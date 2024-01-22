@@ -1,6 +1,6 @@
 {
 	"geode": "2.0.0",
-	"version": "v1.0.1",
+	"version": "v1.0.2",
 	"id": "beat.click-sound",
 	"name": "Click sound",
 	"developer": "Beat",
@@ -26,6 +26,12 @@
 				"arrows": true,
 				"slider": false
 			}
-		}
+		},
+	"OnlyOnJump": {
+		"name": "Only play on jump rather on click",
+		"description": "Doesn't play sound on movement of platformer keys",
+		"type": "bool",
+		"default": true
+	}
 	}
 }

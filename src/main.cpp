@@ -8,7 +8,11 @@ class $modify(PlayerObject) {
 public:
   TodoReturn pushButton(PlayerButton p0) {
     PlayerObject::pushButton(p0);
-
+   if (Mod::get()->getSettingValue<bool>("OnlyOnJump")) {
+        if (p0 != PlayerButton::Jump) {
+          return; //
+        }
+     }
     if (!GameManager::sharedState()->getPlayLayer())
       return;
 
