@@ -32,6 +32,6 @@
 		"description": "Doesn't play sound on movement of platformer keys",
 		"type": "bool",
 		"default": true
-	},
+	}
 	}
 }
