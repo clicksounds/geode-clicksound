@@ -21,17 +21,17 @@
 			"type": "int",
 			"default": 1,
 			"min": 1,
-			"max": 4,
+			"max": 5,
 			"control": {
 				"arrows": true,
 				"slider": false
 			}
 		},
-	"OnlyOnJump": {
-		"name": "Only play on jump rather on click",
-		"description": "Doesn't play sound on movement of platformer keys",
-		"type": "bool",
-		"default": true
-	}
+		"OnlyOnJump": {
+			"name": "Only play on jump",
+			"description": "Doesn't play sound on movement of platformer keys",
+			"type": "bool",
+			"default": true
+		}
 	}
 }
