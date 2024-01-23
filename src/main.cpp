@@ -25,17 +25,17 @@ public:
     std::string soundInUse;
     // <-------------------------------- Add sounds here!
     if (sliderValue == 1) {
-        soundInUse = "osu-hit.mp3"_spr;
+        soundInUse = "osu-hit.ogg"_spr;
     } else if (sliderValue == 2) {
-        soundInUse = "vine-boom.mp3"_spr;
+        soundInUse = "vine-boom.ogg"_spr;
     } else if (sliderValue == 3) {
-        soundInUse = "bwomp.mp3"_spr;
+        soundInUse = "bwomp.ogg"_spr;
     } else if (sliderValue == 4) {
-        soundInUse = "fire-in-the-hole.mp3"_spr;
+        soundInUse = "fire-in-the-hole.ogg"_spr;
     } else if (sliderValue == 5) {
-        soundInUse = "i-love-gd-cologne.mp3"_spr;
+        soundInUse = "i-love-gd-cologne.ogg"_spr;
     } else if (sliderValue == 6) {
-        soundInUse = "metronome.mp3"_spr;
+        soundInUse = "metronome.ogg"_spr;
     }
 
     // play sound from slider value pick sound

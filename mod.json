@@ -11,13 +11,13 @@
 	"description": "Plays a sound whenever you press a jump button.",
 	"resources": {
 		"files": [
-			"resources/*.mp3"
+			"resources/*.ogg"
 		]
 	},
 	"settings": {
 		"clicksound-currentsound": {
 			"name": "Current click sound",
-			"description": "Change the click sound. 1 = Default, 2 = Boom, 3 = Bwomp, 4 = Fire In The Hole",
+			"description": "Change the click sound. 1 = Default, 2 = Boom, 3 = Bwomp, 4 = Fire In The Hole, 5 = I love GD Cologne, 6 = Metronome",
 			"type": "int",
 			"default": 1,
 			"min": 1,
