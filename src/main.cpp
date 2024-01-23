@@ -34,6 +34,8 @@ public:
         soundInUse = "fire-in-the-hole.mp3"_spr;
     } else if (sliderValue == 5) {
         soundInUse = "i-love-gd-cologne.mp3"_spr;
+    } else if (sliderValue == 6) {
+        soundInUse = "metronome.mp3"_spr;
     }
 
     // play sound from slider value pick sound
