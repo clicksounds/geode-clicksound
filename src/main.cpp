@@ -36,6 +36,8 @@ public:
         soundInUse = "i-love-gd-cologne.ogg"_spr;
     } else if (sliderValue == 6) {
         soundInUse = "metronome.ogg"_spr;
+    } else if (sliderValue == 7) {
+        soundInUse = "click1.ogg"_spr;
     }
 
     // play sound from slider value pick sound

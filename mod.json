@@ -1,6 +1,6 @@
 {
 	"geode": "2.0.0",
-	"version": "v1.0.2",
+	"version": "v1.0.3",
 	"id": "beat.click-sound",
 	"name": "Click sound",
 	"developer": "Beat",
@@ -17,11 +17,11 @@
 	"settings": {
 		"clicksound-currentsound": {
 			"name": "Current click sound",
-			"description": "Change the click sound. 1 = Default, 2 = Boom, 3 = Bwomp, 4 = Fire In The Hole, 5 = I love GD Cologne, 6 = Metronome",
+			"description": "Change the click sound. 1 = Default, 2 = Boom, 3 = Bwomp, 4 = Fire In The Hole, 5 = I love GD Cologne, 6 = Metronome, 7 = Click-1",
 			"type": "int",
 			"default": 1,
 			"min": 1,
-			"max": 6,
+			"max": 7,
 			"control": {
 				"arrows": true,
 				"slider": false
