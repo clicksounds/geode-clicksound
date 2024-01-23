@@ -5,7 +5,7 @@
 	"name": "Click sound",
 	"developer": "Beat",
 	"gd": {
-		"android": "2.200",
+		"android": "2.205",
         "win": "2.204"
 	},
 	"description": "Plays a sound whenever you press a jump button.",
