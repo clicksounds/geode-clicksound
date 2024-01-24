@@ -1,6 +1,5 @@
 # Changelog
 ## Version v1.0.4
-* Mac support!
 * 'Metal Pipe' click sound added!
 * 'TikTok' click sound added! (ty boofer!)
 ## Version v1.0.3
