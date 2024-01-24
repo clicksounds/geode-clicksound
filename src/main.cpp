@@ -38,6 +38,10 @@ public:
         soundInUse = "metronome.ogg"_spr;
     } else if (sliderValue == 7) {
         soundInUse = "click1.ogg"_spr;
+    } else if (sliderValue == 8) {
+        soundInUse = "metal-pipe.ogg"_spr;
+    } else if (sliderValue == 9) {
+        soundInUse = "tiktok.ogg"_spr;
     }
 
     // play sound from slider value pick sound
