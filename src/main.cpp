@@ -11,40 +11,55 @@ public:
 
   if (Mod::get()->getSettingValue<bool>("OnlyOnJump")) {
       if (p0 != PlayerButton::Jump) {
-        return; //
+        return;
       }
     }
 
     if (!GameManager::sharedState()->getPlayLayer())
       return;
 
-    // get value of slider
     auto sliderValue = Mod::get()->getSettingValue<int64_t>("clicksound-currentsound");
-    
-    // use slider value to change 
+    auto customSound = Mod::get()->getSettingValue<ghc::filesystem::path>("custom-sound").string();
+    bool usingCustomSound;
     std::string soundInUse;
-    // <-------------------------------- Add sounds here!
-    if (sliderValue == 1) {
+
+    if (sliderValue != 0) {
+      usingCustomSound = false;
+      if (sliderValue == 1) {
         soundInUse = "osu-hit.ogg"_spr;
-    } else if (sliderValue == 2) {
-        soundInUse = "vine-boom.ogg"_spr;
-    } else if (sliderValue == 3) {
-        soundInUse = "bwomp.ogg"_spr;
-    } else if (sliderValue == 4) {
-        soundInUse = "fire-in-the-hole.ogg"_spr;
-    } else if (sliderValue == 5) {
-        soundInUse = "i-love-gd-cologne.ogg"_spr;
-    } else if (sliderValue == 6) {
+      } else if (sliderValue == 2) {
         soundInUse = "metronome.ogg"_spr;
-    } else if (sliderValue == 7) {
+      } else if (sliderValue == 3) {
         soundInUse = "click1.ogg"_spr;
-    } else if (sliderValue == 8) {
+      } else if (sliderValue == 4) {
+        soundInUse = "click2.ogg"_spr;
+      } else if (sliderValue == 5) {
+        soundInUse = "fire-in-the-hole.ogg"_spr;
+      } else if (sliderValue == 6) {
+        soundInUse = "i-love-gd-cologne.ogg"_spr;
+      } else if (sliderValue == 7) {
+        soundInUse = "vine-boom.ogg"_spr;
+      } else if (sliderValue == 8) {
+        soundInUse = "bwomp.ogg"_spr;
+      } else if (sliderValue == 9) {
         soundInUse = "metal-pipe.ogg"_spr;
-    } else if (sliderValue == 9) {
+      } else if (sliderValue == 10) {
         soundInUse = "tiktok.ogg"_spr;
+      } else if (sliderValue == 11) {
+        soundInUse = "plug.ogg"_spr;
+      }
+    } 
+    
+    if (sliderValue == 0) {
+      usingCustomSound = true;
     }
 
-    // play sound from slider value pick sound
-    FMODAudioEngine::sharedEngine()->playEffect(soundInUse);
+    if (Mod::get()->getSettingValue<bool>("enable-clicksound") && !usingCustomSound) {
+        FMODAudioEngine::sharedEngine()->playEffect(soundInUse);
+    } 
+    
+    if (Mod::get()->getSettingValue<bool>("enable-clicksound") && usingCustomSound) {
+        FMODAudioEngine::sharedEngine()->playEffect(customSound);
+    }
   }
 };
