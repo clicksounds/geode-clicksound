@@ -12,6 +12,8 @@ public:
   TodoReturn pushButton(PlayerButton p0) {
     PlayerObject::pushButton(p0);
 
+    
+
   if (Mod::get()->getSettingValue<bool>("OnlyOnJump")) {
       if (p0 != PlayerButton::Jump) {
         return;
@@ -68,6 +70,8 @@ public:
         clickSoundInUse = "el-gato.ogg"_spr;
       } else if (clickSliderValue == -9) {
         clickSoundInUse = "bonk.ogg"_spr;
+      } else if (clickSliderValue == -10) {
+        clickSoundInUse = "discordping.ogg"_spr;
       }
     } 
     
