@@ -40,4 +40,5 @@ Thank you so much to all of the people listed below for doing whatever they did 
 - Viper - Helped me with android support and some other features :3
 - Sicariusblack - Helps with making some click sounds sound good!
 - kittykatspaugh - Emotional support
+- Kuipurr - Emotional support
 (If you think I forgot to credit you, DM @beat___ on Discord. Credit is not given for asking a sound or feature request.)
