@@ -17,6 +17,7 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 7 - Click/Release 3
 - 8 - Up Arrow 1
 - 9 - Spacebar 1
+- 10 - Up Arrow 2
 ### Meme click sounds (negative number):
 - 1 - FIRE IN THE HOLE!
 - 2 - I loooove GD Cologne

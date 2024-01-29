@@ -49,6 +49,8 @@ public:
         clickSoundInUse = "uparrow1.ogg"_spr;
       } else if (clickSliderValue == 9) {
         clickSoundInUse = "spacebar1.ogg"_spr;
+      } else if (clickSliderValue == 10) {
+        clickSoundInUse = "uparrow2.ogg"_spr;
       }
 
       // Meme sounds

@@ -1,4 +1,6 @@
 # Changelog
+## Version v1.1.6
+* 'Up Arrow 2' useful click sound added! (ty verizat!)
 ## Version v1.1.5
 * 'Hamburger' meme click sound added!
 * 'Geometry Dash Death' meme click sound added!
