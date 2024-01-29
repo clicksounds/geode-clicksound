@@ -72,6 +72,8 @@ public:
         clickSoundInUse = "bonk.ogg"_spr;
       } else if (clickSliderValue == -10) {
         clickSoundInUse = "discordping.ogg"_spr;
+      } else if (clickSliderValue == -11) {
+        clickSoundInUse = "hamburger.ogg"_spr;
       }
     } 
     

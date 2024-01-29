@@ -28,6 +28,7 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 8 - El Gato
 - 9 - Bonk
 - 10 - Discord Ping
+- 11 - Hamburger
 ## Release sounds
 ### Useful release sounds:
 - 0 - Custom sound
@@ -40,5 +41,5 @@ Thank you so much to all of the people listed below for doing whatever they did 
 - Viper - Helped me with android support and some other features :3
 - Sicariusblack - Helps with making some click sounds sound good!
 - kittykatspaugh - Emotional support
-- Kuipurr - Emotional support
+- kuipurr - Emotional support
 (If you think I forgot to credit you, DM @beat___ on Discord. Credit is not given for asking a sound or feature request.)
