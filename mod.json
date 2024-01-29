@@ -35,7 +35,7 @@
 			"description": "Change the click sound. Negative numbers for meme sounds, 0 for custom sounds, and positive numbers for useful sounds. Check mod description for a sound list.",
 			"type": "int",
 			"default": 1,
-			"min": -11,
+			"min": -12,
 			"max": 9,
 			"control": {
 				"arrows": true,

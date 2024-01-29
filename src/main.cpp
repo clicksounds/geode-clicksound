@@ -74,6 +74,8 @@ public:
         clickSoundInUse = "discordping.ogg"_spr;
       } else if (clickSliderValue == -11) {
         clickSoundInUse = "hamburger.ogg"_spr;
+      } else if (clickSliderValue == -12) {
+        clickSoundInUse = "geometry-jump-death.ogg"_spr;
       }
     } 
     

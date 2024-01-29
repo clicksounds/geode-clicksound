@@ -29,6 +29,7 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 9 - Bonk
 - 10 - Discord Ping
 - 11 - Hamburger
+- 12 - Geometry Dash Death
 ## Release sounds
 ### Useful release sounds:
 - 0 - Custom sound
