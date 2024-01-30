@@ -1,4 +1,6 @@
 # Changelog
+## Version v1.1.7
+* idk yet -coop
 ## Version v1.1.6
 * 'Up Arrow 2' useful click sound added! (ty verizat!)
 ## Version v1.1.5

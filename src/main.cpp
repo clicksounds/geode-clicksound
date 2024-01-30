@@ -30,56 +30,35 @@ public:
 
     if (clickSliderValue != 0) {
       usingCustomClickSound = false;
-      // Useful sounds
-      if (clickSliderValue == 1) {
-        clickSoundInUse = "osu-hit.ogg"_spr;
-      } else if (clickSliderValue == 2) {
-        clickSoundInUse = "metronome.ogg"_spr;
-      } else if (clickSliderValue == 3) {
-        clickSoundInUse = "click1.ogg"_spr;
-      } else if (clickSliderValue == 4) {
-        clickSoundInUse = "click2.ogg"_spr;
-      } else if (clickSliderValue == 5) {
-        clickSoundInUse = "clickrelease-1-click.ogg"_spr;
-      } else if (clickSliderValue == 6) {
-        clickSoundInUse = "clickrelease-2-click.ogg"_spr;
-      } else if (clickSliderValue == 7) {
-        clickSoundInUse = "clickrelease-3-click.ogg"_spr;
-      } else if (clickSliderValue == 8) {
-        clickSoundInUse = "uparrow1.ogg"_spr;
-      } else if (clickSliderValue == 9) {
-        clickSoundInUse = "spacebar1.ogg"_spr;
-      } else if (clickSliderValue == 10) {
-        clickSoundInUse = "uparrow2.ogg"_spr;
-      }
 
-      // Meme sounds
-      if (clickSliderValue == -1) {
-        clickSoundInUse = "fire-in-the-hole.ogg"_spr;
-      } else if (clickSliderValue == -2) {
-        clickSoundInUse = "i-love-gd-cologne.ogg"_spr;
-      } else if (clickSliderValue == -3) {
-        clickSoundInUse = "vine-boom.ogg"_spr;
-      } else if (clickSliderValue == -4) {
-        clickSoundInUse = "bwomp.ogg"_spr;
-      } else if (clickSliderValue == -5) {
-        clickSoundInUse = "metal-pipe.ogg"_spr;
-      } else if (clickSliderValue == -6) {
-        clickSoundInUse = "tiktok.ogg"_spr;
-      } else if (clickSliderValue == -7) {
-        clickSoundInUse = "plug.ogg"_spr;
-      } else if (clickSliderValue == -8) {
-        clickSoundInUse = "el-gato.ogg"_spr;
-      } else if (clickSliderValue == -9) {
-        clickSoundInUse = "bonk.ogg"_spr;
-      } else if (clickSliderValue == -10) {
-        clickSoundInUse = "discordping.ogg"_spr;
-      } else if (clickSliderValue == -11) {
-        clickSoundInUse = "hamburger.ogg"_spr;
-      } else if (clickSliderValue == -12) {
-        clickSoundInUse = "geometry-jump-death.ogg"_spr;
+      switch(clickSliderValue) {
+        // Useful sounds
+        case 1: clickSoundInUse = "osu-hit.ogg"_spr; break;
+        case 2: clickSoundInUse = "metronome.ogg"_spr; break;
+        case 3: clickSoundInUse = "click1.ogg"_spr; break;
+        case 4: clickSoundInUse = "click2.ogg"_spr; break;
+        case 5: clickSoundInUse = "clickrelease-1-click.ogg"_spr; break;
+        case 6: clickSoundInUse = "clickrelease-2-click.ogg"_spr; break;
+        case 7: clickSoundInUse = "clickrelease-3-click.ogg"_spr; break;
+        case 8: clickSoundInUse = "uparrow1.ogg"_spr; break;
+        case 9: clickSoundInUse = "spacebar1.ogg"_spr; break;
+        case 10: clickSoundInUse = "uparrow2.ogg"_spr; break;
+
+        // Meme sounds
+        case -1: clickSoundInUse = "fire-in-the-hole.ogg"_spr; break;
+        case -2: clickSoundInUse = "i-love-gd-cologne.ogg"_spr; break;
+        case -3: clickSoundInUse = "vine-boom.ogg"_spr; break;
+        case -4: clickSoundInUse = "bwomp.ogg"_spr; break;
+        case -5: clickSoundInUse = "metal-pipe.ogg"_spr; break;
+        case -6: clickSoundInUse = "tiktok.ogg"_spr; break;
+        case -7: clickSoundInUse = "plug.ogg"_spr; break;
+        case -8: clickSoundInUse = "el-gato.ogg"_spr; break;
+        case -9: clickSoundInUse = "spacebar1.ogg"_spr; break;
+        case -10: clickSoundInUse = "bonk.ogg"_spr; break;
+        case -11: clickSoundInUse = "hamburger.ogg"_spr; break;
+        case -12: clickSoundInUse = "geometry-jump-death.ogg"_spr; break;
       }
-    } 
+    }
     
     if (clickSliderValue == 0) {
       usingCustomClickSound = true;
@@ -113,15 +92,17 @@ public:
     bool usingCustomReleaseSound;
     std::string releaseSoundInUse;
 
+    
+
     if (releaseSliderValue != 0) {
       usingCustomReleaseSound = false;
-      if (releaseSliderValue == 1) {
-        releaseSoundInUse = "clickrelease-1-release.ogg"_spr;
-      } else if (releaseSliderValue == 2) {
-        releaseSoundInUse = "clickrelease-2-release.ogg"_spr;
-      } else if (releaseSliderValue == 3) {
-        releaseSoundInUse = "clickrelease-3-release.ogg"_spr;
+
+      switch(releaseSliderValue) {
+        case 1: releaseSoundInUse = "clickrelease-1-release.ogg"_spr; break;
+        case 2: releaseSoundInUse = "clickrelease-2-release.ogg"_spr; break;
+        case 3: releaseSoundInUse = "clickrelease-3-release.ogg"_spr; break;
       }
+
     } 
     
     if (releaseSliderValue == 0) {
