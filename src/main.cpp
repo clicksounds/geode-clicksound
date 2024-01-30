@@ -43,6 +43,7 @@ public:
         case 8: clickSoundInUse = "uparrow1.ogg"_spr; break;
         case 9: clickSoundInUse = "spacebar1.ogg"_spr; break;
         case 10: clickSoundInUse = "uparrow2.ogg"_spr; break;
+        case 11: clickSoundInUse = "clickrelease-4-click.ogg"_spr; break;
 
         // Meme sounds
         case -1: clickSoundInUse = "fire-in-the-hole.ogg"_spr; break;
@@ -101,6 +102,7 @@ public:
         case 1: releaseSoundInUse = "clickrelease-1-release.ogg"_spr; break;
         case 2: releaseSoundInUse = "clickrelease-2-release.ogg"_spr; break;
         case 3: releaseSoundInUse = "clickrelease-3-release.ogg"_spr; break;
+        case 4: releaseSoundInUse = "clickrelease-4-release.ogg"_spr; break;
       }
 
     } 
