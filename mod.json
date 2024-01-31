@@ -54,12 +54,6 @@
 			"type": "bool",
 			"default": false
 		},
-		"custom-releasesound": {
-            "name": "Upload a custom release sound",
-            "description": "Select a .ogg, .wav, or .mp3 format file to set as release sound 0. The best practice is to use a .ogg format sound that start loudly and immediately.",
-            "type": "path",
-            "default": "Upload a file first."
-        },
 		"releasesound-currentsound": {
 			"name": "Current release sound",
 			"description": "Change the click sound. Negative numbers for meme sounds, 0 for custom sounds, and positive numbers for useful sounds. Check mod description for a sound list.",
@@ -71,7 +65,13 @@
 				"arrows": true,
 				"slider": false
 			}
-		}
+		},
+		"custom-releasesound": {
+            "name": "Upload a custom release sound",
+            "description": "Select a .ogg, .wav, or .mp3 format file to set as release sound 0. The best practice is to use a .ogg format sound that start loudly and immediately.",
+            "type": "path",
+            "default": "Upload a file first."
+        }
 	},
 	"repository": "https://github.com/BeatACVR/geode-clicksound"
 }
