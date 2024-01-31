@@ -32,6 +32,9 @@ public:
       usingCustomClickSound = false;
 
       switch(clickSliderValue) {
+        // Other
+        case 0: usingCustomClickSound = true; break;
+
         // Useful sounds
         case 1: clickSoundInUse = "osu-hit.ogg"_spr; break;
         case 2: clickSoundInUse = "metronome.ogg"_spr; break;
@@ -58,19 +61,13 @@ public:
         case -10: clickSoundInUse = "bonk.ogg"_spr; break;
         case -11: clickSoundInUse = "hamburger.ogg"_spr; break;
         case -12: clickSoundInUse = "geometry-jump-death.ogg"_spr; break;
+        case -13: clickSoundInUse = "desk-hit.ogg"_spr; break;
       }
     }
-    
-    if (clickSliderValue == 0) {
-      usingCustomClickSound = true;
-    }
 
-    if (Mod::get()->getSettingValue<bool>("enable-clicksound") && !usingCustomClickSound) {
-        FMODAudioEngine::sharedEngine()->playEffect(clickSoundInUse);
-    } 
-    
-    if (Mod::get()->getSettingValue<bool>("enable-clicksound") && usingCustomClickSound) {
-        FMODAudioEngine::sharedEngine()->playEffect(customClickSound);
+    switch(Mod::get()->getSettingValue<bool>("enable-clicksound") && !usingCustomClickSound) {
+      case true: FMODAudioEngine::sharedEngine()->playEffect(clickSoundInUse); break;
+      case false: if (usingCustomClickSound) {FMODAudioEngine::sharedEngine()->playEffect(customClickSound);} break;
     }
   }
   
@@ -99,6 +96,10 @@ public:
       usingCustomReleaseSound = false;
 
       switch(releaseSliderValue) {
+        // Other
+        case 0: usingCustomReleaseSound = true; break;
+
+        // Useful sounds
         case 1: releaseSoundInUse = "clickrelease-1-release.ogg"_spr; break;
         case 2: releaseSoundInUse = "clickrelease-2-release.ogg"_spr; break;
         case 3: releaseSoundInUse = "clickrelease-3-release.ogg"_spr; break;
@@ -107,16 +108,11 @@ public:
 
     } 
     
-    if (releaseSliderValue == 0) {
-      usingCustomReleaseSound = true;
-    }
 
-    if (Mod::get()->getSettingValue<bool>("enable-releasesound") && !usingCustomReleaseSound) {
-        FMODAudioEngine::sharedEngine()->playEffect(releaseSoundInUse);
-    } 
-    
-    if (Mod::get()->getSettingValue<bool>("enable-releasesound") && usingCustomReleaseSound) {
-        FMODAudioEngine::sharedEngine()->playEffect(customReleaseSound);
+
+   switch(Mod::get()->getSettingValue<bool>("enable-releasesound") && !usingCustomReleaseSound) {
+      case true: FMODAudioEngine::sharedEngine()->playEffect(releaseSoundInUse); break;
+      case false: if (usingCustomReleaseSound) {FMODAudioEngine::sharedEngine()->playEffect(customReleaseSound);} break;
     }
   }
 
