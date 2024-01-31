@@ -29,7 +29,7 @@ public:
     std::string clickSoundInUse;
 
     usingCustomClickSound = false;
-    if (clickSliderValue != 0) usingCustomReleaseSound = false;
+    if (clickSliderValue != 0) usingCustomClickSound = false;
 
     switch(clickSliderValue) {
       // Other
@@ -117,5 +117,5 @@ public:
     if (Mod::get()->getSettingValue<bool>("enable-releasesound") && usingCustomReleaseSound) {
         FMODAudioEngine::sharedEngine()->playEffect(customReleaseSound);
     }
-
+ }
 };
