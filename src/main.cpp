@@ -65,9 +65,12 @@ public:
       }
     }
 
-    switch(Mod::get()->getSettingValue<bool>("enable-clicksound") && !usingCustomClickSound) {
-      case true: FMODAudioEngine::sharedEngine()->playEffect(clickSoundInUse); break;
-      case false: if (usingCustomClickSound) {FMODAudioEngine::sharedEngine()->playEffect(customClickSound);} break;
+     if (Mod::get()->getSettingValue<bool>("enable-clicksound") && !usingCustomClickSound) {
+        FMODAudioEngine::sharedEngine()->playEffect(clickSoundInUse);
+    } 
+
+    if (Mod::get()->getSettingValue<bool>("enable-clicksound") && usingCustomClickSound) {
+        FMODAudioEngine::sharedEngine()->playEffect(customClickSound);
     }
   }
   
@@ -110,10 +113,12 @@ public:
     
 
 
-   switch(Mod::get()->getSettingValue<bool>("enable-releasesound") && !usingCustomReleaseSound) {
-      case true: FMODAudioEngine::sharedEngine()->playEffect(releaseSoundInUse); break;
-      case false: if (usingCustomReleaseSound) {FMODAudioEngine::sharedEngine()->playEffect(customReleaseSound);} break;
+    if (Mod::get()->getSettingValue<bool>("enable-releasesound") && !usingCustomReleaseSound) {
+        FMODAudioEngine::sharedEngine()->playEffect(releaseSoundInUse);
+    } 
+
+    if (Mod::get()->getSettingValue<bool>("enable-releasesound") && usingCustomReleaseSound) {
+        FMODAudioEngine::sharedEngine()->playEffect(customReleaseSound);
     }
-  }
 
 };
