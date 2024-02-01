@@ -1,4 +1,8 @@
 # Changelog
+## Version v1.2.0
+* Randomized sound packs added! (no custom rng sound support, this is intentional and it will never be added.)
+* 'Windows 10 USB' meme randomized sound pack added!
+* Fixed a bug where using -10 would play 'Spacebar 1' instead of 'Discord Ping'
 ## Version v1.1.8
 * 'Up Arrow Click/Release 1' useful click/release sound added!
 * 'Desk Hit' meme click sound added! (ty coop :3) (also ty coop's desk for being the test subject)
