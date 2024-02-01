@@ -3,6 +3,9 @@
 Plays a click sound whenever you press a jump button, or a release sound whenever you release a jump button if you want that too.
 If you want a new built-in click sound or feature to be added, join the [discord server](https://discord.gg/RwbRP8ADdc). <3
 
+Want to test your custom sound and make sure it doesn't have any delay?<br />
+Play [ClickSoundDelayTest](level:99606935)! (<-- Click the name to open the level.)
+
 ### Uses Geode Beta on 2.2
 Open the mod settings to change the click sound. Set the click sound to '0' to use a custom click sound.
 ## Click sounds:
@@ -33,7 +36,6 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 11 - Hamburger
 - 12 - Geometry Dash Death
 - 13 - Desk Hit
-- 14 - Windows 10 USB (RNG)
 ## Release sounds
 ### Useful release sounds:
 - 0 - Custom sound
@@ -46,7 +48,7 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 Thank you so much to all of the people listed below for doing whatever they did to help create the mod!
 - [Beat](user:13873867) - This is me! I made the mod.
 - [Viper](user:14284530) - Developer, helped me with android support :3
-- [Coop](user:21207551) - Developer, helped make coding the mod more efficient ^w^ 
+- [coopeeo](user:21207551) - Developer, helped make coding the mod more efficient ^w^ 
 - Sicariusblack - Helps with making some click sounds sound good!
 - kittykatspaugh - Emotional support
 - kuipurr - Emotional support
