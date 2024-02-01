@@ -46,7 +46,7 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 Thank you so much to all of the people listed below for doing whatever they did to help create the mod!
 - [Beat](https://github.com/BeatACVR) - This is me! I made the mod.
 - [Viper](https://github.com/MuhXd) - Developer, helped me with android support :3
-- [coopeeo](https://github.com/coopeeo) - Developer, helped make coding the mod more efficient ^w^
+- [Coop](https://github.com/coopeeo) - Developer, helped make coding the mod more efficient ^w^
 - Sicariusblack - Helps with making some click sounds sound good!
 - kittykatspaugh - Emotional support
 - kuipurr - Emotional support

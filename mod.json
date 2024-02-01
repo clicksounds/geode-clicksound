@@ -1,6 +1,6 @@
 {
 	"geode": "2.0.0",
-	"version": "v1.1.8",
+	"version": "v1.2.0",
 	"id": "beat.click-sound",
 	"name": "Click Sound",
 	"developer": "Beat",
@@ -13,6 +13,7 @@
 	"resources": {
 		"files": [
 			"resources/*.ogg",
+			"resources/*.png",
 			"*/.mp3",
 			"*/.wav"
 		]
