@@ -48,6 +48,8 @@ public:
       case 10: clickSoundInUse = "uparrow2.ogg"_spr; break;
       case 11: clickSoundInUse = "clickrelease-4-click.ogg"_spr; break;
 
+      
+
       // Meme sounds
       case -1: clickSoundInUse = "fire-in-the-hole.ogg"_spr; break;
       case -2: clickSoundInUse = "i-love-gd-cologne.ogg"_spr; break;
@@ -57,11 +59,12 @@ public:
       case -6: clickSoundInUse = "tiktok.ogg"_spr; break;
       case -7: clickSoundInUse = "plug.ogg"_spr; break;
       case -8: clickSoundInUse = "el-gato.ogg"_spr; break;
-      case -9: clickSoundInUse = "spacebar1.ogg"_spr; break;
-      case -10: clickSoundInUse = "bonk.ogg"_spr; break;
+      case -9: clickSoundInUse = "bonk.ogg"_spr; break;
+      case -10: clickSoundInUse = "discordping.ogg"_spr; break;
       case -11: clickSoundInUse = "hamburger.ogg"_spr; break;
       case -12: clickSoundInUse = "geometry-jump-death.ogg"_spr; break;
       case -13: clickSoundInUse = "desk-hit.ogg"_spr; break;
+      case -14: clickSoundInUse = (rand() % 2 == 0) ? "win10usbconnect.ogg"_spr : "win10usbdisconnect.ogg"_spr; break;
     }
 
      if (Mod::get()->getSettingValue<bool>("enable-clicksound") && !usingCustomClickSound) {
@@ -107,9 +110,6 @@ public:
       case 4: releaseSoundInUse = "clickrelease-4-release.ogg"_spr; break;
     }
  
-    
-
-
     if (Mod::get()->getSettingValue<bool>("enable-releasesound") && !usingCustomReleaseSound) {
         FMODAudioEngine::sharedEngine()->playEffect(releaseSoundInUse);
     } 
