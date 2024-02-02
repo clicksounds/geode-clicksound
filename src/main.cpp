@@ -139,9 +139,10 @@ void customSetup() {
         auto sprite = CCSprite::createWithSpriteFrameName("GJ_infoIcon_001.png");
         sprite->setScale(0.75f);
         auto btn = CCMenuItemSpriteExtra::create(sprite,
-		    this,
+		    menu,
         menu_selector(YourAPansexual::YOUAREGAY)
         );
+        sprite->setID("beat.hewwo!_:3");
       PauseLayer::customSetup();
   }
 };
