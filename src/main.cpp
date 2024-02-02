@@ -123,9 +123,6 @@ public:
 };
 
 class $modify(PauseLayer) {
-void OpenMenuSettings(CCObject* object) {
-    openSettingsPopup(Mod::get());
-};
 void customSetup() {
     auto winSize = CCDirector::sharedDirector()->getWinSize();
         auto menu = CCMenu::create();
@@ -136,7 +133,8 @@ void customSetup() {
         sprite->setScale(0.75f);
         auto btn = CCMenuItemSpriteExtra::create(sprite,
 		    this,
-		    menu_selector(OpenMenuSettings));
+		    openSettingsPopup(Mod::get());
+      );
   }
 };
 
