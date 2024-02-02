@@ -136,10 +136,10 @@ void customSetup() {
         menu->setID("Beat.Taco_IloveSettingsForClickSounds");
         menu->setPosition(52, 70);
         this->addChild(menu);
-        auto sprite = CCSprite::createWithSpriteFrameName("GJ_infoIcon_001.png");
+        auto sprite = CCSprite::createWithSpriteFrameName("GJ_optionsBtn_001.png");
         sprite->setScale(0.75f);
         auto btn = CCMenuItemSpriteExtra::create(sprite,
-		    menu,
+		    this,
         menu_selector(YourAPansexual::YOUAREGAY)
         );
         btn->setID("beat.hewwo!_:3");
