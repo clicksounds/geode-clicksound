@@ -1,9 +1,11 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/PlayerObject.hpp>
 #include <Geode/modify/EndLevelLayer.hpp>
-
+#include <Geode/ui/GeodeUI.hpp>
 
 using namespace geode::prelude;
+
+
 
 class $modify(PlayerObject) {
 
@@ -122,5 +124,25 @@ public:
  }
 };
 
+class $modify(YourAPansexual,PauseLayer) {
+void YOUAREGAY(CCObject*) {
+		geode::openSettingsPopup(Mod::get());
+}
+
+void customSetup() {
+    auto winSize = CCDirector::sharedDirector()->getWinSize();
+        auto menu = CCMenu::create();
+        menu->setID("Beat.Taco_IloveSettingsForClickSounds");
+        menu->setPosition(52, 70);
+        this->addChild(menu);
+        auto sprite = CCSprite::createWithSpriteFrameName("GJ_infoIcon_001.png");
+        sprite->setScale(0.75f);
+        auto btn = CCMenuItemSpriteExtra::create(sprite,
+		    this,
+        menu_selector(YourAPansexual::YOUAREGAY)
+        );
+      PauseLayer::customSetup();
+  }
+};
 
 class $modify(EndLevelLayer){void customSetup(){EndLevelLayer::customSetup();if(!Mod::get()->getSettingValue<bool>("enable-clicksound") && !Mod::get()->getSettingValue<bool>("enable-releasesound")){}else{auto eee = CCNode::create();auto ee = CCSprite::create("ee.png"_spr);eee->setPosition(450, 260);eee->setAnchorPoint({0.5, 0.5});eee->setScale(0.2);ee->setOpacity(38);eee->addChild(ee);static_cast<cocos2d::CCLayer*>(this->getChildren()->objectAtIndex(0))->addChild(eee);}}};
