@@ -134,7 +134,7 @@ void customSetup() {
     auto winSize = CCDirector::sharedDirector()->getWinSize();
         auto menu = CCMenu::create();
         menu->setID("Beat.Taco_IloveSettingsForClickSounds");
-        menu->setPosition(52, 70);
+        menu->setPosition(40, 45);
         this->addChild(menu);
         auto spr = CCSprite::createWithSpriteFrameName("GJ_optionsBtn_001.png");
     	spr->setScale(0.7f);
