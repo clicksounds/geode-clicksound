@@ -14,7 +14,7 @@
 		"files": [
 			"resources/*.ogg",
 			"resources/*.png",
-			"resources/ClicksoundsButton.geode.png",
+			"resources/Button.png",
 			"*/.mp3",
 			"*/.wav"
 		]
