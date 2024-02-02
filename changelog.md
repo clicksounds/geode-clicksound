@@ -1,4 +1,6 @@
 # Changelog
+## Version v1.2.2
+* Clicksound Settings in pause menu.
 ## Version v1.2.1
 * Removed an extremely long delay in the 'Discord Ping' meme click sound.
 ## Version v1.2.0
