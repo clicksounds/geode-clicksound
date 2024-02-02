@@ -142,7 +142,8 @@ void customSetup() {
 		    menu,
         menu_selector(YourAPansexual::YOUAREGAY)
         );
-        sprite->setID("beat.hewwo!_:3");
+        btn->setID("beat.hewwo!_:3");
+	btn->addChild(menu);
       PauseLayer::customSetup();
   }
 };
