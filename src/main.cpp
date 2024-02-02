@@ -124,7 +124,7 @@ public:
     }
  }
 };
-
+// i was getting mad at the function, (i'm bi i just think it's funni - viper)
 class $modify(YourAPansexual,PauseLayer) {
 void YOUAREGAY(CCObject*) {
 		geode::openSettingsPopup(Mod::get());
