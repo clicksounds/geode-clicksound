@@ -136,14 +136,16 @@ void customSetup() {
         menu->setID("Beat.Taco_IloveSettingsForClickSounds");
         menu->setPosition(52, 70);
         this->addChild(menu);
-        auto sprite = CCSprite::createWithSpriteFrameName("GJ_optionsBtn_001.png");
-        sprite->setScale(0.75f);
-        auto btn = CCMenuItemSpriteExtra::create(sprite,
-		    this,
-        menu_selector(YourAPansexual::YOUAREGAY)
-        );
-        btn->setID("beat.hewwo!_:3");
-	btn->addChild(menu);
+        auto spr = CCSprite::createWithSpriteFrameName("GJ_optionsBtn_001.png");
+    	spr->setScale(0.7f);
+    	auto btn = CCMenuItemSpriteExtra::create(
+        	spr,
+        	this,
+        	menu_selector(YourAPansexual::YOUAREGAY)
+    	);
+    	btn->setPosition(0,0);
+	btn->setID("beat.hewwo!_:3");
+    	menu->addChild(btn);
       PauseLayer::customSetup();
   }
 };
