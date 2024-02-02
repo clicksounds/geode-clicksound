@@ -136,7 +136,10 @@ void customSetup() {
         menu->setID("Beat.Taco_IloveSettingsForClickSounds");
         menu->setPosition(40, 45);
         this->addChild(menu);
-        auto spr = ButtonSprite::create("ClicksoundsButton.geode.png"_spr);
+	auto spr = CircleButtonSprite::createWithSprite(
+            "ClicksoundsButton.geode.png"_spr,
+            1.f,
+            CircleBaseColor::White);
     	spr->setScale(0.7f);
     	auto btn = CCMenuItemSpriteExtra::create(
         	spr,
