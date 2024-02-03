@@ -6,18 +6,18 @@
 
 using namespace geode::prelude;
 
-
-
 class $modify(PlayerObject) {
 
 public:
   
   // CLICK SOUNDS CLICK SOUNDS CLICK SOUNDS CLICK SOUNDS CLICK SOUNDS CLICK SOUNDS CLICK SOUNDS CLICK SOUNDS CLICK SOUNDS CLICK SOUNDS CLICK SOUNDS CLICK SOUNDS CLICK SOUNDS CLICK SOUNDS CLICK SOUNDS
+  // Carrots. You know why? No reason.
+  // 🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕
 
   TodoReturn pushButton(PlayerButton p0) {
     PlayerObject::pushButton(p0);
 
-    
+
 
   if (Mod::get()->getSettingValue<bool>("OnlyOnJump")) {
       if (p0 != PlayerButton::Jump) {
@@ -70,6 +70,7 @@ public:
       case -12: clickSoundInUse = "geometry-jump-death.ogg"_spr; break;
       case -13: clickSoundInUse = "desk-hit.ogg"_spr; break;
       case -14: clickSoundInUse = (rand() % 2 == 0) ? "win10usbconnect.ogg"_spr : "win10usbdisconnect.ogg"_spr; break;
+      case -15: clickSoundInUse = "taco-bell.ogg"_spr; break;
     }
 
      if (Mod::get()->getSettingValue<bool>("enable-clicksound") && !usingCustomClickSound) {
@@ -124,6 +125,8 @@ public:
     }
  }
 };
+
+// SETTINGS IN PAUSE MENU (ty viper!)
 // i was getting mad at the function, (i'm bi i just think it's funni - viper)
 class $modify(YourAPansexual,PauseLayer) {
 void YOUAREGAY(CCObject*) {
@@ -149,5 +152,4 @@ void customSetup() {
       PauseLayer::customSetup();
   }
 };
-
 class $modify(EndLevelLayer){void customSetup(){EndLevelLayer::customSetup();if(!Mod::get()->getSettingValue<bool>("enable-clicksound") && !Mod::get()->getSettingValue<bool>("enable-releasesound")){}else{auto eee = CCNode::create();auto ee = CCSprite::create("ee.png"_spr);eee->setPosition(450, 260);eee->setAnchorPoint({0.5, 0.5});eee->setScale(0.2);ee->setOpacity(38);eee->addChild(ee);static_cast<cocos2d::CCLayer*>(this->getChildren()->objectAtIndex(0))->addChild(eee);}}};
