@@ -41,6 +41,7 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 17 - Huh
 - 18 - Three, Two, One... Geometry Dash (randomized)
 - 19 - AUGHHH
+- 20 - Car Door Slam
 ## Release sounds
 ### Useful release sounds:
 - 0 - Custom sound

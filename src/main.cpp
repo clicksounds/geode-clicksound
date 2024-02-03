@@ -83,6 +83,7 @@ public:
       case -17: clickSoundInUse = "huh.ogg"_spr; break;
       case -18: clickSoundInUse = (rand() % 5 == 0) ? "dash-one.ogg"_spr : ((rand() % 5 == 1) ? "dash-two.ogg"_spr : ((rand() % 5 == 2) ? "dash-three.ogg"_spr : ((rand() % 5 == 3) ? "dash-dash.ogg"_spr : "dash-geometry.ogg"_spr))); break;
       case -19: clickSoundInUse = "aughhh.ogg"_spr; break;
+      case -20: clickSoundInUse = "car-door-slam.ogg"_spr; break;
     }
 
      if (Mod::get()->getSettingValue<bool>("enable-clicksound") && !usingCustomClickSound) {
