@@ -1,6 +1,11 @@
 # Changelog
+## Version v1.2.5
+* 'Three Two One Geometry Dash' meme randomized click sound pack added!
+* 'Up Arrow 3' useful click sound added! (ty mecholix! :3)
+* 'Aughhh' meme click sound added!
+* 'Faze' useful randomized click/release sound pack has had it's volume increased, which was previously very quiet (oops :3)
 ## Version v1.2.4
-* 'Faze' randomized click/release sound pack added! (ty fazessz!)
+* 'Faze' useful randomized click/release sound pack added! (ty fazessz!)
 ## Version v1.2.3
 * 'Bad To The Bone' meme click sound added!
 * 'Huh' meme click sound added!

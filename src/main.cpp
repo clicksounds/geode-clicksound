@@ -59,7 +59,7 @@ public:
       case 10: clickSoundInUse = "uparrow2.ogg"_spr; break;
       case 11: clickSoundInUse = "clickrelease-4-click.ogg"_spr; break;
       case 12: clickSoundInUse = (rand() % 5 == 0) ? "faze-click-1.ogg"_spr : ((rand() % 5 == 1) ? "faze-click-2.ogg"_spr : ((rand() % 5 == 2) ? "faze-click-3.ogg"_spr : ((rand() % 5 == 3) ? "faze-click-4.ogg"_spr : "faze-click-5.ogg"_spr))); break;
-
+      case 13: clickSoundInUse = "uparrow3.ogg"_spr; break;
 
       
 
@@ -81,6 +81,8 @@ public:
       case -15: clickSoundInUse = "taco-bell.ogg"_spr; break;
       case -16: clickSoundInUse = "bad-to-the-bone.ogg"_spr; break;
       case -17: clickSoundInUse = "huh.ogg"_spr; break;
+      case -18: clickSoundInUse = (rand() % 5 == 0) ? "dash-one.ogg"_spr : ((rand() % 5 == 1) ? "dash-two.ogg"_spr : ((rand() % 5 == 2) ? "dash-three.ogg"_spr : ((rand() % 5 == 3) ? "dash-dash.ogg"_spr : "dash-geometry.ogg"_spr))); break;
+      case -19: clickSoundInUse = "aughhh.ogg"_spr; break;
     }
 
      if (Mod::get()->getSettingValue<bool>("enable-clicksound") && !usingCustomClickSound) {
@@ -141,7 +143,7 @@ public:
 
 // SETTINGS IN PAUSE MENU (ty viper!)
 // i was getting mad at the function, (i'm bi i just think it's funni - viper)
-class $modify(YourAPansexual,PauseLayer) {
+class $modify(YoureAPansexual,PauseLayer) {
 void YOUAREGAY(CCObject*) {
 		geode::openSettingsPopup(Mod::get());
 }
@@ -157,7 +159,7 @@ void customSetup() {
     	auto btn = CCMenuItemSpriteExtra::create(
         	spr,
         	this,
-        	menu_selector(YourAPansexual::YOUAREGAY)
+        	menu_selector(YoureAPansexual::YOUAREGAY)
     	);
     	btn->setPosition(0,0);
 	btn->setID("beat.hewwo!_:3");
