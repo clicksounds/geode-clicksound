@@ -1,6 +1,6 @@
 {
 	"geode": "2.0.0",
-	"version": "v1.2.6",
+	"version": "v1.2.7",
 	"id": "beat.click-sound",
 	"name": "Click Sound",
 	"developer": "Carrot Devs",
@@ -36,8 +36,8 @@
 			"description": "Change the click sound. Negative numbers for meme sounds, 0 for custom sounds, and positive numbers for useful sounds. Check mod description for a sound list.",
 			"type": "int",
 			"default": 1,
-			"min": -19,
-			"max": 13,
+			"min": -20,
+			"max": 14,
 			"control": {
 				"arrows": true,
 				"slider": false
@@ -61,7 +61,7 @@
 			"type": "int",
 			"default": 1,
 			"min": 0,
-			"max": 5,
+			"max": 6,
 			"control": {
 				"arrows": true,
 				"slider": false
