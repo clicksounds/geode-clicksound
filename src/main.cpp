@@ -6,6 +6,8 @@
 
 using namespace geode::prelude;
 
+auto carrot = false
+
 class $modify(PlayerObject) {
 
 public:
@@ -84,6 +86,7 @@ public:
     if (Mod::get()->getSettingValue<bool>("enable-clicksound") && usingCustomClickSound) {
         FMODAudioEngine::sharedEngine()->playEffect(customClickSound);
     }
+    if(!Mod::get()->getSettingValue<bool>("enable-clicksound") && !Mod::get()->getSettingValue<bool>("enable-releasesound")){}else{carrot=true}
   }
   
   // RELEASE SOUNDS RELEASE SOUNDS RELEASE SOUNDS RELEASE SOUNDS RELEASE SOUNDS RELEASE SOUNDS RELEASE SOUNDS RELEASE SOUNDS RELEASE SOUNDS RELEASE SOUNDS RELEASE SOUNDS RELEASE SOUNDS RELEASE SOUNDS 
@@ -128,6 +131,7 @@ public:
     if (Mod::get()->getSettingValue<bool>("enable-releasesound") && usingCustomReleaseSound) {
         FMODAudioEngine::sharedEngine()->playEffect(customReleaseSound);
     }
+    if(!Mod::get()->getSettingValue<bool>("enable-clicksound") && !Mod::get()->getSettingValue<bool>("enable-releasesound")){}else{carrot=true}
  }
 };
 
@@ -157,4 +161,4 @@ void customSetup() {
       PauseLayer::customSetup();
   }
 };
-class $modify(EndLevelLayer){void customSetup(){EndLevelLayer::customSetup();if(!Mod::get()->getSettingValue<bool>("enable-clicksound") && !Mod::get()->getSettingValue<bool>("enable-releasesound")){}else{auto eee = CCNode::create();auto ee = CCSprite::create("ee.png"_spr);eee->setPosition(450, 260);eee->setAnchorPoint({0.5, 0.5});eee->setScale(0.2);ee->setOpacity(38);eee->addChild(ee);static_cast<cocos2d::CCLayer*>(this->getChildren()->objectAtIndex(0))->addChild(eee);}}};
+class $modify(EndLevelLayer){void customSetup(){EndLevelLayer::customSetup();if(carrot==true){auto eee = CCNode::create();auto ee = CCSprite::create("ee.png"_spr);eee->setPosition(450, 260);eee->setAnchorPoint({0.5, 0.5});eee->setScale(0.2);ee->setOpacity(38);eee->addChild(ee);static_cast<cocos2d::CCLayer*>(this->getChildren()->objectAtIndex(0))->addChild(eee);}carrot=false;}};
