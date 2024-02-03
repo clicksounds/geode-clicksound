@@ -1,6 +1,7 @@
 # Changelog
 ## Version v1.2.5
-* 'Car Door Slam' meme click sound (by coop)
+* Added 320 carrot emojis into the code for no reason!
+* 'Car Door Slam' meme click sound added! (ty coop!)
 * 'Three Two One Geometry Dash' meme randomized click sound pack added!
 * 'Up Arrow 3' useful click sound added! (ty mecholix! :3)
 * 'Aughhh' meme click sound added!
