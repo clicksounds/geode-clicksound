@@ -52,6 +52,8 @@ public:
       case 9: clickSoundInUse = "spacebar1.ogg"_spr; break;
       case 10: clickSoundInUse = "uparrow2.ogg"_spr; break;
       case 11: clickSoundInUse = "clickrelease-4-click.ogg"_spr; break;
+      case 12: clickSoundInUse = (rand() % 5 == 0) ? "faze-click-1.ogg"_spr : ((rand() % 5 == 1) ? "faze-click-2.ogg"_spr : ((rand() % 5 == 2) ? "faze-click-3.ogg"_spr : ((rand() % 5 == 3) ? "faze-click-4.ogg"_spr : "faze-click-5.ogg"_spr))); break;
+
 
       
 
@@ -116,6 +118,7 @@ public:
       case 2: releaseSoundInUse = "clickrelease-2-release.ogg"_spr; break;
       case 3: releaseSoundInUse = "clickrelease-3-release.ogg"_spr; break;
       case 4: releaseSoundInUse = "clickrelease-4-release.ogg"_spr; break;
+      case 5: releaseSoundInUse = (rand() % 4 == 0) ? "faze-release-1.ogg"_spr : ((rand() % 4 == 1) ? "faze-release-2.ogg"_spr : ((rand() % 4 == 2) ? "faze-release-3.ogg"_spr : "faze-release-4.ogg"_spr)); break;
     }
  
     if (Mod::get()->getSettingValue<bool>("enable-releasesound") && !usingCustomReleaseSound) {

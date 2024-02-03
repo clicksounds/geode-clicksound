@@ -1,6 +1,6 @@
 {
 	"geode": "2.0.0",
-	"version": "v1.2.3",
+	"version": "v1.2.4",
 	"id": "beat.click-sound",
 	"name": "Click Sound",
 	"developer": "Beat",
@@ -37,7 +37,7 @@
 			"type": "int",
 			"default": 1,
 			"min": -17,
-			"max": 11,
+			"max": 12,
 			"control": {
 				"arrows": true,
 				"slider": false
@@ -61,7 +61,7 @@
 			"type": "int",
 			"default": 1,
 			"min": 0,
-			"max": 4,
+			"max": 5,
 			"control": {
 				"arrows": true,
 				"slider": false
