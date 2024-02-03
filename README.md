@@ -35,6 +35,8 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 13 - Desk Hit
 - 14 - Windows 10 USB (randomized)
 - 15 - Taco Bell
+- 16 - Bad To The Bone
+- 17 - Huh
 ## Release sounds
 ### Useful release sounds:
 - 0 - Custom sound

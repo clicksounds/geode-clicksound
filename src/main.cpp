@@ -71,6 +71,8 @@ public:
       case -13: clickSoundInUse = "desk-hit.ogg"_spr; break;
       case -14: clickSoundInUse = (rand() % 2 == 0) ? "win10usbconnect.ogg"_spr : "win10usbdisconnect.ogg"_spr; break;
       case -15: clickSoundInUse = "taco-bell.ogg"_spr; break;
+      case -16: clickSoundInUse = "bad-to-the-bone.ogg"_spr; break;
+      case -17: clickSoundInUse = "huh.ogg"_spr; break;
     }
 
      if (Mod::get()->getSettingValue<bool>("enable-clicksound") && !usingCustomClickSound) {
