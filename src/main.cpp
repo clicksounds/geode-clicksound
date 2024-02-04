@@ -217,7 +217,7 @@ class $modify(ProfilePage) {
 	bool init(int p0, bool p1) {
 		if (!ProfilePage::init(p0, p1)) return false;
 
-		std::set<int> csContributors = {13873867, 14284530, 21207551, 227796112};
+		std::set<int> csContributors = {13873867, 14284530, 21207551, 25397826};
 																									
 
 		m_mainLayer->removeChildByID("my-stuff-hint");

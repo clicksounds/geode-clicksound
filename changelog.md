@@ -1,7 +1,4 @@
 # Changelog
-## Version v1.3.1
-* Bug fixes for v1.3.0.
-* Node-IDs is now a requirement.
 ## Version v1.3.0
 * 'TikTok' meme release sound added! (ty boofer!)
 * Sounds now play in editor playtesting!
