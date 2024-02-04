@@ -3,7 +3,13 @@
 	"version": "v1.3.1",
 	"id": "beat.click-sound",
 	"name": "Click Sound",
-	"developer": "Carrot Devs",
+	"developers": [
+		"Beat",
+		"Viper",
+		"Coop",
+		"Uproxide",
+		"Carrot Devs"
+	],
 	"gd": {
 		"android": "2.205",
         	"win": "2.204",
