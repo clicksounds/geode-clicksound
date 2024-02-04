@@ -6,7 +6,8 @@
 	"developer": "Carrot Devs",
 	"gd": {
 		"android": "2.205",
-        	"win": "2.204"
+        	"win": "2.204",
+		"amc": "2.200"
 	},
 	"description": "Plays a sound whenever you press a jump button.",
 	"resources": {
@@ -17,6 +18,13 @@
 			"*/.wav"
 		]
 	},
+	"dependencies": [
+        	{
+            	"id": "geode.node-ids",
+            	"version": ">=v1.1.4",
+            	"importance": "required"
+        	}
+    	],
 	"settings": {
 		"OnlyOnJump": {
 			"name": "Only play on jump",
