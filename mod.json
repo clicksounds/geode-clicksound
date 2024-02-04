@@ -18,13 +18,6 @@
 			"*/.wav"
 		]
 	},
-	"dependencies": [
-        	{
-            	"id": "geode.node-ids",
-            	"version": ">=v1.1.4",
-            	"importance": "required"
-        	}
-    	],
 	"settings": {
 		"OnlyOnJump": {
 			"name": "Only play on jump",
