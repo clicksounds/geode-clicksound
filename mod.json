@@ -73,5 +73,12 @@
             "default": "Upload a file first."
         }
 	},
-	"repository": "https://github.com/BeatACVR/geode-clicksound"
+	"repository": "https://github.com/BeatACVR/geode-clicksound",
+	"dependencies": [
+        {
+            "id": "geode.node-ids",
+            "version": ">=v1.1.4",
+            "importance": "required"
+        }
+    ]
 }
