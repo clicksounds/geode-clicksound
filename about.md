@@ -19,9 +19,9 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 9 - Spacebar 1
 - 10 - Up Arrow 2
 - 11 - Up Arrow Click/Release 1
-- 12 - Faze Click/Release (sound pack)
+- 12 - Faze Click/Release (randomized)
 - 13 - Up Arrow 3
-- 14 - Bloody Click/Release (sound pack)
+- 14 - Bloody Click/Release (randomized)
 ### Meme click sounds (negative number):
 - 1 - FIRE IN THE HOLE!
 - 2 - I loooove GD Cologne
@@ -40,7 +40,7 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 15 - Taco Bell
 - 16 - Bad To The Bone
 - 17 - Huh
-- 18 - Three, Two, One... Geometry Dash (sound pack)
+- 18 - Three, Two, One... Geometry Dash (randomized)
 - 19 - AUGHHH
 - 20 - Car Door Slam
 ## Release sounds
@@ -50,14 +50,17 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 2 - Click/Release 2
 - 3 - Click/Release 3
 - 4 - Up Arrow Click/Release 1
-- 5 - Faze Click/Release (sound pack)
-- 6 - Bloody Click/Release (sound pack)
+- 5 - Faze Click/Release (randomized)
+- 6 - Bloody Click/Release (randomized)
+### Meme release sounds (negative number):
+- 1 - TikTok
 
 ## Credit
 Thank you so much to all of the people listed below for doing whatever they did to help create the mod!
 - [Beat](user:13873867) - This is me! I made the mod.
 - [Viper](user:14284530) - Developer, helped me with android support :3
 - [Coop](user:21207551) - Developer, helped make coding the mod more efficient ^w^ 
+- [Uproxide](user:227796112) - Developer, helped with the developer badge system! OwO
 - Sicariusblack - Helps with making some click sounds sound good!
 - aceofspadesss - Provided a ton of unique click sounds for the mod! >w<
 - kittykatspaugh - Emotional support
