@@ -19,9 +19,9 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 9 - Spacebar 1
 - 10 - Up Arrow 2
 - 11 - Up Arrow Click/Release 1
-- 12 - Faze Click/Release (randomized)
+- 12 - Faze Click/Release (sound pack)
 - 13 - Up Arrow 3
-- 14 - Bloody Click/Release (randomized)
+- 14 - Bloody Click/Release (sound pack)
 ### Meme click sounds (negative number):
 - 1 - FIRE IN THE HOLE!
 - 2 - I loooove GD Cologne
@@ -40,7 +40,7 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 15 - Taco Bell
 - 16 - Bad To The Bone
 - 17 - Huh
-- 18 - Three, Two, One... Geometry Dash (randomized)
+- 18 - Three, Two, One... Geometry Dash (sound pack)
 - 19 - AUGHHH
 - 20 - Car Door Slam
 ## Release sounds
@@ -50,7 +50,8 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 2 - Click/Release 2
 - 3 - Click/Release 3
 - 4 - Up Arrow Click/Release 1
-- 5 - Faze Click/Release (randomized)
+- 5 - Faze Click/Release (sound pack)
+- 6 - Bloody Click/Release (sound pack)
 
 ## Credit
 Thank you so much to all of the people listed below for doing whatever they did to help create the mod!
