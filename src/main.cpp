@@ -88,7 +88,7 @@ public:
       case -3: clickSoundInUse = "vine-boom.ogg"_spr; break;
       case -4: clickSoundInUse = "bwomp.ogg"_spr; break;
       case -5: clickSoundInUse = "metal-pipe.ogg"_spr; break;
-      case -6: clickSoundInUse = "tiktok.ogg"_spr; break;
+      case -6: clickSoundInUse = "tiktok-click.ogg"_spr; break;
       case -7: clickSoundInUse = "plug.ogg"_spr; break;
       case -8: clickSoundInUse = "el-gato.ogg"_spr; break;
       case -9: clickSoundInUse = "bonk.ogg"_spr; break;

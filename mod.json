@@ -1,6 +1,6 @@
 {
 	"geode": "2.0.0",
-	"version": "v1.3.0",
+	"version": "v1.3.1",
 	"id": "beat.click-sound",
 	"name": "Click Sound",
 	"developer": "Carrot Devs",
@@ -9,6 +9,12 @@
         "win": "2.204",
 		"mac": "2.200"
 	},
+	"dependencies": [
+        {
+            "id": "geode.node-ids",
+            "version": ">=v1.1.4",
+            "importance": "required"
+    }],
 	"description": "Plays a sound whenever you press a jump button.",
 	"resources": {
 		"files": [
