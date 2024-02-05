@@ -18,7 +18,8 @@ def send_webhook(eee):
 	from urllib import request
 	import json
 	import os
-
+	for line in eee:
+                    print(line.decode('utf-8'))
 	print(eee)
   
 	req = request.Request(os.getenv('DISCORD_WEBHOOK_URL'), method='POST')
