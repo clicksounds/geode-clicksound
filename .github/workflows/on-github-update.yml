@@ -21,4 +21,4 @@ jobs:
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           LE_RELEASE: ${{ github.event.release.html_url }}
-          THE_MOD_ID: "beat.click-sound.geode"
+          THE_MOD_ID: "beat.click-sound"
