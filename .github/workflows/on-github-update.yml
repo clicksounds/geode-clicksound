@@ -20,3 +20,4 @@ jobs:
           python3 click/.github/sendupdate.py
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          LE_RELEASE: ${{ github.event.release.html_url }}
