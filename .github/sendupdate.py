@@ -25,6 +25,7 @@ def send_webhook(eee):
 	# print(eeee)
 	eeeeee = "".join(eeee)
 	# print(eeeeee)
+	print(eeeeee.split("##")[1])
   	print((eeeeee.split("##")[1]).split("\r")[0])
 	req = request.Request(os.getenv('DISCORD_WEBHOOK_URL'), method='POST')
 	req.add_header('User-Agent', 'python urllib')
