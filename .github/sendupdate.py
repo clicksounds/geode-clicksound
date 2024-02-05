@@ -6,8 +6,8 @@ import zipfile
 import urllib.request
 import re
 
-mod_url = os.getenv('LE_RELEASE') + "/" + os.getenv('THE_MOD_ID') + ".geode"
-urllib.request.urlretrieve(mod_url.replace("/tag/","/download/"), 'le.geode')
+release_url = os.getenv('LE_RELEASE')
+urllib.request.urlretrieve((release_url + "/" + os.getenv('THE_MOD_ID') + ".geode").replace("/tag/","/download/"), 'le.geode')
 archive = zipfile.ZipFile('le.geode', 'r')
 e = archive.open('changelog.md')
 file_list = archive.namelist()	
