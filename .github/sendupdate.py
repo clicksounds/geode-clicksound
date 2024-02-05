@@ -6,16 +6,10 @@ import zipfile
 import urllib.request
 import re
 
-
-try:
-		mod_url = os.getenv('LE_RELEASE') + os.getenv('THE_MOD_ID')
-		urllib.request.urlretrieve(mod_url, 'le.geode')
-
-
-
+mod_url = os.getenv('LE_RELEASE') + os.getenv('THE_MOD_ID')
+urllib.request.urlretrieve(mod_url, 'le.geode')
 archive = zipfile.ZipFile('le.geode', 'r')
 e = archive.extract('changelog.md', path=general_path)
-
 file_list = archive.namelist()	
 
 
