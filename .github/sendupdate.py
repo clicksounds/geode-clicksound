@@ -30,7 +30,7 @@ def send_webhook(eee):
 	req.add_header('User-Agent', 'python urllib')
 	req.add_header('Content-Type', 'application/json')
 	data = {
-		'content': ("#" + eeeeee.split("##")[1]).replace(os.getenv('TAG').split("-")[1], "Click Sounds " + os.getenv('TAG').split("-")[1] + " is out on Github!") + "\n||<@& le github updates here>||\n" + release_url,
+		'content': ("#" + eeeeee.split("##")[1]).replace((eeeeee.split("##")[1]).split("\r")[0], "Click Sounds " + os.getenv('TAG').split("-")[1] + " is out on Github!") + "\n||<@& le github updates here>||\n" + release_url,
 	}
 	request.urlopen(req, data=json.dumps(data).encode('utf-8'))
 
