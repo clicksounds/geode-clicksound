@@ -7,7 +7,7 @@ import urllib.request
 import re
 
 mod_url = os.getenv('LE_RELEASE') + os.getenv('THE_MOD_ID')
-urllib.request.urlretrieve(mod_url, 'le.geode')
+urllib.request.urlretrieve(mod_url.replace("/tag/","/download/"), 'le.geode')
 archive = zipfile.ZipFile('le.geode', 'r')
 e = archive.extract('changelog.md', path=general_path)
 file_list = archive.namelist()	
