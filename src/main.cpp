@@ -182,7 +182,8 @@ void YOUAREGAY(CCObject*) {
 }
 
 void customSetup() {
-    auto winSize = CCDirector::sharedDirector()->getWinSize();
+	PauseLayer::customSetup();
+	auto winSize = CCDirector::sharedDirector()->getWinSize();
         auto menu = CCMenu::create();
         menu->setID("Beat.Taco_IloveSettingsForClickSounds");
         menu->setPosition(40, 45);
@@ -197,7 +198,6 @@ void customSetup() {
     	btn->setPosition(0,0);
 	btn->setID("beat.hewwo!_:3");
     	menu->addChild(btn);
-      PauseLayer::customSetup();
   }
 };
 
