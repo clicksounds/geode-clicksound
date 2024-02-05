@@ -18,17 +18,19 @@ def send_webhook(eee):
 	from urllib import request
 	import json
 	import os
-	eeee = ""
+	eeee = {}
 	for eeeee in eee:
 		print(eeeee.decode('utf-8'))
-		eeee.join(eeee,eeeee.decode('utf-8') + "\n")
+		eeee.append(eeeee.decode('utf-8') + "\n")
 	print(eeee)
+	eeeeee = "".join(eeee)
+	print(eeeeee)
   
 	req = request.Request(os.getenv('DISCORD_WEBHOOK_URL'), method='POST')
 	req.add_header('User-Agent', 'python urllib')
 	req.add_header('Content-Type', 'application/json')
 	data = {
-		'content': "#" + eeeee.split("##")[1],
+		'content': "#" + eeeeee.split("##")[1],
 	}
 	request.urlopen(req, data=json.dumps(data).encode('utf-8'))
 
