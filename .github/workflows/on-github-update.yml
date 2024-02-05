@@ -9,10 +9,14 @@ jobs:
     name: Post To Discord
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Click Sound Repo
+        uses: actions/checkout@v4
+        with:
+          path: click
       - name: Run Python
         id: runit
         shell: bash
         run: |
-          python3 code/.github/sendupdate.py
+          python3 click/.github/sendupdate.py
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
