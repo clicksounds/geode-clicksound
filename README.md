@@ -60,7 +60,7 @@ Thank you so much to all of the people listed below for doing whatever they did 
 - [Beat](https://github.com/BeatACVR) - This is me! I made the mod.
 - [Viper](https://github.com/MuhXd) - Developer, helped me with android support :3
 - [Coop](https://github.com/coopeeo) - Developer, helped make coding the mod more efficient ^w^
-- [Uproxide](https://github.com/umbroxide) - Developer, helped with the developer badge system! OwO
+- [Uproxide](https://github.com/uproxide) - Developer, helped with the developer badge system! OwO
 - Sicariusblack - Helps with making some click sounds sound good!
 - aceofspadesss - Provided a ton of unique click sounds for the mod! >w<
 - kittykatspaugh - Emotional support
