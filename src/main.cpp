@@ -24,6 +24,7 @@ auto carrot = false;
 // 🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕
 // 🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕
 
+
 class $modify(PlayerObject) {
 
 public:
@@ -45,6 +46,7 @@ public:
 
     
     
+    // this code block is not approved by mat, but im not changing it.
     if (GameManager::sharedState()->getPlayLayer() && !GameManager::sharedState()->getEditorLayer())
       nullptr;
     else if (GameManager::sharedState()->getEditorLayer() && !GameManager::sharedState()->getPlayLayer())
@@ -174,6 +176,7 @@ public:
  }
 };
 
+
 // SETTINGS IN PAUSE MENU (ty viper!)
 // i was getting mad at the function, (i'm bi i just think it's funni - viper)
 class $modify(YoureAPansexual,PauseLayer) {
@@ -212,7 +215,7 @@ class buttonfunctionthing : public CCLayer {
 		)->show();
 	}
 };
-// Still developer badges below here!
+
 class $modify(ProfilePage) {
 	bool m_hasBeenOpened = false;
 
