@@ -22,6 +22,7 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 12 - Faze Click/Release (randomized)
 - 13 - Up Arrow 3
 - 14 - Bloody Click/Release (randomized)
+- 15 - SpaceUK Click
 ### Meme click sounds (negative number):
 - 1 - FIRE IN THE HOLE!
 - 2 - I loooove GD Cologne
@@ -43,6 +44,7 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 18 - Three, Two, One... Geometry Dash (randomized)
 - 19 - AUGHHH
 - 20 - Car Door Slam
+- 21 - Spectre / We Live We Love We Lie
 ## Release sounds
 ### Useful release sounds:
 - 0 - Custom sound
@@ -60,7 +62,7 @@ Thank you so much to all of the people listed below for doing whatever they did 
 - [Beat](https://github.com/BeatACVR) - This is me! I made the mod.
 - [Viper](https://github.com/MuhXd) - Developer, helped me with android support :3
 - [Coop](https://github.com/coopeeo) - Developer, helped make coding the mod more efficient ^w^
-- [Uproxide](https://github.com/uproxide) - Developer, helped with the developer badge system! OwO
+- [Uproxide](https://github.com/umbroxide) - Developer, helped with the developer badge system! OwO
 - Sicariusblack - Helps with making some click sounds sound good!
 - aceofspadesss - Provided a ton of unique click sounds for the mod! >w<
 - kittykatspaugh - Emotional support

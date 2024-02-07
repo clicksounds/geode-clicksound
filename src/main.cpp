@@ -83,6 +83,7 @@ public:
       case 12: clickSoundInUse = (rand() % 5 == 0) ? "faze-click-1.ogg"_spr : ((rand() % 5 == 1) ? "faze-click-2.ogg"_spr : ((rand() % 5 == 2) ? "faze-click-3.ogg"_spr : ((rand() % 5 == 3) ? "faze-click-4.ogg"_spr : "faze-click-5.ogg"_spr))); break;
       case 13: clickSoundInUse = "uparrow3.ogg"_spr; break;
       case 14: clickSoundInUse = (rand() % 5 == 0) ? "bloody-click-1.ogg"_spr : ((rand() % 5 == 1) ? "bloody-click-2.ogg"_spr : ((rand() % 5 == 2) ? "bloody-click-3.ogg"_spr : ((rand() % 5 == 3) ? "bloody-click-4.ogg"_spr : "bloody-click-5.ogg"_spr))); break;
+      case 15: clickSoundInUse = "spaceuk.ogg"_spr; break;        
 
       
 
@@ -107,6 +108,7 @@ public:
       case -18: clickSoundInUse = (rand() % 5 == 0) ? "dash-one.ogg"_spr : ((rand() % 5 == 1) ? "dash-two.ogg"_spr : ((rand() % 5 == 2) ? "dash-three.ogg"_spr : ((rand() % 5 == 3) ? "dash-dash.ogg"_spr : "dash-geometry.ogg"_spr))); break;
       case -19: clickSoundInUse = "aughhh.ogg"_spr; break;
       case -20: clickSoundInUse = "car-door-slam.ogg"_spr; break;
+      case -21: clickSoundInUse = "spectre.ogg"_spr; break;
     }
 
      if (Mod::get()->getSettingValue<bool>("enable-clicksound") && !usingCustomClickSound) {
@@ -180,28 +182,34 @@ public:
 // SETTINGS IN PAUSE MENU (ty viper!)
 // i was getting mad at the function, (i'm bi i just think it's funni - viper)
 class $modify(YoureAPansexual,PauseLayer) {
-void YOUAREGAY(CCObject*) {
-		geode::openSettingsPopup(Mod::get());
-}
-
-void customSetup() {
-	PauseLayer::customSetup();
-	auto winSize = CCDirector::sharedDirector()->getWinSize();
-        auto menu = CCMenu::create();
-        menu->setID("Beat.Taco_IloveSettingsForClickSounds");
-        menu->setPosition(40, 45);
-        this->addChild(menu);
-	auto spr = CCSprite::create("Button.png"_spr);
-    	spr->setScale(0.7f);
-    	auto btn = CCMenuItemSpriteExtra::create(
-        	spr,
-        	this,
-        	menu_selector(YoureAPansexual::YOUAREGAY)
-    	);
-    	btn->setPosition(0,0);
-	btn->setID("beat.hewwo!_:3");
-    	menu->addChild(btn);
+  void YOUAREGAY(CCObject*) {
+  		geode::openSettingsPopup(Mod::get());
   }
+
+  void customSetup() {
+  	PauseLayer::customSetup();
+  	auto winSize = CCDirector::sharedDirector()->getWinSize();
+         auto menu = CCMenu::create();
+         if(Mod::get()->getSettingValue<bool>("settings-button")) {
+         menu->setID("Beat.Taco_IloveSettingsForClickSounds");
+         menu->setPosition(40, 45);
+         this->addChild(menu);
+         }
+  	auto spr = CCSprite::create("Button.png"_spr);
+      	if(Mod::get()->getSettingValue<bool>("settings-button")) {
+        spr->setScale(0.7f);
+        }
+       	auto btn = CCMenuItemSpriteExtra::create(
+          	spr,
+          	this,
+          	menu_selector(YoureAPansexual::YOUAREGAY)
+          );
+    	  if(Mod::get()->getSettingValue<bool>("settings-button")) {
+        btn->setPosition(0,0);
+	      btn->setID("beat.hewwo!_:3");
+    	  menu->addChild(btn);
+        }
+    }
 };
 
 // Developer badges! :3333 (ty kot!)

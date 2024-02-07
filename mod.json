@@ -1,5 +1,5 @@
 {
-	"geode": "2.0.0-beta.15",
+	"geode": "2.0.0-beta.16",
 	"version": "v1.3.3",
 	"id": "beat.click-sound",
 	"name": "Click Sound",
@@ -41,8 +41,8 @@
 			"description": "Change the click sound. Negative numbers for meme sounds, 0 for custom sounds, and positive numbers for useful sounds. Check mod description for a sound list.",
 			"type": "int",
 			"default": 1,
-			"min": -20,
-			"max": 14,
+			"min": -21,
+			"max": 15,
 			"control": {
 				"arrows": true,
 				"slider": false
@@ -77,13 +77,19 @@
             "description": "Select a .ogg, .wav, or .mp3 format file to set as release sound 0. The best practice is to use a .ogg format sound that start loudly and immediately.",
             "type": "path",
             "default": "Upload a file first."
-        }
+        },
+		"settings-button": {
+			"name": "Show settings button",
+			"description": "When enabled, a settings button appears in the pause menu.",
+			"type": "bool",
+			"default": true
+		}
 	},
 	"repository": "https://github.com/BeatACVR/geode-clicksound",
 	"dependencies": [
         {
             "id": "geode.node-ids",
-            "version": ">=v1.1.4",
+            "version": ">=v1.3.0",
             "importance": "required"
         }
     ]
