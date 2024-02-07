@@ -4,11 +4,10 @@
 	"id": "beat.click-sound",
 	"name": "Click Sound",
 	"developers": [
-		"Beat (lead dev kinda)",
+		"Beat",
 		"Viper",
 		"Coop",
-		"Uproxide",
-		"Carrot Devs"
+		"Uproxide"
 	],
 	"gd": {
 		"android": "2.205",
