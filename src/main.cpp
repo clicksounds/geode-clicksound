@@ -188,30 +188,32 @@ class $modify(YoureAPansexual,PauseLayer) {
   		geode::openSettingsPopup(Mod::get());
   }
 
+  // fuck yall i fixed the indentation for this snippet
   void customSetup() {
   	PauseLayer::customSetup();
+
   	auto winSize = CCDirector::sharedDirector()->getWinSize();
-         auto menu = CCMenu::create();
-         if(Mod::get()->getSettingValue<bool>("settings-button")) {
-         menu->setID("Beat.Taco_IloveSettingsForClickSounds");
-         menu->setPosition(40, 45);
-         this->addChild(menu);
-         }
+
+    auto menu = this->getChildByID("left-button-menu");
+
   	auto spr = CCSprite::create("Button.png"_spr);
-      	if(Mod::get()->getSettingValue<bool>("settings-button")) {
-        spr->setScale(0.7f);
-        }
-       	auto btn = CCMenuItemSpriteExtra::create(
-          	spr,
-          	this,
-          	menu_selector(YoureAPansexual::YOUAREGAY)
-          );
-    	  if(Mod::get()->getSettingValue<bool>("settings-button")) {
-        btn->setPosition(0,0);
-	      btn->setID("beat.hewwo!_:3");
-    	  menu->addChild(btn);
-        }
+
+    if(Mod::get()->getSettingValue<bool>("settings-button")) {
+      spr->setScale(0.7f);
     }
+
+    auto btn = CCMenuItemSpriteExtra::create(
+        spr,
+        this,
+        menu_selector(YoureAPansexual::YOUAREGAY)
+      );
+
+    if(Mod::get()->getSettingValue<bool>("settings-button")) {
+      btn->setPosition({menu->getContentSize().width/2, btn->getContentSize().height/2});
+      btn->setID("beat.hewwo!_:3");
+      menu->addChild(btn);
+    }
+  }
 };
 
 // Developer badges! :3333 (ty kot!)
