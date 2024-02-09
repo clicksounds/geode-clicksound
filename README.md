@@ -65,6 +65,7 @@ Thank you so much to all of the people listed below for doing whatever they did 
 - [Viper](https://github.com/MuhXd) - Developer, helped me with android support :3
 - [Coop](https://github.com/coopeeo) - Developer, helped make coding the mod more efficient ^w^
 - [Uproxide](https://github.com/umbroxide) - Developer, helped with the developer badge system! OwO
+- Firee - Added mac support, thank you so much!
 - Sicariusblack - Helps with making some click sounds sound good!
 - aceofspadesss - Provided a ton of unique click sounds for the mod! >w<
 - kittykatspaugh - Emotional support
