@@ -10,7 +10,6 @@
 #include <Geode/loader/Loader.hpp>
 #include <algorithm>
 #include <cctype>
-// god damn thats a lot of libraries for a button that has almost no meaning
 
 using namespace geode::prelude;
 
@@ -182,13 +181,11 @@ public:
 
 
 // SETTINGS IN PAUSE MENU (ty viper!)
-// i was getting mad at the function, (i'm bi i just think it's funni - viper)
 class $modify(YoureAPansexual,PauseLayer) {
   void YOUAREGAY(CCObject*) {
       geode::openSettingsPopup(Mod::get());
   }
 
-  // fuck yall i fixed the indentation for this snippet
   void customSetup() {
     PauseLayer::customSetup();
 
