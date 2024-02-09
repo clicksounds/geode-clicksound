@@ -1,6 +1,6 @@
 {
 	"geode": "2.0.0-beta.16",
-	"version": "v1.3.3",
+	"version": "v1.4.0",
 	"id": "beat.click-sound",
 	"name": "Click Sound",
 	"developers": [
@@ -19,8 +19,8 @@
 		"files": [
 			"resources/*.ogg",
 			"resources/*.png",
-			"*/.mp3",
-			"*/.wav"
+			"resources/*.mp3",
+			"resources/*.wav"
 		]
 	},
 	"settings": {
@@ -42,7 +42,7 @@
 			"type": "int",
 			"default": 1,
 			"min": -21,
-			"max": 15,
+			"max": 16,
 			"control": {
 				"arrows": true,
 				"slider": false
@@ -52,8 +52,14 @@
             "name": "Upload a custom click sound",
             "description": "Select a .ogg, .wav, or .mp3 format file to set as click sound 0. The best practice is to use a .ogg format sound that start loudly and immediately.",
             "type": "path",
-            "default": "Upload a file first."
-        },
+            "default": "Upload a file first.",
+			"control": {
+				"filters": [
+					{"files": ["*.ogg*", "*.mp3", "*.wav"],
+					"description": "Audio file"}
+				]
+			}
+		},
 		"enable-releasesound": {
 			"name": "Enable release sounds",
 			"description": "Enable or disable release sounds.",
@@ -66,7 +72,7 @@
 			"type": "int",
 			"default": 1,
 			"min": -1,
-			"max": 6,
+			"max": 7,
 			"control": {
 				"arrows": true,
 				"slider": false
@@ -76,7 +82,13 @@
             "name": "Upload a custom release sound",
             "description": "Select a .ogg, .wav, or .mp3 format file to set as release sound 0. The best practice is to use a .ogg format sound that start loudly and immediately.",
             "type": "path",
-            "default": "Upload a file first."
+            "default": "Upload a file first.",
+			"control": {
+				"filters": [
+					{"files": ["*.ogg*", "*.mp3", "*.wav"],
+					"description": "Audio file"}
+				]
+			}
         },
 		"settings-button": {
 			"name": "Show settings button",

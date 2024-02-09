@@ -83,7 +83,8 @@ public:
       case 12: clickSoundInUse = (rand() % 5 == 0) ? "faze-click-1.ogg"_spr : ((rand() % 5 == 1) ? "faze-click-2.ogg"_spr : ((rand() % 5 == 2) ? "faze-click-3.ogg"_spr : ((rand() % 5 == 3) ? "faze-click-4.ogg"_spr : "faze-click-5.ogg"_spr))); break;
       case 13: clickSoundInUse = "uparrow3.ogg"_spr; break;
       case 14: clickSoundInUse = (rand() % 5 == 0) ? "bloody-click-1.ogg"_spr : ((rand() % 5 == 1) ? "bloody-click-2.ogg"_spr : ((rand() % 5 == 2) ? "bloody-click-3.ogg"_spr : ((rand() % 5 == 3) ? "bloody-click-4.ogg"_spr : "bloody-click-5.ogg"_spr))); break;
-      case 15: clickSoundInUse = "spaceuk.ogg"_spr; break;        
+      case 15: clickSoundInUse = "spaceuk.ogg"_spr; break;
+      case 16: clickSoundInUse = "npesta-click.ogg"_spr; break;        
 
       
 
@@ -162,6 +163,7 @@ public:
       case 4: releaseSoundInUse = "clickrelease-4-release.ogg"_spr; break;
       case 5: releaseSoundInUse = (rand() % 4 == 0) ? "faze-release-1.ogg"_spr : ((rand() % 4 == 1) ? "faze-release-2.ogg"_spr : ((rand() % 4 == 2) ? "faze-release-3.ogg"_spr : "faze-release-4.ogg"_spr)); break;
       case 6: releaseSoundInUse = (rand() % 5 == 0) ? "bloody-release-1.ogg"_spr : ((rand() % 5 == 1) ? "bloody-release-2.ogg"_spr : ((rand() % 5 == 2) ? "bloody-release-3.ogg"_spr : ((rand() % 5 == 3) ? "bloody-release-4.ogg"_spr : "bloody-release-5.ogg"_spr))); break;
+      case 7: releaseSoundInUse = "npesta-release.ogg"_spr; break;
 
       // Meme sounds
       case -1: releaseSoundInUse = "tiktok-release.ogg"_spr; break;
