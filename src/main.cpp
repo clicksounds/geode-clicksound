@@ -83,7 +83,8 @@ public:
       case 13: clickSoundInUse = "uparrow3.ogg"_spr; break;
       case 14: clickSoundInUse = (rand() % 5 == 0) ? "bloody-click-1.ogg"_spr : ((rand() % 5 == 1) ? "bloody-click-2.ogg"_spr : ((rand() % 5 == 2) ? "bloody-click-3.ogg"_spr : ((rand() % 5 == 3) ? "bloody-click-4.ogg"_spr : "bloody-click-5.ogg"_spr))); break;
       case 15: clickSoundInUse = "spaceuk.ogg"_spr; break;
-      case 16: clickSoundInUse = "npesta-click.ogg"_spr; break;        
+      case 16: clickSoundInUse = "npesta-click.ogg"_spr; break;
+      case 17: clickSoundInUse = "cursed.ogg"_spr; break;        
 
       
 
@@ -109,6 +110,7 @@ public:
       case -19: clickSoundInUse = "aughhh.ogg"_spr; break;
       case -20: clickSoundInUse = "car-door-slam.ogg"_spr; break;
       case -21: clickSoundInUse = "spectre.ogg"_spr; break;
+      case -22: clickSoundInUse = (rand() % 500 == 0) ? "congregation-jumpscare.ogg"_spr : "osu-hit.ogg"_spr; break;
     }
 
      if (Mod::get()->getSettingValue<bool>("enable-clicksound") && !usingCustomClickSound) {
@@ -147,7 +149,6 @@ public:
     bool usingCustomReleaseSound;
     std::string releaseSoundInUse;
 
-    
 
     if (releaseSliderValue != 0) usingCustomReleaseSound = false;
 
@@ -178,7 +179,6 @@ public:
     if(!Mod::get()->getSettingValue<bool>("enable-clicksound") && !Mod::get()->getSettingValue<bool>("enable-releasesound")){}else{carrot=true;}
  }
 };
-
 
 // SETTINGS IN PAUSE MENU (ty viper!)
 class $modify(YoureAPansexual,PauseLayer) {
@@ -231,7 +231,7 @@ class $modify(ProfilePage) {
   bool init(int p0, bool p1) {
     if (!ProfilePage::init(p0, p1)) return false;
 
-    std::set<int> csContributors = {13873867, 14284530, 21207551, 25397826};
+    std::set<int> csContributors = {13873867, 14284530, 21207551, 25397826, 6253758};
                                                   
 
     m_mainLayer->removeChildByID("my-stuff-hint");
