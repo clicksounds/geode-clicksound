@@ -3,8 +3,6 @@
 #include <Geode/modify/PauseLayer.hpp>
 #include <Geode/modify/EndLevelLayer.hpp>
 #include <Geode/ui/GeodeUI.hpp>
-// for stupid string adding
-#include <string>
 // For developer badges
 #include <Geode/modify/ProfilePage.hpp>
 #include <Geode/binding/ProfilePage.hpp>
@@ -88,7 +86,7 @@ public:
       case 17: clickSoundInUse = "cursed.ogg"_spr; break;
       case 18: clickSoundInUse = "spacebar2-click.ogg"_spr; break;
       case 19: clickSoundInUse = "click3.ogg"_spr; break;        
-      case 20: releaseSoundInUse = "Viper_Clicks_SpaceBar_" + to_string((rand() % 5) + 1) + ".mp3"_spr; break;
+      case 20: releaseSoundInUse = "Viper_Clicks_SpaceBar_" + std::to_string((rand() % 5) + 1) + ".mp3"_spr; break;
       
 
       // Meme sounds
@@ -169,7 +167,7 @@ public:
       case 6: releaseSoundInUse = (rand() % 5 == 0) ? "bloody-release-1.ogg"_spr : ((rand() % 5 == 1) ? "bloody-release-2.ogg"_spr : ((rand() % 5 == 2) ? "bloody-release-3.ogg"_spr : ((rand() % 5 == 3) ? "bloody-release-4.ogg"_spr : "bloody-release-5.ogg"_spr))); break;
       case 7: releaseSoundInUse = "npesta-release.ogg"_spr; break;
       case 8: releaseSoundInUse = "spacebar2-release.ogg"_spr; break;
-      case 9: releaseSoundInUse = "Viper_SpaceBar_release_" + to_string((rand() % 3) + 1) + ".mp3"_spr; break;
+      case 9: releaseSoundInUse = "Viper_SpaceBar_release_" + std::to_string((rand() % 3) + 1) + ".mp3"_spr; break;
 
       // Meme sounds
       case -1: releaseSoundInUse = "tiktok-release.ogg"_spr; break;
