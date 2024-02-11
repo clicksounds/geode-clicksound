@@ -1,6 +1,6 @@
 {
-	"geode": "2.0.0-beta.16",
-	"version": "v1.4.1",
+	"geode": "2.0.0-beta.17",
+	"version": "v1.4.2",
 	"id": "beat.click-sound",
 	"name": "Click Sound",
 	"developers": [
@@ -21,7 +21,7 @@
 			"resources/*.png",
 			"resources/*.mp3",
 			"resources/*.wav",
-			"resources/*.flac"
+			"resources/*.m4a"
 		]
 	},
 	"settings": {
@@ -43,7 +43,7 @@
 			"type": "int",
 			"default": 1,
 			"min": -22,
-			"max": 17,
+			"max": 19,
 			"control": {
 				"arrows": true,
 				"slider": false
@@ -51,12 +51,12 @@
 		},
 		"custom-clicksound": {
             "name": "Upload a custom click sound",
-            "description": "Select a .ogg, .wav, or .mp3 format file to set as click sound 0. The best practice is to use a .ogg format sound that start loudly and immediately.",
+            "description": "Select a .ogg, .wav, .mp3, or .m4a format file to set as click sound 0. The best practice is to use a .ogg format sound that start loudly and immediately.",
             "type": "path",
             "default": "Upload a file first.",
 			"control": {
 				"filters": [
-					{"files": ["*.ogg*", "*.mp3", "*.wav", "*.flac"],
+					{"files": ["*.ogg*", "*.mp3", "*.wav", "*.m4a"],
 					"description": "Audio file"}
 				]
 			}
@@ -73,7 +73,7 @@
 			"type": "int",
 			"default": 1,
 			"min": -1,
-			"max": 7,
+			"max": 8,
 			"control": {
 				"arrows": true,
 				"slider": false
@@ -81,12 +81,12 @@
 		},
 		"custom-releasesound": {
             "name": "Upload a custom release sound",
-            "description": "Select a .ogg, .wav, or .mp3 format file to set as release sound 0. The best practice is to use a .ogg format sound that start loudly and immediately.",
+            "description": "Select a .ogg, .wav, .mp3, or .m4a format file to set as release sound 0. The best practice is to use a .ogg format sound that start loudly and immediately.",
             "type": "path",
             "default": "Upload a file first.",
 			"control": {
 				"filters": [
-					{"files": ["*.ogg*", "*.mp3", "*.wav", "*.flac"],
+					{"files": ["*.ogg*", "*.mp3", "*.wav", "*.m4a"],
 					"description": "Audio file"}
 				]
 			}

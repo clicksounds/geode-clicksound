@@ -25,6 +25,8 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 15 - SpaceUK Click
 - 16 - Npesta Click/Release
 - 17 - Cursed Click
+- 18 - Spacebar 2
+- 19 - Click 3
 ### Meme click sounds (negative number):
 - 1 - FIRE IN THE HOLE!
 - 2 - I loooove GD Cologne
