@@ -1,5 +1,6 @@
 # Changelog
 ## Version v1.4.2
+* Requirements: Geode v2.0.0-beta.17 / Node-IDs v1.3.0
 * .m4a audio support added! (.ogg is still the best audio format to use for custom sounds.)
 * 'Spacebar 2' useful click sound added! (ty tonysburger!)
 * 'Click 3' useful click sound added! (ty probank!)
