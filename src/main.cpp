@@ -112,6 +112,7 @@ public:
       case -20: clickSoundInUse = "car-door-slam.ogg"_spr; break;
       case -21: clickSoundInUse = "spectre.ogg"_spr; break;
       case -22: clickSoundInUse = (rand() % 500 == 0) ? "congregation-jumpscare.ogg"_spr : "osu-hit.ogg"_spr; break;
+      case -23: clickSoundInUse = "soda.ogg"_spr; break;
     }
 
      if (Mod::get()->getSettingValue<bool>("enable-clicksound") && !usingCustomClickSound) {

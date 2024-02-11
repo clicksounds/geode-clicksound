@@ -1,8 +1,8 @@
 {
 	"geode": "2.0.0-beta.17",
-	"version": "v1.4.2",
+	"version": "v1.4.3",
 	"id": "beat.click-sound",
-	"name": "Click Sound",
+	"name": "Click Sounds",
 	"developers": [
 		"Beat",
 		"Viper",
@@ -21,7 +21,8 @@
 			"resources/*.png",
 			"resources/*.mp3",
 			"resources/*.wav",
-			"resources/*.m4a"
+			"resources/*.m4a",
+			"resources/*.flac"
 		]
 	},
 	"settings": {
@@ -42,7 +43,7 @@
 			"description": "Change the click sound. Negative numbers for meme sounds, 0 for custom sounds, and positive numbers for useful sounds. Check mod description for a sound list.",
 			"type": "int",
 			"default": 1,
-			"min": -22,
+			"min": -23,
 			"max": 19,
 			"control": {
 				"arrows": true,
@@ -51,12 +52,12 @@
 		},
 		"custom-clicksound": {
             "name": "Upload a custom click sound",
-            "description": "Select a .ogg, .wav, .mp3, or .m4a format file to set as click sound 0. The best practice is to use a .ogg format sound that start loudly and immediately.",
+            "description": "Select a .ogg, .wav, .mp3, .m4a, or .flac format file to set as click sound 0. The best practice is to use a .ogg format sound that start loudly and immediately.",
             "type": "path",
             "default": "Upload a file first.",
 			"control": {
 				"filters": [
-					{"files": ["*.ogg*", "*.mp3", "*.wav", "*.m4a"],
+					{"files": ["*.ogg*", "*.mp3", "*.wav", "*.m4a", "*.flac"],
 					"description": "Audio file"}
 				]
 			}
@@ -81,12 +82,12 @@
 		},
 		"custom-releasesound": {
             "name": "Upload a custom release sound",
-            "description": "Select a .ogg, .wav, .mp3, or .m4a format file to set as release sound 0. The best practice is to use a .ogg format sound that start loudly and immediately.",
+            "description": "Select a .ogg, .wav, .mp3, .m4a, or .flac format file to set as release sound 0. The best practice is to use a .ogg format sound that start loudly and immediately.",
             "type": "path",
             "default": "Upload a file first.",
 			"control": {
 				"filters": [
-					{"files": ["*.ogg*", "*.mp3", "*.wav", "*.m4a"],
+					{"files": ["*.ogg*", "*.mp3", "*.wav", "*.m4a", "*.flac"],
 					"description": "Audio file"}
 				]
 			}
