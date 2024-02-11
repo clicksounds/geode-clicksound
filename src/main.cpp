@@ -3,6 +3,8 @@
 #include <Geode/modify/PauseLayer.hpp>
 #include <Geode/modify/EndLevelLayer.hpp>
 #include <Geode/ui/GeodeUI.hpp>
+// for stupid string adding
+#include <string>
 // For developer badges
 #include <Geode/modify/ProfilePage.hpp>
 #include <Geode/binding/ProfilePage.hpp>
