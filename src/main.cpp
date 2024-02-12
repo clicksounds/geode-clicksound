@@ -86,6 +86,8 @@ public:
       case 17: clickSoundInUse = "cursed.ogg"_spr; break;
       case 18: clickSoundInUse = "spacebar2-click.ogg"_spr; break;
       case 19: clickSoundInUse = "click3.ogg"_spr; break;        
+      case 20: clickSoundInUse = ((rand() % 5 == 0) ? "Viper_Clicks_SpaceBar_1.ogg"_spr : ((rand() % 5 == 1) ? "Viper_Clicks_SpaceBar_2.ogg"_spr : ((rand() % 5 == 2) ? "Viper_Clicks_SpaceBar_3.ogg"_spr : ((rand() % 5 == 3) ? "Viper_Clicks_SpaceBar_4.ogg"_spr : "Viper_Clicks_SpaceBar_5.ogg"_spr)))); break;
+      case 21: clickSoundInUse = ((rand() % 5 == 0) ? "logitech_mx_anywhere_2s_Clicks_1.ogg"_spr : ((rand() % 5 == 1) ? "logitech_mx_anywhere_2s_Clicks_2.ogg"_spr : ((rand() % 5 == 2) ? "logitech_mx_anywhere_2s_Clicks_3.ogg"_spr : ((rand() % 5 == 3) ? "logitech_mx_anywhere_2s_Clicks_4.ogg"_spr : "logitech_mx_anywhere_2s_Clicks_5.ogg"_spr)))); break;
 
       
 
@@ -113,8 +115,8 @@ public:
       case -21: clickSoundInUse = "spectre.ogg"_spr; break;
       case -22: clickSoundInUse = (rand() % 500 == 0) ? "congregation-jumpscare.ogg"_spr : "osu-hit.ogg"_spr; break;
       case -23: clickSoundInUse = "soda.ogg"_spr; break;
+      case -24: clickSoundInUse = "Water_On_The_Hill.ogg"_spr; break;
     }
-
      if (Mod::get()->getSettingValue<bool>("enable-clicksound") && !usingCustomClickSound) {
         FMODAudioEngine::sharedEngine()->playEffect(clickSoundInUse, 1.0f, 1.0f, 0.5f);
     } 
@@ -167,6 +169,8 @@ public:
       case 6: releaseSoundInUse = (rand() % 5 == 0) ? "bloody-release-1.ogg"_spr : ((rand() % 5 == 1) ? "bloody-release-2.ogg"_spr : ((rand() % 5 == 2) ? "bloody-release-3.ogg"_spr : ((rand() % 5 == 3) ? "bloody-release-4.ogg"_spr : "bloody-release-5.ogg"_spr))); break;
       case 7: releaseSoundInUse = "npesta-release.ogg"_spr; break;
       case 8: releaseSoundInUse = "spacebar2-release.ogg"_spr; break;
+      case 9: releaseSoundInUse = ((rand() % 3 == 0) ? "Viper_SpaceBar_release_1.ogg"_spr : ((rand() % 3 == 1) ? "Viper_SpaceBar_release_2.ogg"_spr : "Viper_SpaceBar_release_3.ogg"_spr)); break;
+      case 10: releaseSoundInUse = ((rand() % 5 == 0) ? "logitech_mx_anywhere_2s_Releases_1.ogg"_spr : ((rand() % 5 == 1) ? "logitech_mx_anywhere_2s_Releases_2.ogg"_spr : ((rand() % 5 == 2) ? "logitech_mx_anywhere_2s_Releases_3.ogg"_spr : ((rand() % 5 == 3) ? "logitech_mx_anywhere_2s_Releases_4.ogg"_spr : "logitech_mx_anywhere_2s_Releases_5.ogg"_spr)))); break;
 
       // Meme sounds
       case -1: releaseSoundInUse = "tiktok-release.ogg"_spr; break;
