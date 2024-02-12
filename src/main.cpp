@@ -86,7 +86,7 @@ public:
       case 17: clickSoundInUse = "cursed.ogg"_spr; break;
       case 18: clickSoundInUse = "spacebar2-click.ogg"_spr; break;
       case 19: clickSoundInUse = "click3.ogg"_spr; break;        
-      case 20: clickSoundInUse = "Viper_Clicks_SpaceBar_" + std::to_string((rand() % 5)) + ".mp3"_spr; break;
+      case 20: clickSoundInUse = "Viper_Clicks_SpaceBar_" + std::to_string((rand() % 5) + 1) + ".mp3"_spr; break;
       
 
       // Meme sounds
