@@ -2,6 +2,7 @@
 ## Version v1.4.4
 * 'Water on the hill ' meme click sound added!
 * 'Viper Space Bar' useful click sound added!
+* 'Mx anywhere 2S' useful click sound added!
 ## Version v1.4.3
 * Requirements: Geode v2.0.0-beta.17 / Node-IDs v1.3.0
 * 'Click Sound' is now 'Click Sounds'
