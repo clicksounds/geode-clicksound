@@ -86,7 +86,7 @@ public:
       case 17: clickSoundInUse = "cursed.ogg"_spr; break;
       case 18: clickSoundInUse = "spacebar2-click.ogg"_spr; break;
       case 19: clickSoundInUse = "click3.ogg"_spr; break;        
-      case 20: clickSoundInUse = ((rand() % 5 == 0) ? "Viper_Clicks_SpaceBar_1.ogg"_spr : ((rand() % 5 == 1) ? "Viper_Clicks_SpaceBar_2.ogg"_spr : ((rand() % 5 == 2) ? "Viper_Clicks_SpaceBar_3.ogg"_spr : ((rand() % 5 == 3) ? "Viper_Clicks_SpaceBar_4.ogg"_spr : "Viper_Clicks_SpaceBar_5.ogg"_spr)))); break;
+      case 20: clickSoundInUse = Mod::get()->expandFileName("Viper_Clicks_SpaceBar_"+ ( (rand() % 5 ) + 1) +".ogg"); break;
 
       
 
