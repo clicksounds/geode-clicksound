@@ -167,7 +167,8 @@ public:
       case 6: releaseSoundInUse = (rand() % 5 == 0) ? "bloody-release-1.ogg"_spr : ((rand() % 5 == 1) ? "bloody-release-2.ogg"_spr : ((rand() % 5 == 2) ? "bloody-release-3.ogg"_spr : ((rand() % 5 == 3) ? "bloody-release-4.ogg"_spr : "bloody-release-5.ogg"_spr))); break;
       case 7: releaseSoundInUse = "npesta-release.ogg"_spr; break;
       case 8: releaseSoundInUse = "spacebar2-release.ogg"_spr; break;
-      case 9: releaseSoundInUse = ((rand() % 3 == 0) ? "Viper_SpaceBar_release_1"_spr : ((rand() % 3 == 1) ? "Viper_SpaceBar_release_2"_spr : "Viper_SpaceBar_release_3"_spr)); break;
+      case 9: releaseSoundInUse = ((rand() % 3 == 0) ? "Viper_SpaceBar_release_1.ogg"_spr : ((rand() % 3 == 1) ? "Viper_SpaceBar_release_2.ogg"_spr : "Viper_SpaceBar_release_3.ogg"_spr)); break;
+      
 
       // Meme sounds
       case -1: releaseSoundInUse = "tiktok-release.ogg"_spr; break;
