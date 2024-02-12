@@ -66,7 +66,7 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 7 - Npesta Click/Release
 - 8 - Spacebar Click/Release
 - 9 - Viper Space Bar Release (randomized)
-- 10 - Mx anywhere 2S (randomized)
+- 10 - Logitech MX Anywhere 2S mouse (randomized)
 ### Meme release sounds (negative number):
 - 1 - TikTok
 
