@@ -114,7 +114,7 @@ public:
       case -22: clickSoundInUse = (rand() % 500 == 0) ? "congregation-jumpscare.ogg"_spr : "osu-hit.ogg"_spr; break;
       case -23: clickSoundInUse = "soda.ogg"_spr; break;
     }
-
+log::debug(clickSoundInUse)
      if (Mod::get()->getSettingValue<bool>("enable-clicksound") && !usingCustomClickSound) {
         FMODAudioEngine::sharedEngine()->playEffect(clickSoundInUse, 1.0f, 1.0f, 0.5f);
     } 
