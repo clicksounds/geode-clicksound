@@ -27,6 +27,7 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 17 - Cursed Click
 - 18 - Spacebar Click/Release
 - 19 - Click 3
+- 20 - Viper Space Bar
 ### Meme click sounds (negative number):
 - 1 - FIRE IN THE HOLE!
 - 2 - I loooove GD Cologne
@@ -50,6 +51,8 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 20 - Car Door Slam
 - 21 - Spectre / We Live We Love We Lie
 - 22 - Congregation Jumpscare (1/500 chance)
+- 23 - Joe Biden Soda
+- 24 - Water on the Hill
 ## Release sounds
 ### Useful release sounds:
 - 0 - Custom sound
