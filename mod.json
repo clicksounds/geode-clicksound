@@ -18,12 +18,12 @@
 	"resources": {
 		"files": [
 			"resources/*.ogg",
-			"resources/*.png",
 			"resources/*.mp3",
 			"resources/*.wav",
 			"resources/*.m4a",
 			"resources/*.flac"
-		]
+		],
+		"sprites": ["resources/*.png"]
 	},
 	"settings": {
 		"OnlyOnJump": {
