@@ -1,4 +1,8 @@
 # Changelog
+## Version v1.4.5
+* Requirements: Geode v2.0.0-beta.19 / Node-IDs v1.4.0 (FROM LAST UPDATE)
+* Fix developer badge sizing
+* Fix click sound pause menu button sizing
 ## Version v1.4.4
 * New Requirements: Geode v2.0.0-beta.19 / Node-IDs v1.4.0
 * 'Water on the hill' meme click sound added!
