@@ -119,16 +119,17 @@ void wrapSimplePlayer(CCNode* player, CCArray* buttons, CCSize size = {42.6f, 42
 
 struct ProfilePageIDs : Modify<ProfilePageIDs, ProfilePage> {
     static void onModify(auto& self) {
-        if (!self.setHookPriority("ProfilePage::init", GEODE_ID_PRIORITY)) {
+        if (!self.setHookPriority("ProfilePage::init", GEODE_ID_PRIORITY-1)) {
             log::warn("Failed to set ProfilePage::init hook priority, node IDs may not work properly");
         }
-        if (!self.setHookPriority("ProfilePage::loadPageFromUserInfo", GEODE_ID_PRIORITY)) {
+        if (!self.setHookPriority("ProfilePage::loadPageFromUserInfo", GEODE_ID_PRIORITY-1)) {
             log::warn("Failed to set ProfilePage::loadPageFromUserInfo hook priority, node IDs may not work properly");
         }
     }
 
     bool init(int accountID, bool menuLayer) {
         if (!ProfilePage::init(accountID, menuLayer)) return false;
+        if (this->getChildByIDRecursive("main-menu")) return true;
 
         NodeIDs::get()->provide(this);
 
@@ -137,6 +138,7 @@ struct ProfilePageIDs : Modify<ProfilePageIDs, ProfilePage> {
 
     void loadPageFromUserInfo(GJUserScore* score) {
         ProfilePage::loadPageFromUserInfo(score);
+        if (this->getChildByIDRecursive("main-menu")) return;
 
         NodeIDs::get()->provide(this);
 
