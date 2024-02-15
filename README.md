@@ -27,8 +27,10 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 17 - Cursed Click
 - 18 - Spacebar Click/Release
 - 19 - Click 3
-- 20 - Viper Spacebar (randomized) (releases too)
+- 20 - Viper Spacebar Click/Release (randomized)
 - 21 - Click/Release 5 (randomized)
+- 22 - Zoink Click
+- 23 - Screen Tap 1
 ### Meme click sounds (negative number):
 - 1 - FIRE IN THE HOLE!
 - 2 - I loooove GD Cologne
@@ -65,7 +67,7 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 6 - Bloody Click/Release (randomized)
 - 7 - Npesta Click/Release
 - 8 - Spacebar Click/Release
-- 9 - Viper Space Bar Release (randomized)
+- 9 - Viper Spacebar Click/Release (randomized)
 - 10 - Click/Release 5 (randomized)
 ### Meme release sounds (negative number):
 - 1 - TikTok
