@@ -99,12 +99,5 @@
 			"default": true
 		}
 	},
-	"repository": "https://github.com/BeatACVR/geode-clicksound",
-	"dependencies": [
-        {
-            "id": "geode.node-ids",
-            "version": ">=v1.4.0",
-            "importance": "required"
-        }
-    ]
+	"repository": "https://github.com/BeatACVR/geode-clicksound"
 }

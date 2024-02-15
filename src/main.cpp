@@ -11,6 +11,9 @@
 #include <algorithm>
 #include <cctype>
 
+#include "PauseLayer.hpp"
+#include "ProfilePage.hpp"
+
 using namespace geode::prelude;
 
 // 🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕
@@ -202,15 +205,14 @@ class $modify(YoureAPansexual,PauseLayer) {
 
     auto spr = CCSprite::create("Button.png"_spr);
 
-    if(Mod::get()->getSettingValue<bool>("settings-button")) {
-      spr->setScale(0.7f);
-    }
 
     auto btn = CCMenuItemSpriteExtra::create(
         spr,
         this,
         menu_selector(YoureAPansexual::YOUAREGAY)
       );
+   
+    spr->setScale(0.7f);
 
     if(Mod::get()->getSettingValue<bool>("settings-button")) {
       btn->setPosition({menu->getContentSize().width/2, btn->getContentSize().height/2});
