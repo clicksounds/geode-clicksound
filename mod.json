@@ -5,13 +5,13 @@
 	"name": "Click Sounds",
 	"developers": [
 		"Beat",
-		"Viper",
 		"Coop",
+		"Viper",
 		"Uproxide"
 	],
 	"gd": {
 		"android": "2.205",
-        	"win": "2.204",
+        "win": "2.204",
 		"mac": "2.200"
 	},
 	"description": "Plays a sound whenever you press a jump button.",
@@ -44,7 +44,7 @@
 			"type": "int",
 			"default": 1,
 			"min": -24,
-			"max": 21,
+			"max": 23,
 			"control": {
 				"arrows": true,
 				"slider": false
@@ -99,9 +99,6 @@
 			"default": true
 		}
 	},
-<<<<<<< HEAD
-	"repository": "https://github.com/BeatACVR/geode-clicksound"
-=======
 	"repository": "https://github.com/BeatACVR/geode-clicksound",
 	"dependencies": [
         {
@@ -110,5 +107,4 @@
             "importance": "required"
         }
     ]
->>>>>>> parent of f43a356 (>w<)
 }

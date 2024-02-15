@@ -91,7 +91,8 @@ public:
       case 19: clickSoundInUse = "click3.ogg"_spr; break;        
       case 20: clickSoundInUse = ((rand() % 5 == 0) ? "Viper_Clicks_SpaceBar_1.ogg"_spr : ((rand() % 5 == 1) ? "Viper_Clicks_SpaceBar_2.ogg"_spr : ((rand() % 5 == 2) ? "Viper_Clicks_SpaceBar_3.ogg"_spr : ((rand() % 5 == 3) ? "Viper_Clicks_SpaceBar_4.ogg"_spr : "Viper_Clicks_SpaceBar_5.ogg"_spr)))); break;
       case 21: clickSoundInUse = ((rand() % 5 == 0) ? "logitech_mx_anywhere_2s_Clicks_1.ogg"_spr : ((rand() % 5 == 1) ? "logitech_mx_anywhere_2s_Clicks_2.ogg"_spr : ((rand() % 5 == 2) ? "logitech_mx_anywhere_2s_Clicks_3.ogg"_spr : ((rand() % 5 == 3) ? "logitech_mx_anywhere_2s_Clicks_4.ogg"_spr : "logitech_mx_anywhere_2s_Clicks_5.ogg"_spr)))); break;
-
+      case 22: clickSoundInUse = "zoink-click.ogg"_spr; break;
+      case 23: clickSoundInUse = "screen-tap-1.ogg"_spr; break;
       
 
       // Meme sounds
@@ -205,15 +206,12 @@ class $modify(YoureAPansexual,PauseLayer) {
 
     auto spr = CCSprite::create("Button.png"_spr);
 
-
     auto btn = CCMenuItemSpriteExtra::create(
         spr,
         this,
         menu_selector(YoureAPansexual::YOUAREGAY)
       );
-   
     spr->setScale(0.7f);
-
     if(Mod::get()->getSettingValue<bool>("settings-button")) {
       btn->setPosition({menu->getContentSize().width/2, btn->getContentSize().height/2});
       btn->setID("beat.hewwo!_:3");
