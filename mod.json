@@ -1,6 +1,6 @@
 {
 	"geode": "2.0.0-beta.19",
-	"version": "v1.4.5",
+	"version": "v1.4.6",
 	"id": "beat.click-sound",
 	"name": "Click Sounds",
 	"developers": [
@@ -74,7 +74,7 @@
 			"type": "int",
 			"default": 1,
 			"min": -1,
-			"max": 10,
+			"max": 11,
 			"control": {
 				"arrows": true,
 				"slider": false
@@ -103,7 +103,7 @@
 	"dependencies": [
         {
             "id": "geode.node-ids",
-            "version": ">=v1.4.0",
+            "version": ">=v1.5.1",
             "importance": "required"
         }
     ]

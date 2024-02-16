@@ -23,7 +23,6 @@ auto carrot = false;
 // 🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕
 // 🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕
 
-
 class $modify(PlayerObject) {
 
 public:
@@ -119,7 +118,7 @@ public:
       case -24: clickSoundInUse = "Water_On_The_Hill.ogg"_spr; break;
     }
      if (Mod::get()->getSettingValue<bool>("enable-clicksound") && !usingCustomClickSound) {
-        FMODAudioEngine::sharedEngine()->playEffect(clickSoundInUse, 1.0f, 1.0f, 1.0f);
+        FMODAudioEngine::sharedEngine()->playEffect(clickSoundInUse, 1.0f, 1.0f, 2.0f);
     } 
 
     if (Mod::get()->getSettingValue<bool>("enable-clicksound") && usingCustomClickSound) {
@@ -147,8 +146,6 @@ public:
     else
       return;
 
-
-
     auto releaseSliderValue = Mod::get()->getSettingValue<int64_t>("releasesound-currentsound");
     auto customReleaseSound = Mod::get()->getSettingValue<ghc::filesystem::path>("custom-releasesound").string();
     bool usingCustomReleaseSound;
@@ -172,6 +169,7 @@ public:
       case 8: releaseSoundInUse = "spacebar2-release.ogg"_spr; break;
       case 9: releaseSoundInUse = ((rand() % 3 == 0) ? "Viper_SpaceBar_release_1.ogg"_spr : ((rand() % 3 == 1) ? "Viper_SpaceBar_release_2.ogg"_spr : "Viper_SpaceBar_release_3.ogg"_spr)); break;
       case 10: releaseSoundInUse = ((rand() % 5 == 0) ? "logitech_mx_anywhere_2s_Releases_1.ogg"_spr : ((rand() % 5 == 1) ? "logitech_mx_anywhere_2s_Releases_2.ogg"_spr : ((rand() % 5 == 2) ? "logitech_mx_anywhere_2s_Releases_3.ogg"_spr : ((rand() % 5 == 3) ? "logitech_mx_anywhere_2s_Releases_4.ogg"_spr : "logitech_mx_anywhere_2s_Releases_5.ogg"_spr)))); break;
+      case 11: releaseSoundInUse = "zoink-release.ogg"_spr; break;
 
       // Meme sounds
       case -1: releaseSoundInUse = "tiktok-release.ogg"_spr; break;
