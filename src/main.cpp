@@ -119,7 +119,7 @@ public:
       case -24: clickSoundInUse = "Water_On_The_Hill.ogg"_spr; break;
     }
      if (Mod::get()->getSettingValue<bool>("enable-clicksound") && !usingCustomClickSound) {
-        FMODAudioEngine::sharedEngine()->playEffect(clickSoundInUse, 1.0f, 1.0f, 0.5f);
+        FMODAudioEngine::sharedEngine()->playEffect(clickSoundInUse, 1.0f, 1.0f, 1.0f);
     } 
 
     if (Mod::get()->getSettingValue<bool>("enable-clicksound") && usingCustomClickSound) {
