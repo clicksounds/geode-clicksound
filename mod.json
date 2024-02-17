@@ -104,7 +104,7 @@
         {
             "id": "geode.node-ids",
             "version": ">=v1.5.1",
-            "importance": "required"
+            "importance": "suggested"
         }
     ]
 }
