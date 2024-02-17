@@ -10,6 +10,7 @@ static void onModify(auto& self) {
         self.setHookPriority("MenuLayer::init", -100); // GO FIRST :O
     }
      bool init() {
+        auto winSize = CCDirector::get()->getWinSize();
         if (!MenuLayer::init())
             return false;
         
@@ -32,7 +33,8 @@ static void onModify(auto& self) {
             };
             this->getChildByID("bottom-menu")->setVisible(true);
              this->getChildByID("close-menu")->setVisible(true);
-            this->getChildByID("bottom-menu")->setScale(2.6);
+            this->getChildByID("bottom-menu")->setScale(4);
+              this->getChildByID("bottom-menu")->setPosition(winSize.width / 2, winSize.height / 2);
              this->getChildByID("bottom-menu")->setLayout(
                 RowLayout::create()
                 ->setGap(-51)
