@@ -25,10 +25,10 @@ static void onModify(auto& self) {
             alert->m_scene = this;
            
             for(auto items : CCArrayExt<CCNode*>(this->getChildren())) {
-                items->setVisible(false)
+                items->setVisible(false);
             };
              for(auto items : CCArrayExt<CCNode*>(this->getChildByID("bottom-menu")->getChildren())) {
-                items->setVisible(false)
+                items->setVisible(false);
             };
             this->getChildByID("bottom-menu")->setVisible(true);
              this->getChildByID("close-menu")->setVisible(true);
