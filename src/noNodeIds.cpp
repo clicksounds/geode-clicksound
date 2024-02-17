@@ -21,7 +21,7 @@ static void onModify(auto& self) {
 
            auto alert = FLAlertLayer::create(
              "Click Sounds Error",
-             "Please install node ids from <cp>geode index!</c> ",  
+             "Please install node ids from the <cp>geode index!</c> ",  
               "OK"
             );
             alert->m_scene = this;
