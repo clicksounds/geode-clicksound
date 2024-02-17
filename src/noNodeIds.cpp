@@ -17,11 +17,13 @@ static void onModify(auto& self) {
             return true;
         };
 
-            FLAlertLayer::create(
+           auto alert = FLAlertLayer::create(
              "Blud Doesn't have NodeIDs",
              "Please install node ids from <cp>geode index!</c> ",  
               "OK"
-            )->show();
+            )
+            alert->m_scene = this;
+            alert->show();
         
         return true;
      };

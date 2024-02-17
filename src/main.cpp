@@ -194,11 +194,11 @@ class $modify(YoureAPansexual,PauseLayer) {
 
   void customSetup() {
     PauseLayer::customSetup();
-
+    auto menu = this
     auto winSize = CCDirector::sharedDirector()->getWinSize();
-
-    auto menu = this->getChildByID("left-button-menu");
-
+if (Loader::get()->isModLoaded("geode.node-ids")) {
+    menu = this->getChildByID("left-button-menu");
+}
     auto spr = CCSprite::create("Button.png"_spr);
 
     auto btn = CCMenuItemSpriteExtra::create(
