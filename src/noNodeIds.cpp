@@ -19,10 +19,10 @@ static void onModify(auto& self) {
 
             FLAlertLayer::create(
              "Blud Doesn't have NodeIDs",
-             "Get it",  
+             "Please install node ids from <cp>geode index!</c> ",  
               "OK"
             )->show();
         
-        return false;
+        return true;
      };
 };
