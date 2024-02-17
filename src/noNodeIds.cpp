@@ -21,7 +21,7 @@ static void onModify(auto& self) {
              "Blud Doesn't have NodeIDs",
              "Please install node ids from <cp>geode index!</c> ",  
               "OK"
-            )
+            );
             alert->m_scene = this;
             alert->show();
         
