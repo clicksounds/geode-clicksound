@@ -24,7 +24,7 @@ class $modify(newl,MenuLayer) {
             "OK"
         );
         alerterror->show();
-        this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setVisible(true);
+        //this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setVisible(true);
         }
     };
     void index2(CCObject*) {
