@@ -105,6 +105,7 @@ class $modify(newl,MenuLayer) {
                  ->setGrowCrossAxis(true)
                  ->setCrossAxisReverse(true)
                  ->setAutoScale(true)
+                 ->setAxisAlignment(AxisAlignment::Center)
                 );
         this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setScale(0.2);
         this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setPosition(99999, 99999);
