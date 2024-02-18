@@ -41,7 +41,6 @@ class $modify(newl,MenuLayer) {
         );*/
         //alerterror->show();
         //this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setVisible(true);
-        }
     };
     void index2(CCObject*) {
         utils::game::restart();
