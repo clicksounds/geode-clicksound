@@ -54,8 +54,8 @@ class $modify(newl,MenuLayer) {
             spr, this, menu_selector(newl::index)
         );
         btn->setScale(.7);
-        btn->setPosition(18.5, 28);
-        this->getChildByID("bottom-menu")->addChild(btn);
+        btn->setPosition(winSize.width / 2, winSize.height / 2);
+        this->addChild(btn);
     };
     void initUi2() {
         auto winSize = CCDirector::sharedDirector()->getWinSize();
@@ -65,8 +65,8 @@ class $modify(newl,MenuLayer) {
             spr, this, menu_selector(newl::index2)
         );
         btn->setScale(.7);
-        btn->setPosition(18.5, -97);
-        this->getChildByID("bottom-menu")->addChild(btn);
+        btn->setPosition(winSize.width / 2, (winSize.height / 2) - 10);
+        this->addChild(btn);
     };
 
     static void onModify(auto& self) {
@@ -107,9 +107,10 @@ class $modify(newl,MenuLayer) {
                  ->setAutoScale(true)
                  ->setAxisAlignment(AxisAlignment::Center)
                 );
-        this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setScale(0.2);
-        this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setPosition(99999, 99999);
-        this->getChildByID("bottom-menu")->setPosition(winSize.width / 2, winSize.height / 2);
+        this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setVisible(true);
+        //this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setScale(0.2);
+        //this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setPosition(99999, 99999);
+        this->getChildByID("bottom-menu")->setPosition(winSize.width / 2, 0);
           this->getChildByID("bottom-menu")->setContentSize({284.500,45.000});
          this->getChildByID("bottom-menu")->setScale(1.1);
         this->getChildByID("bottom-menu")->setVisible(true);
