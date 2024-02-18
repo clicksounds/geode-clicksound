@@ -80,7 +80,7 @@ class $modify(newl,MenuLayer) {
     };
 
     static void onModify(auto& self) {
-        self.setHookPriority("MenuLayer::init", -100); // GO LAST :O (IDK WHY IT SAID GO FIRST)
+        self.setHookPriority("MenuLayer::init", -6901); // GO LAST :O (IDK WHY IT SAID GO FIRST)
     }
     bool init() {
         auto winSize = CCDirector::get()->getWinSize();
