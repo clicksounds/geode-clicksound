@@ -119,7 +119,7 @@ class $modify(newl,MenuLayer) {
                 );
         
         auto menu = CCMenu::create();
-        menu->setID("Beat.PleaseDONOTREMOVE")
+        menu->setID("Beat.PleaseDONOTREMOVE");
         menu->setPosition(winSize.width / 2, 0);
         
         this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setVisible(true);
