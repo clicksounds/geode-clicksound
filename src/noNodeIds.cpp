@@ -131,6 +131,13 @@ class $modify(newl,MenuLayer) {
         menu->setID("Beat.PleaseDONOTREMOVE");
         menu->setPosition(winSize.width / 2, 0);
          this->addChild(menu);
+        if (auto GeodeButton =  typeinfo_cast<CCMenuItemSpriteExtra*>(this->getChildByIDRecursive("geode.loader/geode-button")))
+		{
+            // If the button is somehow not in the right spot and this cannot be removed as the game would crash so it would always move.
+            GeodeButton->removeFromParent();
+			this->getChildByID("bottom-menu")->addChild(GeodeButton);
+		}
+        
         this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setVisible(true);
         this->getChildByID("bottom-menu")->setVisible(true);
         //this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setScale(0.2);
