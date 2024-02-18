@@ -63,7 +63,7 @@ class $modify(newl,MenuLayer) {
 
     void initUi() {
         auto winSize = CCDirector::sharedDirector()->getWinSize();
-        // auto spr = ButtonSprite::create("/nodeIdsLogo.png"_spr);
+        //auto spr = ButtonSprite::create("/nodeIdsLogo.png"_spr);
         auto spr = CCSprite::create("nodeIdsLogo.png"_spr);
         auto btn = CCMenuItemSpriteExtra::create(
             spr, this, menu_selector(newl::index)
@@ -85,8 +85,10 @@ class $modify(newl,MenuLayer) {
     };
 
     static void onModify(auto& self) {
-        self.setHookPriority("MenuLayer::init", -6901); // GO LAST :O (IDK WHY IT SAID GO FIRST)
+        self.setHookPriority("MenuLayer::init", -16901); // GO LAST :O (IDK WHY IT SAID GO FIRST)
     }
+
+    CCSprite* m_nidscsReplacer;
     bool init() {
         auto winSize = CCDirector::get()->getWinSize();
         if (!MenuLayer::init())
@@ -136,23 +138,27 @@ class $modify(newl,MenuLayer) {
         menu->setID("Beat.PleaseDONOTREMOVE");
         menu->setPosition(winSize.width / 2, 0);
          this->addChild(menu);
-	    auto spr = CCSprite::create("nodeIdsLogo.png"_spr);
+	    /*auto spr = CCSprite::create("nodeIdsLogo.png"_spr);
         auto btn = CCMenuItemSpriteExtra::create(
             spr, this, menu_selector(newl::index)
         );
-        btn->setVisible(false);
-	btn->setID("Beat.Fake");
-         this->getChildByID("Beat.PleaseDONOTREMOVE")->addChild(btn);
-	//if (Loader::get()->getLoadedMod("undefined0.minecraft_menu")) {
-		
-	//}
+        btn->setVisible(false);*/
+	//btn->setID("Beat.Fake");
+         //this->getChildByID("Beat.PleaseDONOTREMOVE")->addChild(btn);
+	if (Loader::get()->getLoadedMod("undefined0.minecraft_menu")) {
+		m_fields->m_nidscsReplacer = CircleButtonSprite::createWithSprite(
+                "nobglogo.png"_spr,
+                1.0f,
+                CircleBaseColor::Green,
+                CircleBaseSize::MediumAlt
+            );
+            
+		auto btnee = CCMenuItemSpriteExtra::create(m_fields->m_nidscsReplacer, this, menu_selector(newl::index));
+		btnee->setID("beat.replacementforgonebtn"_spr);
+		this->getChildByID("bottom-menu")->addChild(btnee);
+	}
     if (auto GeodeButton =  typeinfo_cast<CCMenuItemSpriteExtra*>(this->getChildByIDRecursive("geode.loader/geode-button"))) {
             // If the button is somehow not in the right spot and this cannot be removed as the game would crash so it would always move.
-            auto spree = CircleButtonSprite::createWithSpriteFrameName("nodeIdsLogo.png"_spr);
-		auto btnee = CCMenuItemSpriteExtra::create(spree, this, menu_selector(newl::index3));
-		btnee->setVisible(false);
-		btnee->setID("beat.replacementforgonebtn");
-		this->getChildByID("bottom-menu")->addChild(btnee);
             	GeodeButton->removeFromParent();
 		this->getChildByID("bottom-menu")->addChild(GeodeButton);
 	}
