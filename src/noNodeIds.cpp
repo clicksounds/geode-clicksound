@@ -4,6 +4,7 @@
 #include <Geode/loader/Loader.hpp>
 #include <Geode/ui/GeodeUI.hpp>
 #include <Geode/loader/Index.hpp>
+#include <Geode/ui/BasedButtonSprite.hpp>
 
 using namespace geode::prelude;
 
@@ -138,12 +139,18 @@ class $modify(newl,MenuLayer) {
         btn->setVisible(false);
 	btn->setID("Beat.Fake");
          this->getChildByID("Beat.PleaseDONOTREMOVE")->addChild(btn);
-        if (auto GeodeButton =  typeinfo_cast<CCMenuItemSpriteExtra*>(this->getChildByIDRecursive("geode.loader/geode-button")))
-		{
+	if (Loader::get()->getLoadedMod("undefined0.minecraft_menu")) {
+		auto spree CircleButtonSprite::createWithSpriteFrameName("top-sprite.png"_spr);
+		auto btnee = CCMenuItemSpriteExtra::create(spree, this, menu_selector(newl::index));
+		btnee->setVisible(false);
+		btnee->setID("replacementforgonebtn");
+		this->getChildByID("bottom-menu")->addChild(btnee);
+	}
+        if (auto GeodeButton =  typeinfo_cast<CCMenuItemSpriteExtra*>(this->getChildByIDRecursive("geode.loader/geode-button"))) {
             // If the button is somehow not in the right spot and this cannot be removed as the game would crash so it would always move.
-            GeodeButton->removeFromParent();
-			this->getChildByID("bottom-menu")->addChild(GeodeButton);
-		}
+            	GeodeButton->removeFromParent();
+		this->getChildByID("bottom-menu")->addChild(GeodeButton);
+	}
         
         this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setVisible(true);
         this->getChildByID("bottom-menu")->setVisible(true);
