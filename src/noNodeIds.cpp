@@ -7,6 +7,7 @@
 
 using namespace geode::prelude;
 
+// test disabling the menulayer
 class $modify(newl,newll,MenuLayer) { 
     void index(CCObject*) {
         auto nodeIDSmod = geode::Index::get()->getItemsByModID("geode.node-ids").back();
@@ -18,26 +19,31 @@ class $modify(newl,newll,MenuLayer) {
     void index2(CCObject*) {
         utils::game::restart();
     };
-};
-auto spr = CCSprite::create("nodeIdsLogo.png"_spr);
-auto spr2 = ButtonSprite::create("Restart Game");
-auto leBtn = CCMenuItemSpriteExtra::create(spr, this, menu_selector(newl::index));
-auto leRestartBtn = CCMenuItemSpriteExtra::create(spr, this, menu_selector(newll::index2));
 
-// test disabling the menulayer
-class $modify(newl,newll,MenuLayer) {
-    void initUi() {
+    CCObject initUi() {
         auto winSize = CCDirector::sharedDirector()->getWinSize();
-        leBtn->setScale(1.7);
-        leBtn->setPosition(winSize.width / 2, winSize.height / 2);
-        this->getChildByID("bottom-menu")->addChild(leBtn);
+        // auto spr = ButtonSprite::create("/nodeIdsLogo.png"_spr);
+        auto spr = CCSprite::create("nodeIdsLogo.png"_spr);
+        auto btn = CCMenuItemSpriteExtra::create(
+            spr, this, menu_selector(newl::index)
+        );
+        btn->setScale(1.7);
+        btn->setPosition(winSize.width / 2, winSize.height / 2);
+        this->getChildByID("bottom-menu")->addChild(btn);
+        return btn;
     };
-    void initUi2() {
+    CCObject initUi2() {
         auto winSize = CCDirector::sharedDirector()->getWinSize();
-        leRestartBtn->setScale(1.7);
-        leRestartBtn->setPosition(winSize.width / 2, winSize.height / 2);
-        leRestartBtn->setVisible(false);
-        this->getChildByID("bottom-menu")->addChild(leRestartBtn);
+        // auto spr = ButtonSprite::create("/nodeIdsLogo.png"_spr);
+        auto spr = ButtonSprite::create("Restart Game");
+        auto btn = CCMenuItemSpriteExtra::create(
+            spr, this, menu_selector(newll::index2)
+        );
+        btn->setScale(1.7);
+        btn->setPosition(winSize.width / 2, winSize.height / 2);
+        btn->setVisible(false);
+        this->getChildByID("bottom-menu")->addChild(btn);
+        return btn;
     };
 
     static void onModify(auto& self) {
@@ -77,15 +83,16 @@ class $modify(newl,newll,MenuLayer) {
         this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setVisible(false);
         this->getChildByID("bottom-menu")->setVisible(false);
         alert->show();
-        newl::initUi();
-        newll::initUi2();
+        auto hello = newl::initUi();
+        auto hello2 = newll::initUi2();
+        auto listener = EventListener<ModInstallFilter>(+[](ModInstallEvent* ev) {
+        hello->setVisible(false);
+        hello2->setVisible(true);
+        }, ModInstallFilter("geode.node-ids"));
            
                
         return true;
     };
 };
 
-auto listener = EventListener<ModInstallFilter>(+[](ModInstallEvent* ev) {
-    leBtn->setVisible(false);
-    leRestartBtn->setVisible(true);
-}, ModInstallFilter("geode.node-ids"));
+
