@@ -13,20 +13,20 @@ auto nodeIdsMetadata = nodeIDSmod->getMetadata();
 Mod theNodeIds = Mod(nodeIdsMetadata);
 Mod* theNodeId2 = &theNodeIds;
 geode::openIndexPopup(theNodeId2);
-}
+};
 
-        bool initui(ui) {
+        bool initUi(ui) {
     
     auto spr = ButtonSprite::create("Node ids");
 
     auto btn = CCMenuItemSpriteExtra::create(
-        spr, ui, menu_selector(newl::index)
+        spr, this, menu_selector(newl::index)
     );
 
-    menu->addChild(btn);
+    ui->addChild(btn);
 
     
-}
+};
 
 static void onModify(auto& self) {
         self.setHookPriority("MenuLayer::init", -100); // GO FIRST :O
@@ -65,7 +65,7 @@ static void onModify(auto& self) {
              );
             this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setVisible(false);
             alert->show();
-             newl::initui(this->getChildByID("bottom-menu"));
+             newl::initUi(this->getChildByID("bottom-menu"));
            
                
         return true;
