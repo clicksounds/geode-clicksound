@@ -10,15 +10,23 @@ using namespace geode::prelude;
 // test disabling the menulayer
 class $modify(newl,MenuLayer) { 
     void index(CCObject*) {
-        auto indexlook = nullptr;
         try {
-        auto indexlook = geode::Index::get();
-    } catch (const std::exception& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
-        auto indexlook = nullptr;
-    }
+            auto indexlook = geode::Index::get();
+            auto nodeIDSmod =  indexlook->getItemsByModID("geode.node-ids").back();
+            auto nodeIdsMetadata = nodeIDSmod->getMetadata();
+            Mod theNodeIds = Mod(nodeIdsMetadata);
+            Mod* theNodeId2 = &theNodeIds;
+            geode::openIndexPopup(theNodeId2);
+        } catch () {
+            auto alerterror = FLAlertLayer::create(
+                "Click Sounds Error",
+                "Unable to fetch mod, please download from the <cp>geode website!</c> ",  
+                "OK"
+            );
+            alerterror->show();
+        }
 
-        if (indexlook != nullptr) {
+        /*if (indexlook != nullptr) {
         auto nodeIDSmod =  indexlook->getItemsByModID("geode.node-ids").back();
         auto nodeIdsMetadata = nodeIDSmod->getMetadata();
         Mod theNodeIds = Mod(nodeIdsMetadata);
@@ -30,8 +38,8 @@ class $modify(newl,MenuLayer) {
             "Click Sounds Error",
             "Unable to fetch mod, please download from the <cp>geode website!</c> ",  
             "OK"
-        );
-        alerterror->show();
+        );*/
+        //alerterror->show();
         //this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setVisible(true);
         }
     };
