@@ -15,7 +15,7 @@ class $modify(newl,MenuLayer) {
         geode::openIndexPopup(theNodeId2);
     };
 
-    bool initUi() {
+    void initUi() {
         auto winSize = CCDirector::sharedDirector()->getWinSize();
         // auto spr = ButtonSprite::create("/nodeIdsLogo.png"_spr);
         auto spr = CCSprite::create("nodeIdsLogo.png"_spr);
@@ -66,7 +66,7 @@ class $modify(newl,MenuLayer) {
         this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setVisible(true);
         this->getChildByID("bottom-menu")->setVisible(true);
         alert->show();
-        //newl::initUi();
+        newl::initUi();
            
                
         return true;
