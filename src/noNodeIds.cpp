@@ -65,7 +65,7 @@ static void onModify(auto& self) {
              );
             this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setVisible(false);
             alert->show();
-             newl::initUi()
+             newl::initUi();
            
                
         return true;
