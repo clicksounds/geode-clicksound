@@ -33,7 +33,9 @@ static void onModify(auto& self) {
                 items->setVisible(false);
             };
             this->getChildByID("bottom-menu")->setVisible(true);
-             this->getChildByID("close-menu")->setVisible(true);
+             if (this->getChildByID("close-menu")) {
+                this->getChildByID("close-menu")->setVisible(true);
+             }
             this->getChildByID("bottom-menu")->setScale(4);
               this->getChildByID("bottom-menu")->setPosition(winSize.width / 2, winSize.height / 2);
              this->getChildByID("bottom-menu")->setLayout(
@@ -42,6 +44,8 @@ static void onModify(auto& self) {
              );
             this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setVisible(true);
             alert->show();
+           
+               geode::openIndexPopup(Loader::get()->getLoadedMod("geode.node-ids"));
         return true;
      };
 };
