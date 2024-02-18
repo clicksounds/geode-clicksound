@@ -12,11 +12,21 @@ class $modify(newl,MenuLayer) {
     void index(CCObject*) {
         try {
             auto indexlook = geode::Index::get();
-            auto nodeIDSmod =  indexlook->getItemsByModID("geode.node-ids").back();
-            auto nodeIdsMetadata = nodeIDSmod->getMetadata();
+            auto nodeIDSmod =  indexlook->getItemsByModID("geode.node-ids");
+            if(nodeIDSmod.size() != 0){
+            auto nodeIDSMod2 = nodeIDSmod.back();
+            auto nodeIdsMetadata = nodeIDSMod2->getMetadata();
             Mod theNodeIds = Mod(nodeIdsMetadata);
             Mod* theNodeId2 = &theNodeIds;
             geode::openIndexPopup(theNodeId2);
+            } else {
+                auto alerterror = FLAlertLayer::create(
+                "Click Sounds Error",
+                "Unable to fetch mod, please download from the <cp>geode website!</c> ",  
+                "OK"
+            );
+            alerterror->show();
+            }
         } catch (const std::exception& e) {
             auto alerterror = FLAlertLayer::create(
                 "Click Sounds Error",
