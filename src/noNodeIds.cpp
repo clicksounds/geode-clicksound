@@ -18,13 +18,12 @@ class $modify(newl,MenuLayer) {
         geode::openIndexPopup(theNodeId2);
         }
         else {
-            auto alert = FLAlertLayer::create(
+            auto alerterror = FLAlertLayer::create(
             "Click Sounds Error",
             "Unable to fetch mod, please download from the <cp>geode website!</c> ",  
             "OK"
         );
-        alert->m_scene = this;
-        alert->show();
+        alerterror->show();
         }
     };
     void index2(CCObject*) {
