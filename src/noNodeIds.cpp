@@ -15,11 +15,7 @@ class $modify(newl,MenuLayer) {
             auto theLoader = Loader::get();
             if(theLoader->isModInstalled("geode.node-ids")) {
                 auto isModInstall = theLoader->getInstalledMod("geode.node-ids");
-                if(isModInstall->isEnabled()) {
-                    auto alerterror = FLAlertLayer::create("Node Ids Already Enabled","<co>Node Ids</c> has already been <cg>enabled</c> and <cg>installed</c>! Please <cy>Restart</c> by clicking OK down below then clicking \"<cl>Restart Game</c>\"\nThank <cr>You</c>!","OK");
-                    alerterror->show();
-                } else
-                    geode::openInfoPopup(isModInstall);
+                geode::openInfoPopup(isModInstall);
             } else {
                 auto indexlook = geode::Index::get();
                 auto nodeIDSmod =  indexlook->getItemsByModID("geode.node-ids");
