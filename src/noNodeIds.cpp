@@ -24,7 +24,7 @@ class $modify(newl,MenuLayer) {
             "OK"
         );
         alert->m_scene = this;
-        alert->show()
+        alert->show();
         }
     };
     void index2(CCObject*) {
