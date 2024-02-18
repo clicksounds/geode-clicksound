@@ -20,7 +20,7 @@ class $modify(newl,MenuLayer) {
         utils::game::restart();
     };
 
-    CCMenuItemSpriteExtra* initUi() {
+    void initUi() {
         auto winSize = CCDirector::sharedDirector()->getWinSize();
         // auto spr = ButtonSprite::create("/nodeIdsLogo.png"_spr);
         auto spr = CCSprite::create("nodeIdsLogo.png"_spr);
@@ -30,9 +30,8 @@ class $modify(newl,MenuLayer) {
         btn->setScale(1.7);
         btn->setPosition(winSize.width / 2, winSize.height / 2);
         this->getChildByID("bottom-menu")->addChild(btn);
-        return btn;
     };
-    CCMenuItemSpriteExtra* initUi2() {
+    void initUi2() {
         auto winSize = CCDirector::sharedDirector()->getWinSize();
         // auto spr = ButtonSprite::create("/nodeIdsLogo.png"_spr);
         auto spr = ButtonSprite::create("Restart Game");
@@ -42,7 +41,6 @@ class $modify(newl,MenuLayer) {
         btn->setScale(1.7);
         btn->setPosition(winSize.width / 2, (winSize.height / 2)-34);
         this->getChildByID("bottom-menu")->addChild(btn);
-        return btn;
     };
 
     static void onModify(auto& self) {
@@ -82,8 +80,6 @@ class $modify(newl,MenuLayer) {
         this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setVisible(false);
         this->getChildByID("bottom-menu")->setVisible(false);
         alert->show();
-        auto hello = newl::initUi();
-        auto hello2 = newl::initUi2();
         /*auto listener = EventListener<ModInstallFilter>(+[](ModInstallEvent* ev) {
         this->setVisible(false);
         hello2->setVisible(true);
