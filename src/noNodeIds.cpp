@@ -83,7 +83,7 @@ class $modify(newl,MenuLayer) {
         this->getChildByID("bottom-menu")->setVisible(false);
         alert->show();
         auto hello = newl::initUi();
-        auto hello2 = newll::initUi2();
+        auto hello2 = newl::initUi2();
         /*auto listener = EventListener<ModInstallFilter>(+[](ModInstallEvent* ev) {
         this->setVisible(false);
         hello2->setVisible(true);
