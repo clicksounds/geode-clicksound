@@ -83,7 +83,7 @@ class $modify(newl,MenuLayer) {
 
         auto alert = FLAlertLayer::create(
             "Click Sounds Error",
-            "Please install node ids from the <cp>geode index!</c> ",  
+            "Please install Node Ids from the <cp>Geode Index</c>!",  
             "OK"
         );
         alert->m_scene = this;
@@ -118,7 +118,7 @@ class $modify(newl,MenuLayer) {
         /*auto listener = EventListener<ModInstallFilter>(+[](ModInstallEvent* ev) {
         this->setVisible(false);
         hello2->setVisible(true);
-        }, ModInstallFilter("geode.node-ids"));*/
+        }, ModInstallFilter("geode.node-ids"));e*/
            
                
         return true;
