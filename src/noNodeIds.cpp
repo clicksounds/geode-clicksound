@@ -40,8 +40,7 @@ class $modify(newl,MenuLayer) {
             spr, this, menu_selector(newl::index2)
         );
         btn->setScale(1.7);
-        btn->setPosition(winSize.width / 2, winSize.height / 2);
-        btn->setVisible(false);
+        btn->setPosition(winSize.width / 2, (winSize.height / 2)-34);
         this->getChildByID("bottom-menu")->addChild(btn);
         return btn;
     };
@@ -85,10 +84,10 @@ class $modify(newl,MenuLayer) {
         alert->show();
         auto hello = newl::initUi();
         auto hello2 = newll::initUi2();
-        auto listener = EventListener<ModInstallFilter>(+[](ModInstallEvent* ev) {
-        hello->setVisible(false);
+        /*auto listener = EventListener<ModInstallFilter>(+[](ModInstallEvent* ev) {
+        this->setVisible(false);
         hello2->setVisible(true);
-        }, ModInstallFilter("geode.node-ids"));
+        }, ModInstallFilter("geode.node-ids"));*/
            
                
         return true;
