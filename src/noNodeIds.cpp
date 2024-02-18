@@ -27,7 +27,7 @@ class $modify(newl,MenuLayer) {
         auto btn = CCMenuItemSpriteExtra::create(
             spr, this, menu_selector(newl::index)
         );
-        btn->setScale(1.7);
+        btn->setScale(.7);
         btn->setPosition(18.5, 28);
         this->getChildByID("bottom-menu")->addChild(btn);
     };
@@ -38,7 +38,7 @@ class $modify(newl,MenuLayer) {
         auto btn = CCMenuItemSpriteExtra::create(
             spr, this, menu_selector(newl::index2)
         );
-        btn->setScale(1.7);
+        btn->setScale(.7);
         btn->setPosition(18.5, -97);
         this->getChildByID("bottom-menu")->addChild(btn);
     };
