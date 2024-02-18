@@ -16,6 +16,7 @@ class $modify(newl,MenuLayer) {
     };
 
     bool initUi() {
+        auto winSize = CCDirector::sharedDirector()->getWinSize();
         auto spr = ButtonSprite::create("Node ids");
         auto btn = CCMenuItemSpriteExtra::create(
             spr, this, menu_selector(newl::index)
