@@ -7,31 +7,28 @@
 using namespace geode::prelude;
 // test disabling the menulayer
 class $modify(newl,MenuLayer) { 
-void index(CCObject*) {
-auto nodeIDSmod = geode::Index::get()->getItemsByModID("geode.node-ids").back();
-auto nodeIdsMetadata = nodeIDSmod->getMetadata();
-Mod theNodeIds = Mod(nodeIdsMetadata);
-Mod* theNodeId2 = &theNodeIds;
-geode::openIndexPopup(theNodeId2);
-};
+    void index(CCObject*) {
+        auto nodeIDSmod = geode::Index::get()->getItemsByModID("geode.node-ids").back();
+        auto nodeIdsMetadata = nodeIDSmod->getMetadata();
+        Mod theNodeIds = Mod(nodeIdsMetadata);
+        Mod* theNodeId2 = &theNodeIds;
+        geode::openIndexPopup(theNodeId2);
+    };
 
-        bool initUi() {
-    
-    auto spr = ButtonSprite::create("Node ids");
+    bool initUi() {
+        auto spr = ButtonSprite::create("Node ids");
+        auto btn = CCMenuItemSpriteExtra::create(
+            spr, this, menu_selector(newl::index)
+        );
+        btn->setScale(4);
+        btn->setPosition(winSize.width / 2, winSize.height / 2);
+        this->addChild(btn);
+    };
 
-    auto btn = CCMenuItemSpriteExtra::create(
-        spr, this, menu_selector(newl::index)
-    );
-
-    this->getChildByID("bottom-menu")->addChild(btn);
-
-    
-};
-
-static void onModify(auto& self) {
+    static void onModify(auto& self) {
         self.setHookPriority("MenuLayer::init", -100); // GO FIRST :O
     }
-     bool init() {
+    bool init() {
         auto winSize = CCDirector::get()->getWinSize();
         if (!MenuLayer::init())
             return false;
@@ -40,34 +37,33 @@ static void onModify(auto& self) {
             return true;
         };
 
-           auto alert = FLAlertLayer::create(
-             "Click Sounds Error",
-             "Please install node ids from the <cp>geode index!</c> ",  
-              "OK"
+        auto alert = FLAlertLayer::create(
+            "Click Sounds Error",
+            "Please install node ids from the <cp>geode index!</c> ",  
+            "OK"
+        );
+        alert->m_scene = this;
+        
+        for(auto items : CCArrayExt<CCNode*>(this->getChildren())) {
+            items->setVisible(false);
+        };
+            for(auto items : CCArrayExt<CCNode*>(this->getChildByID("bottom-menu")->getChildren())) {
+            items->setVisible(false);
+        };
+        this->getChildByID("bottom-menu")->setVisible(true);
+            if (this->getChildByID("close-menu")) {
+            this->getChildByID("close-menu")->setVisible(true);
+            }
+        /*
+            this->getChildByID("bottom-menu")->setLayout(
+            RowLayout::create()
+            ->setGap(-51)
             );
-            alert->m_scene = this;
-           
-            for(auto items : CCArrayExt<CCNode*>(this->getChildren())) {
-                items->setVisible(false);
-            };
-             for(auto items : CCArrayExt<CCNode*>(this->getChildByID("bottom-menu")->getChildren())) {
-                items->setVisible(false);
-            };
-            this->getChildByID("bottom-menu")->setVisible(true);
-             if (this->getChildByID("close-menu")) {
-                this->getChildByID("close-menu")->setVisible(true);
-             }
-            this->getChildByID("bottom-menu")->setScale(4);
-              this->getChildByID("bottom-menu")->setPosition(winSize.width / 2, winSize.height / 2);
-             this->getChildByID("bottom-menu")->setLayout(
-                RowLayout::create()
-                ->setGap(-51)
-             );
-            this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setVisible(false);
-            alert->show();
-             newl::initUi();
+        this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setVisible(false);*/
+        alert->show();
+        newl::initUi();
            
                
         return true;
-     };
+    };
 };
