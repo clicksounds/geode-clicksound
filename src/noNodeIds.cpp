@@ -66,7 +66,7 @@ class $modify(newl,MenuLayer) {
         this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setVisible(true);
         this->getChildByID("bottom-menu")->setVisible(true);
         alert->show();
-        newl::initUi();
+        //newl::initUi();
            
                
         return true;
