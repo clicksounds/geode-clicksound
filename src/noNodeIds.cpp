@@ -7,7 +7,7 @@
 using namespace geode::prelude;
 // test disabling the menulayer
 class $modify(newl,MenuLayer) { 
-void index() {
+void index(CCObject*) {
 auto nodeIDSmod = geode::Index::get()->getItemsByModID("geode.node-ids").back();
 auto nodeIdsMetadata = nodeIDSmod->getMetadata();
 Mod theNodeIds = Mod(nodeIdsMetadata);
@@ -15,7 +15,7 @@ Mod* theNodeId2 = &theNodeIds;
 geode::openIndexPopup(theNodeId2);
 };
 
-        bool initUi(ui) {
+        bool initUi() {
     
     auto spr = ButtonSprite::create("Node ids");
 
@@ -23,7 +23,7 @@ geode::openIndexPopup(theNodeId2);
         spr, this, menu_selector(newl::index)
     );
 
-    ui->addChild(btn);
+    this->getChildByID("bottom-menu")->addChild(btn);
 
     
 };
@@ -65,7 +65,7 @@ static void onModify(auto& self) {
              );
             this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setVisible(false);
             alert->show();
-             newl::initUi(this->getChildByID("bottom-menu"));
+             newl::initUi()
            
                
         return true;
