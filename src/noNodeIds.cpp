@@ -12,21 +12,31 @@ using namespace geode::prelude;
 class $modify(newl,MenuLayer) { 
     void index(CCObject*) {
         try {
-            auto indexlook = geode::Index::get();
-            auto nodeIDSmod =  indexlook->getItemsByModID("geode.node-ids");
-            if(nodeIDSmod.size() != 0){
-            auto nodeIDSMod2 = nodeIDSmod.back();
-            auto nodeIdsMetadata = nodeIDSMod2->getMetadata();
-            Mod theNodeIds = Mod(nodeIdsMetadata);
-            Mod* theNodeId2 = &theNodeIds;
-            geode::openIndexPopup(theNodeId2);
+            auto theLoader = Loader::get();
+            if(theLoader->isModInstalled("geode.node-ids")) {
+                auto isModInstall = theLoader->getInstalledMod("geode.node-ids");
+                if(isModInstall->isEnabled()) {
+                    auto alerterror = FLAlertLayer::create("Node Ids Already Enabled","<co>Node Ids</c> has already been <cg>enabled</c> and <cg>installed</c>! Please <cy>Restart</c> by clicking OK down below then clicking \"<cl>Restart Game</c>\"\nThank <cr>You</c>!","OK");
+                    alerterror->show();
+                } else
+                    geode::openInfoPopup(isModInstall);
             } else {
-                auto alerterror = FLAlertLayer::create(
-                "Click Sounds Error",
-                "Unable to fetch mod, please download from the <cp>geode website!</c> ",  
-                "OK"
-            );
-            alerterror->show();
+                auto indexlook = geode::Index::get();
+                auto nodeIDSmod =  indexlook->getItemsByModID("geode.node-ids");
+                if(nodeIDSmod.size() != 0){
+                    auto nodeIDSMod2 = nodeIDSmod.back();
+                    auto nodeIdsMetadata = nodeIDSMod2->getMetadata();
+                    Mod theNodeIds = Mod(nodeIdsMetadata);
+                    Mod* theNodeId2 = &theNodeIds;
+                    geode::openIndexPopup(theNodeId2);
+                    } else {
+                        auto alerterror = FLAlertLayer::create(
+                        "Click Sounds Error",
+                        "Unable to fetch mod, please download from the <cp>geode website!</c> ",  
+                        "OK"
+                    );
+                    alerterror->show();
+                }
             }
         } catch (const std::exception& e) {
             auto alerterror = FLAlertLayer::create(
