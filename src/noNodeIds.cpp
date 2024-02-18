@@ -64,7 +64,7 @@ class $modify(newl,MenuLayer) {
             spr, this, menu_selector(newl::index)
         );
         btn->setScale(.7);
-        btn->setPosition(winSize.width / 2, winSize.height / 2);
+        btn->setPosition(winSize.width / 2, (winSize.height / 2)+ 20);
          this->getChildByID("Beat.PleaseDONOTREMOVE")->addChild(btn);
     };
     void initUi2() {
@@ -75,7 +75,7 @@ class $modify(newl,MenuLayer) {
             spr, this, menu_selector(newl::index2)
         );
         btn->setScale(.7);
-        btn->setPosition(winSize.width / 2, (winSize.height / 2) - 10);
+        btn->setPosition(winSize.width / 2, (winSize.height / 2) - 25);
          this->getChildByID("Beat.PleaseDONOTREMOVE")->addChild(btn);
     };
 
@@ -126,7 +126,8 @@ class $modify(newl,MenuLayer) {
         this->getChildByID("bottom-menu")->setVisible(true);
         //this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setScale(0.2);
         //this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setPosition(99999, 99999);
-        this->getChildByID("Beat.PleaseDONOTREMOVE")->setPosition(winSize.width / 2, 0);
+        this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setPosition(winSize.width / 2, 0);
+        this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setPosition(winSize.width / 2, winSize.height / 2);
           this->getChildByID("Beat.PleaseDONOTREMOVE")->setContentSize({284.500,45.000});
          this->getChildByID("Beat.PleaseDONOTREMOVE")->setScale(1.1);
         this->getChildByID("Beat.PleaseDONOTREMOVE")->setVisible(true);
