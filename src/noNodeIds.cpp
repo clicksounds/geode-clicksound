@@ -17,7 +17,7 @@ class $modify(newl,MenuLayer) {
             Mod theNodeIds = Mod(nodeIdsMetadata);
             Mod* theNodeId2 = &theNodeIds;
             geode::openIndexPopup(theNodeId2);
-        } catch () {
+        } catch (const std::exception& e) {
             auto alerterror = FLAlertLayer::create(
                 "Click Sounds Error",
                 "Unable to fetch mod, please download from the <cp>geode website!</c> ",  
