@@ -99,7 +99,7 @@ class $modify(newl,MenuLayer) {
             this->getChildByID("close-menu")->setVisible(true);
             }
         
-            this->getChildByID("bottom-menu")->setLayout(
+         this->getChildByID("bottom-menu")->setLayout(
                 RowLayout::create()
                 ->setGap(14)
                  ->setGrowCrossAxis(true)
