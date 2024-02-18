@@ -99,16 +99,18 @@ class $modify(newl,MenuLayer) {
             this->getChildByID("close-menu")->setVisible(true);
             }
         
-            this->getChildByID("bottom-menu")->setLayout(
+         this->getChildByID("bottom-menu")->setLayout(
                 RowLayout::create()
                 ->setGap(14)
                  ->setGrowCrossAxis(true)
                  ->setCrossAxisReverse(true)
                  ->setAutoScale(true)
+                 ->setAxisAlignment(AxisAlignment::Center)
                 );
         this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setScale(0.2);
         this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setPosition(99999, 99999);
         this->getChildByID("bottom-menu")->setPosition(winSize.width / 2, winSize.height / 2);
+          this->getChildByID("bottom-menu")->setContentSize({284.500,45.000});
          this->getChildByID("bottom-menu")->setScale(1.1);
         this->getChildByID("bottom-menu")->setVisible(true);
         alert->show();
