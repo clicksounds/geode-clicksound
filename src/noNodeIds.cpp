@@ -8,7 +8,7 @@
 using namespace geode::prelude;
 
 // test disabling the menulayer
-class $modify(newl,newll,MenuLayer) { 
+class $modify(newl,MenuLayer) { 
     void index(CCObject*) {
         auto nodeIDSmod = geode::Index::get()->getItemsByModID("geode.node-ids").back();
         auto nodeIdsMetadata = nodeIDSmod->getMetadata();
@@ -37,7 +37,7 @@ class $modify(newl,newll,MenuLayer) {
         // auto spr = ButtonSprite::create("/nodeIdsLogo.png"_spr);
         auto spr = ButtonSprite::create("Restart Game");
         auto btn = CCMenuItemSpriteExtra::create(
-            spr, this, menu_selector(newll::index2)
+            spr, this, menu_selector(newl::index2)
         );
         btn->setScale(1.7);
         btn->setPosition(winSize.width / 2, winSize.height / 2);
