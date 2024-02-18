@@ -18,7 +18,7 @@ class $modify(newl,MenuLayer) {
     bool initUi() {
         auto winSize = CCDirector::sharedDirector()->getWinSize();
         // auto spr = ButtonSprite::create("/nodeIdsLogo.png"_spr);
-        auto spr = CCSprite::create("Button.png"_spr);
+        auto spr = CCSprite::create("nodeIdsLogo.png"_spr);
         auto btn = CCMenuItemSpriteExtra::create(
             spr, this, menu_selector(newl::index)
         );
@@ -61,8 +61,8 @@ class $modify(newl,MenuLayer) {
             RowLayout::create()
             ->setGap(-51)
             );*/
-        this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setScale(0.0001);
-        this->getChildByID("bottom-menu")->setPosition(999999, 999999);
+        //this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setScale(0.0001);
+        //this->getChildByID("bottom-menu")->setPosition(999999, 999999);
         this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setVisible(true);
         alert->show();
         newl::initUi();
