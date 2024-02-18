@@ -140,7 +140,7 @@ class $modify(newl,MenuLayer) {
 	btn->setID("Beat.Fake");
          this->getChildByID("Beat.PleaseDONOTREMOVE")->addChild(btn);
 	if (Loader::get()->getLoadedMod("undefined0.minecraft_menu")) {
-		auto spree CircleButtonSprite::createWithSpriteFrameName("top-sprite.png"_spr);
+		auto spree = CircleButtonSprite::createWithSpriteFrameName("top-sprite.png"_spr);
 		auto btnee = CCMenuItemSpriteExtra::create(spree, this, menu_selector(newl::index));
 		btnee->setVisible(false);
 		btnee->setID("replacementforgonebtn");
