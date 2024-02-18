@@ -23,6 +23,8 @@ class $modify(newl,MenuLayer) {
             "Unable to fetch mod, please download from the <cp>geode website!</c> ",  
             "OK"
         );
+        alert->m_scene = this;
+        alert->show()
         }
     };
     void index2(CCObject*) {
