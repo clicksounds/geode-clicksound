@@ -7,7 +7,7 @@
 
 using namespace geode::prelude;
 
-class $modify(newl,newll) { 
+class $modify(newl,newll,MenuLayer) { 
     void index(CCObject*) {
         auto nodeIDSmod = geode::Index::get()->getItemsByModID("geode.node-ids").back();
         auto nodeIdsMetadata = nodeIDSmod->getMetadata();
