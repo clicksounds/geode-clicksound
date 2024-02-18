@@ -22,7 +22,7 @@ class $modify(newl,MenuLayer) {
         auto btn = CCMenuItemSpriteExtra::create(
             spr, this, menu_selector(newl::index)
         );
-        btn->setScale(4);
+        btn->setScale(2.2);
         btn->setPosition(winSize.width / 2, winSize.height / 2);
         this->addChild(btn);
     };
@@ -61,10 +61,10 @@ class $modify(newl,MenuLayer) {
             RowLayout::create()
             ->setGap(-51)
             );
-        this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setScale(1);
-        this->getChildByID("bottom-menu")->setPosition(433, 433);
-        this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setVisible(true);
-        this->getChildByID("bottom-menu")->setVisible(true);
+        this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setScale(0.2);
+        this->getChildByID("bottom-menu")->setPosition(99999, 99999);
+        this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setVisible(false);
+        this->getChildByID("bottom-menu")->setVisible(false);
         alert->show();
         newl::initUi();
            
