@@ -86,7 +86,7 @@ class $modify(newl,MenuLayer) {
         
             this->getChildByID("bottom-menu")->setLayout(
                 RowLayout::create()
-                ->setGap(-6)
+                ->setGap(14)
                  ->setGrowCrossAxis(true)
                  ->setCrossAxisReverse(true)
                  ->setAutoScale(true)
