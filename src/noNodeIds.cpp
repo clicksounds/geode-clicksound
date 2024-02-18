@@ -137,6 +137,9 @@ class $modify(newl,MenuLayer) {
         //this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setPosition(99999, 99999);
         //this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setPosition(winSize.width / 2, 40);
         menu->setPosition(winSize.width / 2, (winSize.height / 2)+ 30);
+        this->getChildByID("bottom-menu")->setPosition(winSize.width / 2, 0);
+          this->getChildByID("bottom-menu")->setContentSize({284.500,45.000});
+         this->getChildByID("bottom-menu")->setScale(1.1);
         menu->setContentSize({284.500,45.000});
         menu->setScale(0.9);
         menu->setVisible(true);
