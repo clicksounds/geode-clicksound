@@ -11,10 +11,19 @@ using namespace geode::prelude;
 class $modify(newl,MenuLayer) { 
     void index(CCObject*) {
         auto nodeIDSmod = geode::Index::get()->getItemsByModID("geode.node-ids").back();
+        if (nodeIDSmod) {
         auto nodeIdsMetadata = nodeIDSmod->getMetadata();
         Mod theNodeIds = Mod(nodeIdsMetadata);
         Mod* theNodeId2 = &theNodeIds;
         geode::openIndexPopup(theNodeId2);
+        }
+        else {
+            auto alert = FLAlertLayer::create(
+            "Click Sounds Error",
+            "Unable to fetch mod, please download from the <cp>geode website!</c> ",  
+            "OK"
+        );
+        }
     };
     void index2(CCObject*) {
         utils::game::restart();
@@ -84,7 +93,7 @@ class $modify(newl,MenuLayer) {
         this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setPosition(99999, 99999);
         this->getChildByID("bottom-menu")->setPosition(winSize.width / 2, winSize.height / 2);
          this->getChildByID("bottom-menu")->setScale(1.1);
-        this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setVisible(false);
+         this->getChildByID("geode.loader/geode-button")->setVisible(true);
         this->getChildByID("bottom-menu")->setVisible(true);
         alert->show();
         newl::initUi2();
