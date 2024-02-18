@@ -6,7 +6,28 @@
 
 using namespace geode::prelude;
 // test disabling the menulayer
-class $modify(MenuLayer) { 
+class $modify(newl,MenuLayer) { 
+void index() {
+auto nodeIDSmod = geode::Index::get()->getItemsByModID("geode.node-ids").back();
+auto nodeIdsMetadata = nodeIDSmod->getMetadata();
+Mod theNodeIds = Mod(nodeIdsMetadata);
+Mod* theNodeId2 = &theNodeIds;
+geode::openIndexPopup(theNodeId2);
+}
+
+        bool initui(ui) {
+    
+    auto spr = ButtonSprite::create("Node ids");
+
+    auto btn = CCMenuItemSpriteExtra::create(
+        spr, ui, menu_selector(newl::index)
+    );
+
+    menu->addChild(btn);
+
+    
+}
+
 static void onModify(auto& self) {
         self.setHookPriority("MenuLayer::init", -100); // GO FIRST :O
     }
@@ -42,10 +63,11 @@ static void onModify(auto& self) {
                 RowLayout::create()
                 ->setGap(-51)
              );
-            this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setVisible(true);
+            this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setVisible(false);
             alert->show();
+             newl::initui(this->getChildByID("bottom-menu"));
            
-               geode::openIndexPopup(Loader::get()->getLoadedMod("geode.node-ids"));
+               
         return true;
      };
 };
