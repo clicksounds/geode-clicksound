@@ -24,13 +24,12 @@ class $modify(newl,MenuLayer) {
         );
         btn->setScale(2.2);
         btn->setPosition(winSize.width / 2, winSize.height / 2);
-        btn->setTouchEnabled(true);
         this->addChild(btn);
     };
 
-    /*static void onModify(auto& self) {
+    static void onModify(auto& self) {
         self.setHookPriority("MenuLayer::init", -100); // GO FIRST :O
-    }*/
+    }
     bool init() {
         auto winSize = CCDirector::get()->getWinSize();
         if (!MenuLayer::init())
