@@ -93,7 +93,7 @@ class $modify(newl,MenuLayer) {
 
         auto alert = FLAlertLayer::create(
             "Click Sounds Error",
-            "Please install Node Ids from the <cp>Geode Index</c>!",  
+            "Please install Node Ids by clicking the Node Ids Mod in the middle of your screen!",  
             "OK"
         );
         alert->m_scene = this;
