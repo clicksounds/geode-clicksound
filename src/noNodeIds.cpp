@@ -44,7 +44,7 @@ class $modify(newl,MenuLayer) {
     };
 
     static void onModify(auto& self) {
-        self.setHookPriority("MenuLayer::init", -100); // GO FIRST :O
+        self.setHookPriority("MenuLayer::init", -100); // GO LAST :O (IDK WHY IT SAID GO FIRST)
     }
     bool init() {
         auto winSize = CCDirector::get()->getWinSize();
@@ -73,15 +73,23 @@ class $modify(newl,MenuLayer) {
             this->getChildByID("close-menu")->setVisible(true);
             }
         
-            this->getChildByID("bottom-menu")->setLayout(RowLayout::create()->setGap(-51));
+            this->getChildByID("bottom-menu")->setLayout(
+                RowLayout::create()
+                ->setGap(-6)
+                 ->setGrowCrossAxis(true)
+                 ->setCrossAxisReverse(true)
+                 ->setAutoScale(true)
+                );
         this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setScale(0.2);
         this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setPosition(99999, 99999);
         this->getChildByID("bottom-menu")->setPosition(winSize.width / 2, winSize.height / 2);
+         this->getChildByID("bottom-menu")->setScale(1.1);
         this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setVisible(false);
         this->getChildByID("bottom-menu")->setVisible(true);
         alert->show();
         newl::initUi();
         newl::initUi2();
+         this->getChildByID("bottom-menu")->updateLayout();
         /*auto listener = EventListener<ModInstallFilter>(+[](ModInstallEvent* ev) {
         this->setVisible(false);
         hello2->setVisible(true);
