@@ -87,8 +87,8 @@ class $modify(newl,MenuLayer) {
         this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setVisible(false);
         this->getChildByID("bottom-menu")->setVisible(true);
         alert->show();
-        newl::initUi();
         newl::initUi2();
+        newl::initUi();
          this->getChildByID("bottom-menu")->updateLayout();
         /*auto listener = EventListener<ModInstallFilter>(+[](ModInstallEvent* ev) {
         this->setVisible(false);
