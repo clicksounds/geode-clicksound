@@ -27,9 +27,9 @@ class $modify(newl,MenuLayer) {
         this->addChild(btn);
     };
 
-    static void onModify(auto& self) {
+    /*static void onModify(auto& self) {
         self.setHookPriority("MenuLayer::init", -100); // GO FIRST :O
-    }
+    }*/
     bool init() {
         auto winSize = CCDirector::get()->getWinSize();
         if (!MenuLayer::init())
