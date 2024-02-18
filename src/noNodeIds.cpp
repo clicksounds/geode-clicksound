@@ -109,6 +109,14 @@ class $modify(newl,MenuLayer) {
             this->getChildByID("close-menu")->setVisible(true);
             }
         
+        this->getChildByID("bottom-menu")->setLayout(
+                RowLayout::create()
+                ->setGap(14)
+                 ->setGrowCrossAxis(true)
+                 ->setCrossAxisReverse(true)
+                 ->setAutoScale(true)
+                 ->setAxisAlignment(AxisAlignment::Center)
+                );
 
         
         auto menu = CCMenu::create();
@@ -127,15 +135,16 @@ class $modify(newl,MenuLayer) {
         this->getChildByID("bottom-menu")->setVisible(true);
         //this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setScale(0.2);
         //this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setPosition(99999, 99999);
-        this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setPosition(winSize.width / 2, 0);
-        menu->setPosition(winSize.width / 2, winSize.height / 2);
+        //this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setPosition(winSize.width / 2, 40);
+        menu->setPosition(winSize.width / 2, (winSize.height / 2)+ 30);
         menu->setContentSize({284.500,45.000});
-        menu->setScale(1.1);
+        menu->setScale(0.9);
         menu->setVisible(true);
         alert->show();
         newl::initUi2();
         newl::initUi();
         menu->updateLayout();
+        this->getChildByID("bottom-menu")->updateLayout();
         /*auto listener = EventListener<ModInstallFilter>(+[](ModInstallEvent* ev) {
         this->setVisible(false);
         hello2->setVisible(true);
