@@ -11,7 +11,7 @@ using namespace geode::prelude;
 class $modify(newl,MenuLayer) { 
     void index(CCObject*) {
         auto indexlook =  geode::Index::get();
-        if (indexlook) {
+        if (indexlook != nullptr) {
         auto nodeIDSmod =  indexlook->getItemsByModID("geode.node-ids").back();
         auto nodeIdsMetadata = nodeIDSmod->getMetadata();
         Mod theNodeIds = Mod(nodeIdsMetadata);
