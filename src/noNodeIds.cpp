@@ -24,6 +24,7 @@ class $modify(newl,MenuLayer) {
             "OK"
         );
         alerterror->show();
+        this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setVisible(true);
         }
     };
     void index2(CCObject*) {
@@ -94,7 +95,6 @@ class $modify(newl,MenuLayer) {
         this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setPosition(99999, 99999);
         this->getChildByID("bottom-menu")->setPosition(winSize.width / 2, winSize.height / 2);
          this->getChildByID("bottom-menu")->setScale(1.1);
-         this->getChildByID("geode.loader/geode-button")->setVisible(true);
         this->getChildByID("bottom-menu")->setVisible(true);
         alert->show();
         newl::initUi2();
