@@ -64,6 +64,7 @@ class $modify(newl,MenuLayer) {
         //this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setScale(0.0001);
         //this->getChildByID("bottom-menu")->setPosition(999999, 999999);
         this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setVisible(true);
+        this->getChildByID("bottom-menu")->setVisible(true);
         alert->show();
         newl::initUi();
            
