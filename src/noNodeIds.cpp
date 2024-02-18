@@ -28,7 +28,7 @@ class $modify(newl,MenuLayer) {
             spr, this, menu_selector(newl::index)
         );
         btn->setScale(1.7);
-        btn->setPosition(winSize.width / 2, winSize.height / 2);
+        btn->setPosition(18.5, 28);
         this->getChildByID("bottom-menu")->addChild(btn);
     };
     void initUi2() {
@@ -39,7 +39,7 @@ class $modify(newl,MenuLayer) {
             spr, this, menu_selector(newl::index2)
         );
         btn->setScale(1.7);
-        btn->setPosition(winSize.width / 2, (winSize.height / 2)-34);
+        btn->setPosition(18.5, -97);
         this->getChildByID("bottom-menu")->addChild(btn);
     };
 
