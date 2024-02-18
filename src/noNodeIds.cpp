@@ -10,7 +10,13 @@ using namespace geode::prelude;
 // test disabling the menulayer
 class $modify(newl,MenuLayer) { 
     void index(CCObject*) {
-        auto indexlook =  geode::Index::get();
+        try {
+        auto indexlook = geode::Index::get();
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+        auto indexlook = nullptr;
+    }
+
         if (indexlook != nullptr) {
         auto nodeIDSmod =  indexlook->getItemsByModID("geode.node-ids").back();
         auto nodeIdsMetadata = nodeIDSmod->getMetadata();
