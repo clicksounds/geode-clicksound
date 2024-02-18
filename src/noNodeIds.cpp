@@ -109,7 +109,10 @@ class $modify(newl,MenuLayer) {
             this->getChildByID("close-menu")->setVisible(true);
             }
         
-         this->getChildByID("Beat.PleaseDONOTREMOVE")->setLayout(
+
+        
+        auto menu = CCMenu::create();
+        this->getChildByID("Beat.PleaseDONOTREMOVE")->setLayout(
                 RowLayout::create()
                 ->setGap(14)
                  ->setGrowCrossAxis(true)
@@ -117,8 +120,6 @@ class $modify(newl,MenuLayer) {
                  ->setAutoScale(true)
                  ->setAxisAlignment(AxisAlignment::Center)
                 );
-        
-        auto menu = CCMenu::create();
         menu->setID("Beat.PleaseDONOTREMOVE");
         menu->setPosition(winSize.width / 2, 0);
          this->addChild(menu);
