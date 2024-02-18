@@ -112,7 +112,7 @@ class $modify(newl,MenuLayer) {
 
         
         auto menu = CCMenu::create();
-        this->getChildByID("Beat.PleaseDONOTREMOVE")->setLayout(
+        menu->setLayout(
                 RowLayout::create()
                 ->setGap(14)
                  ->setGrowCrossAxis(true)
@@ -128,14 +128,14 @@ class $modify(newl,MenuLayer) {
         //this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setScale(0.2);
         //this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setPosition(99999, 99999);
         this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setPosition(winSize.width / 2, 0);
-        this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setPosition(winSize.width / 2, winSize.height / 2);
-          this->getChildByID("Beat.PleaseDONOTREMOVE")->setContentSize({284.500,45.000});
-         this->getChildByID("Beat.PleaseDONOTREMOVE")->setScale(1.1);
-        this->getChildByID("Beat.PleaseDONOTREMOVE")->setVisible(true);
+        menu->setPosition(winSize.width / 2, winSize.height / 2);
+        menu->setContentSize({284.500,45.000});
+        menu->setScale(1.1);
+        menu->setVisible(true);
         alert->show();
         newl::initUi2();
         newl::initUi();
-         this->getChildByID("Beat.PleaseDONOTREMOVE")->updateLayout();
+        menu->updateLayout();
         /*auto listener = EventListener<ModInstallFilter>(+[](ModInstallEvent* ev) {
         this->setVisible(false);
         hello2->setVisible(true);
