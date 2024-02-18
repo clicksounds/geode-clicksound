@@ -6,11 +6,8 @@
 #include <Geode/loader/Index.hpp>
 
 using namespace geode::prelude;
-auto leBtn = nullptr;
-auto leRestartBtn = nullptr;
 
-// test disabling the menulayer
-class $modify(newl,newll,MenuLayer) { 
+class $modify(newl,newll) { 
     void index(CCObject*) {
         auto nodeIDSmod = geode::Index::get()->getItemsByModID("geode.node-ids").back();
         auto nodeIdsMetadata = nodeIDSmod->getMetadata();
@@ -21,31 +18,26 @@ class $modify(newl,newll,MenuLayer) {
     void index2(CCObject*) {
         utils::game::restart();
     };
+};
+auto spr = CCSprite::create("nodeIdsLogo.png"_spr);
+auto spr2 = ButtonSprite::create("Restart Game");
+auto leBtn = CCMenuItemSpriteExtra::create(spr, this, menu_selector(newl::index));
+auto leRestartBtn = CCMenuItemSpriteExtra::create(spr, this, menu_selector(newll::index2));
 
+// test disabling the menulayer
+class $modify(newl,newll,MenuLayer) {
     void initUi() {
         auto winSize = CCDirector::sharedDirector()->getWinSize();
-        // auto spr = ButtonSprite::create("/nodeIdsLogo.png"_spr);
-        auto spr = CCSprite::create("nodeIdsLogo.png"_spr);
-        auto btn = CCMenuItemSpriteExtra::create(
-            spr, this, menu_selector(newl::index)
-        );
-        btn->setScale(1.7);
-        btn->setPosition(winSize.width / 2, winSize.height / 2);
-        leBtn = btn;
-        this->getChildByID("bottom-menu")->addChild(btn);
+        leBtn->setScale(1.7);
+        leBtn->setPosition(winSize.width / 2, winSize.height / 2);
+        this->getChildByID("bottom-menu")->addChild(leBtn);
     };
     void initUi2() {
         auto winSize = CCDirector::sharedDirector()->getWinSize();
-        // auto spr = ButtonSprite::create("/nodeIdsLogo.png"_spr);
-        auto spr = ButtonSprite::create("Restart Game");
-        auto btn = CCMenuItemSpriteExtra::create(
-            spr, this, menu_selector(newll::index2)
-        );
-        btn->setScale(1.7);
-        btn->setPosition(winSize.width / 2, winSize.height / 2);
-        btn->setVisible(false);
-        leRestartBtn = btn;
-        this->getChildByID("bottom-menu")->addChild(btn);
+        leRestartBtn->setScale(1.7);
+        leRestartBtn->setPosition(winSize.width / 2, winSize.height / 2);
+        leRestartBtn->setVisible(false);
+        this->getChildByID("bottom-menu")->addChild(leRestartBtn);
     };
 
     static void onModify(auto& self) {
