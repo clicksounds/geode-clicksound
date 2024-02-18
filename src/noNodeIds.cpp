@@ -20,7 +20,7 @@ class $modify(newl,MenuLayer) {
         utils::game::restart();
     };
 
-    CCObject initUi() {
+    CCMenuItemSpriteExtra* initUi() {
         auto winSize = CCDirector::sharedDirector()->getWinSize();
         // auto spr = ButtonSprite::create("/nodeIdsLogo.png"_spr);
         auto spr = CCSprite::create("nodeIdsLogo.png"_spr);
@@ -32,7 +32,7 @@ class $modify(newl,MenuLayer) {
         this->getChildByID("bottom-menu")->addChild(btn);
         return btn;
     };
-    CCObject initUi2() {
+    CCMenuItemSpriteExtra* initUi2() {
         auto winSize = CCDirector::sharedDirector()->getWinSize();
         // auto spr = ButtonSprite::create("/nodeIdsLogo.png"_spr);
         auto spr = ButtonSprite::create("Restart Game");
