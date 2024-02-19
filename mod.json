@@ -1,12 +1,13 @@
 {
 	"geode": "2.0.0-beta.19",
-	"version": "v1.4.6",
+	"version": "v1.4.7",
 	"id": "beat.click-sound",
 	"name": "Click Sounds",
 	"developers": [
 		"Beat",
 		"Coop",
 		"Viper",
+		"Weebify",
 		"Uproxide"
 	],
 	"gd": {
@@ -43,8 +44,8 @@
 			"description": "Change the click sound. Negative numbers for meme sounds, 0 for custom sounds, and positive numbers for useful sounds. Check mod description for a sound list.",
 			"type": "int",
 			"default": 1,
-			"min": -24,
-			"max": 23,
+			"min": -27,
+			"max": 24,
 			"control": {
 				"arrows": true,
 				"slider": false

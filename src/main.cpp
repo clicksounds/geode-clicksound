@@ -89,6 +89,7 @@ public:
       case 21: clickSoundInUse = ((rand() % 5 == 0) ? "logitech_mx_anywhere_2s_Clicks_1.ogg"_spr : ((rand() % 5 == 1) ? "logitech_mx_anywhere_2s_Clicks_2.ogg"_spr : ((rand() % 5 == 2) ? "logitech_mx_anywhere_2s_Clicks_3.ogg"_spr : ((rand() % 5 == 3) ? "logitech_mx_anywhere_2s_Clicks_4.ogg"_spr : "logitech_mx_anywhere_2s_Clicks_5.ogg"_spr)))); break;
       case 22: clickSoundInUse = "zoink-click.ogg"_spr; break;
       case 23: clickSoundInUse = "screen-tap-1.ogg"_spr; break;
+      case 24: clickSoundInUse = "plate.ogg"_spr; break;
       
 
       // Meme sounds
@@ -116,6 +117,8 @@ public:
       case -22: clickSoundInUse = (rand() % 500 == 0) ? "congregation-jumpscare.ogg"_spr : "osu-hit.ogg"_spr; break;
       case -23: clickSoundInUse = "soda.ogg"_spr; break;
       case -24: clickSoundInUse = "Water_On_The_Hill.ogg"_spr; break;
+      case -25: clickSoundInUse = "riot-quack.ogg"_spr; break;
+      case -26: clickSoundInUse = "fuck.ogg"_spr; break;
     }
      if (Mod::get()->getSettingValue<bool>("enable-clicksound") && !usingCustomClickSound) {
         FMODAudioEngine::sharedEngine()->playEffect(clickSoundInUse, 1.0f, 1.0f, 2.0f);
