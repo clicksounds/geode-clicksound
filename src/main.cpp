@@ -113,12 +113,13 @@ public:
       case -23: clickSoundInUse = "soda.ogg"_spr; break;
       case -24: clickSoundInUse = "Water_On_The_Hill.ogg"_spr; break;
     }
+    auto sound = Mod::get()->getSettingValue<double>("Volume-Slider") || 2
      if (Mod::get()->getSettingValue<bool>("enable-clicksound") && !usingCustomClickSound) {
-        FMODAudioEngine::sharedEngine()->playEffect(clickSoundInUse, 1.0f, 1.0f, 2.0f);
+        FMODAudioEngine::sharedEngine()->playEffect(clickSoundInUse, 1.0f, 1.0f, sound);
     } 
 
     if (Mod::get()->getSettingValue<bool>("enable-clicksound") && usingCustomClickSound) {
-        FMODAudioEngine::sharedEngine()->playEffect(customClickSound);
+        FMODAudioEngine::sharedEngine()->playEffect(customClickSound,1.0f,1.0f,sound);
     }
     if(!Mod::get()->getSettingValue<bool>("enable-clicksound") && !Mod::get()->getSettingValue<bool>("enable-releasesound")){}else{carrot=true;}
   }
@@ -165,13 +166,13 @@ public:
       // Meme sounds
       case -1: releaseSoundInUse = "tiktok-release.ogg"_spr; break;
     }
- 
+   auto sound = Mod::get()->getSettingValue<double>("Volume-Slider") || 2
     if (Mod::get()->getSettingValue<bool>("enable-releasesound") && !usingCustomReleaseSound) {
-        FMODAudioEngine::sharedEngine()->playEffect(releaseSoundInUse);
+        FMODAudioEngine::sharedEngine()->playEffect(releaseSoundInUse,1.0f,1.0f,sound);
     } 
 
     if (Mod::get()->getSettingValue<bool>("enable-releasesound") && usingCustomReleaseSound) {
-        FMODAudioEngine::sharedEngine()->playEffect(customReleaseSound);
+        FMODAudioEngine::sharedEngine()->playEffect(customReleaseSound,1.0f,1.0f,sound);
     }
     if(!Mod::get()->getSettingValue<bool>("enable-clicksound") && !Mod::get()->getSettingValue<bool>("enable-releasesound")){}else{carrot=true;}
  }
