@@ -44,12 +44,8 @@ public:
 
     
     
-    // this code block is not approved by mat, but im not changing it.
-    if (GameManager::sharedState()->getPlayLayer() && !GameManager::sharedState()->getEditorLayer())
-      nullptr;
-    else if (GameManager::sharedState()->getEditorLayer() && !GameManager::sharedState()->getPlayLayer())
-      nullptr;
-    else return;
+    // i fixed it -coop and maybe mat can approve this
+    if (!GameManager::sharedState()->getPlayLayer() && !GameManager::sharedState()->getEditorLayer()) return;
 
 
 
@@ -139,12 +135,7 @@ public:
     }
     
     
-    if (GameManager::sharedState()->getPlayLayer() && !GameManager::sharedState()->getEditorLayer())
-      nullptr;
-    else if (GameManager::sharedState()->getEditorLayer() && !GameManager::sharedState()->getPlayLayer())
-      nullptr;
-    else
-      return;
+    if (!GameManager::sharedState()->getPlayLayer() && !GameManager::sharedState()->getEditorLayer()) return;
 
     auto releaseSliderValue = Mod::get()->getSettingValue<int64_t>("releasesound-currentsound");
     auto customReleaseSound = Mod::get()->getSettingValue<ghc::filesystem::path>("custom-releasesound").string();
