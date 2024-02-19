@@ -38,16 +38,6 @@
 			"type": "bool",
 			"default": true
 		},
-	"Volume-Slider": {
-           	 "name": "Click Sound Volume",
-            	"type": "float",
-            	"default": 2,
-           	 "min": 0,
-            	"max": 8,
-            	"control": {
-                "slider": true
-            	}
-       	 },
 		"clicksound-currentsound": {
 			"name": "Current click sound",
 			"description": "Change the click sound. Negative numbers for meme sounds, 0 for custom sounds, and positive numbers for useful sounds. Check mod description for a sound list.",
