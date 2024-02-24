@@ -1,6 +1,6 @@
 {
 	"geode": "2.0.0-beta.19",
-	"version": "v1.4.8",
+	"version": "v1.4.9",
 	"id": "beat.click-sound",
 	"name": "Click Sounds",
 	"developers": [
@@ -45,17 +45,17 @@
 			"type": "int",
 			"default": 1,
 			"min": -27,
-			"max": 24,
+			"max": 26,
 			"control": {
 				"arrows": true,
 				"slider": false
 			}
 		},
 		"custom-clicksound": {
-            		"name": "Upload a custom click sound",
-            		"description": "Select a .ogg, .wav, .mp3, .m4a, or .flac format file to set as click sound 0. The best practice is to use a .ogg format sound that start loudly and immediately.",
-            		"type": "path",
-            		"default": "Upload a file first.",
+            "name": "Upload a custom click sound",
+            "description": "Select a .ogg, .wav, .mp3, .m4a, or .flac format file to set as click sound 0. The best practice is to use a .ogg format sound that start loudly and immediately.",
+            "type": "path",
+            "default": "Upload a file first.",
 			"control": {
 				"filters": [
 					{"files": ["*.ogg*", "*.mp3", "*.wav", "*.m4a", "*.flac"],
@@ -75,24 +75,24 @@
 			"type": "int",
 			"default": 1,
 			"min": -1,
-			"max": 11,
+			"max": 12,
 			"control": {
 				"arrows": true,
 				"slider": false
 			}
 		},
 		"custom-releasesound": {
-            		"name": "Upload a custom release sound",
-            		"description": "Select a .ogg, .wav, .mp3, .m4a, or .flac format file to set as release sound 0. The best practice is to use a .ogg format sound that start loudly and immediately.",
-            		"type": "path",
-            		"default": "Upload a file first.",
+            "name": "Upload a custom release sound",
+            "description": "Select a .ogg, .wav, .mp3, .m4a, or .flac format file to set as release sound 0. The best practice is to use a .ogg format sound that start loudly and immediately.",
+            "type": "path",
+        	"default": "Upload a file first.",
 			"control": {
 				"filters": [
 					{"files": ["*.ogg*", "*.mp3", "*.wav", "*.m4a", "*.flac"],
 					"description": "Audio file"}
 				]
 			}
-        	},
+        },
 		"settings-button": {
 			"name": "Show settings button",
 			"description": "When enabled, a settings button appears in the pause menu.",

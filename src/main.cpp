@@ -89,7 +89,7 @@ public:
       case 23: clickSoundInUse = "screen-tap-1.ogg"_spr; break;
       case 24: clickSoundInUse = "plate.ogg"_spr; break;
       case 25: clickSoundInUse = "neiro-click.ogg"_spr; break;
-      
+      case 26: clickSoundInUse = "doggie.ogg"_spr; break;
 
       // Meme sounds
       case -1: clickSoundInUse = "fire-in-the-hole.ogg"_spr; break;
