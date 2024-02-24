@@ -112,7 +112,7 @@ public:
       case -21: clickSoundInUse = "spectre.ogg"_spr; break;
       case -22: clickSoundInUse = (rand() % 500 == 0) ? "congregation-jumpscare.ogg"_spr : "osu-hit.ogg"_spr; break;
       case -23: clickSoundInUse = "soda.ogg"_spr; break;
-      case -24: clickSoundInUse = "Water_On_The_Hill.ogg"_spr; break;
+      case -24: clickSoundInUse = "water-on-the-hill.ogg"_spr; break;
       case -25: clickSoundInUse = "riot-quack.ogg"_spr; break;
       case -26: clickSoundInUse = "fuck.ogg"_spr; break;
       case -27: clickSoundInUse = "gravity-coil.ogg"_spr; break;

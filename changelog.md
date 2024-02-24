@@ -3,6 +3,7 @@
 * 'Trusta' useful click sound added!
 * 'Gazonk' useful click sound added! (ty gazonkgd! =w=)
 * 'Gravity Coil' meme click sound added!
+* New sound for 'Water On The Hill' meme click sound!
 ## Version v1.4.10 (minor)
 * TodoReturn has been removed -w-
 * Is this better, Alk? :3
