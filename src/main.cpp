@@ -33,24 +33,19 @@ public:
   // Carrots. You know why? No reason.
   // 🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕
 
-  TodoReturn pushButton(PlayerButton p0) {
+  void pushButton(PlayerButton p0) {
     PlayerObject::pushButton(p0);
-
-
 
   if (Mod::get()->getSettingValue<bool>("OnlyOnJump")) {
       if (p0 != PlayerButton::Jump) {
         return;
       }
     }
+    
 
-    
-    
-    // i fixed it -coop and maybe mat can approve this
     if (!GameManager::sharedState()->getPlayLayer() && !GameManager::sharedState()->getEditorLayer()) return;
 
-
-
+    
     auto clickSliderValue = Mod::get()->getSettingValue<int64_t>("clicksound-currentsound");
     auto customClickSound = Mod::get()->getSettingValue<ghc::filesystem::path>("custom-clicksound").string();
     bool usingCustomClickSound;
@@ -131,7 +126,7 @@ public:
   
   // RELEASE SOUNDS RELEASE SOUNDS RELEASE SOUNDS RELEASE SOUNDS RELEASE SOUNDS RELEASE SOUNDS RELEASE SOUNDS RELEASE SOUNDS RELEASE SOUNDS RELEASE SOUNDS RELEASE SOUNDS RELEASE SOUNDS RELEASE SOUNDS 
   
- TodoReturn releaseButton(PlayerButton p0) {
+ void releaseButton(PlayerButton p0) {
     PlayerObject::releaseButton(p0);
 
   if (Mod::get()->getSettingValue<bool>("OnlyOnJump")) {

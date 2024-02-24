@@ -1,4 +1,7 @@
 # Changelog
+## Version v1.4.10 (minor)
+* TodoReturn has been removed -w-
+* Is this better, Alk? :3
 ## Version v1.4.9
 * 'Doggie' useful click sound added!
 * 'Neiro' useful click/release sound added!
