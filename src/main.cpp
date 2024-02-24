@@ -85,6 +85,8 @@ public:
       case 24: clickSoundInUse = "plate.ogg"_spr; break;
       case 25: clickSoundInUse = "neiro-click.ogg"_spr; break;
       case 26: clickSoundInUse = "doggie.ogg"_spr; break;
+      case 27: clickSoundInUse = "trusta.ogg"_spr; break;
+      case 28: clickSoundInUse = "gazonk.ogg"_spr; break;
 
       // Meme sounds
       case -1: clickSoundInUse = "fire-in-the-hole.ogg"_spr; break;
@@ -113,6 +115,7 @@ public:
       case -24: clickSoundInUse = "Water_On_The_Hill.ogg"_spr; break;
       case -25: clickSoundInUse = "riot-quack.ogg"_spr; break;
       case -26: clickSoundInUse = "fuck.ogg"_spr; break;
+      case -27: clickSoundInUse = "gravity-coil.ogg"_spr; break;
     }
      if (Mod::get()->getSettingValue<bool>("enable-clicksound") && !usingCustomClickSound) {
         FMODAudioEngine::sharedEngine()->playEffect(clickSoundInUse, 1.0f, 1.0f, 2.0f);

@@ -34,6 +34,8 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 24 - Plate
 - 25 - Neiro Click/Release
 - 26 - Doggie
+- 27 - Trusta
+- 28 - Gazonk
 ### Meme click sounds (negative number):
 - 1 - FIRE IN THE HOLE!
 - 2 - I loooove GD Cologne
@@ -61,6 +63,7 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 24 - Water on the Hill
 - 25 - Riot Quack
 - 26 - FUCK
+- 27 - Gravity Coil
 ## Release sounds
 ### Useful release sounds:
 - 0 - Custom sound
@@ -85,7 +88,7 @@ Thank you so much to all of the people listed below for doing whatever they did 
 - [Viper](https://github.com/MuhXd) - Developer, helped me with android support :3
 - [Coop](https://github.com/coopeeo) - Developer, helped make coding the mod more efficient ^w^
 - [Weebify](https://github.com/Weebifying) - Developer :3
-- [Uproxide](https://github.com/umbroxide) - Developer, helped with the developer badge system! OwO
+- [Uproxide](https://github.com/uproxide) - Developer, helped with the developer badge system! OwO
 - Firee - Added mac support, thank you so much!
 - Sicariusblack - Helps with making some click sounds sound good!
 - aceofspadesss - Provided a ton of unique click sounds for the mod! >w<
