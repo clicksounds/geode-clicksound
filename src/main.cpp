@@ -11,6 +11,8 @@
 #include <algorithm>
 #include <cctype>
 
+// testicles
+
 using namespace geode::prelude;
 
 // 🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕
@@ -86,6 +88,7 @@ public:
       case 22: clickSoundInUse = "zoink-click.ogg"_spr; break;
       case 23: clickSoundInUse = "screen-tap-1.ogg"_spr; break;
       case 24: clickSoundInUse = "plate.ogg"_spr; break;
+      case 25: clickSoundInUse = "neiro-click.ogg"_spr; break;
       
 
       // Meme sounds
@@ -164,6 +167,7 @@ public:
       case 9: releaseSoundInUse = ((rand() % 3 == 0) ? "Viper_SpaceBar_release_1.ogg"_spr : ((rand() % 3 == 1) ? "Viper_SpaceBar_release_2.ogg"_spr : "Viper_SpaceBar_release_3.ogg"_spr)); break;
       case 10: releaseSoundInUse = ((rand() % 5 == 0) ? "logitech_mx_anywhere_2s_Releases_1.ogg"_spr : ((rand() % 5 == 1) ? "logitech_mx_anywhere_2s_Releases_2.ogg"_spr : ((rand() % 5 == 2) ? "logitech_mx_anywhere_2s_Releases_3.ogg"_spr : ((rand() % 5 == 3) ? "logitech_mx_anywhere_2s_Releases_4.ogg"_spr : "logitech_mx_anywhere_2s_Releases_5.ogg"_spr)))); break;
       case 11: releaseSoundInUse = "zoink-release.ogg"_spr; break;
+      case 12: releaseSoundInUse = "neiro-release.ogg"_spr; break;
 
       // Meme sounds
       case -1: releaseSoundInUse = "tiktok-release.ogg"_spr; break;
