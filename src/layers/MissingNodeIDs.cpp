@@ -8,12 +8,16 @@
 
 using namespace geode::prelude;
 
-// test disabling the menulayer
-class $modify(newl,MenuLayer) { 
+class $modify(newl,MenuLayer) {
+    bool hasInstalledNodeIds = false;
+    bool hasStartedListen = false;
     void index(CCObject*) {
         try {
             auto theLoader = Loader::get();
-            if(theLoader->isModInstalled("geode.node-ids")) {
+            if(newl::hasInstalledNodeIds) {
+                auto alerterror = FLAlertLayer::create("Node Ids Already Enabled","<co>Node Ids</c> has already been <cg>enabled</c> and <cg>installed</c>! Please <cy>Restart</c> by clicking OK down below then clicking \"<cl>Restart Game</c>\"\nThank <cr>You</c>!","OK");
+                alerterror->show();
+            } else if (theLoader->isModInstalled("geode.node-ids")) {
                 auto isModInstall = theLoader->getInstalledMod("geode.node-ids");
                 geode::openInfoPopup(isModInstall);
             } else {
@@ -28,7 +32,7 @@ class $modify(newl,MenuLayer) {
                     } else {
                         auto alerterror = FLAlertLayer::create(
                         "Click Sounds Error",
-                        "Unable to fetch mod, please download from the <cp>geode website!</c> ",  
+                        "Unable to fetch mod, please download from the <cp>geode website!</c> (It could be the Geode Index is still downloading so try again in a few seconds.)",  
                         "OK"
                     );
                     alerterror->show();
@@ -37,39 +41,28 @@ class $modify(newl,MenuLayer) {
         } catch (const std::exception& e) {
             auto alerterror = FLAlertLayer::create(
                 "Click Sounds Error",
-                "Unable to fetch mod, please download from the <cp>geode website!</c> ",  
+                "Unable to fetch mod, please download from the <cp>geode website!</c>",  
                 "OK"
             );
             alerterror->show();
         }
-
-        /*if (indexlook != nullptr) {
-        auto nodeIDSmod =  indexlook->getItemsByModID("geode.node-ids").back();
-        auto nodeIdsMetadata = nodeIDSmod->getMetadata();
-        Mod theNodeIds = Mod(nodeIdsMetadata);
-        Mod* theNodeId2 = &theNodeIds;
-        geode::openIndexPopup(theNodeId2);
-        }
-        else {
-            auto alerterror = FLAlertLayer::create(
-            "Click Sounds Error",
-            "Unable to fetch mod, please download from the <cp>geode website!</c> ",  
-            "OK"
-        );*/
-        //alerterror->show();
-        //this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setVisible(true);
     };
+
     void index2(CCObject*) {
         utils::game::restart();
     };
 
-    void index3(CCObject*) {
-        // utils::game::restart();
-    };
+    void index3(CCObject*) {};
+
 
     void initUi() {
+        if (!newl::hasStartedListen) {
+            newl::hasStartedListen = true;
+            auto listener = EventListener<ModInstallFilter>([this](ModInstallEvent* ev) {
+                if(std::holds_alternative<UpdateFinished>(ev->status)) newl::hasInstalledNodeIds = true;
+            }, ModInstallFilter("geode.node-ids"));
+        }
         auto winSize = CCDirector::sharedDirector()->getWinSize();
-        //auto spr = ButtonSprite::create("/nodeIdsLogo.png"_spr);
         auto spr = CCSprite::create("nodeIdsLogo.png"_spr);
         auto btn = CCMenuItemSpriteExtra::create(
             spr, this, menu_selector(newl::index)
@@ -78,9 +71,9 @@ class $modify(newl,MenuLayer) {
         btn->setPosition(winSize.width / 2, (winSize.height / 2)+ 20);
          this->getChildByID("Beat.PleaseDONOTREMOVE")->addChild(btn);
     };
+
     void initUi2() {
         auto winSize = CCDirector::sharedDirector()->getWinSize();
-        // auto spr = ButtonSprite::create("/nodeIdsLogo.png"_spr);
         auto spr = ButtonSprite::create("Restart Game");
         auto btn = CCMenuItemSpriteExtra::create(
             spr, this, menu_selector(newl::index2)
@@ -96,6 +89,7 @@ class $modify(newl,MenuLayer) {
 
     CCSprite* m_nidscsReplacer;
     bool init() {
+
         auto winSize = CCDirector::get()->getWinSize();
         if (!MenuLayer::init())
             return false;
@@ -103,6 +97,7 @@ class $modify(newl,MenuLayer) {
         if (Loader::get()->isModLoaded("geode.node-ids")) {
             return true;
         };
+
 
         auto alert = FLAlertLayer::create(
             "Click Sounds Error",
@@ -143,14 +138,7 @@ class $modify(newl,MenuLayer) {
                 );
         menu->setID("Beat.PleaseDONOTREMOVE");
         menu->setPosition(winSize.width / 2, 0);
-         this->addChild(menu);
-	    /*auto spr = CCSprite::create("nodeIdsLogo.png"_spr);
-        auto btn = CCMenuItemSpriteExtra::create(
-            spr, this, menu_selector(newl::index)
-        );
-        btn->setVisible(false);*/
-	//btn->setID("Beat.Fake");
-         //this->getChildByID("Beat.PleaseDONOTREMOVE")->addChild(btn);
+        this->addChild(menu);
 	if (Loader::get()->getLoadedMod("undefined0.minecraft_menu")) {
 		m_fields->m_nidscsReplacer = CircleButtonSprite::createWithSprite(
                 "nobglogo.png"_spr,
@@ -171,9 +159,6 @@ class $modify(newl,MenuLayer) {
         
         this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setVisible(true);
         this->getChildByID("bottom-menu")->setVisible(true);
-        //this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setScale(0.2);
-        //this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setPosition(99999, 99999);
-        //this->getChildByID("bottom-menu")->getChildByID("geode.loader/geode-button")->setPosition(winSize.width / 2, 40);
         menu->setPosition(winSize.width / 2, (winSize.height / 2)+ 30);
         this->getChildByID("bottom-menu")->setPosition(winSize.width / 2, 0);
           this->getChildByID("bottom-menu")->setContentSize({284.500,45.000});
@@ -186,10 +171,6 @@ class $modify(newl,MenuLayer) {
         newl::initUi();
         menu->updateLayout();
         this->getChildByID("bottom-menu")->updateLayout();
-        /*auto listener = EventListener<ModInstallFilter>(+[](ModInstallEvent* ev) {
-        this->setVisible(false);
-        hello2->setVisible(true);
-        }, ModInstallFilter("geode.node-ids"));e*/
            
                
         return true;
