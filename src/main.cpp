@@ -15,6 +15,8 @@
 
 using namespace geode::prelude;
 // 🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕
+bool Carrot::carrot;
+
 
 // SETTINGS IN PAUSE MENU (ty viper!)
 class $modify(YoureAPansexual,PauseLayer) {
