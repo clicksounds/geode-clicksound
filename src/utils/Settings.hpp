@@ -29,17 +29,17 @@ protected:
         this->setContentSize({ width, 35.f });
         auto menu = CCMenu::create();
         auto label = CCLabelBMFont::create("Play Click Sound", "bigFont.fnt");
-        label->setScale(.6F);
-        label->setPositionX(-130);
+        label->setScale(.41F);
+        label->setPositionX(-91);
         auto playSpr = CCSprite::createWithSpriteFrameName("GJ_playBtn2_001.png");
-        playSpr->setScale(.4F);
+        playSpr->setScale(.325F);
         //auto infoBtn
         auto testBtn = CCMenuItemSpriteExtra::create(
             playSpr,
             this,
             menu_selector(SettingClickNode::onClickBtn)
         );
-        testBtn->setPositionX(140);
+        testBtn->setPositionX(143);
         menu->setPosition(width / 2, 18.f);
         menu->addChild(label);
         menu->addChild(testBtn);
@@ -110,17 +110,17 @@ protected:
         this->setContentSize({ width, 35.f });
         auto menu = CCMenu::create();
         auto label = CCLabelBMFont::create("Play Release Sound", "bigFont.fnt");
-        label->setScale(.6F);
-        label->setPositionX(-130);
+        label->setScale(.36F);
+        label->setPositionX(-92);
         auto playSpr = CCSprite::createWithSpriteFrameName("GJ_playBtn2_001.png");
-        playSpr->setScale(.4F);
+        playSpr->setScale(.325F);
         //auto infoBtn
         auto testBtn = CCMenuItemSpriteExtra::create(
             playSpr,
             this,
             menu_selector(SettingReleaseNode::onReleaseBtn)
         );
-        testBtn->setPositionX(140);
+        testBtn->setPositionX(143);
         menu->setPosition(width / 2, 18.f);
         menu->addChild(label);
         menu->addChild(testBtn);
