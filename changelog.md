@@ -1,9 +1,9 @@
 # Changelog
 ## Version v1.5.0
-* You can now PREVIEW CLICK SOUNDS!!!!!!!!!!!!!!! (ty coop <3)
-* You can now PREVIEW RELEASE SOUNDS!!!!!!!!!!!!! (ty coop <3)
-* Code more organized (ty coop <3)
-* Removed the gd explosion click BUT it was replaced with the built-in one in the GD Files
+* You can now preview sounds in mod settings! (tysm coop i luv u! :3)
+* Credited Jouca and Firee
+* Internal changes (Code more organized) (ty coop <3)
+* Removed the GD explosion click BUT it was replaced with the built-in one in the GD Files
 ## Version v1.4.11
 * 'Trusta' useful click sound added!
 * 'Gazonk' useful click sound added! (ty gazonkgd! =w=)
