@@ -29,8 +29,8 @@ protected:
         this->setContentSize({ width, 35.f });
         auto menu = CCMenu::create();
         auto label = CCLabelBMFont::create("Preview Click Sound", "bigFont.fnt");
-        label->setScale(.41F);
-        label->setPositionX(-91);
+        label->setScale(.33F);
+        label->setPositionX(-93);
         auto playSpr = CCSprite::createWithSpriteFrameName("GJ_playMusicBtn_001.png");
         playSpr->setScale(.650F);
         //auto infoBtn
@@ -110,8 +110,8 @@ protected:
         this->setContentSize({ width, 35.f });
         auto menu = CCMenu::create();
         auto label = CCLabelBMFont::create("Preview Release Sound", "bigFont.fnt");
-        label->setScale(.36F);
-        label->setPositionX(-92);
+        label->setScale(.3F);
+        label->setPositionX(-93);
         auto playSpr = CCSprite::createWithSpriteFrameName("GJ_playMusicBtn_001.png");
         playSpr->setScale(.650F);
         //auto infoBtn
