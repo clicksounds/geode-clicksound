@@ -3,7 +3,7 @@
 * You can now preview sounds in mod settings! (tysm coop i luv u! :3)
 * Credited Jouca and Firee
 * Internal changes
-* Optimized "Geometry Dash Death" click sound
+* Optimized 'Geometry Dash Death' click sound
 ## Version v1.4.11
 * 'Trusta' useful click sound added!
 * 'Gazonk' useful click sound added! (ty gazonkgd! =w=)
