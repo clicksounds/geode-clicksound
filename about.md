@@ -89,7 +89,8 @@ Thank you so much to all of the people listed below for doing whatever they did 
 - [Coop](user:21207551) - Developer, helped make coding the mod more efficient ^w^
 - [Weebify](https://github.com/Weebifying) - Developer :3
 - [Uproxide](user:25397826) - Developer, helped with the developer badge system! OwO
-- Firee - Added mac support, thank you so much!
+- [Firee](user:6253758) - Added mac support, thank you so much! GDUtils Notification Test Button
+- [Jouca](user:7026949) - GDUtils Notification Test Button
 - Sicariusblack - Helps with making some click sounds sound good!
 - aceofspadesss - Provided a ton of unique click sounds for the mod! >w<
 - kittykatspaugh - Emotional support
