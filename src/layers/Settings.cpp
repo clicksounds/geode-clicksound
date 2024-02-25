@@ -3,11 +3,15 @@
 #include "../utils/Clicks.hpp"
 
 using namespace geode::prelude;
-
+// TYSM JOUCA AND FIREE
 SettingNode* SettingClickValue::createNode(float width) {
     return SettingClickNode::create(this, width);
 }
-
+// TYSM JOUCA AND FIREE
+// TYSM JOUCA AND FIREE
+// TYSM JOUCA AND FIREE
+// TYSM JOUCA AND FIREE
+// TYSM JOUCA AND FIREE
 void SettingClickNode::onClickBtn(CCObject*) {
 	auto clickSliderValue = Mod::get()->getSettingValue<int64_t>("clicksound-currentsound");
     auto customClickSound = Mod::get()->getSettingValue<ghc::filesystem::path>("custom-clicksound").string();
