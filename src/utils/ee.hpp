@@ -2,5 +2,6 @@
 
 class Carrot {
 public:
-    static const bool carrot = false;
+    static bool carrot;
 };
+bool Carrot::carrot = false;
