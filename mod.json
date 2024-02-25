@@ -1,6 +1,6 @@
 {
-	"geode": "2.0.0-beta.19",
-	"version": "v1.4.11",
+	"geode": "2.0.0-beta.20",
+	"version": "v1.5.0",
 	"id": "beat.click-sound",
 	"name": "Click Sounds",
 	"developers": [
@@ -39,6 +39,9 @@
 			"type": "bool",
 			"default": true
 		},
+		"test-click-btn": {
+			"type": "custom"
+	 	},
 		"clicksound-currentsound": {
 			"name": "Current click sound",
 			"description": "Change the click sound. Negative numbers for meme sounds, 0 for custom sounds, and positive numbers for useful sounds. Check mod description for a sound list.",
@@ -69,6 +72,9 @@
 			"type": "bool",
 			"default": false
 		},
+		"test-release-btn": {
+			"type": "custom"
+	 	},
 		"releasesound-currentsound": {
 			"name": "Current release sound",
 			"description": "Change the click sound. Negative numbers for meme sounds, 0 for custom sounds, and positive numbers for useful sounds. Check mod description for a sound list.",
@@ -104,7 +110,7 @@
 	"dependencies": [
         {
             "id": "geode.node-ids",
-            "version": ">=v1.5.1",
+            "version": ">=v1.6.1",
             "importance": "suggested"
         }
     ]
