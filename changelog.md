@@ -1,4 +1,8 @@
 # Changelog
+## Version v1.5.0
+* You can now PREIVIEW CLICK SOUNDS!!!!!!!!!!!!!!! (ty coop <3)
+* You can now PREIVIEW RELEASE SOUNDS!!!!!!!!!!!!! (ty coop <3)
+* Code more organized (ty coop <3)
 ## Version v1.4.11
 * 'Trusta' useful click sound added!
 * 'Gazonk' useful click sound added! (ty gazonkgd! =w=)
