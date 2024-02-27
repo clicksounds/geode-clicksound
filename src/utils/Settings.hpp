@@ -2,6 +2,8 @@
 #include <Geode/loader/SettingNode.hpp>
 using namespace geode::prelude;
 // TYSM JOUCA AND FIREE
+
+// CLICK SOUNDS
 class SettingClickValue;
 
 class SettingClickValue : public SettingValue {
@@ -101,7 +103,7 @@ public:
     SettingNode* createNode(float width) override;
 };
 
-
+// RELEASE SOUNDS
 class SettingReleaseNode : public SettingNode {
 protected:
  bool init(SettingReleaseValue* value, float width) {
@@ -155,6 +157,69 @@ public:
     }
     static SettingReleaseNode* create(SettingReleaseValue* value, float width) {
         auto ret = new SettingReleaseNode;
+        if (ret && ret->init(value, width)) {
+            ret->autorelease();
+            return ret;
+        }
+        CC_SAFE_DELETE(ret);
+        return nullptr;
+    }
+};
+
+// SECTIONS
+// Copied from Coop's new Hide+ mod (soon tm)
+
+class SectionSettingValue;
+
+class SectionSettingValue : public SettingValue {
+protected:
+    std::string m_placeholder;
+public:
+    // lines 5, 8, 11, and 12 are copied from GDUtils
+    SectionSettingValue(std::string const& key, std::string const& modID, std::string const& placeholder)
+      : SettingValue(key, modID), m_placeholder(placeholder) {}
+    bool load(matjson::Value const& json) override {return true;}
+    bool save(matjson::Value& json) const override {return true;}
+    SettingNode* createNode(float width) override;
+};
+
+class SectionSettingNode : public SettingNode {
+protected:
+    bool init(SectionSettingValue* value, float width) {
+        if (!SettingNode::init(value))
+            return false;
+        this->setContentSize({ width, 40.f });
+        std::string name = Mod::get()->getSettingDefinition(value->getKey())->get<CustomSetting>()->json->get<std::string>("name");
+
+        auto theMenu = CCMenu::create();
+        auto theLabel = CCLabelBMFont::create(name.c_str(),"bigFont.fnt");
+
+        theLabel->setScale(.75);
+        theLabel->setPositionX(0);
+        theMenu->addChild(theLabel);
+        theMenu->setPosition(width / 2, 18.f);
+        
+        this->addChild(theMenu);
+
+
+
+        return true;
+    }
+
+public:
+    void commit() override {
+        this->dispatchCommitted();
+    }
+    bool hasUncommittedChanges() override {
+        return false;
+    }
+    bool hasNonDefaultValue() override {
+        return true;
+    }
+    void resetToDefault() override {}
+
+    static SectionSettingNode* create(SectionSettingValue* value, float width) {
+        auto ret = new SectionSettingNode();
         if (ret && ret->init(value, width)) {
             ret->autorelease();
             return ret;

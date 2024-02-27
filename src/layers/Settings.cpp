@@ -15,19 +15,18 @@ SettingNode* SettingClickValue::createNode(float width) {
 void SettingClickNode::onClickBtn(CCObject*) {
 	auto clickSliderValue = Mod::get()->getSettingValue<int64_t>("clicksound-currentsound");
     auto customClickSound = Mod::get()->getSettingValue<ghc::filesystem::path>("custom-clicksound").string();
-    bool usingCustomClickSound;
+    auto usingCustomClickSound = false;
     std::string clickSoundInUse = Clicks::getClickSprite(clickSliderValue);
 
     usingCustomClickSound = false;
-    if (clickSliderValue != 0) usingCustomClickSound = false;
     if (clickSoundInUse == "__USECUSTOM__") usingCustomClickSound = true;
     
     
-     if (Mod::get()->getSettingValue<bool>("enable-clicksound") && !usingCustomClickSound) {
+     if (!usingCustomClickSound) {
         FMODAudioEngine::sharedEngine()->playEffect(clickSoundInUse, 1.0f, 1.0f, 2.0f);
     } 
 
-    if (Mod::get()->getSettingValue<bool>("enable-clicksound") && usingCustomClickSound) {
+    if (usingCustomClickSound) {
         FMODAudioEngine::sharedEngine()->playEffect(customClickSound);
     }
 }
@@ -46,11 +45,11 @@ void SettingReleaseNode::onReleaseBtn(CCObject*) {
     if (releaseSliderValue != 0) usingCustomReleaseSound = false;
     if (releaseSoundInUse == "__USECUSTOM__") usingCustomReleaseSound = true;
  
-    if (Mod::get()->getSettingValue<bool>("enable-releasesound") && !usingCustomReleaseSound) {
-        FMODAudioEngine::sharedEngine()->playEffect(releaseSoundInUse);
+    if (!usingCustomReleaseSound) {
+        FMODAudioEngine::sharedEngine()->playEffect(releaseSoundInUse, 1.0f, 1.0f, 2.0f);
     } 
 
-    if (Mod::get()->getSettingValue<bool>("enable-releasesound") && usingCustomReleaseSound) {
+    if (usingCustomReleaseSound) {
         FMODAudioEngine::sharedEngine()->playEffect(customReleaseSound);
     }
 }
@@ -58,4 +57,7 @@ void SettingReleaseNode::onReleaseBtn(CCObject*) {
 $on_mod(Loaded) {
     Mod::get()->addCustomSetting<SettingClickValue>("test-click-btn", "none");
     Mod::get()->addCustomSetting<SettingReleaseValue>("test-release-btn", "none");
+    Mod::get()->addCustomSetting<SectionSettingValue>("clicksound-section", "none");
+    Mod::get()->addCustomSetting<SectionSettingValue>("releasesound-section", "none");
+    Mod::get()->addCustomSetting<SectionSettingValue>("misc-section", "none");
 }

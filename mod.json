@@ -1,6 +1,6 @@
 {
 	"geode": "2.0.0-beta.20",
-	"version": "v1.5.1",
+	"version": "v1.5.2",
 	"id": "beat.click-sound",
 	"name": "Click Sounds",
 	"developers": [
@@ -32,6 +32,10 @@
 			"description": "Doesn't play sound on movement of platformer keys",
 			"type": "bool",
 			"default": true
+		},
+		"clicksound-section": {
+			"name": "Click Sounds",
+			"type": "custom"
 		},
 		"enable-clicksound": {
 			"name": "Enable click sounds",
@@ -67,6 +71,10 @@
 				]
 			}
 		},
+		"releasesound-section": {
+			"name": "Release Sounds",
+			"type": "custom"
+		},
 		"enable-releasesound": {
 			"name": "Enable release sounds",
 			"description": "Enable or disable release sounds.",
@@ -101,6 +109,10 @@
 				]
 			}
         },
+		"misc-section": {
+			"name": "Miscellaneous",
+			"type": "custom"
+		},
 		"settings-button": {
 			"name": "Show settings button",
 			"description": "When enabled, a settings button appears in the pause menu.",
