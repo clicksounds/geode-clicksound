@@ -194,7 +194,7 @@ protected:
         auto theMenu = CCMenu::create();
         auto theLabel = CCLabelBMFont::create(name.c_str(),"bigFont.fnt");
 
-        theLabel->setScale(.75);
+        theLabel->setScale(.5);
         theLabel->setPositionX(0);
         theMenu->addChild(theLabel);
         theMenu->setPosition(width / 2, 18.f);
