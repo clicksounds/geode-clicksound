@@ -5,7 +5,7 @@
 using namespace geode::prelude;
 
 
-SettingNode* SectionSettingValuee::createNode(float width) {
+SettingNode* SectionSettingValue::createNode(float width) {
     return SectionSettingNode::create(this, width);
 }
 
