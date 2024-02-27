@@ -57,7 +57,7 @@ void SettingReleaseNode::onReleaseBtn(CCObject*) {
 $on_mod(Loaded) {
     Mod::get()->addCustomSetting<SettingClickValue>("test-click-btn", "none");
     Mod::get()->addCustomSetting<SettingReleaseValue>("test-release-btn", "none");
-    Mod::get()->addCustomSetting<SectionSettingValue>("clicksound-section", "none");
-    Mod::get()->addCustomSetting<SectionSettingValue>("releasesound-section", "none");
-    Mod::get()->addCustomSetting<SectionSettingValue>("misc-section", "none");
+    Mod::get()->addCustomSetting<SectionSettingValue>("clicksound-section");
+    Mod::get()->addCustomSetting<SectionSettingValue>("releasesound-section");
+    Mod::get()->addCustomSetting<SectionSettingValue>("misc-section");
 }
