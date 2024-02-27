@@ -40,7 +40,8 @@
 			"default": true
 		},
 		"test-click-btn": {
-			"type": "custom"
+			"type": "custom",
+			"description": "This only works if you opened settings from the main menu."
 	 	},
 		"clicksound-currentsound": {
 			"name": "Current click sound",
@@ -73,7 +74,8 @@
 			"default": false
 		},
 		"test-release-btn": {
-			"type": "custom"
+			"type": "custom",
+			"description": "This only works if you opened settings from the main menu."
 	 	},
 		"releasesound-currentsound": {
 			"name": "Current release sound",
@@ -113,5 +115,11 @@
             "version": ">=v1.6.1",
             "importance": "suggested"
         }
-    ]
+    ],
+	"tags":	[
+		"gameplay",
+		"enhancement",
+		"customization",
+		"offline"
+	] 
 }

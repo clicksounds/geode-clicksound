@@ -1,4 +1,6 @@
 # Changelog
+## Version v1.5.1
+* Added tags for the Geode downloads page
 ## Version v1.5.0
 * You can now preview sounds in mod settings! (tysm coop i luv u! :3)
 * Credited Jouca and Firee
