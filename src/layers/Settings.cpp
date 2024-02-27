@@ -3,7 +3,14 @@
 #include "../utils/Clicks.hpp"
 
 using namespace geode::prelude;
-// TYSM JOUCA AND FIREE
+
+
+SettingNode* SectionSettingValuee::createNode(float width) {
+    return SectionSettingNode::create(this, width);
+}
+
+
+
 SettingNode* SettingClickValue::createNode(float width) {
     return SettingClickNode::create(this, width);
 }
@@ -56,7 +63,7 @@ void SettingReleaseNode::onReleaseBtn(CCObject*) {
 
 $on_mod(Loaded) {
     Mod::get()->addCustomSetting<SettingClickValue>("test-click-btn", "none");
-    Mod::get()->addCustomSetting<SettingReleaseValue>("test-release-btn", "none");
+    Mod::get()->addCustomSetting<SettingReleaseValue>("test-release-btn");
     Mod::get()->addCustomSetting<SectionSettingValue>("clicksound-section");
     Mod::get()->addCustomSetting<SectionSettingValue>("releasesound-section");
     Mod::get()->addCustomSetting<SectionSettingValue>("misc-section");
