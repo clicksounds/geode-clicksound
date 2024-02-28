@@ -197,7 +197,7 @@ protected:
         theLabel->setScale(.5);
         theLabel->setPositionX(0);
         theMenu->addChild(theLabel);
-        theMenu->setPosition(width / 2, 18.f);
+        theMenu->setPosition(width / 2, 20.f);
         
         this->addChild(theMenu);
 
