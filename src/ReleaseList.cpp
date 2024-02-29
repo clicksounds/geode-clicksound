@@ -19,6 +19,7 @@ const char* Clicks::getReleaseSprite(int clickSliderValue) {
       case 10: releaseSoundInUse = ((rand() % 5 == 0) ? "logitech_mx_anywhere_2s_Releases_1.ogg"_spr : ((rand() % 5 == 1) ? "logitech_mx_anywhere_2s_Releases_2.ogg"_spr : ((rand() % 5 == 2) ? "logitech_mx_anywhere_2s_Releases_3.ogg"_spr : ((rand() % 5 == 3) ? "logitech_mx_anywhere_2s_Releases_4.ogg"_spr : "logitech_mx_anywhere_2s_Releases_5.ogg"_spr)))); break;
       case 11: releaseSoundInUse = "zoink-release.ogg"_spr; break;
       case 12: releaseSoundInUse = "neiro-release.ogg"_spr; break;
+      case 13: releaseSoundInUse = ((rand() % 8 == 0) ? "sayo-release-1.ogg"_spr : ((rand() % 8 == 1) ? "sayo-release-2.ogg"_spr : ((rand() % 8 == 2) ? "sayo-release-3.ogg"_spr : ((rand() % 8 == 3) ? "sayo-release-4.ogg"_spr : ((rand() % 8 == 4) ? "sayo-release-5.ogg"_spr : ((rand() % 8 == 5) ? "sayo-release-6.ogg"_spr : ((rand() % 8 == 6) ? "sayo-release-7.ogg"_spr : "sayo-release-8.ogg"_spr))))))); break;
 
       // Meme sounds
       case -1: releaseSoundInUse = "tiktok-release.ogg"_spr; break;

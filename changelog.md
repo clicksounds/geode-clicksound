@@ -1,4 +1,7 @@
 # Changelog
+## Version v1.5.3
+* 'Sayo Device' useful randomized click/release sound added! (ty slxyer!)
+* Sayo Device includes 8 clicks and 8 releases (tats alot!! >w<)
 ## Version v1.5.2
 * Added headings in the settings menu! (ty coop and viper :3)
 ## Version v1.5.1
