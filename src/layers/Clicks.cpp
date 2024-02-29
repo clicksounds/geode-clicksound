@@ -40,7 +40,7 @@ public:
     } 
 
     if (Mod::get()->getSettingValue<bool>("enable-clicksound") && usingCustomClickSound) {
-        FMODAudioEngine::sharedEngine()->playEffect(customClickSound);
+        FMODAudioEngine::sharedEngine()->playEffect(customClickSound, 1.0f, 1.0f, 2.0f);
     }
     if(!Mod::get()->getSettingValue<bool>("enable-clicksound") && !Mod::get()->getSettingValue<bool>("enable-releasesound")){}else{Carrot::carrot=true;}
   }
@@ -69,11 +69,11 @@ public:
     if (releaseSoundInUse == "__USECUSTOM__") usingCustomReleaseSound = true;
  
     if (Mod::get()->getSettingValue<bool>("enable-releasesound") && !usingCustomReleaseSound) {
-        FMODAudioEngine::sharedEngine()->playEffect(releaseSoundInUse);
+        FMODAudioEngine::sharedEngine()->playEffect(releaseSoundInUse, 1.0f, 1.0f, 2.0f);
     } 
 
     if (Mod::get()->getSettingValue<bool>("enable-releasesound") && usingCustomReleaseSound) {
-        FMODAudioEngine::sharedEngine()->playEffect(customReleaseSound);
+        FMODAudioEngine::sharedEngine()->playEffect(customReleaseSound, 1.0f, 1.0f, 2.0f);
     }
     if(!Mod::get()->getSettingValue<bool>("enable-clicksound") && !Mod::get()->getSettingValue<bool>("enable-releasesound")){}else{Carrot::carrot=true;}
  }
