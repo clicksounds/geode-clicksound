@@ -5,7 +5,6 @@
 #include <Geode/ui/GeodeUI.hpp>
 #include <Geode/ui/BasedButtonSprite.hpp>
 #include <Geode/utils/web.hpp>
-#include "../utils/utils.hpp"
 
 using namespace geode::prelude;
 
