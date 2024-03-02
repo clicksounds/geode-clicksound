@@ -5,6 +5,7 @@
 #include <Geode/ui/GeodeUI.hpp>
 #include <Geode/utils/web.hpp>
 #include <Geode/loader/ModMetadata.hpp>
+#include <matjson.hpp>
 
 using namespace geode::prelude;
 
@@ -15,7 +16,7 @@ Mod* newIndexToMod(std::string url) {
 	    .json()
         .then([&](auto const& webRes){
             auto res = webRes["payload"];
-            auto metadata = ModMetadata::create().unwrap();
+            auto metadata = ModMetadata::create(matjson::parse("{}").unwrap();
             metadata->setVersion(res["versions"][0]["name"]);
             metadata->setName(res["versions"][0]["version"]);
             metadata->setDevelopers({res["developers"][0]["display_name"]});
