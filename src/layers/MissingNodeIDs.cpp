@@ -17,22 +17,28 @@ class $modify(newl,MenuLayer) {
                 geode::openInfoPopup(isModInstall);
             } else {
                 //geode::openIndexPopup(newIndexToMod("https://api.geode-sdk.org/v1/mods/geode.node-ids"));
-                ModMetadata metadata2 = ModMetadata::create(matjson::parse("{}")).unwrap();
-                ModMetadata* metadata = &metadata2;
+                //ModMetadata metadata2 = ModMetadata::create(matjson::parse("{}")).unwrap();
+                //ModMetadata* metadata = &metadata2;
                 web::AsyncWebRequest()
                     .fetch("https://api.geode-sdk.org/v1/mods/geode.node-ids")
                     .json()
                     .then([&](auto const& webRes){
+                        ModMetadata metadata2 = ModMetadata::create(matjson::parse("{}")).unwrap();
+                        ModMetadata* metadata = &metadata2;
                         auto res = webRes["payload"];
                         metadata->setVersion(res["versions"][0]["name"]);
                         metadata->setName(res["versions"][0]["version"]);
                         metadata->setDevelopers({res["developers"][0]["display_name"]});
                         metadata->setDescription(res["versions"][0]["description"]);
+                        Mod theNodeIds = Mod();
+                        Mod* theNodeId2 = &theNodeIds;
+                        theNodeIds2->setMetadata(metadata2);
+                        geode::openIndexPopup(theNodeId2);
                     });
-                Mod theNodeIds = Mod();
+                /*Mod theNodeIds = Mod();
                 Mod* theNodeId2 = &theNodeIds;
                 theNodeIds2->setMetadata(metadata2);
-                geode::openIndexPopup(theNodeId2);
+                geode::openIndexPopup(theNodeId2);*/
                 /*auto indexlook = geode::Index::get();
                 auto nodeIDSmod =  indexlook->getItemsByModID("geode.node-ids");
                 if(nodeIDSmod.size() != 0){
