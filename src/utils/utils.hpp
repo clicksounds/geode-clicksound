@@ -10,7 +10,8 @@
 using namespace geode::prelude;
 
 Mod* newIndexToMod(std::string url) {
-    auto& metadata = ModMetadata::create(matjson::parse("{}")).unwrap();
+    ModMetadata metadata2 = ModMetadata::create(matjson::parse("{}")).unwrap();
+    ModMetadata* metadata = &metadata2;
     web::AsyncWebRequest()
         .fetch(url)
 	    .json()
@@ -22,6 +23,6 @@ Mod* newIndexToMod(std::string url) {
             metadata->setDescription(res["versions"][0]["description"]);
 	    });
     Mod theNodeIds = Mod(metadata);
-    Mod* theNodeId2 = &mtheNodeIdsod;
+    Mod* theNodeId2 = &theNodeIds;
     return theNodeId2;
 }
