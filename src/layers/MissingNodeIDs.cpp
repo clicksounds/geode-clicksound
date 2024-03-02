@@ -4,23 +4,21 @@
 #include <Geode/loader/Loader.hpp>
 #include <Geode/ui/GeodeUI.hpp>
 #include <Geode/ui/BasedButtonSprite.hpp>
+#include <Geode/utils/web.hpp>
+#include "../utils/utils.hpp"
 
 using namespace geode::prelude;
 
 class $modify(newl,MenuLayer) {
-    bool hasInstalledNodeIds = false;
-    bool hasStartedListen = false;
     void index(CCObject*) {
         try {
             auto theLoader = Loader::get();
-            if(newl::hasInstalledNodeIds) {
-                auto alerterror = FLAlertLayer::create("Node Ids Already Enabled","<co>Node Ids</c> has already been <cg>enabled</c> and <cg>installed</c>! Please <cy>Restart</c> by clicking OK down below then clicking \"<cl>Restart Game</c>\"\nThank <cr>You</c>!","OK");
-                alerterror->show();
-            } else if (theLoader->isModInstalled("geode.node-ids")) {
+            if (theLoader->isModInstalled("geode.node-ids")) {
                 auto isModInstall = theLoader->getInstalledMod("geode.node-ids");
                 geode::openInfoPopup(isModInstall);
             } else {
-                auto indexlook = geode::Index::get();
+                geode::openIndexPopup(&newIndexToMod("https://api.geode-sdk.org/v1/mods/geode.node-ids"));
+                /*auto indexlook = geode::Index::get();
                 auto nodeIDSmod =  indexlook->getItemsByModID("geode.node-ids");
                 if(nodeIDSmod.size() != 0){
                     auto nodeIDSMod2 = nodeIDSmod.back();
@@ -34,7 +32,7 @@ class $modify(newl,MenuLayer) {
                         "Unable to fetch mod, please download from the <cp>geode website!</c> (It could be the Geode Index is still downloading so try again in a few seconds.)",  
                         "OK"
                     );
-                    alerterror->show();
+                    alerterror->show();*/
                 }
             }
         } catch (const std::exception& e) {
@@ -55,12 +53,6 @@ class $modify(newl,MenuLayer) {
 
 
     void initUi() {
-        if (!newl::hasStartedListen) {
-            newl::hasStartedListen = true;
-            auto listener = EventListener<ModInstallFilter>([this](ModInstallEvent* ev) {
-                if(std::holds_alternative<UpdateFinished>(ev->status)) newl::hasInstalledNodeIds = true;
-            }, ModInstallFilter("geode.node-ids"));
-        }
         auto winSize = CCDirector::sharedDirector()->getWinSize();
         auto spr = CCSprite::create("nodeIdsLogo.png"_spr);
         auto btn = CCMenuItemSpriteExtra::create(
@@ -68,7 +60,7 @@ class $modify(newl,MenuLayer) {
         );
         btn->setScale(.7);
         btn->setPosition(winSize.width / 2, (winSize.height / 2)+ 20);
-         this->getChildByID("Beat.PleaseDONOTREMOVE")->addChild(btn);
+        this->getChildByID("Beat.PleaseDONOTREMOVE")->addChild(btn);
     };
 
     void initUi2() {
