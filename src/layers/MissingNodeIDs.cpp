@@ -21,7 +21,7 @@ class $modify(newl,MenuLayer) {
                 //ModMetadata* metadata = &metadata2;
                 web::AsyncWebRequest()
                     .fetch("https://raw.githubusercontent.com/geode-sdk/NodeIDs/main/mod.json")
-                    .text()
+                    .json()
                     .then([&](auto const& webRes){
                         ModMetadata metadata2 = ModMetadata::create(webRes).unwrap();
                         ModMetadata* metadata = &metadata2;
