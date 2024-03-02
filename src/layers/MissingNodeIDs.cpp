@@ -30,9 +30,9 @@ class $modify(newl,MenuLayer) {
                         metadata->setName(res["versions"][0]["version"]);
                         metadata->setDevelopers({res["developers"][0]["display_name"]});
                         metadata->setDescription(res["versions"][0]["description"]);
-                        Mod theNodeIds = Mod();
+                        Mod theNodeIds = Mod(metadata2);
                         Mod* theNodeId2 = &theNodeIds;
-                        theNodeIds2->setMetadata(metadata2);
+                        //theNodeIds2->setMetadata(metadata2);
                         geode::openIndexPopup(theNodeId2);
                     });
                 /*Mod theNodeIds = Mod();
