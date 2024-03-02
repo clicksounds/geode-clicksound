@@ -32,8 +32,8 @@ class $modify(newl,MenuLayer) {
                         "Unable to fetch mod, please download from the <cp>geode website!</c> (It could be the Geode Index is still downloading so try again in a few seconds.)",  
                         "OK"
                     );
-                    alerterror->show();*/
-                }
+                    alerterror->show();
+                }*/
             }
         } catch (const std::exception& e) {
             auto alerterror = FLAlertLayer::create(
