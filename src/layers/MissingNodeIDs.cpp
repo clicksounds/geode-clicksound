@@ -17,7 +17,7 @@ class $modify(newl,MenuLayer) {
                 auto isModInstall = theLoader->getInstalledMod("geode.node-ids");
                 geode::openInfoPopup(isModInstall);
             } else {
-                geode::openIndexPopup(&newIndexToMod("https://api.geode-sdk.org/v1/mods/geode.node-ids"));
+                geode::openIndexPopup(newIndexToMod("https://api.geode-sdk.org/v1/mods/geode.node-ids"));
                 /*auto indexlook = geode::Index::get();
                 auto nodeIDSmod =  indexlook->getItemsByModID("geode.node-ids");
                 if(nodeIDSmod.size() != 0){

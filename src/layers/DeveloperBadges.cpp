@@ -42,7 +42,7 @@ class $modify(ProfilePage) {
     btn->setID("cs-badge");
     mainMenu->getChildByID("left-menu")->addChild(btn);
     btn->setVisible(false);
-    mainMenu->getChildByID("left-menu")->updateLayout()
+    mainMenu->getChildByID("left-menu")->updateLayout();
 
     std::string username = m_usernameLabel->getString();
 

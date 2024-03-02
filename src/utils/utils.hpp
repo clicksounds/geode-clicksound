@@ -23,5 +23,5 @@ Mod* newIndexToMod(std::string url) {
             metadata->setDescription(res["versions"][0]["description"]);
             mod = Mod(metadata);
 	    });
-    return mod;
+    return &mod;
 }
