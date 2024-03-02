@@ -17,12 +17,13 @@ Mod* newIndexToMod(std::string url) {
 	    .json()
         .then([&](auto const& webRes){
             auto res = webRes["payload"];
-            metadata->setVersion(res["versions"][0]["name"]);
-            metadata->setName(res["versions"][0]["version"]);
-            metadata->setDevelopers({res["developers"][0]["display_name"]});
-            metadata->setDescription(res["versions"][0]["description"]);
+            metadata.setVersion(res["versions"][0]["name"]);
+            metadata.setName(res["versions"][0]["version"]);
+            metadata.setDevelopers({res["developers"][0]["display_name"]});
+            metadata.setDescription(res["versions"][0]["description"]);
 	    });
-    Mod theNodeIds = Mod(metadata);
+    Mod theNodeIds = Mod();
+    theNodeIds->setMetadata(metadata2)
     Mod* theNodeId2 = &theNodeIds;
     return theNodeId2;
 }
