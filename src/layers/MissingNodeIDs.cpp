@@ -3,7 +3,6 @@
 #include <Geode/loader/Mod.hpp>
 #include <Geode/loader/Loader.hpp>
 #include <Geode/ui/GeodeUI.hpp>
-#include <Geode/loader/Index.hpp>
 #include <Geode/ui/BasedButtonSprite.hpp>
 
 using namespace geode::prelude;
