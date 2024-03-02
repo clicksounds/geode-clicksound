@@ -16,7 +16,7 @@ Mod* newIndexToMod(std::string url) {
 	    .json()
         .then([&](auto const& webRes){
             auto res = webRes["payload"];
-            auto metadata = ModMetadata::create(matjson::parse("{}").unwrap();
+            auto metadata = ModMetadata::create(matjson::parse("{}")).unwrap();
             metadata->setVersion(res["versions"][0]["name"]);
             metadata->setName(res["versions"][0]["version"]);
             metadata->setDevelopers({res["developers"][0]["display_name"]});
