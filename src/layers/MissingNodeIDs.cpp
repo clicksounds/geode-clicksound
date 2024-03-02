@@ -20,16 +20,16 @@ class $modify(newl,MenuLayer) {
                 //ModMetadata metadata2 = ModMetadata::create(matjson::parse("{}")).unwrap();
                 //ModMetadata* metadata = &metadata2;
                 web::AsyncWebRequest()
-                    .fetch("https://api.geode-sdk.org/v1/mods/geode.node-ids")
-                    .json()
+                    .fetch("https://raw.githubusercontent.com/geode-sdk/NodeIDs/main/mod.json")
+                    .text()
                     .then([&](auto const& webRes){
-                        ModMetadata metadata2 = ModMetadata::create(matjson::parse("{}")).unwrap();
+                        ModMetadata metadata2 = ModMetadata::create(webRes).unwrap();
                         ModMetadata* metadata = &metadata2;
-                        auto res = webRes["payload"];
+                        /*auto res = webRes["payload"];
                         metadata->setVersion(res["versions"][0]["name"]);
                         metadata->setName(res["versions"][0]["version"]);
                         metadata->setDevelopers({res["developers"][0]["display_name"]});
-                        metadata->setDescription(res["versions"][0]["description"]);
+                        metadata->setDescription(res["versions"][0]["description"]);*/
                         Mod theNodeIds = Mod(metadata2);
                         Mod* theNodeId2 = &theNodeIds;
                         //theNodeIds2->setMetadata(metadata2);
