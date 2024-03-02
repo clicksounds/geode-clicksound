@@ -17,10 +17,10 @@ Mod* newIndexToMod(std::string url) {
         .then([&](auto const& webRes){
             auto res = webRes["payload"];
             auto metadata = ModMetadata::create(matjson::parse("{}")).unwrap();
-            metadata.setVersion(res["versions"][0]["name"]);
-            metadata.setName(res["versions"][0]["version"]);
-            metadata.setDevelopers({res["developers"][0]["display_name"]});
-            metadata.setDescription(res["versions"][0]["description"]);
+            metadata->setVersion(res["versions"][0]["name"]);
+            metadata->setName(res["versions"][0]["version"]);
+            metadata->setDevelopers({res["developers"][0]["display_name"]});
+            metadata->setDescription(res["versions"][0]["description"]);
             mod = Mod(metadata);
 	    });
     return &mod;
