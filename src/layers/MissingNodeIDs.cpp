@@ -9,7 +9,7 @@
 using namespace geode::prelude;
 
 auto hasDoneDaThingy = false;
-auto theCoolThingy;
+Mod* theCoolThingy;
 
 
 class $modify(newl,MenuLayer) {
@@ -87,7 +87,7 @@ class $modify(newl,MenuLayer) {
                 ModMetadata* metadata = &metadata2;
                 Mod theNodeIds = Mod(metadata2);
                 Mod* theNodeId2 = &theNodeIds;
-                theCoolThingy = theNodeId2
+                theCoolThingy = theNodeId2;
             });
         auto alert = FLAlertLayer::create(
             "Click Sounds Error",
