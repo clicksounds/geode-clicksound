@@ -39,9 +39,9 @@ class $modify(ProfilePage) {
     btn->setPosition(14.500, -132);
     btn->setZOrder(26);
     btn->setID("cs-badge");
-    this->getChildByID("left-menu")->addChild(btn);
+    this->getChildByIDRecursive("left-menu")->addChild(btn);
     btn->setVisible(false);
-    this->getChildByID("left-menu")->updateLayout();
+    this->getChildByIDRecursive("left-menu")->updateLayout();
 
     std::string username = m_usernameLabel->getString();
 
