@@ -33,7 +33,6 @@ class $modify(ProfilePage) {
     auto btn = CCMenuItemSpriteExtra::create(
            spr, this, menu_selector(buttonfunctionthing::onButtonClick)
       );
-    auto contentSize = mainMenu->getContentSize();
 
 
     btn->setPosition(14.500, -132);
