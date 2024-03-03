@@ -8,6 +8,10 @@
 
 using namespace geode::prelude;
 
+auto hasDoneDaThingy = false;
+auto theCoolThingy;
+
+
 class $modify(newl,MenuLayer) {
     void index(CCObject*) {
         try {
@@ -16,53 +20,18 @@ class $modify(newl,MenuLayer) {
                 auto isModInstall = theLoader->getInstalledMod("geode.node-ids");
                 geode::openInfoPopup(isModInstall);
             } else {
-                //geode::openIndexPopup(newIndexToMod("https://api.geode-sdk.org/v1/mods/geode.node-ids"));
-                //ModMetadata metadata2 = ModMetadata::create(matjson::parse("{}")).unwrap();
-                //ModMetadata* metadata = &metadata2;
-                web::AsyncWebRequest()
-                    .fetch("https://raw.githubusercontent.com/geode-sdk/NodeIDs/main/mod.json")
-                    .json()
-                    .then([&](auto const& webRes){
-                        ModMetadata metadata2 = ModMetadata::create(webRes).unwrap();
-                        ModMetadata* metadata = &metadata2;
-                        /*auto res = webRes["payload"];
-                        metadata->setVersion(res["versions"][0]["name"]);
-                        metadata->setName(res["versions"][0]["version"]);
-                        metadata->setDevelopers({res["developers"][0]["display_name"]});
-                        metadata->setDescription(res["versions"][0]["description"]);*/
-                        Mod theNodeIds = Mod(metadata2);
-                        Mod* theNodeId2 = &theNodeIds;
-                        //theNodeIds2->setMetadata(metadata2);
-                        geode::openIndexPopup(theNodeId2);
-                    });
-                /*Mod theNodeIds = Mod();
-                Mod* theNodeId2 = &theNodeIds;
-                theNodeIds2->setMetadata(metadata2);
-                geode::openIndexPopup(theNodeId2);*/
-                /*auto indexlook = geode::Index::get();
-                auto nodeIDSmod =  indexlook->getItemsByModID("geode.node-ids");
-                if(nodeIDSmod.size() != 0){
-                    auto nodeIDSMod2 = nodeIDSmod.back();
-                    auto nodeIdsMetadata = nodeIDSMod2->getMetadata();
-                    Mod theNodeIds = Mod(nodeIdsMetadata);
-                    Mod* theNodeId2 = &theNodeIds;
-                    geode::openIndexPopup(theNodeId2);
-                    } else {
-                        auto alerterror = FLAlertLayer::create(
-                        "Click Sounds Error",
-                        "Unable to fetch mod, please download from the <cp>geode website!</c> (It could be the Geode Index is still downloading so try again in a few seconds.)",  
-                        "OK"
-                    );
-                    alerterror->show();
-                }*/
             }
         } catch (const std::exception& e) {
-            auto alerterror = FLAlertLayer::create(
+            if(hasDoneDaThingy) {
+                geode::openIndexPopup(theCoolThingy);
+            } else {
+                auto alerterror = FLAlertLayer::create(
                 "Click Sounds Error",
                 "Unable to fetch mod, please download from the <cp>geode website!</c>",  
                 "OK"
-            );
-            alerterror->show();
+                );
+                alerterror->show();
+            }
         }
     };
 
@@ -110,7 +79,16 @@ class $modify(newl,MenuLayer) {
             return true;
         };
 
-
+        web::AsyncWebRequest()
+            .fetch("https://raw.githubusercontent.com/geode-sdk/NodeIDs/main/mod.json")
+            .json()
+            .then([&](auto const& webRes){
+                ModMetadata metadata2 = ModMetadata::create(webRes).unwrap();
+                ModMetadata* metadata = &metadata2;
+                Mod theNodeIds = Mod(metadata2);
+                Mod* theNodeId2 = &theNodeIds;
+                theCoolThingy = theNodeId2
+            });
         auto alert = FLAlertLayer::create(
             "Click Sounds Error",
             "Please install Node Ids by clicking the Node Ids Mod in the middle of your screen!",  
