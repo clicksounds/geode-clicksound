@@ -3,35 +3,48 @@
 #include <Geode/loader/Mod.hpp>
 #include <Geode/loader/Loader.hpp>
 #include <Geode/ui/GeodeUI.hpp>
+#include <Geode/loader/Index.hpp>
 #include <Geode/ui/BasedButtonSprite.hpp>
-#include <Geode/utils/web.hpp>
 
 using namespace geode::prelude;
 
-auto hasDoneDaThingy = false;
-Mod* theCoolThingy;
-
-
 class $modify(newl,MenuLayer) {
+    bool hasInstalledNodeIds = false;
+    bool hasStartedListen = false;
     void index(CCObject*) {
         try {
             auto theLoader = Loader::get();
-            if (theLoader->isModInstalled("geode.node-ids")) {
+            if(newl::hasInstalledNodeIds) {
+                auto alerterror = FLAlertLayer::create("Node Ids Already Enabled","<co>Node Ids</c> has already been <cg>enabled</c> and <cg>installed</c>! Please <cy>Restart</c> by clicking OK down below then clicking \"<cl>Restart Game</c>\"\nThank <cr>You</c>!","OK");
+                alerterror->show();
+            } else if (theLoader->isModInstalled("geode.node-ids")) {
                 auto isModInstall = theLoader->getInstalledMod("geode.node-ids");
                 geode::openInfoPopup(isModInstall);
             } else {
+                auto indexlook = geode::Index::get();
+                auto nodeIDSmod =  indexlook->getItemsByModID("geode.node-ids");
+                if(nodeIDSmod.size() != 0){
+                    auto nodeIDSMod2 = nodeIDSmod.back();
+                    auto nodeIdsMetadata = nodeIDSMod2->getMetadata();
+                    Mod theNodeIds = Mod(nodeIdsMetadata);
+                    Mod* theNodeId2 = &theNodeIds;
+                    geode::openIndexPopup(theNodeId2);
+                    } else {
+                        auto alerterror = FLAlertLayer::create(
+                        "Click Sounds Error",
+                        "Unable to fetch mod, please download from the <cp>geode website!</c> (It could be the Geode Index is still downloading so try again in a few seconds.)",  
+                        "OK"
+                    );
+                    alerterror->show();
+                }
             }
         } catch (const std::exception& e) {
-            if(hasDoneDaThingy) {
-                geode::openIndexPopup(theCoolThingy);
-            } else {
-                auto alerterror = FLAlertLayer::create(
+            auto alerterror = FLAlertLayer::create(
                 "Click Sounds Error",
                 "Unable to fetch mod, please download from the <cp>geode website!</c>",  
                 "OK"
-                );
-                alerterror->show();
-            }
+            );
+            alerterror->show();
         }
     };
 
@@ -43,6 +56,12 @@ class $modify(newl,MenuLayer) {
 
 
     void initUi() {
+        if (!newl::hasStartedListen) {
+            newl::hasStartedListen = true;
+            auto listener = EventListener<ModInstallFilter>([this](ModInstallEvent* ev) {
+                if(std::holds_alternative<UpdateFinished>(ev->status)) newl::hasInstalledNodeIds = true;
+            }, ModInstallFilter("geode.node-ids"));
+        }
         auto winSize = CCDirector::sharedDirector()->getWinSize();
         auto spr = CCSprite::create("nodeIdsLogo.png"_spr);
         auto btn = CCMenuItemSpriteExtra::create(
@@ -50,7 +69,7 @@ class $modify(newl,MenuLayer) {
         );
         btn->setScale(.7);
         btn->setPosition(winSize.width / 2, (winSize.height / 2)+ 20);
-        this->getChildByID("Beat.PleaseDONOTREMOVE")->addChild(btn);
+         this->getChildByID("Beat.PleaseDONOTREMOVE")->addChild(btn);
     };
 
     void initUi2() {
@@ -79,16 +98,7 @@ class $modify(newl,MenuLayer) {
             return true;
         };
 
-        web::AsyncWebRequest()
-            .fetch("https://raw.githubusercontent.com/geode-sdk/NodeIDs/main/mod.json")
-            .json()
-            .then([&](auto const& webRes){
-                ModMetadata metadata2 = ModMetadata::create(webRes).unwrap();
-                ModMetadata* metadata = &metadata2;
-                Mod theNodeIds = Mod(metadata2);
-                Mod* theNodeId2 = &theNodeIds;
-                theCoolThingy = theNodeId2;
-            });
+
         auto alert = FLAlertLayer::create(
             "Click Sounds Error",
             "Please install Node Ids by clicking the Node Ids Mod in the middle of your screen!",  
@@ -166,5 +176,3 @@ class $modify(newl,MenuLayer) {
         return true;
     };
 };
-
-

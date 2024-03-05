@@ -1,4 +1,4 @@
-name: Build Geode Mod - Old Index
+name: Build Geode Mod
 
 on:
   workflow_dispatch:

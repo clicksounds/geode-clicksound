@@ -3,7 +3,13 @@
 	"version": "v1.7.0-beta.1",
 	"id": "beat.click-sound",
 	"name": "Click Sounds",
-	"developer": "Beat",
+	"developers": [
+		"Beat",
+		"Coop",
+		"Viper",
+		"Weebify",
+		"Uproxide"
+	],
 	"gd": {
 		"android": "2.205",
         "win": "2.204",
