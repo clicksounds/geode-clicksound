@@ -29,19 +29,18 @@ class $modify(ProfilePage) {
                                                   
 
     m_mainLayer->removeChildByID("my-stuff-hint");
-    auto mainMenu = static_cast<cocos2d::CCLayer*>(this->getChildByIDRecursive("main-menu"));
     auto spr = CCSprite::create("csBadge.png"_spr);
     auto btn = CCMenuItemSpriteExtra::create(
            spr, this, menu_selector(buttonfunctionthing::onButtonClick)
       );
-    auto contentSize = mainMenu->getContentSize();
 
 
     btn->setPosition(14.500, -132);
     btn->setZOrder(26);
     btn->setID("cs-badge");
-    mainMenu->addChild(btn);
+    this->getChildByIDRecursive("left-menu")->addChild(btn);
     btn->setVisible(false);
+    this->getChildByIDRecursive("left-menu")->updateLayout();
 
     std::string username = m_usernameLabel->getString();
 
