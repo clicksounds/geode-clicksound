@@ -56,9 +56,9 @@ jobs:
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
-                tag_name: ${{ steps.info.outputs.version }}
+                tag_name: Release-v${{ steps.info.outputs.version }}
                 name: Click Sounds v${{ steps.info.outputs.version }} for Geode
-                body: Release-v${{ steps.info.outputs.cl }}
+                body: ${{ steps.info.outputs.cl }}
                 draft: true
                 files: |
                   ./beat.click-sound.geode
