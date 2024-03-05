@@ -29,12 +29,35 @@ void SettingClickNode::onClickBtn(CCObject*) {
     if (clickSoundInUse == "__USECUSTOM__") usingCustomClickSound = true;
     
     
-     if (!usingCustomClickSound) {
+    if (!usingCustomClickSound) {
+      if (Mod::get()->getSettingValue<bool>("separate-volume")) {
+        auto system = FMODAudioEngine::sharedEngine()->m_system;
+
+        FMOD::Channel* channel;
+        FMOD::Sound* sound;
+
+        // System::createSound's first arg requires full c_string path
+        system->createSound((Mod::get()->getResourcesDir().parent_path() / clickSoundInUse).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
+        system->playSound(sound, nullptr, false, &channel);
+        channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);  
+      } else {
         FMODAudioEngine::sharedEngine()->playEffect(clickSoundInUse, 1.0f, 1.0f, 2.0f);
+      }
     } 
 
     if (usingCustomClickSound) {
-        FMODAudioEngine::sharedEngine()->playEffect(customClickSound);
+      if (Mod::get()->getSettingValue<bool>("separate-volume")) {
+        auto system = FMODAudioEngine::sharedEngine()->m_system;
+
+        FMOD::Channel* channel;
+        FMOD::Sound* sound;
+
+        system->createSound(customClickSound.c_str(), FMOD_DEFAULT, nullptr, &sound);
+        system->playSound(sound, nullptr, false, &channel);
+        channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);  
+      } else {
+        FMODAudioEngine::sharedEngine()->playEffect(customClickSound, 1.0f, 1.0f, 2.0f);
+      }
     }
 }
 
@@ -53,11 +76,34 @@ void SettingReleaseNode::onReleaseBtn(CCObject*) {
     if (releaseSoundInUse == "__USECUSTOM__") usingCustomReleaseSound = true;
  
     if (!usingCustomReleaseSound) {
+      if (Mod::get()->getSettingValue<bool>("separate-volume")) {
+        auto system = FMODAudioEngine::sharedEngine()->m_system;
+
+        FMOD::Channel* channel;
+        FMOD::Sound* sound;
+
+        // System::createSound's first arg requires full c_string path
+        system->createSound((Mod::get()->getResourcesDir().parent_path() / releaseSoundInUse).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
+        system->playSound(sound, nullptr, false, &channel);
+        channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);  
+      } else {
         FMODAudioEngine::sharedEngine()->playEffect(releaseSoundInUse, 1.0f, 1.0f, 2.0f);
+      }
     } 
 
     if (usingCustomReleaseSound) {
-        FMODAudioEngine::sharedEngine()->playEffect(customReleaseSound);
+      if (Mod::get()->getSettingValue<bool>("separate-volume")) {
+        auto system = FMODAudioEngine::sharedEngine()->m_system;
+
+        FMOD::Channel* channel;
+        FMOD::Sound* sound;
+
+        system->createSound(customReleaseSound.c_str(), FMOD_DEFAULT, nullptr, &sound);
+        system->playSound(sound, nullptr, false, &channel);
+        channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);  
+      } else {
+        FMODAudioEngine::sharedEngine()->playEffect(customReleaseSound, 1.0f, 1.0f, 2.0f);
+      }
     }
 }
 
