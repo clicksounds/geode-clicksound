@@ -26,7 +26,7 @@ public:
 
     
     auto clickSliderValue = Mod::get()->getSettingValue<int64_t>("clicksound-currentsound");
-    auto customClickSound = Mod::get()->getSettingValue<ghc::filesystem::path>("custom-clicksound").string();
+    auto customClickSound = Mod::get()->getSettingValue<std::filesystem::path>("custom-clicksound").string();
     bool usingCustomClickSound;
     std::string clickSoundInUse = Clicks::getClickSprite(clickSliderValue);
 
@@ -60,7 +60,7 @@ public:
     if (!GameManager::sharedState()->getPlayLayer() && !GameManager::sharedState()->getEditorLayer()) return;
 
     auto releaseSliderValue = Mod::get()->getSettingValue<int64_t>("releasesound-currentsound");
-    auto customReleaseSound = Mod::get()->getSettingValue<ghc::filesystem::path>("custom-releasesound").string();
+    auto customReleaseSound = Mod::get()->getSettingValue<std::filesystem::path>("custom-releasesound").string();
     bool usingCustomReleaseSound;
     std::string releaseSoundInUse = Clicks::getReleaseSprite(releaseSliderValue);
 
