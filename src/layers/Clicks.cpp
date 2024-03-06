@@ -110,13 +110,13 @@ public:
       }
     }
 
-    if (Mod::get()->getSettingValue<bool>("enable-releasesound") && usingCustomreleaseSound) {
+    if (Mod::get()->getSettingValue<bool>("enable-releasesound") && usingCustomReleaseSound) {
       auto system = FMODAudioEngine::sharedEngine()->m_system;
 
       FMOD::Channel* channel;
       FMOD::Sound* sound;
 
-      system->createSound(customClickSound.c_str(), FMOD_DEFAULT, nullptr, &sound);
+      system->createSound(customReleaseSound.c_str(), FMOD_DEFAULT, nullptr, &sound);
       system->playSound(sound, nullptr, false, &channel);
 
       if (Mod::get()->getSettingValue<bool>("separate-volume")) {
