@@ -37,12 +37,6 @@
 				"slider": true	
 			}
 		},	
-		"OnlyOnJump": {
-			"name": "Only play on jump",
-			"description": "Doesn't play sound on movement of platformer keys",
-			"type": "bool",
-			"default": true
-		},
 		"clicksound-section": {
 			"name": "Click Sounds",
 			"type": "custom"
@@ -108,17 +102,17 @@
 			}
 		},
 		"custom-releasesound": {
-            "name": "Upload a custom release sound",
-            "description": "Select a .ogg, .wav, .mp3, .m4a, or .flac format file to set as release sound 0. The best practice is to use a .ogg format sound that start loudly and immediately.",
-            "type": "path",
-        	"default": "Upload a file first.",
-			"control": {
-				"filters": [
-					{"files": ["*.ogg*", "*.mp3", "*.wav", "*.m4a", "*.flac"],
-					"description": "Audio file"}
+            		"name": "Upload a custom release sound",
+            		"description": "Select a .ogg, .wav, .mp3, .m4a, or .flac format file to set as release sound 0. The best practice is to use a .ogg format sound that start loudly and immediately.",
+            		"type": "path",
+        		"default": "Upload a file first.",
+				"control": {
+					"filters": [
+						{"files": ["*.ogg*", "*.mp3", "*.wav", "*.m4a", "*.flac"],
+						"description": "Audio file"}
 				]
 			}
-        },
+        	},
 		"misc-section": {
 			"name": "Miscellaneous",
 			"type": "custom"
@@ -132,6 +126,12 @@
 		"separate-volume": {
 			"name": "Separate volume slider",
 			"description": "When enabled, the click sounds' volume will depend on the volume slider below",
+			"type": "bool",
+			"default": true
+		},
+		"OnlyOnJump": {
+			"name": "Only play on jump",
+			"description": "Doesn't play sound on movement of platformer keys",
 			"type": "bool",
 			"default": true
 		}
