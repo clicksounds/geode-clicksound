@@ -124,12 +124,12 @@
 			"default": true
 		},
 		"separate-volume": {
-			"name": "Separate volume slider",
-			"description": "When enabled, the click sounds' volume will depend on the volume slider below",
+			"name": "Separate volume slider (otherwise use sfx volume)",
+			"description": "When enabled, the click sounds' volume will depend on the volume slider at the top of settings",
 			"type": "bool",
 			"default": true
 		},
-		"OnlyOnJump": {
+		"only-on-jump": {
 			"name": "Only play on jump",
 			"description": "Doesn't play sound on movement of platformer keys",
 			"type": "bool",
