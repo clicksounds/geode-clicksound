@@ -1,6 +1,6 @@
 {
 	"geode": "2.0.0-beta.21",
-	"version": "v1.7.0-beta.1",
+	"version": "v1.7.0",
 	"id": "beat.click-sound",
 	"name": "Click Sounds",
 	"developers": [
@@ -27,6 +27,16 @@
 		"sprites": ["resources/**/*.png"]
 	},
 	"settings": {
+		"volume-slider": {
+			"name": "Click sounds volume (%)",
+			"type": "int",
+			"default": 100,
+			"min": 0,
+			"max": 100,
+			"control": {
+				"slider": true	
+			}
+		},	
 		"OnlyOnJump": {
 			"name": "Only play on jump",
 			"description": "Doesn't play sound on movement of platformer keys",
@@ -124,16 +134,6 @@
 			"description": "When enabled, the click sounds' volume will depend on the volume slider below",
 			"type": "bool",
 			"default": true
-		},
-		"volume-slider": {
-			"name": "Click sounds volume (%)",
-			"type": "int",
-			"default": 100,
-			"min": 0,
-			"max": 100,
-			"control": {
-				"slider": true	
-			}
 		}
 	},
 	"repository": "https://github.com/BeatACVR/geode-clicksound",
