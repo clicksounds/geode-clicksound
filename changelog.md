@@ -1,4 +1,6 @@
 # Changelog
+## Version v1.7.1
+* Lowered the minimum Geode version to beta.20
 ## Version v1.7.0
 * Volume is now seperate from SFX! (thank you weebify, very cool :thumbs_up:)
 * Previewing sounds now works while in the pause menu (thank you weebify, very cool :thumbs_up:)
