@@ -1,5 +1,7 @@
 # Changelog
 ## Version v1.7.1
+* Fixed a bug where sounds don't play in editor testplaying
+* Fixed a bug with sound -12 not playing
 * Lowered the minimum Geode version to beta.20
 ## Version v1.7.0
 * Volume is now seperate from SFX! (thank you weebify, very cool :thumbs_up:)

@@ -49,7 +49,7 @@ const char* Clicks::getClickSprite(int clickSliderValue) {
       case -9: clickSoundInUse = "bonk.ogg"_spr; break;
       case -10: clickSoundInUse = "discordping.ogg"_spr; break;
       case -11: clickSoundInUse = "hamburger.ogg"_spr; break;
-      case -12: clickSoundInUse = "explode_11.ogg"; break;
+      case -12: clickSoundInUse = "gd-death.ogg"_spr; break;
       case -13: clickSoundInUse = "desk-hit.ogg"_spr; break;
       case -14: clickSoundInUse = (rand() % 2 == 0) ? "win10usbconnect.ogg"_spr : "win10usbdisconnect.ogg"_spr; break;
       case -15: clickSoundInUse = "taco-bell.ogg"_spr; break;
