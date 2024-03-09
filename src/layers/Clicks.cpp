@@ -6,12 +6,6 @@
 
 using namespace geode::prelude;
 
-template<typename T, typename U> constexpr size_t OFFSETBYMEMBER(U T::* member)
-{
-    return (char*)&((T*)nullptr->*member) - (char*)nullptr;
-}
-#define OBM(member) OFFSETBYMEMBER(member)
-//std::cout << OBM(&FMODAudioEngine::m_sfxVolume) << std::endl;
 class $modify(PlayerObject) {
 
 public:
@@ -51,12 +45,15 @@ public:
       system->createSound((Mod::get()->getResourcesDir().parent_path() / clickSoundInUse).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
       system->playSound(sound, nullptr, false, &channel);
 
-      if (Mod::get()->getSettingValue<bool>("separate-volume")) {
-        channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
-        log::debug("Click Sound Volume (cs settings): {}", Mod::get()->getSettingValue<int64_t>("volume-slider"));
+      if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {
+        #if defined(GEODE_IS_WINDOWS) 
+          channel->setVolume(fae->m_sfxVolume*2.f);
+          log::debug("Click Sound Volume (sfx slider): {}", fae->m_sfxVolume);
+        #else
+          channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
+        #endif
       } else {
-        channel->setVolume(GameManager::sharedState()->m_sfxVolume*2.f);
-        log::debug("Click Sound Volume (sfx slider): {}", OBM(&FMODAudioEngine::m_sfxVolume));
+        channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
       }
     }
 
@@ -70,10 +67,15 @@ public:
       system->createSound(customClickSound.c_str(), FMOD_DEFAULT, nullptr, &sound);
       system->playSound(sound, nullptr, false, &channel);
 
-      if (Mod::get()->getSettingValue<bool>("separate-volume")) {
-        channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f); 
+      if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {
+        #if defined(GEODE_IS_WINDOWS) 
+          channel->setVolume(fae->m_sfxVolume*2.f);
+          log::debug("Click Sound Volume (sfx slider): {}", fae->m_sfxVolume);
+        #else
+          channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
+        #endif
       } else {
-        channel->setVolume(GameManager::sharedState()->m_sfxVolume*2.f); 
+        channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
       }
     }
     if(!Mod::get()->getSettingValue<bool>("enable-clicksound") && !Mod::get()->getSettingValue<bool>("enable-releasesound")){}else{Carrot::carrot=true;}
@@ -115,10 +117,15 @@ public:
       system->createSound((Mod::get()->getResourcesDir().parent_path() / releaseSoundInUse).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
       system->playSound(sound, nullptr, false, &channel);
 
-      if (Mod::get()->getSettingValue<bool>("separate-volume")) {
-        channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f); 
+      if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {
+        #if defined(GEODE_IS_WINDOWS) 
+          channel->setVolume(fae->m_sfxVolume*2.f);
+          log::debug("Click Sound Volume (sfx slider): {}", fae->m_sfxVolume);
+        #else
+          channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
+        #endif
       } else {
-        channel->setVolume(GameManager::sharedState()->m_sfxVolume*2.f); 
+        channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
       }
     }
 
@@ -132,10 +139,15 @@ public:
       system->createSound(customReleaseSound.c_str(), FMOD_DEFAULT, nullptr, &sound);
       system->playSound(sound, nullptr, false, &channel);
 
-      if (Mod::get()->getSettingValue<bool>("separate-volume")) {
-        channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f); 
+      if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {
+        #if defined(GEODE_IS_WINDOWS) 
+          channel->setVolume(fae->m_sfxVolume*2.f);
+          log::debug("Click Sound Volume (sfx slider): {}", fae->m_sfxVolume);
+        #else
+          channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
+        #endif
       } else {
-        channel->setVolume(GameManager::sharedState()->m_sfxVolume*2.f); 
+        channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
       }
     }
     if(!Mod::get()->getSettingValue<bool>("enable-clicksound") && !Mod::get()->getSettingValue<bool>("enable-releasesound")){}else{Carrot::carrot=true;}
