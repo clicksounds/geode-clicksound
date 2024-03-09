@@ -11,7 +11,7 @@ template<typename T, typename U> constexpr size_t OFFSETBYMEMBER(U T::* member)
     return (char*)&((T*)nullptr->*member) - (char*)nullptr;
 }
 #define OBM(member) OFFSETBYMEMBER(member)
-std::cout << OBM(&FMODAudioEngine::m_sfxVolume) << std::endl;
+//std::cout << OBM(&FMODAudioEngine::m_sfxVolume) << std::endl;
 class $modify(PlayerObject) {
 
 public:
@@ -53,10 +53,10 @@ public:
 
       if (Mod::get()->getSettingValue<bool>("separate-volume")) {
         channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
-        //log::debug("Click Sound Volume (cs settings): {}", Mod::get()->getSettingValue<int64_t>("volume-slider"));
+        log::debug("Click Sound Volume (cs settings): {}", Mod::get()->getSettingValue<int64_t>("volume-slider"));
       } else {
         channel->setVolume(GameManager::sharedState()->m_sfxVolume*2.f);
-        //log::debug("Click Sound Volume (sfx slider): {}", fae->m_sfxVolume);
+        log::debug("Click Sound Volume (sfx slider): {}", OBM(&FMODAudioEngine::m_sfxVolume));
       }
     }
 
