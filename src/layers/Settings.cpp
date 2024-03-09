@@ -126,7 +126,7 @@ void SettingReleaseNode::onReleaseBtn(CCObject*) {
         
       if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {
         #if defined(GEODE_IS_WINDOWS)
-          if (fae->m_sfxVolume != 0f) system->playSound(sound, nullptr, false, &channel);
+          if (fae->m_sfxVolume != 0) system->playSound(sound, nullptr, false, &channel);
           channel->setVolume(fae->m_sfxVolume*2.f);
         #else
           if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) system->playSound(sound, nullptr, false, &channel);
