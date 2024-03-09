@@ -48,11 +48,11 @@ public:
           if (fae->m_sfxVolume != 0f) system->playSound(sound, nullptr, false, &channel);
           channel->setVolume(fae->m_sfxVolume*2.f);
         #else
-          if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0f) system->playSound(sound, nullptr, false, &channel);
+          if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) system->playSound(sound, nullptr, false, &channel);
           channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
         #endif
       } else {
-        if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0f) system->playSound(sound, nullptr, false, &channel);
+        if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) system->playSound(sound, nullptr, false, &channel);
         channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
       }
     }
