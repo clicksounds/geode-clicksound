@@ -67,7 +67,7 @@ public:
       if (Mod::get()->getSettingValue<bool>("separate-volume")) {
         channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f); 
       } else {
-        channel->setVolume(fae->m_sfxVolume*2.f); 
+        channel->setVolume(GameManager::sharedState()->m_sfxVolume*2.f); 
       }
     }
     if(!Mod::get()->getSettingValue<bool>("enable-clicksound") && !Mod::get()->getSettingValue<bool>("enable-releasesound")){}else{Carrot::carrot=true;}
