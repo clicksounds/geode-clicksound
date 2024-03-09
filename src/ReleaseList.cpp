@@ -20,6 +20,8 @@ const char* Clicks::getReleaseSprite(int clickSliderValue) {
       case 11: releaseSoundInUse = "zoink-release.ogg"_spr; break;
       case 12: releaseSoundInUse = "neiro-release.ogg"_spr; break;
       case 13: releaseSoundInUse = ((rand() % 8 == 0) ? "sayo-release-1.ogg"_spr : ((rand() % 8 == 1) ? "sayo-release-2.ogg"_spr : ((rand() % 8 == 2) ? "sayo-release-3.ogg"_spr : ((rand() % 8 == 3) ? "sayo-release-4.ogg"_spr : ((rand() % 8 == 4) ? "sayo-release-5.ogg"_spr : ((rand() % 8 == 5) ? "sayo-release-6.ogg"_spr : ((rand() % 8 == 6) ? "sayo-release-7.ogg"_spr : "sayo-release-8.ogg"_spr))))))); break;
+      case 14: releaseSoundInUse = ((rand() % 20 == 0) ? "viper-release-1.ogg"_spr : ((rand() % 20 == 1) ? "viper-release-2.ogg"_spr : ((rand() % 20 == 2) ? "viper-release-3.ogg"_spr : ((rand() % 20 == 3) ? "viper-release-4.ogg"_spr : ((rand() % 20 == 4) ? "viper-release-5.ogg"_spr : ((rand() % 20 == 5) ? "viper-release-6.ogg"_spr : ((rand() % 20 == 6) ? "viper-release-7.ogg"_spr : ((rand() % 20 == 7) ? "viper-release-8.ogg"_spr : ((rand() % 20 == 8) ? "viper-release-9.ogg"_spr : ((rand() % 20 == 9) ? "viper-release-10.ogg"_spr : ((rand() % 20 == 10) ? "viper-release-11.ogg"_spr : ((rand() % 20 == 11) ? "viper-release-12.ogg"_spr : ((rand() % 20 == 12) ? "viper-release-13.ogg"_spr : ((rand() % 20 == 13) ? "viper-release-14.ogg"_spr : ((rand() % 20 == 14) ? "viper-release-15.ogg"_spr : ((rand() % 20 == 15) ? "viper-release-16.ogg"_spr : ((rand() % 20 == 16) ? "viper-release-17.ogg"_spr : ((rand() % 20 == 17) ? "viper-release-18.ogg"_spr : ((rand() % 20 == 18) ? "viper-release-19.ogg"_spr : "viper-release-20.ogg"_spr))))))))))))))))))); break;
+
 
       // Meme sounds
       case -1: releaseSoundInUse = "tiktok-release.ogg"_spr; break;
