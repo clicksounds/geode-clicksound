@@ -50,7 +50,7 @@ public:
           log::debug("Click Sound Volume (sfx slider): {}", fae->m_sfxVolume);
           log::debug("Click Sound Volume (sfx slider parse): {}", fae->m_sfxVolume%100f);
           log::debug("Click Sound Volume (sfx game manager slider): {}", GameManager::sharedState()->m_sfxVolume);
-          log::debug("Click Sound Volume (sfx slider game manager parse): {}", GameManager::sharedState()->m_sfxVolume%100.f);
+          log::debug("Click Sound Volume (sfx slider game manager parse): {}", GameManager::sharedState()->m_sfxVolume%100f);
         #else
           channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
         #endif
