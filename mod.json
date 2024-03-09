@@ -124,7 +124,7 @@
 			"default": true
 		},
 		"separate-volume": {
-			"name": "Separate volume slider (READ!)",
+			"name": "Separate volume slider (READ)",
 			"description": "When enabled, the click sounds' volume will depend on the volume slider at the top of settings, otherwise use the sfx volume slider",
 			"type": "bool",
 			"default": true
@@ -145,9 +145,9 @@
         }
     ],
 	"tags":	[
-		"gameplay",
-		"enhancement",
-		"customization",
-		"offline"
+		"Gameplay",
+		"Enhancement",
+		"Customization",
+		"Offline"
 	] 
 }
