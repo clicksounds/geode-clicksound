@@ -36,7 +36,8 @@ public:
     if (clickSoundInUse == "__USECUSTOM__") usingCustomClickSound = true;
     
     if (Mod::get()->getSettingValue<bool>("enable-clicksound") && !usingCustomClickSound) {
-      auto system = FMODAudioEngine::sharedEngine()->m_system;
+      auto fae = FMODAudioEngine::sharedEngine();
+      auto system = fae->m_system;
 
       FMOD::Channel* channel;
       FMOD::Sound* sound;
@@ -49,12 +50,13 @@ public:
         log::debug("Click Sound Volume (cs settings): {}", Mod::get()->getSettingValue<int64_t>("volume-slider"));
       } else {
         channel->setVolume(GameManager::sharedState()->m_sfxVolume*2.f);
-        log::debug("Click Sound Volume (sfx slider): {}", GameManager::sharedState()->m_sfxVolume);
+        log::debug("Click Sound Volume (sfx slider): {}", fae->m_sfxVolume);
       }
     }
 
     if (Mod::get()->getSettingValue<bool>("enable-clicksound") && usingCustomClickSound) {
-      auto system = FMODAudioEngine::sharedEngine()->m_system;
+      auto fae = FMODAudioEngine::sharedEngine();
+      auto system = fae->m_system;
 
       FMOD::Channel* channel;
       FMOD::Sound* sound;
@@ -65,7 +67,7 @@ public:
       if (Mod::get()->getSettingValue<bool>("separate-volume")) {
         channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f); 
       } else {
-        channel->setVolume(GameManager::sharedState()->m_sfxVolume*2.f); 
+        channel->setVolume(fae->m_sfxVolume*2.f); 
       }
     }
     if(!Mod::get()->getSettingValue<bool>("enable-clicksound") && !Mod::get()->getSettingValue<bool>("enable-releasesound")){}else{Carrot::carrot=true;}
@@ -98,7 +100,8 @@ public:
     if (releaseSoundInUse == "__USECUSTOM__") usingCustomReleaseSound = true;
  
     if (Mod::get()->getSettingValue<bool>("enable-releasesound") && !usingCustomReleaseSound) {
-      auto system = FMODAudioEngine::sharedEngine()->m_system;
+      auto fae = FMODAudioEngine::sharedEngine();
+      auto system = fae->m_system;
 
       FMOD::Channel* channel;
       FMOD::Sound* sound;
@@ -114,7 +117,8 @@ public:
     }
 
     if (Mod::get()->getSettingValue<bool>("enable-releasesound") && usingCustomReleaseSound) {
-      auto system = FMODAudioEngine::sharedEngine()->m_system;
+      auto fae = FMODAudioEngine::sharedEngine();
+      auto system = fae->m_system;
 
       FMOD::Channel* channel;
       FMOD::Sound* sound;
