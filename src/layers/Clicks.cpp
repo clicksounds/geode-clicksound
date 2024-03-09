@@ -42,19 +42,17 @@ public:
       FMOD::Sound* sound;
 
       system->createSound((Mod::get()->getResourcesDir().parent_path() / clickSoundInUse).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
-      system->playSound(sound, nullptr, false, &channel);
 
       if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {
-        #if defined(GEODE_IS_WINDOWS) 
+        #if defined(GEODE_IS_WINDOWS)
+          if (fae->m_sfxVolume != 0f) system->playSound(sound, nullptr, false, &channel);
           channel->setVolume(fae->m_sfxVolume*2.f);
-          log::debug("Click Sound Volume (sfx slider): {}", fae->m_sfxVolume);
-          log::debug("Click Sound Volume (sfx slider parse): {}", fae->m_sfxVolume*50.f);
-          log::debug("Click Sound Volume (sfx game manager slider): {}", GameManager::sharedState()->m_sfxVolume);
-          log::debug("Click Sound Volume (sfx slider game manager parse): {}", GameManager::sharedState()->m_sfxVolume*50.f);
         #else
+          if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0f) system->playSound(sound, nullptr, false, &channel);
           channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
         #endif
       } else {
+        if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0f) system->playSound(sound, nullptr, false, &channel);
         channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
       }
     }
@@ -67,16 +65,17 @@ public:
       FMOD::Sound* sound;
 
       system->createSound(customClickSound.c_str(), FMOD_DEFAULT, nullptr, &sound);
-      system->playSound(sound, nullptr, false, &channel);
-
+      
       if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {
-        #if defined(GEODE_IS_WINDOWS) 
+        #if defined(GEODE_IS_WINDOWS)
+          if (fae->m_sfxVolume != 0f) system->playSound(sound, nullptr, false, &channel);
           channel->setVolume(fae->m_sfxVolume*2.f);
-          log::debug("Click Sound Volume (sfx slider): {}", fae->m_sfxVolume);
         #else
+          if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0f) system->playSound(sound, nullptr, false, &channel);
           channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
         #endif
       } else {
+        if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0f) system->playSound(sound, nullptr, false, &channel);
         channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
       }
     }
