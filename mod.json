@@ -124,8 +124,8 @@
 			"default": true
 		},
 		"separate-volume": {
-			"name": "Separate volume slider (otherwise use sfx volume)",
-			"description": "When enabled, the click sounds' volume will depend on the volume slider at the top of settings",
+			"name": "Separate volume slider (READ!)",
+			"description": "When enabled, the click sounds' volume will depend on the volume slider at the top of settings, otherwise use the sfx volume slider",
 			"type": "bool",
 			"default": true
 		},

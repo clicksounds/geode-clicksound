@@ -46,10 +46,10 @@ public:
 
       if (Mod::get()->getSettingValue<bool>("separate-volume")) {
         channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
-        log::debug("Click Sound Volume (cs settings): {}", Mod::get()->getSettingValue<int64_t>("volume-slider"))
+        log::debug("Click Sound Volume (cs settings): {}", Mod::get()->getSettingValue<int64_t>("volume-slider"));
       } else {
         channel->setVolume(GameManager::sharedState()->m_sfxVolume*2.f);
-        log::debug("Click Sound Volume (sfx slider): {}", GameManager::sharedState()->m_sfxVolume)
+        log::debug("Click Sound Volume (sfx slider): {}", GameManager::sharedState()->m_sfxVolume);
       }
     }
 
