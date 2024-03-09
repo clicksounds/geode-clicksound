@@ -36,6 +36,8 @@ const char* Clicks::getClickSprite(int clickSliderValue) {
       case 27: clickSoundInUse = "trusta.ogg"_spr; break;
       case 28: clickSoundInUse = "gazonk.ogg"_spr; break;
       case 29: clickSoundInUse = ((rand() % 8 == 0) ? "sayo-click-1.ogg"_spr : ((rand() % 8 == 1) ? "sayo-click-2.ogg"_spr : ((rand() % 8 == 2) ? "sayo-click-3.ogg"_spr : ((rand() % 8 == 3) ? "sayo-click-4.ogg"_spr : ((rand() % 8 == 4) ? "sayo-click-5.ogg"_spr : ((rand() % 8 == 5) ? "sayo-click-6.ogg"_spr : ((rand() % 8 == 6) ? "sayo-click-7.ogg"_spr : "sayo-click-8.ogg"_spr))))))); break;
+      case 30: clickSoundInUse = ((rand() % 9 == 0) ? "viper-click-1.ogg"_spr : ((rand() % 9 == 1) ? "viper-click-2.ogg"_spr : ((rand() % 9 == 2) ? "viper-click-3.ogg"_spr : ((rand() % 9 == 3) ? "viper-click-4.ogg"_spr : ((rand() % 9 == 4) ? "viper-click-5.ogg"_spr : ((rand() % 9 == 5) ? "viper-click-6.ogg"_spr : ((rand() % 9 == 6) ? "viper-click-7.ogg"_spr : ((rand() % 9 == 7) ? "viper-click-8.ogg"_spr : "viper-click-9.ogg"_spr)))))))); break;
+
 
       // Meme sounds
       case -1: clickSoundInUse = "fire-in-the-hole.ogg"_spr; break;
