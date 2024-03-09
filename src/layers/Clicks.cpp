@@ -20,7 +20,6 @@ public:
         return;
       }
     }
-    std::cout << OBM(&FMODAudioEngine::m_sfxVolume) << std::endl;
 
     if (!GameManager::sharedState()->getPlayLayer() && !GameManager::sharedState()->getEditorLayer()) return;
     if (PlayLayer::get()) if (this == PlayLayer::get()->m_player2 && !PlayLayer::get()->m_level->m_twoPlayerMode) return;
