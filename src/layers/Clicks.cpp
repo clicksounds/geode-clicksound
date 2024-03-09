@@ -24,7 +24,7 @@ public:
 
     if (!GameManager::sharedState()->getPlayLayer() && !GameManager::sharedState()->getEditorLayer()) return;
     if (PlayLayer::get()) if (this == PlayLayer::get()->m_player2) return;
-//  if (LevelEditorLayer::get()) if (LevelEditorLayer::get()->m_player2) return;
+    if (LevelEditorLayer::get()) if (this == LevelEditorLayer::get()->m_player2) return;
     
     auto clickSliderValue = Mod::get()->getSettingValue<int64_t>("clicksound-currentsound");
     auto customClickSound = Mod::get()->getSettingValue<ghc::filesystem::path>("custom-clicksound").string();
