@@ -124,7 +124,7 @@
 			"default": true
 		},
 		"use-sfx-volume": {
-			"name": "Use SFX Volume Slider (Win ONLY) (READ)",
+			"name": "Use SFX Volume Slider (Windows ONLY)",
 			"description": "When enabled, the click sounds' volume will depend on the sound effects volume slider at the in the pause menu and game settings. When disabled, the click sounds' volume will depend on the volume slider at the top of settings",
 			"type": "bool",
 			"default": false
