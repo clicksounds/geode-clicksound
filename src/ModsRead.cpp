@@ -2,10 +2,10 @@
 #include <Geode/Geode.hpp>
 using namespace geode::prelude;
 
-$execute {
-    listenForSettingChanges("clicksound-currentsound", +[](int64_t value) {
+$on_mod(Loaded) {
+listenForSettingChanges("clicksound-currentsound", +[](int value) {
         // do something with the value
-      GJGameState->CurentClicksound = value;
+      GJGameState::CurentClicksound = value;
     });
-  GJGameState->CurentClicksound = 0;
+  GJGameState::CurentClicksound = 0;
 }
