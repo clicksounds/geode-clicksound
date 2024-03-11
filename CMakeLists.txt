@@ -13,6 +13,7 @@ file(GLOB SOURCES
 	src/layers/*.cpp
     src/main.cpp
     src/ClickList.cpp
+    src/ModsRead.cpp
     src/ReleaseList.cpp
 )
 
