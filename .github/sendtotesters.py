@@ -25,7 +25,7 @@ def send_webhook(eee):
 	data = {
 		'content': "# New Test"
 	}
-	request.urlopen(req, data=json.dumps(data).encode('utf-8'))
-	requests.post(os.getenv('DISCORD_WEBHOOK_URL'), files={"file": open('beat.click-sound.geode', "rb")})
+	# request.urlopen(req, data=json.dumps(data).encode('utf-8'))
+	requests.post(os.getenv('DISCORD_WEBHOOK_URL'), data=json.dumps(data).encode('utf-8'), files={"file": open('beat.click-sound.geode', "rb")})
 
 send_webhook(e)
