@@ -18,10 +18,6 @@ on:
           description: 'Description (what to test)'
           required: false
           type: string
-        environment:
-          description: 'Environment to run tests against'
-          type: environment
-          required: true
 
 jobs:
   post:
