@@ -8,24 +8,32 @@ import re
 
 
 archive = zipfile.ZipFile('beat.click-sound.geode', 'r')
-e = archive.open('changelog.md')
+e = json.loads(archive.read('mod.json'))
 file_list = archive.namelist()	
 
 
 
 def send_webhook(eee):
-	from urllib import request
 	import requests
 	import json
 	import os
 
-	req = request.Request(os.getenv('DISCORD_WEBHOOK_URL'), method='POST')
-	req.add_header('User-Agent', 'python urllib')
-	req.add_header('Content-Type', 'application/json')
-	data = {
-		'content': "# New Test"
+	thePing = "\n## Testers: <@&"
+
+	leping = {
+        'all': '1217241657548865556'
+        'windows': '1217241755578142780'
+        'mac': '1217241792106205284'
+        'android': '1217241827912978462'
 	}
-	# request.urlopen(req, data=json.dumps(data).encode('utf-8'))
+	if not 'none' in os.getenv('PING'):
+		thePing += leping[os.getenv('PING')] + ">"
+	else:
+		thePing = ""
+
+	data = {
+		'content': "# New Test for v" + eee["version"].replace("v","") + thePing + "\n" + os.getenv('DESC')
+	}
 	requests.post(os.getenv('DISCORD_WEBHOOK_URL'), data=data, files={"file": open('beat.click-sound.geode', "rb")})
 
 send_webhook(e)

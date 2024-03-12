@@ -70,5 +70,6 @@ jobs:
           python3 repo/.github/sendtotesters.py
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL_2 }}
-          ROLE_ID: ${{ secrets.ROLE_ID }}
           THE_MOD_ID: "beat.click-sound"
+          PING: ${{ inputs.ping }}
+          DESC: ${{ inputs.desc }}
