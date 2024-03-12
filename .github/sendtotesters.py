@@ -21,10 +21,10 @@ def send_webhook(eee):
 	thePing = "\n## Testers: <@&"
 
 	leping = {
-        'all': '1217241657548865556',
-        'windows': '1217241755578142780',
-        'mac': '1217241792106205284', # i added ','
-        'android': '1217241827912978462'
+        'all': '1210765582685966387',
+        'windows': '1210765242502615120',
+        'mac': '1209630974787452998',
+        'android': '1210765328519536704'
 	}
 	if not 'none' in os.getenv('PING'):
 		thePing += leping[os.getenv('PING')] + ">"
