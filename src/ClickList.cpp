@@ -18,7 +18,10 @@ const char* Clicks::getClickSprite(int clickSliderValue) {
     switch(clickSliderValue) {
       // Other
       case 0: clickSoundInUse = "__USECUSTOM__"; break;
-    // convertToConstChar(fmt::format("{}Name-{}.ogg",getmodfix(),std::to_string((rand() % HowMany) + 1 )));
+
+
+      // convertToConstChar(fmt::format("{}Name-{}.ogg",getmodfix(),std::to_string((rand() % HowMany) + 1 )));
+
       // Useful sounds
       case 1: clickSoundInUse = "osu-hit.ogg"_spr; break;
       case 2: clickSoundInUse = "metronome.ogg"_spr; break;

@@ -167,7 +167,7 @@ public:
 };
 
 // SECTIONS
-// Copied from Coop's new Hide+ mod (soon tm)
+// Copied from Coop's new Hide+ mod (get it now!)
 
 class SectionSettingValue;
 

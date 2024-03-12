@@ -1,6 +1,6 @@
 {
 	"geode": "2.0.0-beta.20",
-	"version": "v1.7.1",
+	"version": "v1.7.2-alpha.1",
 	"id": "beat.click-sound",
 	"name": "Click Sounds",
 	"developers": [
@@ -123,13 +123,13 @@
 			"type": "bool",
 			"default": true
 		},
-		"separate-volume": {
-			"name": "Separate volume slider",
-			"description": "When enabled, the click sounds' volume will depend on the volume slider below",
+		"use-sfx-volume": {
+			"name": "Use SFX Volume Slider (Windows ONLY)",
+			"description": "When enabled, the click sounds' volume will depend on the sound effects volume slider at the in the pause menu and game settings. When disabled, the click sounds' volume will depend on the volume slider at the top of settings",
 			"type": "bool",
-			"default": true
+			"default": false
 		},
-		"OnlyOnJump": {
+		"only-on-jump": {
 			"name": "Only play on jump",
 			"description": "Doesn't play sound on movement of platformer keys",
 			"type": "bool",
@@ -145,9 +145,9 @@
         }
     ],
 	"tags":	[
-		"gameplay",
-		"enhancement",
-		"customization",
-		"offline"
+		"Gameplay",
+		"Enhancement",
+		"Customization",
+		"Offline"
 	] 
 }

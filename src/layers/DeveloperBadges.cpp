@@ -28,8 +28,13 @@ class $modify(ProfilePage) {
     std::set<int> csContributors = {13873867, 14284530, 21207551, 25397826, 6253758};
                                                   
 
-    m_mainLayer->removeChildByID("my-stuff-hint");
+    if (m_mainLayer->getChildByID("my-stuff-hint")) {
+      m_mainLayer->removeChildByID("my-stuff-hint"); // Might fix a crash idk
+    }
     auto spr = CCSprite::create("csBadge.png"_spr);
+    if (!spr) {
+      return true; // unable to find sprite
+    }
     auto btn = CCMenuItemSpriteExtra::create(
            spr, this, menu_selector(buttonfunctionthing::onButtonClick)
       );
