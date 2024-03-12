@@ -22,9 +22,9 @@ def send_webhook(eee):
 	req.add_header('User-Agent', 'python urllib')
 	req.add_header('Content-Type', 'application/json')
 	data = {
-		'content': "# New Test",
-		"file": open('beat.click-sound.geode', "rb")
+		'content': "# New Test"
 	}
 	request.urlopen(req, data=json.dumps(data).encode('utf-8'))
+	requests.post(os.getenv('DISCORD_WEBHOOK_URL'), files={"file": open('beat.click-sound.geode', "rb")})
 
 send_webhook(e)
