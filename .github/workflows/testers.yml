@@ -68,7 +68,7 @@ jobs:
         id: runit
         shell: bash
         run: |
-          python3 click/.github/sendtotesters.py
+          python3 repo/.github/sendtotesters.py
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL_2 }}
           ROLE_ID: ${{ secrets.ROLE_ID }}
