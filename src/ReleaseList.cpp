@@ -31,7 +31,7 @@ const char* Clicks::getReleaseSprite(int clickSliderValue) {
       case 12: releaseSoundInUse = "neiro-release.ogg"_spr; break;
       case 13: releaseSoundInUse = convertToConstChar(fmt::format("{}sayo-release-{}.ogg",getmodfix(),std::to_string((rand() % 20) + 1 ))); break; 
       case 14: releaseSoundInUse = convertToConstChar(fmt::format("{}viper-release-{}.ogg",getmodfix(),std::to_string((rand() % 20) + 1 ))); break; 
-
+      case 15: releaseSoundInUse = "Logitech_G502-release-1.ogg"_spr; break;
 
       // Meme sounds
       case -1: releaseSoundInUse = "tiktok-release.ogg"_spr; break;
