@@ -10,10 +10,9 @@ on:
           options:
           - none
           - all
-          - debug
-          - info
-          - warning
-          - debug
+          - windows
+          - mac
+          - android
         desc:
           description: 'Description (what to test)'
           required: false
