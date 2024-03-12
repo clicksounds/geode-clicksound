@@ -1,4 +1,9 @@
 # Changelog
+## Version v1.7.2
+* 2 new click sounds and release sounds (both randomized)
+* Added click sounds settings button in the editor
+* 2 player click support (can't do different clicks)
+* Dual mode support in editor
 ## Version v1.7.1
 * Fixed a bug where sounds don't play in editor testplaying
 * Fixed a bug with sound -12 not playing
