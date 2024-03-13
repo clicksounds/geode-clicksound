@@ -1,5 +1,5 @@
 # Changelog
-## Version v1.7.2
+## Version v1.8.0
 * Added Viper's click sounds and release sounds (both randomized)
 * Added Logitech G502 click sounds and release sounds (clicks randomized)
 * Added up arrow 4 click sounds and release sounds (both randomized)
