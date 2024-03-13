@@ -16,7 +16,7 @@ jobs:
               id: defvar
               run: |
                 BRANCH=main
-                API_URL="https://api.github.com/repos/beatacvr/geode-clicksound/actions/workflows/build.yml/runs?per_page=1&branch=$BRANCH&event=push&status=success"
+                API_URL="https://api.github.com/repos/carrotdevs/geode-clicksound/actions/workflows/build.yml/runs?per_page=1&branch=$BRANCH&status=success"
                 RUN_ID=$(curl $API_URL | jq .workflow_runs[0].id)
                 echo "run_id=$RUN_ID" >> $GITHUB_OUTPUT
             - name: Download artifacts

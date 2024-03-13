@@ -8,8 +8,8 @@
 using namespace geode::prelude;
 
 // SETTINGS IN PAUSE MENU (ty viper!)
-class $modify(YoureAPansexual,PauseLayer) {
-  void YOUAREGAY(CCObject*) {
+class $modify(pause,PauseLayer) {
+  void onLeClick(CCObject*) {
       geode::openSettingsPopup(Mod::get());
   }
 
@@ -22,7 +22,7 @@ class $modify(YoureAPansexual,PauseLayer) {
     auto btn = CCMenuItemSpriteExtra::create(
         spr,
         this,
-        menu_selector(YoureAPansexual::YOUAREGAY)
+        menu_selector(pause::onLeClick)
       );
     spr->setScale(0.7f);
     if(Mod::get()->getSettingValue<bool>("settings-button")) {
@@ -34,7 +34,7 @@ class $modify(YoureAPansexual,PauseLayer) {
 };
 
 class $modify(editor,EditorPauseLayer) {
-  void YOUAREGAY(CCObject*) {
+  void onLeClick(CCObject*) {
       geode::openSettingsPopup(Mod::get());
   }
 
@@ -45,15 +45,15 @@ class $modify(editor,EditorPauseLayer) {
     auto spr = CCSprite::create("Button.png"_spr);
     spr->setScale(0.6f);
     menu->setLayout(RowLayout::create()
-                        ->setGap(0.f)
-                        ->setAxisAlignment(AxisAlignment::Center)
-                        ->setAutoScale(false)
-                        ->setCrossAxisOverflow(true)
-                  );
+      ->setGap(0.f)
+      ->setAxisAlignment(AxisAlignment::Center)
+      ->setAutoScale(false)
+      ->setCrossAxisOverflow(true)
+    );
     auto btn = CCMenuItemSpriteExtra::create(
         spr,
         this,
-        menu_selector(editor::YOUAREGAY)
+        menu_selector(editor::onLeClick)
       );
     if(Mod::get()->getSettingValue<bool>("settings-button")) {
       btn->setPosition({menu->getContentSize().width/2, btn->getContentSize().height/2});
