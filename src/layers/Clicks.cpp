@@ -23,7 +23,7 @@ public:
     
     if (!GameManager::sharedState()->getPlayLayer() && !GameManager::sharedState()->getEditorLayer()) return;
     if (PlayLayer::get()) if (this == PlayLayer::get()->m_player2 && !PlayLayer::get()->m_level->m_twoPlayerMode) return;
-    if (LevelEditorLayer::get()) {log::debug('{}', LevelEditorLayer::get()->m_level->m_twoPlayerMode);if (this == LevelEditorLayer::get()->m_player2 && !LevelEditorLayer::get()->m_level->m_twoPlayerMode) return;}
+    if (LevelEditorLayer::get()) {log::debug("{}", LevelEditorLayer::get()->m_level->m_twoPlayerMode);if (this == LevelEditorLayer::get()->m_player2 && !LevelEditorLayer::get()->m_level->m_twoPlayerMode) return;}
     
     auto clickSliderValue = Mod::get()->getSettingValue<int64_t>("clicksound-currentsound");
     auto customClickSound = Mod::get()->getSettingValue<ghc::filesystem::path>("custom-clicksound").string();
