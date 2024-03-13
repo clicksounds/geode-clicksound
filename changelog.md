@@ -1,6 +1,8 @@
 # Changelog
 ## Version v1.7.2
-* 2 new click sounds and release sounds (both randomized)
+* Added Viper's click sounds and release sounds (both randomized)
+* Added Logitech G502 click sounds and release sounds (clicks randomized)
+* Added up arrow 4 click sounds and release sounds (both randomized)
 * Added click sounds settings button in the editor
 * 2 player click support (can't do different clicks)
 * Dual mode support in editor

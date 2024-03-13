@@ -37,8 +37,9 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 27 - Trusta
 - 28 - Gazonk
 - 29 - Sayo Device (randomized)
-- 30 - Viper's Clicks/Release
-- 31 - Logitech G502 Clicks/Release
+- 30 - Viper's Clicks/Release (randomized)
+- 31 - Logitech G502 Clicks/Release (randomized)
+- 32 - Up arrow 4 Clicks/Release (randomized)
 ### Meme click sounds (negative number):
 - 1 - FIRE IN THE HOLE!
 - 2 - I loooove GD Cologne
@@ -83,8 +84,9 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 11 - Zoink Click/Release
 - 12 - Neiro Click/Release
 - 13 - Sayo Device (randomized)
-- 14 - Viper's Clicks/Release
+- 14 - Viper's Clicks/Release (randomized)
 - 15 - Logitech G502 Clicks/Release
+- 16 - Up arrow 4 Clicks/Release (randomized)
 ### Meme release sounds (negative number):
 - 1 - TikTok
 
