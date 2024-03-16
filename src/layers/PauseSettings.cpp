@@ -4,14 +4,15 @@
 #include <Geode/modify/EndLevelLayer.hpp>
 #include <Geode/modify/EditorPauseLayer.hpp>
 #include <Geode/ui/GeodeUI.hpp>
+
+using namespace geode::prelude;
+
 class PopupModSettings : public CCLayer {
 public:
 void ShowPopup(CCObject*) {
 		geode::openSettingsPopup(Mod::get());
 	}
 };
-
-using namespace geode::prelude;
 
 // SETTINGS IN PAUSE MENU (ty viper!)
 class $modify(pause,PauseLayer) {
