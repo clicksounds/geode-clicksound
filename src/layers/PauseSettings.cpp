@@ -4,14 +4,18 @@
 #include <Geode/modify/EndLevelLayer.hpp>
 #include <Geode/modify/EditorPauseLayer.hpp>
 #include <Geode/ui/GeodeUI.hpp>
+class PopupModSettings : public CCLayer {
+public:
+void ShowPopup(CCObject*) {
+		geode::openSettingsPopup(Mod::get());
+	}
+};
 
 using namespace geode::prelude;
 
 // SETTINGS IN PAUSE MENU (ty viper!)
 class $modify(pause,PauseLayer) {
-  void onLeClick(CCObject*) {
-      geode::openSettingsPopup(Mod::get());
-  }
+
 
   void customSetup() {
     PauseLayer::customSetup();
@@ -22,7 +26,7 @@ class $modify(pause,PauseLayer) {
     auto btn = CCMenuItemSpriteExtra::create(
         spr,
         this,
-        menu_selector(pause::onLeClick)
+        menu_selector(PopupModSettings::ShowPopup)
       );
     spr->setScale(0.7f);
     if(Mod::get()->getSettingValue<bool>("settings-button")) {
@@ -34,9 +38,7 @@ class $modify(pause,PauseLayer) {
 };
 
 class $modify(editor,EditorPauseLayer) {
-  void onLeClick(CCObject*) {
-      geode::openSettingsPopup(Mod::get());
-  }
+
 
   bool init(LevelEditorLayer* po) {
     if (!EditorPauseLayer::init(po)) return false;
@@ -53,7 +55,7 @@ class $modify(editor,EditorPauseLayer) {
     auto btn = CCMenuItemSpriteExtra::create(
         spr,
         this,
-        menu_selector(editor::onLeClick)
+        menu_selector(PopupModSettings::ShowPopup)
       );
     if(Mod::get()->getSettingValue<bool>("settings-button")) {
       btn->setPosition({menu->getContentSize().width/2, btn->getContentSize().height/2});
