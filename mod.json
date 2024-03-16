@@ -57,7 +57,7 @@
 			"type": "int",
 			"default": 1,
 			"min": -27,
-			"max": 33,
+			"max": 34,
 			"control": {
 				"arrows": true,
 				"slider": false
@@ -95,7 +95,7 @@
 			"type": "int",
 			"default": 1,
 			"min": -1,
-			"max": 17,
+			"max": 18,
 			"control": {
 				"arrows": true,
 				"slider": false

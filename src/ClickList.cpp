@@ -56,6 +56,7 @@ const char* Clicks::getClickSprite(int clickSliderValue) {
       case 31: clickSoundInUse = convertToConstChar(fmt::format("{}Logitech_G502-{}-{}.ogg",getmodfix(),(rand() % 100 == 0) ? "soft" : ((rand() % 100 > 50) ? "hard" : "normal"),std::to_string((rand() % 10) + 1 ))); break;
       case 32: clickSoundInUse = convertToConstChar(fmt::format("{}up-arrow-4-click-{}.ogg",getmodfix(),std::to_string((rand() % 10) + 1 ))); break;
       case 33: clickSoundInUse = convertToConstChar(fmt::format("{}mouse-clicks-6-Clicks-{}.ogg",getmodfix(),std::to_string((rand() % 10) + 1 ))); break;
+      case 34: clickSoundInUse = convertToConstChar(fmt::format("{}0PacitysClicksV2clicks{}.ogg",getmodfix(),std::to_string((rand() % 4) + 1 ))); break;
       // Meme sounds
       case -1: clickSoundInUse = "fire-in-the-hole.ogg"_spr; break;
       case -2: clickSoundInUse = "i-love-gd-cologne.ogg"_spr; break;
