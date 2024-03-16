@@ -44,19 +44,20 @@ class $modify(editor,EditorPauseLayer) {
   bool init(LevelEditorLayer* po) {
     if (!EditorPauseLayer::init(po)) return false;
     #ifndef GEODE_IS_DESKTOP
-    auto menu = this->getChildByID("actions-menu");
+   	 auto menu = this->getChildByID("actions-menu");
+		menu->setLayout(ColumnLayout::create()
+      			->setGap(2.f)
+      			->setAxisAlignment(AxisAlignment::Center)
+      			->setAutoScale(false)
+      			->setCrossAxisOverflow(true)
+    		);
     #else
     auto menu = this->getChildByID("settings-menu");
     #endif
     auto winSize = CCDirector::sharedDirector()->getWinSize();
     auto spr = CCSprite::create("Button.png"_spr);
     spr->setScale(0.6f);
-    menu->setLayout(ColumnLayout::create()
-      ->setGap(2.f)
-      ->setAxisAlignment(AxisAlignment::Center)
-      ->setAutoScale(false)
-      ->setCrossAxisOverflow(true)
-    );
+  
     auto btn = CCMenuItemSpriteExtra::create(
         spr,
         this,
