@@ -47,7 +47,7 @@ class $modify(editor,EditorPauseLayer) {
     auto menu = this->getChildByID("actions-menu");
     #else
     auto menu = this->getChildByID("settings-menu");
-    #enddef
+    #endif
     auto winSize = CCDirector::sharedDirector()->getWinSize();
     auto spr = CCSprite::create("Button.png"_spr);
     spr->setScale(0.6f);
