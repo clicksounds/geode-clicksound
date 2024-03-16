@@ -9,7 +9,7 @@ using namespace geode::prelude;
 
 class PopupModSettings : public CCLayer {
 public:
-void ShowPopup(CCObject*) {
+    void ShowPopup(CCObject*) {
 		geode::openSettingsPopup(Mod::get());
 	}
 };
@@ -43,12 +43,16 @@ class $modify(editor,EditorPauseLayer) {
 
   bool init(LevelEditorLayer* po) {
     if (!EditorPauseLayer::init(po)) return false;
+    #ifndef GEODE_IS_DESKTOP
+    auto menu = this->getChildByID("actions-menu");
+    #else
     auto menu = this->getChildByID("settings-menu");
+    #enddef
     auto winSize = CCDirector::sharedDirector()->getWinSize();
     auto spr = CCSprite::create("Button.png"_spr);
     spr->setScale(0.6f);
-    menu->setLayout(RowLayout::create()
-      ->setGap(0.f)
+    menu->setLayout(ColumnLayout::create()
+      ->setGap(2.f)
       ->setAxisAlignment(AxisAlignment::Center)
       ->setAutoScale(false)
       ->setCrossAxisOverflow(true)
