@@ -1,6 +1,6 @@
 {
 	"geode": "2.0.0-beta.20",
-	"version": "v1.8.0",
+	"version": "v1.8.1",
 	"id": "beat.click-sound",
 	"name": "Click Sounds",
 	"developers": [
@@ -122,6 +122,12 @@
 			"description": "When enabled, a settings button appears in the pause menu.",
 			"type": "bool",
 			"default": true
+		},
+		"decrease-volume-on-spam-click": {
+			"name": "Decrease spam volume",
+			"description": "When enabled, If you click <500ms it decreases the volume",
+			"type": "bool",
+			"default": false
 		},
 		"use-sfx-volume": {
 			"name": "Use SFX Volume Slider (Windows ONLY)",

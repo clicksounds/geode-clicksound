@@ -1,10 +1,31 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/PlayerObject.hpp>
+#include <chrono>
 
 #include "../utils/ee.hpp"
 #include "../utils/Clicks.hpp"
 
 using namespace geode::prelude;
+
+auto oldTime = std::chrono::steady_clock::now();
+
+bool isLessThanOneSecond(auto time) {
+      oldTime = std::chrono::steady_clock::now(); // resets the time for ya know
+     if (Mod::get()->getSettingValue<bool>("decrease-volume-on-spam-click")) {
+        return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - time).count() < 500;
+     }
+     return false;
+}
+
+float calculateVolumeMultiplier() { // ARE YOU CLICKING????
+    if ( isLessThanOneSecond(oldTime) ) {
+        return 0.3f; // a number i picked
+    } else {
+        return 1.0f; 
+    };
+}
+
+
 
 class $modify(PlayerObject) {
 
@@ -46,14 +67,14 @@ public:
       if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {
         #if defined(GEODE_IS_WINDOWS)
           if (fae->m_sfxVolume != 0) system->playSound(sound, nullptr, false, &channel);
-          channel->setVolume(fae->m_sfxVolume*2.f);
+          channel->setVolume( (fae->m_sfxVolume*2.f ) * calculateVolumeMultiplier() );
         #else
           if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) system->playSound(sound, nullptr, false, &channel);
-          channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
+          channel->setVolume( (Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f )* calculateVolumeMultiplier() );
         #endif
       } else {
         if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) system->playSound(sound, nullptr, false, &channel);
-        channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
+        channel->setVolume( (Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f) * calculateVolumeMultiplier() );
       }
     }
 
@@ -69,14 +90,14 @@ public:
       if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {
         #if defined(GEODE_IS_WINDOWS)
           if (fae->m_sfxVolume != 0) system->playSound(sound, nullptr, false, &channel);
-          channel->setVolume(fae->m_sfxVolume*2.f);
+          channel->setVolume( (fae->m_sfxVolume*2.f) * calculateVolumeMultiplier() );
         #else
           if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) system->playSound(sound, nullptr, false, &channel);
-          channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
+          channel->setVolume( (Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f) * calculateVolumeMultiplier() );
         #endif
       } else {
         if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) system->playSound(sound, nullptr, false, &channel);
-        channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
+        channel->setVolume( (Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f) * calculateVolumeMultiplier() );
       }
     }
     if(!Mod::get()->getSettingValue<bool>("enable-clicksound") && !Mod::get()->getSettingValue<bool>("enable-releasesound")){}else{Carrot::carrot=true;}
@@ -120,14 +141,14 @@ public:
       if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {
         #if defined(GEODE_IS_WINDOWS)
           if (fae->m_sfxVolume != 0) system->playSound(sound, nullptr, false, &channel);
-          channel->setVolume(fae->m_sfxVolume*2.f);
+          channel->setVolume((fae->m_sfxVolume*2.f) * calculateVolumeMultiplier() );
         #else
           if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) system->playSound(sound, nullptr, false, &channel);
-          channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
+          channel->setVolume( (Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f) * calculateVolumeMultiplier() );
         #endif
       } else {
         if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) system->playSound(sound, nullptr, false, &channel);
-        channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
+        channel->setVolume( (Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f ) * calculateVolumeMultiplier() );
       }
     }
 
@@ -146,11 +167,11 @@ public:
           channel->setVolume(fae->m_sfxVolume*2.f);
         #else
           if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) system->playSound(sound, nullptr, false, &channel);
-          channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
+          channel->setVolume( (Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f)* calculateVolumeMultiplier() ) ;
         #endif
       } else {
         if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) system->playSound(sound, nullptr, false, &channel);
-        channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
+        channel->setVolume((Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f) * calculateVolumeMultiplier());
       }
     }
     if(!Mod::get()->getSettingValue<bool>("enable-clicksound") && !Mod::get()->getSettingValue<bool>("enable-releasesound")){}else{Carrot::carrot=true;}
