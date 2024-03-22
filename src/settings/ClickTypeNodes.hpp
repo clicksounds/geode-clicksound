@@ -61,7 +61,7 @@ protected:
         menu->setPosition(290, 23.f);
 
         // stole from geode code cause there's no docs on how CCScale9Sprite works
-        bgSelector = cocos2d::extension::CCScale9Sprite::create(
+        auto bgSelector = cocos2d::extension::CCScale9Sprite::create(
             "square02b_001.png", { 0.0f, 0.0f, 80.0f, 80.0f }
         );
         bgSelector->setScale(.5f);
