@@ -4,7 +4,7 @@
 #include "ClickTypes.hpp"
 using namespace geode::prelude;
 
-CCNode* createCheckboxButtonTexture(std::string text, int width, bool isSelect){
+CCNode* createCheckboxButtonTexture(std::string text, float width, bool isSelect){
     auto label = CCLabelBMFont::create(text.c_str(), "chatFont.fnt");
     if (isSelect){label->setString(fmt::format("{} + on", text).c_str());}
     label->setScale(.33F);
