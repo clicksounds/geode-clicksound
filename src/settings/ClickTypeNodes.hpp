@@ -60,7 +60,7 @@ protected:
         auto menu = CCMenu::create();
         //menu->setScale(1);
         menu->setContentSize({ width/2, 15.f} );
-        menu->setPosition(width/2, 18);
+        menu->setPosition((width/2)/2, 18);
         menu->setLayout(RowLayout::create()
       			->setGap(20.f)
       			->setAxisAlignment(AxisAlignment::Center)
@@ -75,7 +75,7 @@ protected:
         bgSelector->setColor({ 71, 39, 10 });
         bgSelector->setOpacity(255);
         bgSelector->setContentSize({ width/2, 32.f });
-        bgSelector->setPosition(width/2, 18);
+        bgSelector->setPosition((width/2)/2, 18);
 
 
         usefulBtn = CCMenuItemToggler::create(
