@@ -113,10 +113,13 @@ protected:
 
         auto label = CCLabelBMFont::create(fmt::format("{} Type",prefixText).c_str(), "bigFont.fnt");
         label->setScale(.6F);
-        switch (prefixText) {
-            case "Click": label->setPositionX(75);
-            case "Release": label->setPositionX(81); label->setScale(.525F);
-            default: label->setPositionX(94);
+        if (prefixText == "Click") {
+            setPositionX(75);
+        } else if (prefixText == "Release") {
+            label->setPositionX(81);
+            label->setScale(.525F);
+        } else {
+            label->setPositionX(94);
         }
         label->setPositionY(17.5f);
 
