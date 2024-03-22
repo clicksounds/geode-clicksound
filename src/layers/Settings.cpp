@@ -9,7 +9,9 @@ SettingNode* SectionSettingValue::createNode(float width) {
     return SectionSettingNode::create(this, width);
 }
 
-
+SettingNode* SettingPosValue::createNode(float width) {
+    return SettingPosNode::create(this, width);
+}
 
 SettingNode* SettingClickValue::createNode(float width) {
     return SettingClickNode::create(this, width);
