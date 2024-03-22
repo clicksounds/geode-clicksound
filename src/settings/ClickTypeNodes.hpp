@@ -45,7 +45,7 @@ protected:
         }
     }
     template <typename T>
-    bool init(T* value, float width, std::string prefixText = "Unknown [Mod Developer didn't put anything here]") {
+    bool init(T* value, float width, std::string prefixText) {
         if (!SettingNode::init(value))
             return false;
 
@@ -54,7 +54,7 @@ protected:
         this->setContentSize({ width, 35.f });
         auto layer = CCLayer::create();
         layer->setScale(1);
-        layer->setContentSize({ width/2, 33.f });
+        layer->setContentSize({ (width/2) - 7, 33.f });
         layer->setPosition(width/2, 0);
 
         auto menu = CCMenu::create();
@@ -112,10 +112,13 @@ protected:
         menu->addChild(customBtn);
 
         auto label = CCLabelBMFont::create(fmt::format("{} Type",prefixText).c_str(), "bigFont.fnt");
-        label->setScale(0.750);
-        label->setPositionX(94);
-        label->setPositionY(17.5f);
         label->setScale(.6F);
+        switch (prefixText) {
+            case "Click": label->setPositionX(75);
+            case "Release": label->setPositionX(81); label->setScale(.525F);
+            default: label->setPositionX(94);
+        }
+        label->setPositionY(17.5f);
 
         this->addChild(label);
         this->addChild(layer);
