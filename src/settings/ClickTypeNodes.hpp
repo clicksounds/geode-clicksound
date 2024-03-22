@@ -4,11 +4,21 @@
 #include "ClickTypes.hpp"
 using namespace geode::prelude;
 
-CCNode* createCheckboxButtonTexture(std::string text, bool isSelect){
+CCNode* createCheckboxButtonTexture(std::string text, int width, bool isSelect){
     auto label = CCLabelBMFont::create(text.c_str(), "chatFont.fnt");
     if (isSelect){label->setString(fmt::format("{} + on", text).c_str());}
     label->setScale(.33F);
-    return static_cast<CCNode*>(label);
+    auto bgSelector = cocos2d::extension::CCScale9Sprite::create(
+            "square02b_001.png", { 0.0f, 0.0f, 80.0f, 80.0f }
+        );
+    bgSelector->setColor({ 255, 255, 255 });
+    bgSelector->setOpacity(210);
+    bgSelector->setContentSize({ width/2, 32.f });
+    bgSelector->setPosition((width/2)/2, 18);
+    auto layer = CCLayer::create();
+    layer->addChild(label);
+    layer->addChild(bgSelector);
+    return static_cast<CCNode*>(layer);
 }
 
 
@@ -62,7 +72,7 @@ protected:
         menu->setContentSize({ width/2, 15.f} );
         menu->setPosition((width/2)/2, 18);
         menu->setLayout(RowLayout::create()
-      			->setGap(20.f)
+      			->setGap(24.f)
       			->setAxisAlignment(AxisAlignment::Center)
       			->setAutoScale(false)
       			->setCrossAxisOverflow(true)
@@ -79,24 +89,27 @@ protected:
 
 
         usefulBtn = CCMenuItemToggler::create(
-            createCheckboxButtonTexture("Useful", true),
-            createCheckboxButtonTexture("Useful", false),
+            createCheckboxButtonTexture("Useful", width, true),
+            createCheckboxButtonTexture("Useful", width, false),
             this,
             menu_selector(ClickTypeNode::onCornerClick)
         );
         memeBtn = CCMenuItemToggler::create(
-            createCheckboxButtonTexture("Meme", true),
-            createCheckboxButtonTexture("Meme", false),
+            createCheckboxButtonTexture("Meme", width, true),
+            createCheckboxButtonTexture("Meme", width, false),
             this,
             menu_selector(ClickTypeNode::onCornerClick)
         );
         customBtn = CCMenuItemToggler::create(
-            createCheckboxButtonTexture("Custom", true),
-            createCheckboxButtonTexture("Custom", false),
+            createCheckboxButtonTexture("Custom", width, true),
+            createCheckboxButtonTexture("Custom", width, false),
             this,
             menu_selector(ClickTypeNode::onCornerClick)
         );
 
+        usefulBtn->setTag(getActiveCornerTag(1));
+        memeBtn->setTag(getActiveCornerTag(2));
+        customBtn->setTag(getActiveCornerTag(3));
         usefulBtn->setTag(getActiveCornerTag(1));
         memeBtn->setTag(getActiveCornerTag(2));
         customBtn->setTag(getActiveCornerTag(3));
