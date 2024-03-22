@@ -8,8 +8,9 @@ CCNode* createCheckboxButtonTexture(std::string text, float width, bool isSelect
     auto label = CCLabelBMFont::create(text.c_str(), "chatFont.fnt");
     if (isSelect){label->setString(fmt::format("{} + on", text).c_str());}
     label->setScale(.33F);
+    label->setPosition((width/2)/2, 18);
     auto bgSelector = cocos2d::extension::CCScale9Sprite::create(
-            "square02b_001.png", { 0.0f, 0.0f, 80.0f, 80.0f }
+            "square02b_001.png", { 0.0f, 0.0f, 32.0f, 18.0f }
         );
     bgSelector->setColor({ 255, 255, 255 });
     bgSelector->setOpacity(210);
@@ -18,6 +19,8 @@ CCNode* createCheckboxButtonTexture(std::string text, float width, bool isSelect
     auto layer = CCLayer::create();
     layer->addChild(label);
     layer->addChild(bgSelector);
+    layer->setContentSize({ width/2, 32.f });
+    layer->setPosition((width/2)/2, 18);
     return static_cast<CCNode*>(layer);
 }
 
