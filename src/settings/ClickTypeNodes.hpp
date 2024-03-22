@@ -54,13 +54,13 @@ protected:
         this->setContentSize({ width, 35.f });
         auto layer = CCLayer::create();
         layer->setScale(1);
-        layer->setPosition((width/2) + 8, 17.5f);
         layer->setContentSize({ (width/2) - 10, 17.5f });
+        layer->setPosition((width/2) + 8, 17.5f);
 
         auto menu = CCMenu::create();
         //menu->setScale(1);
-        menu->setPosition(width/2, 17.5f);
         menu->setContentSize({ width/2, 17.5f} );
+        menu->setPosition(width/2, 17.5f);
         menu->setLayout(RowLayout::create()
       			->setGap(2.f)
       			->setAxisAlignment(AxisAlignment::Center)
@@ -73,8 +73,8 @@ protected:
             "square02b_001.png", { 0.0f, 0.0f, 80.0f, 80.0f }
         );
         bgSelector->setColor({ 126, 59, 7 });
-        bgSelector->setOpacity(75);
-        bgSelector->setContentSize({ 100, 15 });
+        bgSelector->setOpacity(255);
+        bgSelector->setContentSize({ width*2, 70 });
         bgSelector->setPosition(width/2, 17.5f);
 
 
