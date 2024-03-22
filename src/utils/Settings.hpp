@@ -13,7 +13,6 @@ CCNode* createCheckboxButtonTexture(std::string text, bool isSelect){
     return static_cast<CCNode*>(label);
 }
 
-
 // TYSM JOUCA AND FIREE
 
 // CLICK SOUNDS
@@ -245,7 +244,7 @@ public:
 
 
 
-// STOLE FROM VIPER'S BETTER MENU
+// STOLE FROM VIPER'S BETTER MENU BUT CUSTOMIZE BY COOPER 
 class ClickTypeNode : public SettingNode {
 protected:
     int m_currentPos;
@@ -292,20 +291,20 @@ protected:
         toggleOff->setScale(.7F);
         menu->setPosition(290, 23.f);
         usefulBtn = CCMenuItemToggler::create(
-            toggleOn,
-            toggleOff,
+            createCheckboxButtonTexture("Useful", true),
+            createCheckboxButtonTexture("Useful", false),
             this,
             menu_selector(ClickTypeNode::onCornerClick)
         );
         memeBtn = CCMenuItemToggler::create(
-            toggleOn,
-            toggleOff,
+            createCheckboxButtonTexture("Meme", true),
+            createCheckboxButtonTexture("Meme", false),
             this,
             menu_selector(ClickTypeNode::onCornerClick)
         );
         customBtn = CCMenuItemToggler::create(
-            toggleOn,
-            toggleOff,
+            createCheckboxButtonTexture("Custom", true),
+            createCheckboxButtonTexture("Custom", false),
             this,
             menu_selector(ClickTypeNode::onCornerClick)
         );
