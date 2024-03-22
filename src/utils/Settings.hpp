@@ -228,3 +228,190 @@ public:
         return nullptr;
     }
 };
+
+
+
+
+// STOLE FROM VIPER'S BETTER MENU
+const int DEFAULT_POS = 1;
+
+// thx gdutils Yippeeeeeeee
+
+struct SettingPosStruct {
+    int m_pos;
+};
+
+class SettingPosValue;
+
+class SettingPosValue : public SettingValue {
+protected:
+    int m_pos;
+public:
+    SettingPosValue(std::string const& key, std::string const& modID, int const& position)
+      : SettingValue(key, modID), m_pos(position) {}
+
+    bool load(matjson::Value const& json) override {
+        try {
+            m_pos = static_cast<int>(json.as<int>());
+            return true;
+        } catch(...) {
+            return false;
+        }
+    }
+    bool save(matjson::Value& json) const override {
+        json = static_cast<int>(m_pos);
+        return true;
+    }
+    SettingNode* createNode(float width) override;
+    void setPos(int pos) {
+        m_pos = pos;
+    }
+    int getPos() const {
+        return m_pos;
+    }
+};
+
+template<>
+struct SettingValueSetter<SettingPosStruct> {
+    static SettingPosStruct get(SettingValue* setting) {
+        auto posSetting = static_cast<SettingPosValue*>(setting);
+        struct SettingPosStruct defaultStruct = { posSetting->getPos() };
+        return defaultStruct;
+    };
+    static void set(SettingPosValue* setting, SettingPosStruct const& value) {
+        setting->setPos(value.m_pos);
+    };
+};
+
+class SettingPosNode : public SettingNode {
+protected:
+    int m_currentPos;
+    CCMenuItemToggler* usefulBtn;
+    CCMenuItemToggler* memeBtn;
+    CCMenuItemToggler* customBtn;
+    CCMenuItemToggler* brBtn;
+
+    int getActiveCornerTag(int corner) {
+        switch (corner) {
+            case 1: // actual
+                return 2004;
+            case 2: // meme
+                return 2005;
+            case 3: // Bottom Left
+                return 2006;
+            default:
+                return 2007;
+        }
+    }
+    int tagToCorner(int tag) {
+        switch (tag) {
+            case 2004: // Top Left
+                return 1;
+            case 2005: // Top Right
+                return 2;
+            case 2006: // Bottom Left
+                return 3;
+            default:
+                return 4;
+        }
+    }
+
+    bool init(SettingPosValue* value, float width) {
+        if (!SettingNode::init(value))
+            return false;
+
+       
+        m_currentPos = value->getPos();
+        this->setContentSize({ width, 70.f });
+        auto menu = CCMenu::create();
+        CCSprite* toggleOn = CCSprite::createWithSpriteFrameName("GJ_checkOn_001.png");
+        CCSprite* toggleOff = CCSprite::createWithSpriteFrameName("GJ_checkOff_001.png");
+        toggleOn->setScale(.7F);
+        toggleOff->setScale(.7F);
+        menu->setPosition(290, 23.f);
+        usefulBtn = CCMenuItemToggler::create(
+            toggleOn,
+            toggleOff,
+            this,
+            menu_selector(SettingPosNode::onCornerClick)
+        );
+        memeBtn = CCMenuItemToggler::create(
+            toggleOn,
+            toggleOff,
+            this,
+            menu_selector(SettingPosNode::onCornerClick)
+        );
+        customBtn = CCMenuItemToggler::create(
+            toggleOn,
+            toggleOff,
+            this,
+            menu_selector(SettingPosNode::onCornerClick)
+        );
+        usefulBtn->setPosition({ -32, 15 });
+        memeBtn->setPosition({ 32, 15 });
+        customBtn->setPosition({ 0, 35 });
+        brBtn->setPosition({ 0, -10 });
+
+        usefulBtn->setTag(getActiveCornerTag(1+));
+        memeBtn->setTag(getActiveCornerTag(2));
+        customBtn->setTag(getActiveCornerTag(3));
+        int currentCorner = m_currentPos;
+        usefulBtn->toggle(!(usefulBtn->getTag() == getActiveCornerTag(currentCorner)));
+        memeBtn->toggle(!(memeBtn->getTag() == getActiveCornerTag(currentCorner)));
+        customBtn->toggle(!(customBtn->getTag() == getActiveCornerTag(currentCorner)));
+        
+        menu->addChild(usefulBtn);
+        menu->addChild(memeBtn);
+        menu->addChild(customBtn);
+        menu->setPositionX(293);
+        this->addChild(menu);
+        auto label = CCLabelBMFont::create("Click Type", "bigFont.fnt");
+        label->setScale(0.750);
+        label->setPositionX(94);
+        label->setPositionY(36);
+        this->addChild(label);
+        //auto infoBtn
+        
+        
+        label->setScale(.6F);
+        this->addChild(label);
+        this->addChild(menu);
+        return true;
+    }
+    void onCornerClick(CCObject* sender) {
+        usefulBtn->toggle(true);
+        memeBtn->toggle(true);
+        customBtn->toggle(true);
+        m_currentPos = tagToCorner(sender->getTag());
+        this->dispatchChanged();
+    };
+
+public:
+    void commit() override {
+        static_cast<SettingPosValue*>(m_value)->setPos(m_currentPos);
+        this->dispatchCommitted();
+    }
+    bool hasUncommittedChanges() override {
+        return m_currentPos != static_cast<SettingPosValue*>(m_value)->getPos();
+    }
+    bool hasNonDefaultValue() override {
+        return m_currentPos != DEFAULT_POS;
+    }
+
+    // Geode calls this to reset the setting's value back to default
+    void resetToDefault() override {
+        usefulBtn->toggle(true);
+        memeBtn->toggle(true);
+        customBtn->toggle(true);
+        m_currentPos = DEFAULT_POS;
+    }
+    static SettingPosNode* create(SettingPosValue* value, float width) {
+        auto ret = new SettingPosNode;
+        if (ret && ret->init(value, width)) {
+            ret->autorelease();
+            return ret;
+        }
+        CC_SAFE_DELETE(ret);
+        return nullptr;
+    }
+};
