@@ -337,22 +337,22 @@ protected:
 
 public:
     void commit() override {
-        m_value->setType(m_currentPos);
+        static_cast<ClickTypeValue*>(m_value)->setType(m_currentPos);
         this->dispatchCommitted();
     }
     bool hasUncommittedChanges() override {
-        return m_currentPos != m_value->getType();
+        return m_currentPos != static_cast<ClickTypeValue*>(m_value)->getType();
     }
     bool hasNonDefaultValue() override {
-        return m_currentPos != DEFAULT_POS;
+        return m_currentPos != 1;
     }
 
     // Geode calls this to reset the setting's value back to default
     void resetToDefault() override {
-        usefulBtn->toggle(true);
+        usefulBtn->toggle(false);
         memeBtn->toggle(true);
         customBtn->toggle(true);
-        m_currentPos = DEFAULT_POS;
+        m_currentPos = 1;
     }
     template <typename T>
     static ClickTypeNode* create(T* value, float width) {
