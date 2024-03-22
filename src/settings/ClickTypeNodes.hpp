@@ -56,12 +56,12 @@ protected:
         auto layer = CCLayer::create();
         layer->setScale(1);
         layer->setPosition((width/2) + 8, 17.5f);
-        layer->setContentSize((width/2) - 10,17.5f);
+        layer->setContentSize({ (width/2) - 10,17.5f });
 
         auto menu = CCMenu::create();
         //menu->setScale(1);
         menu->setPosition((width/2) + 3, 17.5f);
-        menu->setContentSize((width/2) - 10,17.5f);
+        menu->setContentSize({ (width/2) - 10,17.5f} );
         menu->setLayout(RowLayout::create()
       			->setGap(2.f)
       			->setAxisAlignment(AxisAlignment::Center)
