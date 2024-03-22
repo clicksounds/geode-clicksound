@@ -54,8 +54,8 @@ protected:
         this->setContentSize({ width, 35.f });
         auto layer = CCLayer::create();
         layer->setScale(1);
-        layer->setContentSize({ (width/2) - 7, 33.f });
-        layer->setPosition(width/2, 0);
+        layer->setContentSize({ width/2, 33.f });
+        layer->setPosition((width/2) - 7, 0);
 
         auto menu = CCMenu::create();
         //menu->setScale(1);
@@ -114,7 +114,7 @@ protected:
         auto label = CCLabelBMFont::create(fmt::format("{} Type",prefixText).c_str(), "bigFont.fnt");
         label->setScale(.6F);
         if (prefixText == "Click") {
-            setPositionX(75);
+            label->setPositionX(75);
         } else if (prefixText == "Release") {
             label->setPositionX(81);
             label->setScale(.525F);
