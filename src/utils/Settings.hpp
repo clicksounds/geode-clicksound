@@ -1,5 +1,6 @@
 #pragma once
 #include <Geode/loader/SettingNode.hpp>
+#include "../utils/AnotherSettings.hpp"
 using namespace geode::prelude;
 // TYSM JOUCA AND FIREE
 
@@ -233,57 +234,7 @@ public:
 
 
 // STOLE FROM VIPER'S BETTER MENU
-const int DEFAULT_POS = 1;
-
-// thx gdutils Yippeeeeeeee
-
-struct SettingPosStruct {
-    int m_pos;
-};
-
-class SettingPosValue;
-
-class SettingPosValue : public SettingValue {
-protected:
-    int m_pos;
-public:
-    SettingPosValue(std::string const& key, std::string const& modID, int const& position)
-      : SettingValue(key, modID), m_pos(position) {}
-
-    bool load(matjson::Value const& json) override {
-        try {
-            m_pos = static_cast<int>(json.as<int>());
-            return true;
-        } catch(...) {
-            return false;
-        }
-    }
-    bool save(matjson::Value& json) const override {
-        json = static_cast<int>(m_pos);
-        return true;
-    }
-    SettingNode* createNode(float width) override;
-    void setPos(int pos) {
-        m_pos = pos;
-    }
-    int getPos() const {
-        return m_pos;
-    }
-};
-
-template<>
-struct SettingValueSetter<SettingPosStruct> {
-    static SettingPosStruct get(SettingValue* setting) {
-        auto posSetting = static_cast<SettingPosValue*>(setting);
-        struct SettingPosStruct defaultStruct = { posSetting->getPos() };
-        return defaultStruct;
-    };
-    static void set(SettingPosValue* setting, SettingPosStruct const& value) {
-        setting->setPos(value.m_pos);
-    };
-};
-
-class SettingPosNode : public SettingNode {
+class ClickTypeNode : public SettingNode {
 protected:
     int m_currentPos;
     CCMenuItemToggler* usefulBtn;
@@ -314,8 +265,8 @@ protected:
                 return 4;
         }
     }
-
-    bool init(SettingPosValue* value, float width) {
+    template <typename T>
+    bool init(T* value, float width) {
         if (!SettingNode::init(value))
             return false;
 
@@ -332,19 +283,19 @@ protected:
             toggleOn,
             toggleOff,
             this,
-            menu_selector(SettingPosNode::onCornerClick)
+            menu_selector(ClickTypeNode::onCornerClick)
         );
         memeBtn = CCMenuItemToggler::create(
             toggleOn,
             toggleOff,
             this,
-            menu_selector(SettingPosNode::onCornerClick)
+            menu_selector(ClickTypeNode::onCornerClick)
         );
         customBtn = CCMenuItemToggler::create(
             toggleOn,
             toggleOff,
             this,
-            menu_selector(SettingPosNode::onCornerClick)
+            menu_selector(ClickTypeNode::onCornerClick)
         );
         usefulBtn->setPosition({ -32, 15 });
         memeBtn->setPosition({ 32, 15 });
@@ -386,11 +337,11 @@ protected:
 
 public:
     void commit() override {
-        static_cast<SettingPosValue*>(m_value)->setPos(m_currentPos);
+        m_value->setType(m_currentPos);
         this->dispatchCommitted();
     }
     bool hasUncommittedChanges() override {
-        return m_currentPos != static_cast<SettingPosValue*>(m_value)->getPos();
+        return m_currentPos != m_value->geType();
     }
     bool hasNonDefaultValue() override {
         return m_currentPos != DEFAULT_POS;
@@ -403,8 +354,8 @@ public:
         customBtn->toggle(true);
         m_currentPos = DEFAULT_POS;
     }
-    static SettingPosNode* create(SettingPosValue* value, float width) {
-        auto ret = new SettingPosNode;
+    static ClickTypeNode* create(ClickTypeValue* value, float width) {
+        auto ret = new ClickTypeNode;
         if (ret && ret->init(value, width)) {
             ret->autorelease();
             return ret;

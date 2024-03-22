@@ -1,4 +1,5 @@
 #include <Geode/Geode.hpp>
+#include "../utils/AnotherSettings.hpp"
 #include "../utils/Settings.hpp"
 #include "../utils/Clicks.hpp"
 
@@ -9,8 +10,12 @@ SettingNode* SectionSettingValue::createNode(float width) {
     return SectionSettingNode::create(this, width);
 }
 
-SettingNode* SettingPosValue::createNode(float width) {
-    return SettingPosNode::create(this, width);
+SettingNode* ClickTypeValue::createNode(float width) {
+    return ClickTypeNode::create(this, width);
+}
+
+SettingNode* ReleaseTypeValue::createNode(float width) {
+    return ClickTypeNode::create(this, width);
 }
 
 SettingNode* SettingClickValue::createNode(float width) {
