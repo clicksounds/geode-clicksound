@@ -354,7 +354,8 @@ public:
         customBtn->toggle(true);
         m_currentPos = DEFAULT_POS;
     }
-    static ClickTypeNode* create(ClickTypeValue* value, float width) {
+    template <typename T>
+    static ClickTypeNode* create(T* value, float width) {
         auto ret = new ClickTypeNode;
         if (ret && ret->init(value, width)) {
             ret->autorelease();
