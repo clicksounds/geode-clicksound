@@ -56,12 +56,12 @@ protected:
         auto layer = CCLayer::create();
         layer->setScale(1);
         layer->setPosition((width/2) + 8, 17.5f);
-        layer->setContentSize({ (width/2) - 10,17.5f });
+        layer->setContentSize({ (width/2) - 10, 17.5f });
 
         auto menu = CCMenu::create();
         //menu->setScale(1);
-        menu->setPosition((width/2) + 3, 17.5f);
-        menu->setContentSize({ (width/2) - 10,17.5f} );
+        menu->setPosition(width/2, 17.5f);
+        menu->setContentSize({ width/2, 17.5f} );
         menu->setLayout(RowLayout::create()
       			->setGap(2.f)
       			->setAxisAlignment(AxisAlignment::Center)
@@ -76,7 +76,7 @@ protected:
         bgSelector->setColor({ 126, 59, 7 });
         bgSelector->setOpacity(75);
         bgSelector->setContentSize({ 100, 15 });
-        bgSelector->setPosition(width/2 + 3, 17.5f);
+        bgSelector->setPosition(width/2, 17.5f);
 
 
         usefulBtn = CCMenuItemToggler::create(
@@ -115,7 +115,7 @@ protected:
         auto label = CCLabelBMFont::create(fmt::format("{} Type",prefixText).c_str(), "bigFont.fnt");
         label->setScale(0.750);
         label->setPositionX(94);
-        label->setPositionY(36);
+        label->setPositionY(17.5f);
         label->setScale(.6F);
 
         this->addChild(label);
