@@ -8,7 +8,6 @@ CCNode* createCheckboxButtonTexture(std::string text, bool isSelect){
     auto label = CCLabelBMFont::create(text.c_str(), "chatFont.fnt");
     if (isSelect){label->setString(fmt::format("{} + on", text).c_str());}
     label->setScale(.33F);
-    label->setPositionX(0);
     return static_cast<CCNode*>(label);
 }
 
