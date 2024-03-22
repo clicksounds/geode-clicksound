@@ -54,7 +54,7 @@ protected:
         m_currentPos = value->getType();
         this->setContentSize({ width, 30.f });
         auto menu = CCMenu::create();
-        menu->setScale(.5f)
+        menu->setScale(.5f);
         menu->setPosition(290, 23.f);
 
         // stole from geode code cause there's no docs on how CCScale9Sprite works
