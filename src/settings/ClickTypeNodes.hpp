@@ -55,11 +55,11 @@ protected:
         auto layer = CCLayer::create();
         layer->setScale(1);
         layer->setContentSize({ (width/2), 35.f });
-        layer->setPosition((width/2) + 8, 17.5f);
+        layer->setPosition(width/2, 0);
 
         auto menu = CCMenu::create();
         //menu->setScale(1);
-        menu->setContentSize({ width, 35.f} );
+        menu->setContentSize({ width, 15.f} );
         menu->setPosition(width/2, 17.5f);
         menu->setLayout(RowLayout::create()
       			->setGap(20.f)
@@ -72,9 +72,9 @@ protected:
         auto bgSelector = cocos2d::extension::CCScale9Sprite::create(
             "square02b_001.png", { 0.0f, 0.0f, 80.0f, 80.0f }
         );
-        bgSelector->setColor({ 126, 59, 7 });
+        bgSelector->setColor({ 71, 39, 10 });
         bgSelector->setOpacity(255);
-        bgSelector->setContentSize({ width, 35.f });
+        bgSelector->setContentSize({ width, 15.f });
         bgSelector->setPosition(width/2, 17.5f);
 
 
