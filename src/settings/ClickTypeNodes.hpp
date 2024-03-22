@@ -59,6 +59,18 @@ protected:
         toggleOn->setScale(.7F);
         toggleOff->setScale(.7F);
         menu->setPosition(290, 23.f);
+
+        // stole from geode code cause there's no docs on how CCScale9Sprite works
+        bgSelector = cocos2d::extension::CCScale9Sprite::create(
+            "square02b_001.png", { 0.0f, 0.0f, 80.0f, 80.0f }
+        );
+        bgSelector->setScale(.5f);
+        bgSelector->setColor({ 0, 0, 0 });
+        bgSelector->setOpacity(75);
+        bgSelector->setContentSize({ 100, 15 });
+        bgSelector->setPosition(0, 15);
+
+
         usefulBtn = CCMenuItemToggler::create(
             createCheckboxButtonTexture("Useful", true),
             createCheckboxButtonTexture("Useful", false),
@@ -92,6 +104,7 @@ protected:
         menu->addChild(usefulBtn);
         menu->addChild(memeBtn);
         menu->addChild(customBtn);
+        menu->addChild(bgSelector);
         menu->setPositionX(293);
         this->addChild(menu);
         auto label = CCLabelBMFont::create(fmt::format("{} Type",prefixText).c_str(), "bigFont.fnt");

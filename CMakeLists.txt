@@ -9,15 +9,6 @@ set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 project(click-sound VERSION 1.0.0)
 
 # Add Everything under src dir
-#
-# file(GLOB SOURCES
-#	src/layers/*.cpp
-#    src/settings/*.cpp
-#    src/main.cpp
-#    src/ClickList.cpp
-#    src/ReleaseList.cpp
-#)
-# This is better as it pulls in folders rather then have to put the folder in
 file(GLOB_RECURSE SOURCES src/*.cpp)
 
 # Set up the mod binary
