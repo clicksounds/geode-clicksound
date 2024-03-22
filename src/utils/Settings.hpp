@@ -4,11 +4,12 @@
 using namespace geode::prelude;
 
 
-function createCheckboxButtonTexture(std::string text, bool isSelect){
+CCNode* createCheckboxButtonTexture(std::string text, bool isSelect){
     auto label = CCLabelBMFont::create(text, "chatFont.fnt");
     if (isSelect){label->setString(fmt::format("{} + on", text));}
     label->setScale(.33F);
     label->setPositionX(0);
+    return static_cast<CCNode*>(label);
 }
 
 
