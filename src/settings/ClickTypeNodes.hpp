@@ -52,10 +52,10 @@ protected:
 
        
         m_currentPos = value->getType();
-        this->setContentSize({ width, 30.f });
-        auto menu = CCMenu::create();
+        this->setContentSize({ width, 35.f });
+        auto menu = CCLayer::create();
         menu->setScale(.5f);
-        menu->setPosition(290, 23.f);
+        menu->setPosition((width/2) + 3, 17.5f);
 
         // stole from geode code cause there's no docs on how CCScale9Sprite works
         auto bgSelector = cocos2d::extension::CCScale9Sprite::create(
