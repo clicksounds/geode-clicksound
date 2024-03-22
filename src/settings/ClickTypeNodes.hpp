@@ -54,12 +54,12 @@ protected:
         this->setContentSize({ width, 35.f });
         auto layer = CCLayer::create();
         layer->setScale(1);
-        layer->setContentSize({ (width/2), 33.f });
+        layer->setContentSize({ width/2, 33.f });
         layer->setPosition(width/2, 0);
 
         auto menu = CCMenu::create();
         //menu->setScale(1);
-        menu->setContentSize({ width, 15.f} );
+        menu->setContentSize({ width/2, 15.f} );
         menu->setPosition(width/2, 18);
         menu->setLayout(RowLayout::create()
       			->setGap(20.f)
@@ -74,7 +74,7 @@ protected:
         );
         bgSelector->setColor({ 71, 39, 10 });
         bgSelector->setOpacity(255);
-        bgSelector->setContentSize({ width, 32.f });
+        bgSelector->setContentSize({ width/2, 32.f });
         bgSelector->setPosition(width/2, 18);
 
 
