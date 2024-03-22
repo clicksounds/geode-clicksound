@@ -1,4 +1,5 @@
 #pragma once
+#include <Geode/Geode.hpp>
 #include <Geode/loader/SettingNode.hpp>
 #include "../utils/AnotherSettings.hpp"
 using namespace geode::prelude;
