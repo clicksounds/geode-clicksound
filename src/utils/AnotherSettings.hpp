@@ -29,7 +29,7 @@ public:
     int getType() const {
         return m_type;
     }
-}
+};
 
 class ReleaseTypeValue : public SettingValue {
 protected:
@@ -58,4 +58,4 @@ public:
     int getType() const {
         return m_type;
     }
-}
+};

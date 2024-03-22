@@ -271,7 +271,7 @@ protected:
             return false;
 
        
-        m_currentPos = value->getPos();
+        m_currentPos = value->getType();
         this->setContentSize({ width, 70.f });
         auto menu = CCMenu::create();
         CCSprite* toggleOn = CCSprite::createWithSpriteFrameName("GJ_checkOn_001.png");
@@ -341,7 +341,7 @@ public:
         this->dispatchCommitted();
     }
     bool hasUncommittedChanges() override {
-        return m_currentPos != m_value->geType();
+        return m_currentPos != m_value->getType();
     }
     bool hasNonDefaultValue() override {
         return m_currentPos != DEFAULT_POS;
