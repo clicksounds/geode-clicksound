@@ -1,6 +1,8 @@
 #include <Geode/Geode.hpp>
-#include "../utils/AnotherSettings.hpp"
-#include "../utils/Settings.hpp"
+#include "ClickTypes.hpp"
+#include "ClickTypeNodes.hpp"
+#include "Sections.hpp"
+#include "SoundTest.hpp"
 #include "../utils/Clicks.hpp"
 
 using namespace geode::prelude;
