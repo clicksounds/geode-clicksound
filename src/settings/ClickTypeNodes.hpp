@@ -55,10 +55,13 @@ protected:
         this->setContentSize({ width, 35.f });
         auto layer = CCLayer::create();
         layer->setScale(1);
-        layer->setPosition((width/2) + 3, 17.5f);
+        layer->setPosition((width/2) + 8, 17.5f);
+        layer->setContentSize((width/2) - 10,17.5f);
+
         auto menu = CCMenu::create();
-        menu->setScale(1);
+        //menu->setScale(1);
         menu->setPosition((width/2) + 3, 17.5f);
+        menu->setContentSize((width/2) - 10,17.5f);
         menu->setLayout(RowLayout::create()
       			->setGap(2.f)
       			->setAxisAlignment(AxisAlignment::Center)
@@ -70,7 +73,6 @@ protected:
         auto bgSelector = cocos2d::extension::CCScale9Sprite::create(
             "square02b_001.png", { 0.0f, 0.0f, 80.0f, 80.0f }
         );
-        bgSelector->setScale(1);
         bgSelector->setColor({ 126, 59, 7 });
         bgSelector->setOpacity(75);
         bgSelector->setContentSize({ 100, 15 });
@@ -95,9 +97,6 @@ protected:
             this,
             menu_selector(ClickTypeNode::onCornerClick)
         );
-        usefulBtn->setPosition({ -32, 15 });
-        memeBtn->setPosition({ 32, 15 });
-        customBtn->setPosition({ 0, 35 });
 
         usefulBtn->setTag(getActiveCornerTag(1));
         memeBtn->setTag(getActiveCornerTag(2));
