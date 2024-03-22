@@ -52,12 +52,9 @@ protected:
 
        
         m_currentPos = value->getType();
-        this->setContentSize({ width, 70.f });
+        this->setContentSize({ width, 30.f });
         auto menu = CCMenu::create();
-        CCSprite* toggleOn = CCSprite::createWithSpriteFrameName("GJ_checkOn_001.png");
-        CCSprite* toggleOff = CCSprite::createWithSpriteFrameName("GJ_checkOff_001.png");
-        toggleOn->setScale(.7F);
-        toggleOff->setScale(.7F);
+        menu->setScale(.5f)
         menu->setPosition(290, 23.f);
 
         // stole from geode code cause there's no docs on how CCScale9Sprite works
@@ -65,7 +62,7 @@ protected:
             "square02b_001.png", { 0.0f, 0.0f, 80.0f, 80.0f }
         );
         bgSelector->setScale(.5f);
-        bgSelector->setColor({ 0, 0, 0 });
+        bgSelector->setColor({ 126, 59, 7 });
         bgSelector->setOpacity(75);
         bgSelector->setContentSize({ 100, 15 });
         bgSelector->setPosition(0, 15);
