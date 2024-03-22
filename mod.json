@@ -1,6 +1,6 @@
 {
-	"geode": "2.0.0-beta.21",
-	"version": "v2.0.0",
+	"geode": "2.0.0-beta.22",
+	"version": "v2.0.0-alpha.1",
 	"id": "beat.click-sound",
 	"name": "Click Sounds",
 	"developers": [
@@ -41,9 +41,6 @@
 			"name": "Click Sounds",
 			"type": "custom"
 		},
-		"clicksound-type": {
-			"type": "custom"
-		},
 		"enable-clicksound": {
 			"name": "Enable click sounds",
 			"description": "Enable or disable click sounds without restarting the game!",
@@ -54,6 +51,9 @@
 			"type": "custom",
 			"description": "This only works if you opened settings from the main menu."
 	 	},
+		"clicksound-type": {
+			"type": "custom"
+		},
 		"clicksound-currentsound": {
 			"name": "Current click sound",
 			"description": "Change the click sound. Negative numbers for meme sounds, 0 for custom sounds, and positive numbers for useful sounds. Check mod description for a sound list.",
@@ -82,9 +82,6 @@
 			"name": "Release Sounds",
 			"type": "custom"
 		},
-		"releasesound-type": {
-			"type": "custom"
-		},
 		"enable-releasesound": {
 			"name": "Enable release sounds",
 			"description": "Enable or disable release sounds.",
@@ -95,6 +92,9 @@
 			"type": "custom",
 			"description": "This only works if you opened settings from the main menu."
 	 	},
+		"releasesound-type": {
+			"type": "custom"
+		},
 		"releasesound-currentsound": {
 			"name": "Current release sound",
 			"description": "Change the click sound. Negative numbers for meme sounds, 0 for custom sounds, and positive numbers for useful sounds. Check mod description for a sound list.",
@@ -152,7 +152,7 @@
 	"dependencies": [
         {
             "id": "geode.node-ids",
-            "version": ">=v1.7.1",
+            "version": ">=v1.8.1",
             "importance": "suggested"
         }
     ],

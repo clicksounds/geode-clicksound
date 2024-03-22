@@ -3,7 +3,7 @@
 Plays a click sound whenever you press a jump button, or (optionally) a release sound whenever you release a jump button.
 If you want a new built-in click sound or feature to be added, join the [discord server](https://discord.gg/RwbRP8ADdc). <3
 
-### Uses Geode v2.0.0-beta.20 and Node-IDs v1.6.1
+### Uses Geode v2.0.0-beta.22 and Node-IDs v1.8.1
 Open the mod settings to change the click sound. Set the click sound to '0' to use a custom click sound.
 ## Click sounds:
 ### Useful click sounds (positive number):

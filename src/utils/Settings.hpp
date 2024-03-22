@@ -2,6 +2,16 @@
 #include <Geode/loader/SettingNode.hpp>
 #include "../utils/AnotherSettings.hpp"
 using namespace geode::prelude;
+
+
+function createCheckboxButtonTexture(std::string text, bool isSelect){
+    auto label = CCLabelBMFont::create(text, "chatFont.fnt");
+    if (isSelect){label->setString(fmt::format("{} + on", text));}
+    label->setScale(.33F);
+    label->setPositionX(0);
+}
+
+
 // TYSM JOUCA AND FIREE
 
 // CLICK SOUNDS
@@ -243,11 +253,11 @@ protected:
 
     int getActiveCornerTag(int corner) {
         switch (corner) {
-            case 1: // actual
+            case 1: // useful
                 return 2004;
             case 2: // meme
                 return 2005;
-            case 3: // Bottom Left
+            case 3: // custom
                 return 2006;
             default:
                 return 2007;
@@ -255,18 +265,18 @@ protected:
     }
     int tagToCorner(int tag) {
         switch (tag) {
-            case 2004: // Top Left
+            case 2004: // useful
                 return 1;
-            case 2005: // Top Right
+            case 2005: // meme
                 return 2;
-            case 2006: // Bottom Left
+            case 2006: // custom
                 return 3;
             default:
                 return 4;
         }
     }
     template <typename T>
-    bool init(T* value, float width) {
+    bool init(T* value, float width, std::string prefixText = "Unknown [Mod Developer didn't put anything here]") {
         if (!SettingNode::init(value))
             return false;
 
@@ -314,7 +324,7 @@ protected:
         menu->addChild(customBtn);
         menu->setPositionX(293);
         this->addChild(menu);
-        auto label = CCLabelBMFont::create("Click Type", "bigFont.fnt");
+        auto label = CCLabelBMFont::create(fmt::format("{} Type",prefixText), "bigFont.fnt");
         label->setScale(0.750);
         label->setPositionX(94);
         label->setPositionY(36);
@@ -355,9 +365,9 @@ public:
         m_currentPos = 1;
     }
     template <typename T>
-    static ClickTypeNode* create(T* value, float width) {
+    static ClickTypeNode* create(T* value, float width, std::string prefixText = "?") {
         auto ret = new ClickTypeNode;
-        if (ret && ret->init(value, width)) {
+        if (ret && ret->init(value, width, prefixText)) {
             ret->autorelease();
             return ret;
         }

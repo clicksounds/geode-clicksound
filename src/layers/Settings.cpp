@@ -11,11 +11,11 @@ SettingNode* SectionSettingValue::createNode(float width) {
 }
 
 SettingNode* ClickTypeValue::createNode(float width) {
-    return ClickTypeNode::create(this, width);
+    return ClickTypeNode::create(this, width, "Click");
 }
 
 SettingNode* ReleaseTypeValue::createNode(float width) {
-    return ClickTypeNode::create(this, width);
+    return ClickTypeNode::create(this, width, "Release");
 }
 
 SettingNode* SettingClickValue::createNode(float width) {
