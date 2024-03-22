@@ -54,15 +54,15 @@ protected:
         this->setContentSize({ width, 35.f });
         auto layer = CCLayer::create();
         layer->setScale(1);
-        layer->setContentSize({ (width/2) - 10, 17.5f });
+        layer->setContentSize({ (width/2), 35.f });
         layer->setPosition((width/2) + 8, 17.5f);
 
         auto menu = CCMenu::create();
         //menu->setScale(1);
-        menu->setContentSize({ width/2, 17.5f} );
+        menu->setContentSize({ width, 35.f} );
         menu->setPosition(width/2, 17.5f);
         menu->setLayout(RowLayout::create()
-      			->setGap(2.f)
+      			->setGap(20.f)
       			->setAxisAlignment(AxisAlignment::Center)
       			->setAutoScale(false)
       			->setCrossAxisOverflow(true)
@@ -74,7 +74,7 @@ protected:
         );
         bgSelector->setColor({ 126, 59, 7 });
         bgSelector->setOpacity(255);
-        bgSelector->setContentSize({ width*2, 70 });
+        bgSelector->setContentSize({ width, 35.f });
         bgSelector->setPosition(width/2, 17.5f);
 
 
