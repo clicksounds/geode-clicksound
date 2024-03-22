@@ -326,7 +326,7 @@ protected:
         menu->addChild(customBtn);
         menu->setPositionX(293);
         this->addChild(menu);
-        auto label = CCLabelBMFont::create(fmt::format("{} Type",prefixText), "bigFont.fnt");
+        auto label = CCLabelBMFont::create(fmt::format("{} Type",prefixText).c_str(), "bigFont.fnt");
         label->setScale(0.750);
         label->setPositionX(94);
         label->setPositionY(36);
