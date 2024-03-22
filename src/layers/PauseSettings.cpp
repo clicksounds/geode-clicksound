@@ -44,7 +44,7 @@ class $modify(editor,EditorPauseLayer) {
   bool init(LevelEditorLayer* po) {
     if (!EditorPauseLayer::init(po)) return false;
     #ifndef GEODE_IS_DESKTOP
-   	 auto menu = this->getChildByID("actions-menu");
+   	auto menu = this->getChildByID("actions-menu");
 		menu->setLayout(ColumnLayout::create()
       			->setGap(2.f)
       			->setAxisAlignment(AxisAlignment::Center)

@@ -53,19 +53,28 @@ protected:
        
         m_currentPos = value->getType();
         this->setContentSize({ width, 35.f });
-        auto menu = CCLayer::create();
-        menu->setScale(.5f);
+        auto layer = CCLayer::create();
+        layer->setScale(1);
+        layer->setPosition((width/2) + 3, 17.5f);
+        auto menu = CCMenu::create();
+        menu->setScale(1);
         menu->setPosition((width/2) + 3, 17.5f);
+        menu->setLayout(RowLayout::create()
+      			->setGap(2.f)
+      			->setAxisAlignment(AxisAlignment::Center)
+      			->setAutoScale(false)
+      			->setCrossAxisOverflow(true)
+    	);
 
         // stole from geode code cause there's no docs on how CCScale9Sprite works
         auto bgSelector = cocos2d::extension::CCScale9Sprite::create(
             "square02b_001.png", { 0.0f, 0.0f, 80.0f, 80.0f }
         );
-        bgSelector->setScale(.5f);
+        bgSelector->setScale(1);
         bgSelector->setColor({ 126, 59, 7 });
         bgSelector->setOpacity(75);
         bgSelector->setContentSize({ 100, 15 });
-        bgSelector->setPosition(0, 15);
+        bgSelector->setPosition(width/2 + 3, 17.5f);
 
 
         usefulBtn = CCMenuItemToggler::create(
@@ -98,23 +107,21 @@ protected:
         memeBtn->toggle(!(memeBtn->getTag() == getActiveCornerTag(currentCorner)));
         customBtn->toggle(!(customBtn->getTag() == getActiveCornerTag(currentCorner)));
         
+        layer->addChild(bgSelector);
+        layer->addChild(menu);
         menu->addChild(usefulBtn);
         menu->addChild(memeBtn);
         menu->addChild(customBtn);
-        menu->addChild(bgSelector);
-        menu->setPositionX(293);
-        this->addChild(menu);
+
         auto label = CCLabelBMFont::create(fmt::format("{} Type",prefixText).c_str(), "bigFont.fnt");
         label->setScale(0.750);
         label->setPositionX(94);
         label->setPositionY(36);
-        this->addChild(label);
-        //auto infoBtn
-        
-        
         label->setScale(.6F);
+
         this->addChild(label);
-        this->addChild(menu);
+        this->addChild(layer);
+        menu->updateLayout();
         return true;
     }
     void onCornerClick(CCObject* sender) {
