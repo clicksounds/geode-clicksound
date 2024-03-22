@@ -289,7 +289,6 @@ protected:
     CCMenuItemToggler* usefulBtn;
     CCMenuItemToggler* memeBtn;
     CCMenuItemToggler* customBtn;
-    CCMenuItemToggler* brBtn;
 
     int getActiveCornerTag(int corner) {
         switch (corner) {
@@ -350,9 +349,8 @@ protected:
         usefulBtn->setPosition({ -32, 15 });
         memeBtn->setPosition({ 32, 15 });
         customBtn->setPosition({ 0, 35 });
-        brBtn->setPosition({ 0, -10 });
 
-        usefulBtn->setTag(getActiveCornerTag(1+));
+        usefulBtn->setTag(getActiveCornerTag(1));
         memeBtn->setTag(getActiveCornerTag(2));
         customBtn->setTag(getActiveCornerTag(3));
         int currentCorner = m_currentPos;
