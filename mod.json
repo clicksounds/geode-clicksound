@@ -82,6 +82,9 @@
 			"name": "Release Sounds",
 			"type": "custom"
 		},
+		"releasesound-type": {
+			"type": "custom"
+		},
 		"enable-releasesound": {
 			"name": "Enable release sounds",
 			"description": "Enable or disable release sounds.",

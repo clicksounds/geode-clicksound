@@ -150,7 +150,8 @@ $on_mod(Loaded) {
     Mod::get()->addCustomSetting<SettingClickValue>("test-click-btn", "none");
     Mod::get()->addCustomSetting<SettingReleaseValue>("test-release-btn", "none");
     Mod::get()->addCustomSetting<SectionSettingValue>("clicksound-section", "none");
-    Mod::get()->addCustomSetting<SettingPosValue>("clicksound-type", 1);
+    Mod::get()->addCustomSetting<ClickTypeValue>("clicksound-type", 1);
+    Mod::get()->addCustomSetting<ReleaseTypeValue>("releasesound-type", 1);
     Mod::get()->addCustomSetting<SectionSettingValue>("releasesound-section", "none");
     Mod::get()->addCustomSetting<SectionSettingValue>("misc-section", "none");
 }
