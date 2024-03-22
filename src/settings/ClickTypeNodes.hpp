@@ -10,7 +10,7 @@ CCNode* createCheckboxButtonTexture(std::string text, float width, bool isSelect
     label->setScale(.33F);
     label->setPosition((width/2)/2, 18);
     auto bgSelector = cocos2d::extension::CCScale9Sprite::create(
-            "square02b_001.png", { 0.0f, 0.0f, 32.0f, 18.0f }
+            "square02b_001.png", { 0.0f, 0.0f, 40.0f, 40.0f }
         );
     bgSelector->setColor({ 255, 255, 255 });
     bgSelector->setOpacity(210);
