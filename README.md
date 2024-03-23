@@ -42,6 +42,7 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 32 - Up arrow 4 Clicks/Release (randomized)
 - 33 - Mouse Click 6
 - 34 - Pacity's Clicks
+- 35 - Mouse Click 7
 ### Meme click sounds (negative number):
 - 1 - FIRE IN THE HOLE!
 - 2 - I loooove GD Cologne
@@ -91,6 +92,7 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 16 - Up arrow 4 Clicks/Release (randomized)
 - 17 - Mouse Click 6
 - 18 - Pacity's Clicks
+- 19 - Mouse Click 7
 ### Meme release sounds (negative number):
 - 1 - TikTok
 
