@@ -26,9 +26,9 @@ def rename_files(folder_path2, prefix, ffmpeg_path):
             directory_name = os.path.basename(root)
             ee = root.split("/")[1]
             if directory_name is clicksOrRelease:
-                new_filename = f"{prefix}-{clicksOrRelease}-{i}{file_extension}"
+                new_filename = f"{ee}-{clicksOrRelease}-{i}{file_extension}"
             else:
-                new_filename = f"{prefix}-{clicksOrRelease}-{i}-{directory_name}{file_extension}"
+                new_filename = f"{e}-{clicksOrRelease}-{i}-{directory_name}{file_extension}"
             # Sanitize the new file name
             new_filename = sanitize_filename(new_filename)
             os.rename(os.path.join(root, file), os.path.join(root, new_filename))
