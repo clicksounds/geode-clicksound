@@ -21,7 +21,7 @@ def rename_files(folder_path2, prefix, ffmpeg_path):
             filename, file_extension = os.path.splitext(file)
             # Get the directory name for the file
             directory_name = os.path.basename(root)
-            ee = root.split("\\")[1]
+            ee = root.split("/")[1]
             print(directory_name)
             new_filename = f"{ee}-{directory_name}-{i}{file_extension}"
             print(new_filename)
