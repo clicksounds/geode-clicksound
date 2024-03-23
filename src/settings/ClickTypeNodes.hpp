@@ -13,7 +13,7 @@ CCNode* createCheckboxButtonTexture(std::string text, float width, bool isSelect
         );
     bgSelector->setColor({ 255, 255, 255 });
     if (isSelect) {bgSelector->setOpacity(190);} else {bgSelector->setOpacity(0);}
-    bgSelector->setContentSize({ 57.667f, 32.f });
+    bgSelector->setContentSize({ 52.667f, 27.f });
     bgSelector->setPosition(28.833f, 16);
     auto layer = CCLayer::create();
     layer->ignoreAnchorPointForPosition(false);
