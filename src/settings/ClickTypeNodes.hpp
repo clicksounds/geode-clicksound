@@ -18,7 +18,7 @@ CCNode* createCheckboxButtonTexture(std::string text, float width, bool isSelect
     auto layer = CCLayer::create();
     layer->addChild(label);
     layer->addChild(bgSelector);
-    layer->setContentSize({ ((width/2)/2)/3, 32.f });
+    layer->setContentSize({ (width/2)/3, 32.f });
     //layer->setPosition((width/2)/2, 18);
     return static_cast<CCNode*>(layer);
 }
