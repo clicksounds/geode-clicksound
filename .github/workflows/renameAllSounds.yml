@@ -29,7 +29,7 @@ jobs:
             path: .github/FileNamer/Output
         - name: Copy Output to the Original Folder
           if: inputs.push
-          run: python ./.github/CopySoundsForRename.py
+          run: python ./.github/CopySoundsForRenamePT2.py
         - name: Update Repository
           if: inputs.push
           run: |
