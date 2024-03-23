@@ -7,14 +7,14 @@ using namespace geode::prelude;
 CCNode* createCheckboxButtonTexture(std::string text, float width, bool isSelect){
     auto label = CCLabelBMFont::create(text.c_str(), "chatFont.fnt");
     label->setScale(.33F);
-    label->setPosition(((width/2)/2)/3, 18);
+    label->setPosition((width/2)/3, 18);
     auto bgSelector = cocos2d::extension::CCScale9Sprite::create(
             "square02b_small.png", { 0.0f, 0.0f, 40.0f, 40.0f }
         );
     bgSelector->setColor({ 255, 255, 255 });
     if (isSelect) {bgSelector->setOpacity(210);} else {bgSelector->setOpacity(0);}
     bgSelector->setContentSize({ ((width/2)/2)/3, 32.f });
-    bgSelector->setPosition(((width/2)/2)/3, 0);
+    bgSelector->setPosition((width/2)/3, 0);
     auto layer = CCLayer::create();
     layer->addChild(label);
     layer->addChild(bgSelector);
