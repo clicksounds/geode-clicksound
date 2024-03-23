@@ -2,8 +2,8 @@
 #include <matjson.hpp>
 class Clicks {
 protected:
-    matjson::Value* m_ClickList;
-    matjson::Value* m_ReleaseList;
+    static matjson::Value* m_ClickList;
+    static matjson::Value* m_ReleaseList;
 public:
     static const char* getClickSprite(int);
     static const char* getReleaseSprite(int);
