@@ -1,10 +1,9 @@
 {
     "example": {
         "name": "urmum",
-        "file": "path/to/file.ogg",
-        "prefix": "either prefix or file (prefix is required when doing random. Example: Viper_Spacebar",
+        "file": "file name here",
+        "prefix": "either use prefix or file (prefix is required when doing random. Example: Viper_Spacebar",
         "random": true
-
     },
     "useful": [],
     "meme": []

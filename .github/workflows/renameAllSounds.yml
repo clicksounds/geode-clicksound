@@ -1,0 +1,26 @@
+name: Rename All Sounds
+
+on:
+    workflow_dispatch:
+
+jobs:
+    rename:
+      name: Rename Click Sounds
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v4
+        - name: Run Sounds Copier
+          run: python ./.github/CopySoundsForRename.py
+        - name: Run File Namer
+          run: python ./.github/FileNamer/main.py
+    package:
+      name: Package builds
+      runs-on: ubuntu-latest
+      needs: ['rename']
+
+      steps:
+        - uses: actions/upload-artifact@v3
+          with:
+            name: Build Output
+            path: .github/FileNamer/Output

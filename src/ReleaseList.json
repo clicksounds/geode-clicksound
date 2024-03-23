@@ -1,8 +1,9 @@
 {
     "example": {
         "name": "urmum",
-        "file": "__RANDOM__ or <filepath>",
-        "random": ["path/to/folder","path/to/folder/soft"]
+        "file": "file name here",
+        "prefix": "either use prefix or file (prefix is required when doing random. Example: Viper_Spacebar",
+        "random": true
     },
     "useful": [],
     "meme": []
