@@ -20,7 +20,10 @@ def rename_files(folder_path2, prefix, ffmpeg_path):
         for i, file in enumerate(files, start=1):
             filename, file_extension = os.path.splitext(file)
             # Get the directory name for the file
-            print(root)
+            name = root.split("/")[1]
+            if name == filename.split("-")[0]:
+                print("not doing " + filename)
+                return;
             clicksOrRelease = root.split("/")[2]
             clicksOrRelease2 = root.split("/")[2]
             if clicksOrRelease2 == "Releases":
