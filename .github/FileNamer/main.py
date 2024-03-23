@@ -23,20 +23,20 @@ def rename_files(folder_path2, prefix, ffmpeg_path):
             name = root.split("/")[1]
             if name == filename.split("-")[0]:
                 print("not doing " + filename)
-                return;
-            clicksOrRelease = root.split("/")[2]
-            clicksOrRelease2 = root.split("/")[2]
-            if clicksOrRelease2 == "Releases":
-                clicksOrRelease2 = "Release"
-            directory_name = os.path.basename(root)
-            ee = root.split("/")[1]
-            if directory_name == clicksOrRelease:
-                new_filename = f"{ee}-{clicksOrRelease2}-{i}{file_extension}"
             else:
-                new_filename = f"{ee}-{clicksOrRelease2}-{i}-{directory_name}{file_extension}"
-            # Sanitize the new file name
-            new_filename = sanitize_filename(new_filename)
-            os.rename(os.path.join(root, file), os.path.join(root, new_filename))
+                clicksOrRelease = root.split("/")[2]
+                clicksOrRelease2 = root.split("/")[2]
+                if clicksOrRelease2 == "Releases":
+                    clicksOrRelease2 = "Release"
+                directory_name = os.path.basename(root)
+                ee = root.split("/")[1]
+                if directory_name == clicksOrRelease:
+                    new_filename = f"{ee}-{clicksOrRelease2}-{i}{file_extension}"
+                else:
+                    new_filename = f"{ee}-{clicksOrRelease2}-{i}-{directory_name}{file_extension}"
+                # Sanitize the new file name
+                new_filename = sanitize_filename(new_filename)
+                os.rename(os.path.join(root, file), os.path.join(root, new_filename))
 
 if __name__ == "__main__":
     update_folder = find_update_folder()
