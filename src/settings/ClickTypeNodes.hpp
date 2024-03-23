@@ -75,37 +75,37 @@ protected:
         menu->setContentSize({ width/2, 16.f} );
         menu->setPosition((width/2)/2, 18);
         menu->setLayout(RowLayout::create()
-      			->setGap(0.f)
+      			->setGap(4.f)
       			->setAxisAlignment(AxisAlignment::Center)
       			->setAutoScale(false)
       			->setCrossAxisOverflow(true)
     	);
 
         // stole from geode code cause there's no docs on how CCScale9Sprite works
-        auto bgSelector = cocos2d::extension::CCScale9Sprite::create(
-            "square02b_001.png", { 0.0f, 0.0f, 80.0f, 80.0f }
-        );
-        bgSelector->setColor({ 71, 39, 10 });
-        bgSelector->setOpacity(255);
-        bgSelector->setContentSize({ width/2, 32.f });
-        bgSelector->setPosition((width/2)/2, 18);
+        // auto bgSelector = cocos2d::extension::CCScale9Sprite::create(
+        //     "square02b_001.png", { 0.0f, 0.0f, 80.0f, 80.0f }
+        // );
+        // bgSelector->setColor({ 71, 39, 10 });
+        // bgSelector->setOpacity(255);
+        // bgSelector->setContentSize({ width/2, 32.f });
+        // bgSelector->setPosition((width/2)/2, 18);
 
 
         usefulBtn = CCMenuItemToggler::create(
-            createCheckboxButtonTexture("Useful", width, true),
-            createCheckboxButtonTexture("Useful", width, false),
+            ButtonSprite::create("Useful", 40.f, true, "bigFont.fnt", "GJ_button_01.png", 25.f, 0.5f),
+            ButtonSprite::create("Useful", 40.f, true, "bigFont.fnt", "GJ_button_04.png", 25.f, 0.5f),
             this,
             menu_selector(ClickTypeNode::onCornerClick)
         );
         memeBtn = CCMenuItemToggler::create(
-            createCheckboxButtonTexture("Meme", width, true),
-            createCheckboxButtonTexture("Meme", width, false),
+            ButtonSprite::create("Meme", 40.f, true, "bigFont.fnt", "GJ_button_01.png", 25.f, 0.5f),
+            ButtonSprite::create("Meme", 40.f, true, "bigFont.fnt", "GJ_button_04.png", 25.f, 0.5f),
             this,
             menu_selector(ClickTypeNode::onCornerClick)
         );
         customBtn = CCMenuItemToggler::create(
-            createCheckboxButtonTexture("Custom", width, true),
-            createCheckboxButtonTexture("Custom", width, false),
+            ButtonSprite::create("Custom", 40.f, true, "bigFont.fnt", "GJ_button_01.png", 25.f, 0.5f),
+            ButtonSprite::create("Custom", 40.f, true, "bigFont.fnt", "GJ_button_04.png", 25.f, 0.5f),
             this,
             menu_selector(ClickTypeNode::onCornerClick)
         );
@@ -121,30 +121,23 @@ protected:
         memeBtn->toggle(!(memeBtn->getTag() == getActiveCornerTag(currentCorner)));
         customBtn->toggle(!(customBtn->getTag() == getActiveCornerTag(currentCorner)));
         
-        layer->addChild(bgSelector);
+        // layer->addChild(bgSelector);
         layer->addChild(menu);
         menu->addChild(usefulBtn);
         menu->addChild(memeBtn);
         menu->addChild(customBtn);
 
         auto label = CCLabelBMFont::create(fmt::format("{} Type",prefixText).c_str(), "bigFont.fnt");
-        label->setScale(.6F);
-        if (prefixText == "Click") {
-            label->setPositionX(75);
-        } else if (prefixText == "Release") {
-            label->setPositionX(81);
-            label->setScale(.525F);
-        } else {
-            label->setPositionX(94);
-        }
-        label->setPositionY(17.5f);
+        label->setScale(.5F);
+        label->setAnchorPoint({ 0.f, 0.5f });
+        label->setPosition(20.f, 18.f);
 
         this->addChild(label);
         this->addChild(layer);
         menu->updateLayout();
         return true;
     }
-    void onCornerClick(CCObject* sender) {
+    void    onCornerClick(CCObject* sender) {
         usefulBtn->toggle(true);
         memeBtn->toggle(true);
         customBtn->toggle(true);
