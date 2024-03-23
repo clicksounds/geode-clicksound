@@ -4,31 +4,13 @@
 #include "ClickTypes.hpp"
 using namespace geode::prelude;
 
-CCNode* createCheckboxButtonTexture(std::string text, float width, bool isSelect){
-    auto label = CCLabelBMFont::create(text.c_str(), "chatFont.fnt");
-    label->setScale(.33F);
-    label->setPosition(28.833f, 16);
-    auto bgSelector = cocos2d::extension::CCScale9Sprite::create(
-            "square02b_small.png", { 0.0f, 0.0f, 40.0f, 40.0f }
-        );
-    bgSelector->setColor({ 255, 255, 255 });
-    if (isSelect) {bgSelector->setOpacity(190);} else {bgSelector->setOpacity(0);}
-    bgSelector->setContentSize({ 52.667f, 27.f });
-    bgSelector->setPosition(28.833f, 16);
-    auto layer = CCLayer::create();
-    layer->ignoreAnchorPointForPosition(false);
-    layer->addChild(label);
-    layer->addChild(bgSelector);
-    layer->setContentSize({ 57.667f, 32.f });
-    layer->setPositionY(0);
-    return static_cast<CCNode*>(layer);
-}
-
 
 // STOLE FROM VIPER'S BETTER MENU BUT CUSTOMIZED BY COOPER 
 class ClickTypeNode : public SettingNode {
 protected:
     int m_currentPos;
+    int m_currentClick;
+    std::string m_currentCustomClick;
     CCMenuItemToggler* usefulBtn;
     CCMenuItemToggler* memeBtn;
     CCMenuItemToggler* customBtn;
@@ -64,11 +46,11 @@ protected:
 
        
         m_currentPos = value->getType();
-        this->setContentSize({ width, 80.f });
+        this->setContentSize({ width, 70.f });
 
         auto menu = CCMenu::create();
         menu->setContentSize({ width/2, 20.f} );
-        menu->setPosition(width*3/4 - 7.f, 60.f);
+        menu->setPosition(width*3/4 - 7.f, 50.f);
         menu->setLayout(RowLayout::create()
       			->setGap(4.f)
       			->setAxisAlignment(AxisAlignment::Center)
@@ -114,7 +96,7 @@ protected:
         auto label = CCLabelBMFont::create(fmt::format("{} Type",prefixText).c_str(), "bigFont.fnt");
         label->setScale(.5F);
         label->setAnchorPoint({ 0.f, 0.5f });
-        label->setPosition(20.f, 60.f);
+        label->setPosition(20.f, 50.f);
 
         this->addChild(label);
         menu->updateLayout();
@@ -131,9 +113,9 @@ protected:
         anotherLabel->setPosition(20.f, 20.f);
         this->addChild(anotherLabel);
 
-        auto inputNode1 = InputNode::create(103.f, "...", "chatFont.fnt");
-        inputNode1->setScale(0.65f);    
-        inputNode1->setPosition(-51.5f, 0);
+        auto inputNode1 = InputNode::create(200.f, "...", "chatFont.fnt");
+        inputNode1->setScale(0.65f);
+        inputNode1->setPosition(-75.f, 0);
         inputNode1->setString("...");
         inputNode1->getInput()->setAllowedChars("");
         menu1->addChild(inputNode1);
@@ -141,14 +123,13 @@ protected:
         auto arrowRight = CCSprite::createWithSpriteFrameName("navArrowBtn_001.png");
         arrowRight->setScale(0.3f);
         auto buttonRight = CCMenuItemSpriteExtra::create(arrowRight, this, menu_selector(ClickTypeNode::onNext));
-        buttonRight->setPosition(-10.f, 0);
         menu1->addChild(buttonRight);
 
         auto arrowLeft = CCSprite::createWithSpriteFrameName("navArrowBtn_001.png");
         arrowLeft->setScale(0.3f);
         arrowLeft->setFlipX(true);
         auto buttonLeft = CCMenuItemSpriteExtra::create(arrowLeft, this, menu_selector(ClickTypeNode::onPrev));
-        buttonLeft->setPosition(-93.f, 0);
+        buttonLeft->setPosition(-150.f, 0);
         menu1->addChild(buttonLeft);
 
         auto menu2 = CCMenu::create();
@@ -157,9 +138,9 @@ protected:
         menu2->setTag(5002);
         this->addChild(menu2);
 
-        auto inputNode2 = InputNode::create(143.f, "...", "chatFont.fnt");
+        auto inputNode2 = InputNode::create(200.f, "...", "chatFont.fnt");
         inputNode2->setScale(0.65f);
-        inputNode2->setPosition(-61.5f, 0);
+        inputNode2->setPosition(-80.f, 0);
         inputNode2->setString("...");
         inputNode2->getInput()->setAllowedChars("");
         menu2->addChild(inputNode2);

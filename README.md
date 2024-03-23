@@ -30,7 +30,7 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 20 - Viper Spacebar Click/Release (randomized)
 - 21 - Click/Release 5 (randomized)
 - 22 - Zoink Click/Release
-- 23 - Screen Tap 1
+- 23 - Screen Tap 1 
 - 24 - Plate
 - 25 - Neiro Click/Release
 - 26 - Doggie
