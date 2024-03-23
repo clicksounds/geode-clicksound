@@ -1,5 +1,4 @@
 import os
-from pydub import AudioSegment
 import traceback
 import shutil
 
@@ -29,30 +28,6 @@ def rename_files(folder_path2, prefix, ffmpeg_path):
             # Sanitize the new file name
             new_filename = sanitize_filename(new_filename)
             os.rename(os.path.join(root, file), os.path.join(root, new_filename))
-            # Convert the renamed file to ogg
-            convert_to_ogg(os.path.join(root, new_filename), ffmpeg_path)
-
-def convert_to_ogg(input_file, ffmpeg_path):
-    try:
-        input_file_extension = os.path.splitext(input_file)[1]
-        if input_file_extension.lower() == ".ogg":
-            print(f"Skipping conversion for {input_file}. Already in OGG format.")
-            return input_file
-        
-        output_file = os.path.splitext(input_file)[0] + ".ogg"
-        
-        print(f"Converting {input_file} to OGG format...")
-        
-        # Convert audio to OGG format using pydub with specified FFmpeg path
-        audio = AudioSegment.from_file(input_file, format=input_file_extension[1:], ffmpeg=ffmpeg_path)
-        audio.export(output_file, format="ogg", codec="libvorbis")
-        
-        print(f"Successfully converted {input_file} to {output_file}")
-        
-        return output_file
-    except Exception as e:
-        print(f"Error converting {input_file} to OGG format: {e}")
-        traceback.print_exc()
 
 if __name__ == "__main__":
     update_folder = find_update_folder()
