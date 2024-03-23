@@ -27,7 +27,7 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 17 - Cursed Click
 - 18 - Spacebar Click/Release
 - 19 - Click 3
-- 20 - Viper Spacebar Click/Release (randomized)
+- 20 - Viper's Spacebar Click/Release (randomized)
 - 21 - Click/Release 5 (randomized)
 - 22 - Zoink Click/Release
 - 23 - Screen Tap 1 
@@ -37,7 +37,7 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 27 - Trusta
 - 28 - Gazonk
 - 29 - Sayo Device (randomized)
-- 30 - Viper's Clicks/Release (randomized)
+- 30 - Viper Mouse Clicks/Release (randomized)
 - 31 - Logitech G502 Clicks/Release (randomized)
 - 32 - Up arrow 4 Clicks/Release (randomized)
 ### Meme click sounds (negative number):
@@ -84,7 +84,7 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 11 - Zoink Click/Release
 - 12 - Neiro Click/Release
 - 13 - Sayo Device (randomized)
-- 14 - Viper's Clicks/Release (randomized)
+- 14 - Viper Mouse Clicks/Release (randomized)
 - 15 - Logitech G502 Clicks/Release
 - 16 - Up arrow 4 Clicks/Release (randomized)
 ### Meme release sounds (negative number):
@@ -94,9 +94,9 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 Thank you so much to all of the people listed below for doing whatever they did to help create the mod!
 - [Beat](https://github.com/BeatACVR) - This is me! I made the mod.
 - [Viper](https://github.com/MuhXd) - Developer, helped me with android support :3
-- [Coop](https://github.com/coopeeo) - Developer, helped make coding the mod more efficient ^w^
+- [Cooper](https://github.com/coopeeo) - Developer, helped make coding the mod more efficient ^w^
 - [Firee](https://github.com/FireMario211) - Added mac support, thank you so much!
-- [Weebify](https://github.com/Weebifying) - Developer :3
+- [Weebify](https://github.com/Weebifying) - Developer, helped with settings UI in v2.0.0 :3
 - [Uproxide](https://github.com/uproxide) - Developer, helped with the developer badge system! OwO
 - [Jouca](https://github.com/Jouca) - Helped with the preview button
 - Rue - Made the icon of Click Sounds (v1.6.0) >w<
