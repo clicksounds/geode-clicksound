@@ -72,7 +72,7 @@ protected:
 
         auto menu = CCMenu::create();
         //menu->setScale(1);
-        menu->setContentSize({ width/2, 15.f} );
+        menu->setContentSize({ width/2, 16.f} );
         menu->setPosition((width/2)/2, 18);
         menu->setLayout(RowLayout::create()
       			->setGap(0.f)
