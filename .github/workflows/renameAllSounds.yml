@@ -17,5 +17,5 @@ jobs:
         - name: Upload sounds as an artifact
           uses: actions/upload-artifact@v3
           with:
-            name: Build Output
+            name: MultipleClick
             path: .github/FileNamer/Output
