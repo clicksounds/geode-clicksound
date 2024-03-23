@@ -64,16 +64,11 @@ protected:
 
        
         m_currentPos = value->getType();
-        this->setContentSize({ width, 35.f });
-        auto layer = CCLayer::create();
-        layer->setScale(1);
-        layer->setContentSize({ width/2, 33.f });
-        layer->setPosition((width/2) - 7, 0);
+        this->setContentSize({ width, 80.f });
 
         auto menu = CCMenu::create();
-        //menu->setScale(1);
-        menu->setContentSize({ width/2, 16.f} );
-        menu->setPosition((width/2)/2, 18);
+        menu->setContentSize({ width/2, 20.f} );
+        menu->setPosition(width*3/4 - 7.f, 60.f);
         menu->setLayout(RowLayout::create()
       			->setGap(4.f)
       			->setAxisAlignment(AxisAlignment::Center)
@@ -81,31 +76,21 @@ protected:
       			->setCrossAxisOverflow(true)
     	);
 
-        // stole from geode code cause there's no docs on how CCScale9Sprite works
-        // auto bgSelector = cocos2d::extension::CCScale9Sprite::create(
-        //     "square02b_001.png", { 0.0f, 0.0f, 80.0f, 80.0f }
-        // );
-        // bgSelector->setColor({ 71, 39, 10 });
-        // bgSelector->setOpacity(255);
-        // bgSelector->setContentSize({ width/2, 32.f });
-        // bgSelector->setPosition((width/2)/2, 18);
-
-
         usefulBtn = CCMenuItemToggler::create(
-            ButtonSprite::create("Useful", 40.f, true, "bigFont.fnt", "GJ_button_01.png", 25.f, 0.5f),
-            ButtonSprite::create("Useful", 40.f, true, "bigFont.fnt", "GJ_button_04.png", 25.f, 0.5f),
+            ButtonSprite::create("Useful", 40.f, true, "bigFont.fnt", "GJ_button_01.png", 20.f, 0.5f),
+            ButtonSprite::create("Useful", 40.f, true, "bigFont.fnt", "GJ_button_04.png", 20.f, 0.5f),
             this,
             menu_selector(ClickTypeNode::onCornerClick)
         );
         memeBtn = CCMenuItemToggler::create(
-            ButtonSprite::create("Meme", 40.f, true, "bigFont.fnt", "GJ_button_01.png", 25.f, 0.5f),
-            ButtonSprite::create("Meme", 40.f, true, "bigFont.fnt", "GJ_button_04.png", 25.f, 0.5f),
+            ButtonSprite::create("Meme", 40.f, true, "bigFont.fnt", "GJ_button_01.png", 20.f, 0.5f),
+            ButtonSprite::create("Meme", 40.f, true, "bigFont.fnt", "GJ_button_04.png", 20.f, 0.5f),
             this,
             menu_selector(ClickTypeNode::onCornerClick)
         );
         customBtn = CCMenuItemToggler::create(
-            ButtonSprite::create("Custom", 40.f, true, "bigFont.fnt", "GJ_button_01.png", 25.f, 0.5f),
-            ButtonSprite::create("Custom", 40.f, true, "bigFont.fnt", "GJ_button_04.png", 25.f, 0.5f),
+            ButtonSprite::create("Custom", 40.f, true, "bigFont.fnt", "GJ_button_01.png", 20.f, 0.5f),
+            ButtonSprite::create("Custom", 40.f, true, "bigFont.fnt", "GJ_button_04.png", 20.f, 0.5f),
             this,
             menu_selector(ClickTypeNode::onCornerClick)
         );
@@ -121,8 +106,7 @@ protected:
         memeBtn->toggle(!(memeBtn->getTag() == getActiveCornerTag(currentCorner)));
         customBtn->toggle(!(customBtn->getTag() == getActiveCornerTag(currentCorner)));
         
-        // layer->addChild(bgSelector);
-        layer->addChild(menu);
+        this->addChild(menu);
         menu->addChild(usefulBtn);
         menu->addChild(memeBtn);
         menu->addChild(customBtn);
@@ -130,20 +114,113 @@ protected:
         auto label = CCLabelBMFont::create(fmt::format("{} Type",prefixText).c_str(), "bigFont.fnt");
         label->setScale(.5F);
         label->setAnchorPoint({ 0.f, 0.5f });
-        label->setPosition(20.f, 18.f);
+        label->setPosition(20.f, 60.f);
 
         this->addChild(label);
-        this->addChild(layer);
         menu->updateLayout();
+
+        auto menu1 = CCMenu::create();
+        menu1->setPosition({ width - 20.f, 20.f });
+        menu1->setVisible(false);
+        menu1->setTag(5001);
+        this->addChild(menu1);
+
+        auto anotherLabel = CCLabelBMFont::create(fmt::format("{} Sound",prefixText).c_str(), "bigFont.fnt");
+        anotherLabel->setScale(.5F);
+        anotherLabel->setAnchorPoint({ 0.f, 0.5f });
+        anotherLabel->setPosition(20.f, 20.f);
+        this->addChild(anotherLabel);
+
+        auto inputNode1 = InputNode::create(103.f, "...", "chatFont.fnt");
+        inputNode1->setScale(0.65f);    
+        inputNode1->setPosition(-51.5f, 0);
+        inputNode1->setString("...");
+        inputNode1->getInput()->setAllowedChars("");
+        menu1->addChild(inputNode1);
+
+        auto arrowRight = CCSprite::createWithSpriteFrameName("navArrowBtn_001.png");
+        arrowRight->setScale(0.3f);
+        auto buttonRight = CCMenuItemSpriteExtra::create(arrowRight, this, menu_selector(ClickTypeNode::onNext));
+        buttonRight->setPosition(-10.f, 0);
+        menu1->addChild(buttonRight);
+
+        auto arrowLeft = CCSprite::createWithSpriteFrameName("navArrowBtn_001.png");
+        arrowLeft->setScale(0.3f);
+        arrowLeft->setFlipX(true);
+        auto buttonLeft = CCMenuItemSpriteExtra::create(arrowLeft, this, menu_selector(ClickTypeNode::onPrev));
+        buttonLeft->setPosition(-93.f, 0);
+        menu1->addChild(buttonLeft);
+
+        auto menu2 = CCMenu::create();
+        menu2->setPosition({ width - 20.f, 20.f });
+        menu2->setVisible(false);
+        menu2->setTag(5002);
+        this->addChild(menu2);
+
+        auto inputNode2 = InputNode::create(143.f, "...", "chatFont.fnt");
+        inputNode2->setScale(0.65f);
+        inputNode2->setPosition(-61.5f, 0);
+        inputNode2->setString("...");
+        inputNode2->getInput()->setAllowedChars("");
+        menu2->addChild(inputNode2);
+
+        auto folderSpr = CCSprite::createWithSpriteFrameName("gj_folderBtn_001.png");
+        folderSpr->setScale(0.5f);
+        auto folderBtn = CCMenuItemSpriteExtra::create(
+            folderSpr,
+            this,
+            menu_selector(ClickTypeNode::onFolder)
+        );
+        menu2->addChild(folderBtn);
+
+
+        if (currentCorner == 1 || currentCorner == 2) {
+            menu1->setVisible(true);
+        } else if (currentCorner == 3) {
+            menu2->setVisible(true);
+        }
         return true;
     }
-    void    onCornerClick(CCObject* sender) {
+    
+    void onCornerClick(CCObject* sender) {
         usefulBtn->toggle(true);
         memeBtn->toggle(true);
         customBtn->toggle(true);
         m_currentPos = tagToCorner(sender->getTag());
+
+        if (m_currentPos == 1 || m_currentPos == 2) {
+            this->getChildByTag(5001)->setVisible(true);
+            this->getChildByTag(5002)->setVisible(false);
+        } else if (m_currentPos == 3) {
+            this->getChildByTag(5001)->setVisible(false);
+            this->getChildByTag(5002)->setVisible(true);
+        }
+
         this->dispatchChanged();
     };
+
+    void onNext(CCObject* sender) {
+        log::debug("next");
+        this->dispatchChanged();
+    }
+
+    void onPrev(CCObject* sender) {
+        log::debug("prev");
+        this->dispatchChanged();
+    }
+
+    void onFolder(CCObject* sender) {
+        file::pickFile(
+            file::PickMode::OpenFile,
+            {
+                dirs::getGameDir()
+            },
+            [&](auto path) {
+                log::error("{}", path.string());
+            }
+        );
+        this->dispatchChanged();
+    }
 
 public:
     void commit() override {
