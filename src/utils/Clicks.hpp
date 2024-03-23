@@ -7,6 +7,6 @@ protected:
 public:
     static const char* getClickSprite(int);
     static const char* getReleaseSprite(int);
-    static const matjson::Value* getClickList() {return m_ClickList};
-    static const matjson::Value* getReleaseList() {return m_ReleaseList};
+    static const matjson::Value* getClickList() {return m_ClickList;}
+    static const matjson::Value* getReleaseList() {return m_ReleaseList;}
 };
