@@ -14,13 +14,8 @@ jobs:
           run: python ./.github/CopySoundsForRename.py
         - name: Run File Namer
           run: cd .github/FileNamer; python main.py
-    package:
-      name: Upload sounds as an artifact
-      runs-on: ubuntu-latest
-      needs: ['rename']
-
-      steps:
-        - uses: actions/upload-artifact@v3
+        - name: Upload sounds as an artifact
+          uses: actions/upload-artifact@v3
           with:
             name: Build Output
-            path: ./.github/FileNamer/Output
+            path: .github/FileNamer/Output
