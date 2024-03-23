@@ -24,3 +24,4 @@ jobs:
           LE_RELEASE: ${{ github.event.release.html_url }}
           TAG: ${{ github.event.release.tag_name }}
           THE_MOD_ID: "beat.click-sound"
+          

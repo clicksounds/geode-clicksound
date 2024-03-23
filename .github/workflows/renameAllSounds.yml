@@ -1,7 +1,15 @@
 name: Rename All Sounds
 
 on:
-    workflow_dispatch:
+  workflow_dispatch:
+    inputs:
+      push:
+        description: 'Push results to the main branch?'
+        required: true
+        type: boolean
+        default: false
+permissions:
+  contents: write
 
 jobs:
     rename:
@@ -19,3 +27,14 @@ jobs:
           with:
             name: MultipleClick
             path: .github/FileNamer/Output
+        - name: Copy Output to the Original Folder
+          if: inputs.push
+          run: python ./.github/CopySoundsForRename.py
+        - name: Update Repository
+          if: inputs.push
+          run: |
+            git config user.name github-actions
+            git config user.email github-actions@github.com
+            git add .
+            git commit -m "[ACTIONS] Update JSON"
+            git push
