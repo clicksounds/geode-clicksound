@@ -3,18 +3,54 @@ name: Build Geode Mod - New Index
 on:
   workflow_dispatch:
   push:
-    branches:
-      - "!main"
+    branches: "!main"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
+  #update-modules:
+  #  name: Update Modules
+  #  runs-on: ubuntu-latest
+    # https://stackoverflow.com/questions/64407333/using-github-actions-to-automatically-update-the-repos-submodules
+  #  defaults:
+  #    run:
+  #      shell: bash
+
+  #  steps:
+  #  - name: Checkout
+  #    uses: actions/checkout@v2
+  #    with:
+  #      #token: ${{ secrets.CI_TOKEN }}
+  #      submodules: true
+
+    # Update references
+  #  - name: Git Submodule Update
+  #    run: |
+  #      git pull --recurse-submodules
+  #      git submodule update --remote --recursive
+
+  #  - name: Commit update
+  #    run: |
+  #      git config --global user.name 'Clicks Submodule Updater'
+  #      git config --global user.email 'bot@noreply.github.com'
+  #      git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+  #      git commit -am "Update clicksounds/clicks module" && git push || echo "No changes to commit"
+
   build:
+    #needs: ["update-modules"]
+    #if: needs.update-modules.result == 'success' || needs.update-modules.result != 'success'
     strategy:
       fail-fast: false
       matrix:
         config:
         - name: Windows
           os: windows-latest
-
+          
         - name: macOS
           os: macos-latest
 
@@ -36,18 +72,20 @@ jobs:
         uses: coopeeo/build-geode-mod@main
         with:
           combine: true
-          target: ${{ matrix.config.target }}
           sdk: nightly
+          target: ${{ matrix.config.target }}
+      
   package:
     name: Package builds
     runs-on: ubuntu-latest
-    needs: ['build']
+    needs: ['build'] #, 'update-modules']
+    #if: (needs.update-modules.result == 'success' || needs.update-modules.result != 'success') && needs.build.result == 'success'
 
     steps:
-      - uses: geode-sdk/build-geode-mod/combine@main
+      - uses: geode-sdk/build-geode-mod@combine
         id: build
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v3
         with:
           name: Build Output
           path: ${{ steps.build.outputs.build-output }}
