@@ -17,21 +17,30 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       update-modules-status: ${{ steps.update-modules.outputs.status }}
+    # https://stackoverflow.com/questions/64407333/using-github-actions-to-automatically-update-the-repos-submodules
+    defaults:
+      run:
+        shell: bash
+
     steps:
-      - name: Update Repository
-        id: update-modules
-        run: |
-          sudo apt-get update
-          sudo apt-get install git
-          git clone https://github.com/${{ github.repository }}.git
-          cd geode-clicksound
-          git config user.name "Clicks Submodule Updater"
-          git config user.email github-actions@github.com
-          git submodule update --remote --merge --verbose
-          sleep 5
-          git commit -a -m "Update clicksounds/clicks module"
-          git push
-          echo "::set-output name=status::success"
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        #token: ${{ secrets.CI_TOKEN }}
+        submodules: true
+
+    # Update references
+    - name: Git Submodule Update
+      run: |
+        git pull --recurse-submodules
+        git submodule update --remote --recursive
+
+    - name: Commit update
+      run: |
+        git config --global user.name 'Git bot'
+        git config --global user.email 'bot@noreply.github.com'
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+        git commit -am "Auto updated submodule references" && git push || echo "No changes to commit"
   build:
     needs: ["update-modules"]
     if: needs.update-modules.outputs.update-modules-status == 'success' || needs.update-modules.outputs.update-modules-status != 'success'
