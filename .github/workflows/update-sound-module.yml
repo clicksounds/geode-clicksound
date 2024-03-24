@@ -1,0 +1,28 @@
+name: Update clicks module
+
+on:
+  push: 
+    branches: "main"
+  workflow_dispatch:
+permissions:
+  contents: write
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+    rename:
+      name: Update Module
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v4
+        - name: Update Repository
+          run: |
+            git config user.name "Clicks Submodule Updater"
+            git config user.email github-actions@github.com
+            git submodules update
+            add .
+            git commit -m "Update clicksounds/clicks module"
+            git push
