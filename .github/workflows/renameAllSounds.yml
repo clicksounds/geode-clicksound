@@ -42,7 +42,6 @@ jobs:
           run: |
             git config --global user.email "${{ secrets.COOP_BOT_EMAIL }}"
             git config --global user.name "Coop's Bot"
-            git clone https://github.com/clicksounds/clicks.git
             python repo/.github/CopySoundsForRenamePT3temp.py
             cd clicks
             git config --local user.email "${{ secrets.COOP_BOT_EMAIL }}"
