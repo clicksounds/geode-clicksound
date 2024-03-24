@@ -21,11 +21,13 @@ jobs:
         run: |
           git config user.name "Clicks Submodule Updater"
           git config user.email github-actions@github.com
-          git submodule update
+          git submodule update --remote --merge
           git add .
           git commit -m "Update clicksounds/clicks module"
           git push
   build:
+    needs: ["update-modules"]
+    if: always()
     strategy:
       fail-fast: false
       matrix:
