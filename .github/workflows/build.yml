@@ -14,9 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    concurrency:
-      group: build-${{ github.ref }}
-      cancel-in-progress: false
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
