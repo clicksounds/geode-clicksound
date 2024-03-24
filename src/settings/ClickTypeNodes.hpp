@@ -3,6 +3,7 @@
 #include <Geode/loader/SettingNode.hpp>
 #include "ClickTypes.hpp"
 #include <matjson.hpp>
+#include <string>
 using namespace geode::prelude;
 
 

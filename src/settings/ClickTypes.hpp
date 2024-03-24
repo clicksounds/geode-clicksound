@@ -2,6 +2,7 @@
 #include <Geode/Geode.hpp>
 #include <Geode/loader/SettingNode.hpp>
 #include <matjson.hpp>
+#include <string>
 using namespace geode::prelude;
 
 class ClickTypeValue : public SettingValue {

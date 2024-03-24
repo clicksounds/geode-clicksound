@@ -1,6 +1,7 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/PlayerObject.hpp>
 #include <chrono>
+#include <string>
 #include <matjson.hpp>
 
 #include "../utils/ee.hpp"
