@@ -60,6 +60,10 @@ public:
     std::string getCustomClick() const {
         return m_type["customClick"].as<std::string>();
     }
+    
+    matjson::Value getJson() const {
+        return m_type;
+    }
 };
 
 class ReleaseTypeValue : public SettingValue {
@@ -122,7 +126,7 @@ public:
 template<>
 struct SettingValueSetter<CRTypeStruct> {
     static CRTypeStruct get(SettingValue* setting) {
-        auto CRSetting = static_cast<ClickTypeValue*>(setting);
+        auto CRSetting = static_cast<ClickTypeValue>(setting);
         struct CRTypeStruct defaultStruct = { CRSetting->getJson() };
         return defaultStruct;
     };
