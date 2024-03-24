@@ -204,7 +204,7 @@ protected:
                 dirs::getGameDir()
             },
             [&](auto path) {
-                log::error("{}", path.string());
+                static_cast<ClickTypeValue*>(m_value)->setCustomClick(path.string());
             }
         );
         this->dispatchChanged();
@@ -219,7 +219,7 @@ public:
         this->dispatchCommitted();
     }
     bool hasUncommittedChanges() override {
-        return m_currentPos != static_cast<ClickTypeValue*>(m_value)->getTab() || m_currentPos != static_cast<ClickTypeValue*>(m_value)->getClick() || m_currentPos != static_cast<ClickTypeValue*>(m_value)->getMemeClick() || m_currentCustomClick != static_cast<ClickTypeValue*>(m_value)->getCustomClick();
+        return m_currentPos != static_cast<ClickTypeValue*>(m_value)->getTab() || m_currentClick != static_cast<ClickTypeValue*>(m_value)->getClick() || m_currentMemeClick != static_cast<ClickTypeValue*>(m_value)->getMemeClick() || m_currentCustomClick != static_cast<ClickTypeValue*>(m_value)->getCustomClick();
     }
     bool hasNonDefaultValue() override {
         return m_currentPos != 1 || m_currentClick != 1 || m_currentMemeClick != 1 || m_currentCustomClick != "...";

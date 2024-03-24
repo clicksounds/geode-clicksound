@@ -51,20 +51,25 @@ public:
     auto clickSliderValue = Mod::get()->getSettingValue<int64_t>("clicksound-currentsound");
     auto customClickSound = Mod::get()->getSettingValue<ghc::filesystem::path>("custom-clicksound").string();
     bool usingCustomClickSound;
+    matjson::Value settings = Mod::get()->getSettingValue<matjson::Value>("clicksound-type");
     std::string clickSoundInUse = Clicks::getClickSprite(clickSliderValue);
 
     usingCustomClickSound = false;
     if (clickSliderValue != 0) usingCustomClickSound = false;
     if (clickSoundInUse == "__USECUSTOM__") usingCustomClickSound = true;
     
-    if (Mod::get()->getSettingValue<bool>("enable-clicksound") && !usingCustomClickSound) {
+    if (Mod::get()->getSettingValue<bool>("enable-clicksound") && settings["tab"] != 3) {
       auto fae = FMODAudioEngine::sharedEngine();
       auto system = fae->m_system;
 
       FMOD::Channel* channel;
       FMOD::Sound* sound;
+      if (settings["tab"] == 1){
+        system->createSound((Mod::get()->getResourcesDir().parent_path() / Clicks::getClickSprite(settings["click"])).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
+      } else if (settings["tab"] == 2) {
+        system->createSound((Mod::get()->getResourcesDir().parent_path() / Clicks::getClickSprite(settings["memeClick"])).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
+      }
 
-      system->createSound((Mod::get()->getResourcesDir().parent_path() / clickSoundInUse).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
 
       if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {
         #if defined(GEODE_IS_WINDOWS)
@@ -80,14 +85,14 @@ public:
       }
     }
 
-    if (Mod::get()->getSettingValue<bool>("enable-clicksound") && usingCustomClickSound) {
+    if (Mod::get()->getSettingValue<bool>("enable-clicksound") && settings["tab"] == 3) {
       auto fae = FMODAudioEngine::sharedEngine();
       auto system = fae->m_system;
 
       FMOD::Channel* channel;
       FMOD::Sound* sound;
 
-      system->createSound(customClickSound.c_str(), FMOD_DEFAULT, nullptr, &sound);
+      system->createSound(settings["customClick"].c_str(), FMOD_DEFAULT, nullptr, &sound);
       
       if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {
         #if defined(GEODE_IS_WINDOWS)
@@ -125,20 +130,25 @@ public:
     auto releaseSliderValue = Mod::get()->getSettingValue<int64_t>("releasesound-currentsound");
     auto customReleaseSound = Mod::get()->getSettingValue<ghc::filesystem::path>("custom-releasesound").string();
     bool usingCustomReleaseSound;
+    auto settings = Mod::get()->getSettingValue<matjson::Value>("releasesound-type");
     std::string releaseSoundInUse = Clicks::getReleaseSprite(releaseSliderValue);
 
 
     if (releaseSliderValue != 0) usingCustomReleaseSound = false;
     if (releaseSoundInUse == "__USECUSTOM__") usingCustomReleaseSound = true;
  
-    if (Mod::get()->getSettingValue<bool>("enable-releasesound") && !usingCustomReleaseSound) {
+    if (Mod::get()->getSettingValue<bool>("enable-releasesound") && settings["tab"] != 3) {
       auto fae = FMODAudioEngine::sharedEngine();
       auto system = fae->m_system;
 
       FMOD::Channel* channel;
       FMOD::Sound* sound;
 
-      system->createSound((Mod::get()->getResourcesDir().parent_path() / releaseSoundInUse).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
+      if (settings["tab"] == 1){
+        system->createSound((Mod::get()->getResourcesDir().parent_path() / Clicks::getRealseSprite(settings["click"])).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
+      } else if (settings["tab"] == 2) {
+        system->createSound((Mod::get()->getResourcesDir().parent_path() / Clicks::getReleaseSprite(settings["memeClick"])).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
+      }
       
       if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {
         #if defined(GEODE_IS_WINDOWS)
@@ -154,14 +164,14 @@ public:
       }
     }
 
-    if (Mod::get()->getSettingValue<bool>("enable-releasesound") && usingCustomReleaseSound) {
+    if (Mod::get()->getSettingValue<bool>("enable-releasesound") && settings["tab"] == 3) {
       auto fae = FMODAudioEngine::sharedEngine();
       auto system = fae->m_system;
 
       FMOD::Channel* channel;
       FMOD::Sound* sound;
 
-      system->createSound(customReleaseSound.c_str(), FMOD_DEFAULT, nullptr, &sound);
+      system->createSound(settings["customClick"].c_str(), FMOD_DEFAULT, nullptr, &sound);
       
       if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {
         #if defined(GEODE_IS_WINDOWS)
