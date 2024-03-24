@@ -4,12 +4,34 @@ on:
   workflow_dispatch:
   push:
 
-concurrency:
-  group: build-${{ github.ref }}
-  cancel-in-progress: true
+#concurrency:
+#  group: build-${{ github.ref }}
+#  cancel-in-progress: true
 
 jobs:
+  update-modules:
+    name: Update Modules
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: build-${{ github.ref }}
+      cancel-in-progress: false
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Update Repository
+        run: |
+          git config user.name "Clicks Submodule Updater"
+          git config user.email github-actions@github.com
+          git submodules update
+          add .
+          git commit -m "Update clicksounds/clicks module"
+          git push
   build:
+    concurrency:
+      group: build-${{ github.ref }}
+      cancel-in-progress: true
     strategy:
       fail-fast: false
       matrix:
@@ -45,6 +67,9 @@ jobs:
     name: Package builds
     runs-on: ubuntu-latest
     needs: ['build']
+    concurrency:
+      group: build-${{ github.ref }}
+      cancel-in-progress: false
 
     steps:
       - uses: geode-sdk/build-geode-mod@combine
