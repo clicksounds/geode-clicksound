@@ -2,6 +2,7 @@
 #include <Geode/Geode.hpp>
 #include <Geode/loader/SettingNode.hpp>
 #include "ClickTypes.hpp"
+#include <matjson.hpp>
 using namespace geode::prelude;
 
 
@@ -10,6 +11,7 @@ class ClickTypeNode : public SettingNode {
 protected:
     int m_currentPos;
     int m_currentClick;
+    int m_currentMemeClick;
     std::string m_currentCustomClick;
     CCMenuItemToggler* usefulBtn;
     CCMenuItemToggler* memeBtn;
@@ -45,7 +47,7 @@ protected:
             return false;
 
        
-        m_currentPos = value->getType();
+        m_currentPos = value->getTab();
         this->setContentSize({ width, 70.f });
 
         auto menu = CCMenu::create();
@@ -209,7 +211,7 @@ public:
         this->dispatchCommitted();
     }
     bool hasUncommittedChanges() override {
-        return m_currentPos != static_cast<ClickTypeValue*>(m_value)->getType();
+        return m_currentPos != static_cast<ClickTypeValue*>(m_value)->getTab();
     }
     bool hasNonDefaultValue() override {
         return m_currentPos != 1;

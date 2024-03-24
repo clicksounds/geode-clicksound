@@ -5,14 +5,14 @@ using namespace geode::prelude;
 
 class ClickTypeValue : public SettingValue {
 protected:
-    int m_type;
+    matjson::Value m_type;
 public:
     ClickTypeValue(std::string const& key, std::string const& modID, int type)
       : SettingValue(key, modID), m_type(type) {}
 
     bool load(matjson::Value const& json) override {
-        if (!json.is<int>()) return false;
-        m_type = json.as<int>();
+        if (!json["tab"].is<int>()) return false;
+        m_type = json;
         return true;
     }
 
@@ -23,25 +23,25 @@ public:
 
     SettingNode* createNode(float width) override;
 
-    void setType(int type) {
-        m_type = type;
+    void setTab(int type) {
+        m_type["tab"] = type;
     }
 
-    int getType() const {
-        return m_type;
+    int getTab() const {
+        return m_type["tab"].as<int>();
     }
 };
 
 class ReleaseTypeValue : public SettingValue {
 protected:
-    int m_type;
+    matjson::Value m_type;
 public:
     ReleaseTypeValue(std::string const& key, std::string const& modID, int type)
       : SettingValue(key, modID), m_type(type) {}
 
     bool load(matjson::Value const& json) override {
-        if (!json.is<int>()) return false;
-        m_type = json.as<int>();
+        if (!json["tab"].is<int>()) return false;
+        m_type = json;
         return true;
     }
 
@@ -52,11 +52,11 @@ public:
 
     SettingNode* createNode(float width) override;
 
-    void setType(int type) {
-        m_type = type;
+    void setTab(int type) {
+        m_type["tab"] = type;
     }
 
-    int getType() const {
-        return m_type;
+    int getTab() const {
+        return m_type["tab"].as<int>();
     }
 };
