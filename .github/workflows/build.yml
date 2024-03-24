@@ -26,7 +26,7 @@ jobs:
           git push
   build:
     needs: ["update-modules"]
-    if: always()
+    if: needs || !needs
     strategy:
       fail-fast: false
       matrix:
