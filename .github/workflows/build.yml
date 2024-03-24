@@ -21,7 +21,7 @@ jobs:
         run: |
           git config user.name "Clicks Submodule Updater"
           git config user.email github-actions@github.com
-          git submodules update
+          git submodule update
           add .
           git commit -m "Update clicksounds/clicks module"
           git push
