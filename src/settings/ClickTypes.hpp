@@ -108,8 +108,4 @@ public:
     std::string getCustomClick() const {
         return m_type["click"].as<std::string>();
     }
-
-    matjson::Value getAllSettings() const {
-        return m_type;
-    }
 };

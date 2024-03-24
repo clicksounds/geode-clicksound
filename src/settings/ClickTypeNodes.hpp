@@ -143,7 +143,7 @@ protected:
         menu2->setTag(5002);
         this->addChild(menu2);
 
-        auto inputNode2 = InputNode::create(200.f, "...", "chatFont.fnt");
+        auto inputNode2 = InputNode::create(200.f, std::to_string(m_currentCustomClick), "chatFont.fnt");
         inputNode2->setScale(0.65f);
         inputNode2->setPosition(-80.f, 0);
         inputNode2->setString("...");
@@ -159,6 +159,7 @@ protected:
         );
         menu2->addChild(folderBtn);
 
+        if (currentCorner == 1) {inputNode1->setString(std::to_string(m_currentClick));} else if (currentCorner == 2) {inputNode1->setString(std::to_string(m_currentMemeClick));}
 
         if (currentCorner == 1 || currentCorner == 2) {
             menu1->setVisible(true);
@@ -232,6 +233,10 @@ public:
         m_currentClick = 1;
         m_currentMemeClick = 1;
         m_currentCustomClick = "...";
+        static_cast<ClickTypeValue*>(m_value)->setTab(m_currentPos);
+        static_cast<ClickTypeValue*>(m_value)->setClick(m_currentClick);
+        static_cast<ClickTypeValue*>(m_value)->setMemeClick(m_currentMemeClick);
+        static_cast<ClickTypeValue*>(m_value)->setCustomClick(m_currentCustomClick);
     }
     template <typename T>
     static ClickTypeNode* create(T* value, float width, std::string prefixText = "?") {
