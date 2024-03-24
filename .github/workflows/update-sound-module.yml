@@ -14,13 +14,14 @@ jobs:
       name: Update Module
       runs-on: ubuntu-latest
       steps:
-        - name: Checkout Repository
-          uses: actions/checkout@v4
+        #- name: Checkout Repository
+        #  uses: actions/checkout@v4
         - name: Update Repository
           run: |
+            git clone https://github.com/${ github.repository }.git ./
             git config user.name "Clicks Submodule Updater"
             git config user.email github-actions@github.com
-            git submodules update
-            add .
+            git submodule update --remote --merge
+            git add -A
             git commit -m "Update clicksounds/clicks module"
             git push
