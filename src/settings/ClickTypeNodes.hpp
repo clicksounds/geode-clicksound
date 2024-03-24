@@ -160,7 +160,7 @@ protected:
         );
         menu2->addChild(folderBtn);
 
-        if (currentCorner == 1) {inputNode1->setString(std::to_string(m_currentClick));} else if (currentCorner == 2) {inputNode1->setString(std::to_string(m_currentMemeClick));}
+        if (currentCorner == 1) {inputNode1->setString(std::to_string(m_currentClick).c_str());} else if (currentCorner == 2) {inputNode1->setString(std::to_string(m_currentMemeClick).c_str());}
 
         if (currentCorner == 1 || currentCorner == 2) {
             menu1->setVisible(true);
