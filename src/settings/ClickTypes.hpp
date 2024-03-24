@@ -51,7 +51,7 @@ public:
         m_type["click"] = type;
     }
 
-    int getCustomClick() const {
+    std::string getCustomClick() const {
         return m_type["click"].as<std::string>();
     }
 };
@@ -104,7 +104,7 @@ public:
         m_type["click"] = type;
     }
 
-    int getCustomClick() const {
+    std::string getCustomClick() const {
         return m_type["click"].as<std::string>();
     }
 };
