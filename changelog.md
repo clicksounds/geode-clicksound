@@ -1,9 +1,17 @@
 # Changelog
+## Version **v2.0.0** (SETTINGS UPDATE)
+* A WHOLE NEW LOOK AND FEEL FOR SETTINGS!
+* Easier to see what click sound is selected
+* No More Numbers!
+* Added Mouse Click 6 (randomized clicks and releases)
+* Added Pacity's Clicks (randomized clicks and releases)
+* Added Mouse Click 7 (randomized clicks and releases)
+* Added Electro Clicks (randomized clicks and releases)
 ## Version v1.8.0
 * Added Viper's click sounds and release sounds (both randomized)
 * Added Logitech G502 click sounds and release sounds (clicks randomized)
-* Added up arrow 4 click sounds and release sounds (both randomized)
-* Added click sounds settings button in the editor
+* Added Up Arrow 4 click sounds and release sounds (both randomized)
+* Added Click Sounds settings button in the editor
 * 2 player click support (can't do different clicks)
 * Dual mode support in editor
 ## Version v1.7.1

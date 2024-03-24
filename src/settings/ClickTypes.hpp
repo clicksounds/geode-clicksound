@@ -1,6 +1,7 @@
 #pragma once
 #include <Geode/Geode.hpp>
 #include <Geode/loader/SettingNode.hpp>
+#include <matjson.hpp>
 using namespace geode::prelude;
 
 class ClickTypeValue : public SettingValue {
@@ -106,5 +107,9 @@ public:
 
     std::string getCustomClick() const {
         return m_type["click"].as<std::string>();
+    }
+
+    matjson::Value getAllSettings() const {
+        return m_type;
     }
 };

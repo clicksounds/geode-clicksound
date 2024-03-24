@@ -40,9 +40,10 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 30 - Viper Mouse Clicks/Release (randomized)
 - 31 - Logitech G502 Clicks/Release (randomized)
 - 32 - Up arrow 4 Clicks/Release (randomized)
-- 33 - Mouse Click 6
-- 34 - Pacity's Clicks
-- 35 - Mouse Click 7
+- 33 - Mouse Click/Release 6 (randomized)
+- 34 - Pacity's Clicks/Release (randomized)
+- 35 - Mouse Click/Release 7 (randomized)
+- 36 - Electro Clicks/Release (randomized)
 ### Meme click sounds (negative number):
 - 1 - FIRE IN THE HOLE!
 - 2 - I loooove GD Cologne
@@ -93,6 +94,7 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 17 - Mouse Click 6
 - 18 - Pacity's Clicks
 - 19 - Mouse Click 7
+- 20 - Electro Clicks
 ### Meme release sounds (negative number):
 - 1 - TikTok
 
