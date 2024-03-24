@@ -28,8 +28,8 @@ jobs:
           git config user.name "Clicks Submodule Updater"
           git config user.email github-actions@github.com
           git submodule update --remote --merge --verbose
-          git add -A
-          git commit -m "Update clicksounds/clicks module"
+          sleep 5
+          git commit -a -m "Update clicksounds/clicks module"
           git push
           echo "::set-output name=status::success"
   build:
