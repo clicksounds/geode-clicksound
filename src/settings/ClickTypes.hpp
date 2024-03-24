@@ -6,7 +6,7 @@
 using namespace geode::prelude;
 
 struct CRTypeStruct {
-    int m_type;
+    matjson::Value m_type;
 };
 
 class ClickTypeValue : public SettingValue {
