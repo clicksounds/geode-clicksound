@@ -18,23 +18,36 @@ jobs:
       steps:
         - name: Checkout Repository
           uses: actions/checkout@v4
-        - name: Run Sounds Copier
-          run: python ./.github/CopySoundsForRename.py
-        - name: Run File Namer
-          run: cd .github/FileNamer; python main.py
-        - name: Upload sounds as an artifact
-          uses: actions/upload-artifact@v3
           with:
-            name: MultipleClick
-            path: .github/FileNamer/Output
+            path: "repo"
+        #- name: Run Sounds Copier
+        #  run: python ./.github/CopySoundsForRename.py
+        #- name: Run File Namer
+        #  run: cd .github/FileNamer; python main.py
+        #- name: Upload sounds as an artifact
+        #  uses: actions/upload-artifact@v3
+        #  with:
+        #    name: MultipleClick
+        #    path: .github/FileNamer/Output
         - name: Copy Output to the Original Folder
           if: inputs.push
-          run: python ./.github/CopySoundsForRenamePT2.py
+          run: python repo/.github/CopySoundsForRenamePT3temp.py
         - name: Update Repository
           if: inputs.push
+          #git config user.name "Sounds Updater"
+          #git config user.email github-actions@github.com
+          #git add .
+          #git commit -m "Update Sounds (renames all multiple click files)"
+          #git push
           run: |
-            git config user.name "Sounds Updater"
-            git config user.email github-actions@github.com
-            git add .
-            git commit -m "Update Sounds (renames all multiple click files)"
-            git push
+            git config --global user.email "${{ secrets.COOP_BOT_EMAIL }}"
+            git config --global user.name "Coop's Bot"
+            git clone https://github.com/clicksounds/clicks.git
+
+            cd clicks
+            git config --local user.email "${{ secrets.COOP_BOT_EMAIL }}"
+            git config --local user.name "Coop's Bot"
+            git add -A
+            git commit -m "add sounds here yay!"
+            git remote set-url origin "https://${{ secrets.COOP_BOT_PUSH_BIN_TOKEN }}@github.com/clicksounds/clicks.git"
+            git push origin main
