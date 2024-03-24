@@ -1,5 +1,7 @@
 #pragma once
+#include <Geode/Geode.hpp>
 #include <matjson.hpp>
+using namespace geode::prelude;
 class Clicks {
 protected:
     static matjson::Value* m_ClickList;
