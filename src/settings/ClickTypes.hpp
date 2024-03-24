@@ -50,11 +50,11 @@ public:
     }
 
     void setCustomClick(std::string type) {
-        m_type["click"] = type;
+        m_type["customClick"] = type;
     }
 
     std::string getCustomClick() const {
-        return m_type["click"].as<std::string>();
+        return m_type["customClick"].as<std::string>();
     }
 };
 
@@ -103,10 +103,10 @@ public:
     }
 
     void setCustomClick(std::string type) {
-        m_type["click"] = type;
+        m_type["customClick"] = type;
     }
 
     std::string getCustomClick() const {
-        return m_type["click"].as<std::string>();
+        return m_type["customClick"].as<std::string>();
     }
 };
