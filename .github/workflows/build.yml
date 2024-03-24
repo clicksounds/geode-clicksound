@@ -21,7 +21,8 @@ jobs:
       - name: Update Repository
         id: update-modules
         run: |
-          git clone https://github.com/${{ github.repository }}.git ./
+          git clone https://github.com/${{ github.repository }}.git
+          cd geode-clicksound
           git config user.name "Clicks Submodule Updater"
           git config user.email github-actions@github.com
           git submodule update --remote --merge --verbose
