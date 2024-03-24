@@ -6,6 +6,7 @@
 
 #include "../utils/ee.hpp"
 #include "../utils/Clicks.hpp"
+#include "../settings/ClickTypes.hpp"
 
 using namespace geode::prelude;
 
@@ -48,7 +49,7 @@ public:
     if (PlayLayer::get()) if (this == PlayLayer::get()->m_player2 && !PlayLayer::get()->m_level->m_twoPlayerMode) return;
     if (LevelEditorLayer::get()) {if (this == LevelEditorLayer::get()->m_player2 && !LevelEditorLayer::get()->m_level->m_twoPlayerMode) return;}
     
-    auto settings = Mod::get()->getSettingValue<matjson::Value*>("clicksound-type");
+    auto settings = Mod::get()->getSettingValue<CRTypeStruct>("clicksound-type");
     
     if (Mod::get()->getSettingValue<bool>("enable-clicksound") && settings["tab"] != 3) {
       auto fae = FMODAudioEngine::sharedEngine();
@@ -120,7 +121,7 @@ public:
     if (PlayLayer::get()) if (this == PlayLayer::get()->m_player2 && !PlayLayer::get()->m_level->m_twoPlayerMode) return;
     if (LevelEditorLayer::get()) if (this == LevelEditorLayer::get()->m_player2 && !LevelEditorLayer::get()->m_level->m_twoPlayerMode) return;
 
-    auto settings = Mod::get()->getSettingValue<matjson::Value>("releasesound-type");
+    auto settings = Mod::get()->getSettingValue<CRTypeStruct>("releasesound-type");
  
     if (Mod::get()->getSettingValue<bool>("enable-releasesound") && settings["tab"] != 3) {
       auto fae = FMODAudioEngine::sharedEngine();

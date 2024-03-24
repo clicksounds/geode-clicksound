@@ -5,6 +5,10 @@
 #include <string>
 using namespace geode::prelude;
 
+struct CRTypeStruct {
+    int m_type;
+};
+
 class ClickTypeValue : public SettingValue {
 protected:
     matjson::Value m_type;
@@ -66,7 +70,7 @@ public:
       : SettingValue(key, modID), m_type(type) {}
 
     bool load(matjson::Value const& json) override {
-        if (!json["tab"].is<int>() && !json["click"].is<int>() && !json["memeClick"].is<int>() && !json["customClick"].is<std::string>()) return false;
+        if (!json["tab"].is<int>() || !json["click"].is<int>() || !json["memeClick"].is<int>() || !json["customClick"].is<std::string>()) {return false;}
         m_type = json;
         return true;
     }
@@ -108,5 +112,9 @@ public:
 
     std::string getCustomClick() const {
         return m_type["customClick"].as<std::string>();
+    }
+
+    matjson::Value getJson() const {
+        return m_type;
     }
 };
