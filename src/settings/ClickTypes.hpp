@@ -122,8 +122,8 @@ public:
 template<>
 struct SettingValueSetter<CRTypeStruct> {
     static SettingPosStruct get(SettingValue* setting) {
-        auto posSetting = static_cast<ClickTypeValue*>(setting);
-        struct SettingPosStruct defaultStruct = { posSetting->getPos() };
+        auto CRSetting = static_cast<ClickTypeValue*>(setting);
+        struct CRTypeStruct defaultStruct = { CRSetting->getJson() };
         return defaultStruct;
     };
 };
