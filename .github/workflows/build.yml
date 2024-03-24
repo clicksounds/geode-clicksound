@@ -24,14 +24,14 @@ jobs:
           git clone https://github.com/${{ github.repository }}.git ./
           git config user.name "Clicks Submodule Updater"
           git config user.email github-actions@github.com
-          git submodule update --remote --merge
+          git submodule update --remote --merge --verbose
           git add -A
           git commit -m "Update clicksounds/clicks module"
           git push
           echo "::set-output name=status::success"
   build:
     needs: ["update-modules"]
-    if: needs.update-modules.outputs == 'success' || needs.update-modules.outputs != 'success'
+    if: needs.update-modules.outputs.update-modules-status == 'success' || needs.update-modules.outputs.update-modules-status != 'success'
     strategy:
       fail-fast: false
       matrix:
@@ -66,8 +66,8 @@ jobs:
   package:
     name: Package builds
     runs-on: ubuntu-latest
-    needs: ['build']
-    if: needs
+    needs: ['build', 'update-modules']
+    if: needs.update-modules.outputs.update-modules-status == 'success' || needs.update-modules.outputs.update-modules-status != 'success'
 
     steps:
       - uses: geode-sdk/build-geode-mod@combine
