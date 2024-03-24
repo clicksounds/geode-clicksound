@@ -9,7 +9,7 @@ class ClickTypeValue : public SettingValue {
 protected:
     matjson::Value m_type;
 public:
-    ClickTypeValue(std::string const& key, std::string const& modID, int type)
+    ClickTypeValue(std::string const& key, std::string const& modID, matjson::Value type)
       : SettingValue(key, modID), m_type(type) {}
 
     bool load(matjson::Value const& json) override {
@@ -62,7 +62,7 @@ class ReleaseTypeValue : public SettingValue {
 protected:
     matjson::Value m_type;
 public:
-    ReleaseTypeValue(std::string const& key, std::string const& modID, int type)
+    ReleaseTypeValue(std::string const& key, std::string const& modID, matjson::Value type)
       : SettingValue(key, modID), m_type(type) {}
 
     bool load(matjson::Value const& json) override {
