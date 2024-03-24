@@ -30,6 +30,30 @@ public:
     int getTab() const {
         return m_type["tab"].as<int>();
     }
+
+    void setClick(int type) {
+        m_type["click"] = type;
+    }
+
+    int getClick() const {
+        return m_type["click"].as<int>();
+    }
+
+    void setMemeClick(int type) {
+        m_type["memeClick"] = type;
+    }
+
+    int getMemeClick() const {
+        return m_type["memeClick"].as<int>();
+    }
+
+    void setCustomClick(std::string type) {
+        m_type["click"] = type;
+    }
+
+    int getCustomClick() const {
+        return m_type["click"].as<std::string>();
+    }
 };
 
 class ReleaseTypeValue : public SettingValue {
@@ -40,7 +64,7 @@ public:
       : SettingValue(key, modID), m_type(type) {}
 
     bool load(matjson::Value const& json) override {
-        if (!json["tab"].is<int>()) return false;
+        if (!json["tab"].is<int>() && !json["click"].is<int>() && !json["memeClick"].is<int>() && !json["customClick"].is<std::string>()) return false;
         m_type = json;
         return true;
     }
@@ -58,5 +82,29 @@ public:
 
     int getTab() const {
         return m_type["tab"].as<int>();
+    }
+    
+    void setClick(int type) {
+        m_type["click"] = type;
+    }
+
+    int getClick() const {
+        return m_type["click"].as<int>();
+    }
+
+    void setMemeClick(int type) {
+        m_type["memeClick"] = type;
+    }
+
+    int getMemeClick() const {
+        return m_type["memeClick"].as<int>();
+    }
+
+    void setCustomClick(std::string type) {
+        m_type["click"] = type;
+    }
+
+    int getCustomClick() const {
+        return m_type["click"].as<std::string>();
     }
 };

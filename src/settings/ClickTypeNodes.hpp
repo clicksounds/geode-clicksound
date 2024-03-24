@@ -48,6 +48,9 @@ protected:
 
        
         m_currentPos = value->getTab();
+        m_currentClick = value->getClick();
+        m_currentMemeClick = value->getMemeClick();
+        m_currentCustomClick = value->getCustomClick();
         this->setContentSize({ width, 70.f });
 
         auto menu = CCMenu::create();
@@ -208,13 +211,16 @@ protected:
 public:
     void commit() override {
         static_cast<ClickTypeValue*>(m_value)->setTab(m_currentPos);
+        static_cast<ClickTypeValue*>(m_value)->setClick(m_currentClick);
+        static_cast<ClickTypeValue*>(m_value)->setMemeClick(m_currentMemeClick);
+        static_cast<ClickTypeValue*>(m_value)->setCustomClick(m_currentCustomClick);
         this->dispatchCommitted();
     }
     bool hasUncommittedChanges() override {
-        return m_currentPos != static_cast<ClickTypeValue*>(m_value)->getTab();
+        return m_currentPos != static_cast<ClickTypeValue*>(m_value)->getTab() || m_currentPos != static_cast<ClickTypeValue*>(m_value)->getClick() || m_currentPos != static_cast<ClickTypeValue*>(m_value)->getMemeClick() || m_currentCustomClick != static_cast<ClickTypeValue*>(m_value)->getCustomClick();
     }
     bool hasNonDefaultValue() override {
-        return m_currentPos != 1;
+        return m_currentPos != 1 || m_currentClick != 1 || m_currentMemeClick != 1 || m_currentCustomClick != "...";
     }
 
     // Geode calls this to reset the setting's value back to default
@@ -223,6 +229,9 @@ public:
         memeBtn->toggle(true);
         customBtn->toggle(true);
         m_currentPos = 1;
+        m_currentClick = 1;
+        m_currentMemeClick = 1;
+        m_currentCustomClick = "...";
     }
     template <typename T>
     static ClickTypeNode* create(T* value, float width, std::string prefixText = "?") {
