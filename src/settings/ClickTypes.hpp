@@ -118,3 +118,12 @@ public:
         return m_type;
     }
 };
+
+template<>
+struct SettingValueSetter<CRTypeStruct> {
+    static SettingPosStruct get(SettingValue* setting) {
+        auto posSetting = static_cast<ClickTypeValue*>(setting);
+        struct SettingPosStruct defaultStruct = { posSetting->getPos() };
+        return defaultStruct;
+    };
+};
