@@ -48,15 +48,7 @@ public:
     if (PlayLayer::get()) if (this == PlayLayer::get()->m_player2 && !PlayLayer::get()->m_level->m_twoPlayerMode) return;
     if (LevelEditorLayer::get()) {if (this == LevelEditorLayer::get()->m_player2 && !LevelEditorLayer::get()->m_level->m_twoPlayerMode) return;}
     
-    auto clickSliderValue = Mod::get()->getSettingValue<int64_t>("clicksound-currentsound");
-    auto customClickSound = Mod::get()->getSettingValue<ghc::filesystem::path>("custom-clicksound").string();
-    bool usingCustomClickSound;
     matjson::Value settings = Mod::get()->getSettingValue<matjson::Value>("clicksound-type");
-    std::string clickSoundInUse = Clicks::getClickSprite(clickSliderValue);
-
-    usingCustomClickSound = false;
-    if (clickSliderValue != 0) usingCustomClickSound = false;
-    if (clickSoundInUse == "__USECUSTOM__") usingCustomClickSound = true;
     
     if (Mod::get()->getSettingValue<bool>("enable-clicksound") && settings["tab"] != 3) {
       auto fae = FMODAudioEngine::sharedEngine();
@@ -64,6 +56,7 @@ public:
 
       FMOD::Channel* channel;
       FMOD::Sound* sound;
+      
       if (settings["tab"] == 1){
         system->createSound((Mod::get()->getResourcesDir().parent_path() / Clicks::getClickSprite(settings["click"])).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
       } else if (settings["tab"] == 2) {
@@ -127,15 +120,7 @@ public:
     if (PlayLayer::get()) if (this == PlayLayer::get()->m_player2 && !PlayLayer::get()->m_level->m_twoPlayerMode) return;
     if (LevelEditorLayer::get()) if (this == LevelEditorLayer::get()->m_player2 && !LevelEditorLayer::get()->m_level->m_twoPlayerMode) return;
 
-    auto releaseSliderValue = Mod::get()->getSettingValue<int64_t>("releasesound-currentsound");
-    auto customReleaseSound = Mod::get()->getSettingValue<ghc::filesystem::path>("custom-releasesound").string();
-    bool usingCustomReleaseSound;
-    auto settings = Mod::get()->getSettingValue<matjson::Value>("releasesound-type");
-    std::string releaseSoundInUse = Clicks::getReleaseSprite(releaseSliderValue);
-
-
-    if (releaseSliderValue != 0) usingCustomReleaseSound = false;
-    if (releaseSoundInUse == "__USECUSTOM__") usingCustomReleaseSound = true;
+    matjson::Value settings = Mod::get()->getSettingValue<matjson::Value>("releasesound-type");
  
     if (Mod::get()->getSettingValue<bool>("enable-releasesound") && settings["tab"] != 3) {
       auto fae = FMODAudioEngine::sharedEngine();
