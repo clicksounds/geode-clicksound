@@ -4,6 +4,9 @@ on:
   workflow_dispatch:
   push:
 
+permissions:
+  contents: write
+
 concurrency:
   group: build-${{ github.ref }}
   cancel-in-progress: true
@@ -12,10 +15,11 @@ jobs:
   update-modules:
     name: Update Modules
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+    outputs:
+      update-modules-status: ${{ steps.update-modules.outputs.status }}
     steps:
       - name: Update Repository
+        id: update-modules
         run: |
           git clone https://github.com/${{ github.repository }}.git ./
           git config user.name "Clicks Submodule Updater"
@@ -24,9 +28,10 @@ jobs:
           git add -A
           git commit -m "Update clicksounds/clicks module"
           git push
+          echo "::set-output name=status::success"
   build:
     needs: ["update-modules"]
-    if: needs || !needs
+    if: needs.update-modules.outputs == 'success' || needs.update-modules.outputs != 'success'
     strategy:
       fail-fast: false
       matrix:
