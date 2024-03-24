@@ -85,7 +85,7 @@ public:
       FMOD::Channel* channel;
       FMOD::Sound* sound;
 
-      system->createSound(settings["customClick"].c_str(), FMOD_DEFAULT, nullptr, &sound);
+      system->createSound(settings["customClick"].as<std::string>().c_str(), FMOD_DEFAULT, nullptr, &sound);
       
       if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {
         #if defined(GEODE_IS_WINDOWS)
@@ -156,7 +156,7 @@ public:
       FMOD::Channel* channel;
       FMOD::Sound* sound;
 
-      system->createSound(settings["customClick"].c_str(), FMOD_DEFAULT, nullptr, &sound);
+      system->createSound(settings["customClick"].as<std::string>().c_str(), FMOD_DEFAULT, nullptr, &sound);
       
       if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {
         #if defined(GEODE_IS_WINDOWS)
