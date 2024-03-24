@@ -207,7 +207,7 @@ protected:
 
 public:
     void commit() override {
-        static_cast<ClickTypeValue*>(m_value)->setType(m_currentPos);
+        static_cast<ClickTypeValue*>(m_value)->setTab(m_currentPos);
         this->dispatchCommitted();
     }
     bool hasUncommittedChanges() override {
