@@ -144,10 +144,10 @@ protected:
         menu2->setTag(5002);
         this->addChild(menu2);
 
-        auto inputNode2 = InputNode::create(200.f, std::to_string(m_currentCustomClick), "chatFont.fnt");
+        auto inputNode2 = InputNode::create(200.f, "...", "chatFont.fnt");
         inputNode2->setScale(0.65f);
         inputNode2->setPosition(-80.f, 0);
-        inputNode2->setString("...");
+        inputNode2->setString(m_currentCustomClick.c_str());
         inputNode2->getInput()->setAllowedChars("");
         menu2->addChild(inputNode2);
 
