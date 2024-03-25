@@ -20,16 +20,16 @@ protected:
     CCMenu* menu;
     CCMenu* menu1;
     CCMenu* menu2;
-    CCLabelBMFont label;
-    CCLabelBMFont anotherLabel;
-    InputNode inputNode1;
-    InputNode inputNode2;
-    CCSprite arrowRight;
-    CCMenuItemSpriteExtra buttonRight;
-    CCSprite arrowLeft;
-    CCMenuItemSpriteExtra buttonLeft;
-    CCSprite folderSpr;
-    CCMenuItemSpriteExtra folderBtn;
+    CCLabelBMFont* label;
+    CCLabelBMFont* anotherLabel;
+    InputNode* inputNode1;
+    InputNode* inputNode2;
+    CCSprite* arrowRight;
+    CCMenuItemSpriteExtra* buttonRight;
+    CCSprite* arrowLeft;
+    CCMenuItemSpriteExtra* buttonLeft;
+    CCSprite* folderSpr;
+    CCMenuItemSpriteExtra* folderBtn;
 
     int getActiveCornerTag(int corner) {
         switch (corner) {
