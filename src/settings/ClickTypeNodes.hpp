@@ -17,6 +17,19 @@ protected:
     CCMenuItemToggler* usefulBtn;
     CCMenuItemToggler* memeBtn;
     CCMenuItemToggler* customBtn;
+    CCMenu* menu;
+    CCMenu* menu1;
+    CCMenu* menu2;
+    CCLabelBMFont label;
+    CCLabelBMFont anotherLabel;
+    InputNode inputNode1;
+    InputNode inputNode2;
+    CCSprite arrowRight;
+    CCMenuItemSpriteExtra buttonRight;
+    CCSprite arrowLeft;
+    CCMenuItemSpriteExtra buttonLeft;
+    CCSprite folderSpr;
+    CCMenuItemSpriteExtra folderBtn;
 
     int getActiveCornerTag(int corner) {
         switch (corner) {
@@ -54,7 +67,7 @@ protected:
         m_currentCustomClick = value->getCustomClick();
         this->setContentSize({ width, 70.f });
 
-        auto menu = CCMenu::create();
+        menu = CCMenu::create();
         menu->setContentSize({ width/2, 20.f} );
         menu->setPosition(width*3/4 - 7.f, 50.f);
         menu->setLayout(RowLayout::create()
@@ -99,7 +112,7 @@ protected:
         menu->addChild(memeBtn);
         menu->addChild(customBtn);
 
-        auto label = CCLabelBMFont::create(fmt::format("{} Type",prefixText).c_str(), "bigFont.fnt");
+        label = CCLabelBMFont::create(fmt::format("{} Type",prefixText).c_str(), "bigFont.fnt");
         label->setScale(.5F);
         label->setAnchorPoint({ 0.f, 0.5f });
         label->setPosition(20.f, 50.f);
@@ -107,53 +120,53 @@ protected:
         this->addChild(label);
         menu->updateLayout();
 
-        auto menu1 = CCMenu::create();
+        menu1 = CCMenu::create();
         menu1->setPosition({ width - 20.f, 20.f });
         menu1->setVisible(false);
         menu1->setTag(5001);
         this->addChild(menu1);
 
-        auto anotherLabel = CCLabelBMFont::create(fmt::format("{} Sound",prefixText).c_str(), "bigFont.fnt");
+        anotherLabel = CCLabelBMFont::create(fmt::format("{} Sound",prefixText).c_str(), "bigFont.fnt");
         anotherLabel->setScale(.5F);
         anotherLabel->setAnchorPoint({ 0.f, 0.5f });
         anotherLabel->setPosition(20.f, 20.f);
         this->addChild(anotherLabel);
 
-        auto inputNode1 = InputNode::create(200.f, "...", "chatFont.fnt");
+        inputNode1 = InputNode::create(200.f, "...", "chatFont.fnt");
         inputNode1->setScale(0.65f);
         inputNode1->setPosition(-75.f, 0);
         inputNode1->setString("...");
         inputNode1->getInput()->setAllowedChars("");
         menu1->addChild(inputNode1);
 
-        auto arrowRight = CCSprite::createWithSpriteFrameName("navArrowBtn_001.png");
+        arrowRight = CCSprite::createWithSpriteFrameName("navArrowBtn_001.png");
         arrowRight->setScale(0.3f);
-        auto buttonRight = CCMenuItemSpriteExtra::create(arrowRight, this, menu_selector(ClickTypeNode::onNext));
+        buttonRight = CCMenuItemSpriteExtra::create(arrowRight, this, menu_selector(ClickTypeNode::onNext));
         menu1->addChild(buttonRight);
 
-        auto arrowLeft = CCSprite::createWithSpriteFrameName("navArrowBtn_001.png");
+        arrowLeft = CCSprite::createWithSpriteFrameName("navArrowBtn_001.png");
         arrowLeft->setScale(0.3f);
         arrowLeft->setFlipX(true);
-        auto buttonLeft = CCMenuItemSpriteExtra::create(arrowLeft, this, menu_selector(ClickTypeNode::onPrev));
+        buttonLeft = CCMenuItemSpriteExtra::create(arrowLeft, this, menu_selector(ClickTypeNode::onPrev));
         buttonLeft->setPosition(-150.f, 0);
         menu1->addChild(buttonLeft);
 
-        auto menu2 = CCMenu::create();
+        menu2 = CCMenu::create();
         menu2->setPosition({ width - 20.f, 20.f });
         menu2->setVisible(false);
         menu2->setTag(5002);
         this->addChild(menu2);
 
-        auto inputNode2 = InputNode::create(200.f, "...", "chatFont.fnt");
+        inputNode2 = InputNode::create(200.f, "...", "chatFont.fnt");
         inputNode2->setScale(0.65f);
         inputNode2->setPosition(-80.f, 0);
         inputNode2->setString(m_currentCustomClick.c_str());
         inputNode2->getInput()->setAllowedChars("");
         menu2->addChild(inputNode2);
 
-        auto folderSpr = CCSprite::createWithSpriteFrameName("gj_folderBtn_001.png");
+        folderSpr = CCSprite::createWithSpriteFrameName("gj_folderBtn_001.png");
         folderSpr->setScale(0.5f);
-        auto folderBtn = CCMenuItemSpriteExtra::create(
+        folderBtn = CCMenuItemSpriteExtra::create(
             folderSpr,
             this,
             menu_selector(ClickTypeNode::onFolder)
@@ -205,6 +218,8 @@ protected:
             },
             [&](auto path) {
                 static_cast<ClickTypeValue*>(m_value)->setCustomClick(path.string());
+                m_currentCustomClick = path.string();
+                inputNode2->setString(path.string().c_str());
             }
         );
         this->dispatchChanged();
