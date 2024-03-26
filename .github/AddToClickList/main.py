@@ -44,15 +44,14 @@ def rename_files():
                 jsonshit[clicksRelease][memeUseful].append({
                     "name": name.replace("_", " "),
                     "prefix": name,
-                    "files": [],
-                    "fileCount": 0
+                    "files": [filename],
+                    "fileCount": 1
                 })
-            
-
-            for o in jsonshit[clicksRelease][memeUseful]:
-                if o["name"] == name:
-                    o["files"].append(filename)
-                    o["fileCount"] += 1
+            else:
+                for o in jsonshit[clicksRelease][memeUseful]:
+                    if o["name"] == name:
+                        o["files"].append(filename)
+                        o["fileCount"] += 1
 
 if __name__ == "__main__":
     if os.path.exists("Output"):
