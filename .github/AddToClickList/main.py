@@ -2,6 +2,7 @@ import os
 import traceback
 import shutil
 import json
+import time
 
 jsonshit = {
     "Clicks": {
@@ -46,6 +47,9 @@ def rename_files():
                     "files": [],
                     "fileCount": 0
                 })
+            
+            time.sleep(0.5)
+
             for o in jsonshit[clicksRelease][memeUseful]:
                 if o["name"] == name:
                     o["files"].append(filename)
