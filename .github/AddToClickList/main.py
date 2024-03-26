@@ -48,7 +48,6 @@ def rename_files():
                     "fileCount": 0
                 })
             
-            time.sleep(0.5)
 
             for o in jsonshit[clicksRelease][memeUseful]:
                 if o["name"] == name:
