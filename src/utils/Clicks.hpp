@@ -12,5 +12,5 @@ public:
     static const char* getReleaseSprite(int);
     static const matjson::Value* getClickList() {return m_ClickList;}
     static const matjson::Value* getReleaseList() {return m_ReleaseList;}
-    static const void initJson() {auto thing = getJson();m_ClickList = thing["click"];m_ReleaseList = thing["release"];}
+    static const void initJson() {auto thing = getJson();m_ClickList = thing["Clicks"];m_ReleaseList = thing["Releases"];}
 };
