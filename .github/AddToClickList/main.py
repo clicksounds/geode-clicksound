@@ -65,7 +65,7 @@ if __name__ == "__main__":
     if update_folder:
         if os.path.exists("Output"):
             shutil.rmtree("Output")
-        shutil.mktree("Update")
+        os.mkdir("Update")
         shutil.copytree("../../../../clicks/Meme", "Update/Meme")
         shutil.copytree("../../../../clicks/Useful", "Update/Useful")
 
