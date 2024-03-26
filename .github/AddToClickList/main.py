@@ -31,6 +31,7 @@ def rename_files():
 
         for i, file in enumerate(files, start=1):
             # do starting variables
+            print(root)
             name = root.split("/")[2]
             memeUseful = root.split("/")[1]
             clicksRelease = root.split("/")[3]
