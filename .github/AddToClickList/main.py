@@ -14,6 +14,16 @@ jsonshit = {
         "Useful": []
     }
 }
+jsonshit2 = {
+    "Clicks": {
+        "Meme": {},
+        "Useful": {}
+    },
+    "Releases": {
+        "Meme": {},
+        "Useful": {}
+    }
+}
 jsonshitForChecking = {
     "Clicks": {
         "Meme": [],
@@ -62,7 +72,9 @@ if __name__ == "__main__":
 
     rename_files()
 
-    thingy = f'#pragma once\n#include <Geode/Geode.hpp>\n#include <matjson.hpp>\nusing namespace geode::prelude;\n\nauto jsonString = "{json.dumps(jsonshit)}";\n\nmatjson::Value getJson() {{\nreturn matjson::parse(jsonString)\n}}'
+    jsonshitall = {"Reg":jsonshit,"Back":jsonshit2}
+
+    thingy = f'#pragma once\n#include <Geode/Geode.hpp>\n#include <matjson.hpp>\nusing namespace geode::prelude;\n\nauto jsonString = "{json.dumps(jsonshitall)}";\n\nmatjson::Value getJson() {{\nreturn matjson::parse(jsonString)\n}}'
     thingy2 = thingy.split("\n")
     with open("../../src/utils/getJSON.hpp", "w") as file:
         for line in thingy2:
