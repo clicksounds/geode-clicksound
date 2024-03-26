@@ -25,20 +25,31 @@ jobs:
       uses: actions/checkout@v2
       with:
         #token: ${{ secrets.CI_TOKEN }}
+        path: code
         submodules: true
+    - name: Checkout Clicks Repo
+      uses: actions/checkout@v4
+      with:
+        repository: clicksounds/clicks
+        path: clicks
 
     # Update references
     - name: Git Submodule Update
       run: |
+        cd code
         git pull --recurse-submodules
         git submodule update --remote --recursive
 
+    - name: Run AddToClickList
+      run: cd code/.github/AddToClickList; python main.py
+
     - name: Commit update
       run: |
-        git config --global user.name 'Clicks Submodule Updater'
+        cd code
+        git config --global user.name 'Clicks Submodule/Click List Updater'
         git config --global user.email 'bot@noreply.github.com'
         git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-        git commit -am "Update clicksounds/clicks module" && git push || echo "No changes to commit"
+        git commit -am "Update clicksounds/clicks module and update clicklist" && git push || echo "No changes to commit"
   build:
     needs: ["update-modules"]
     if: needs.update-modules.result == 'success' || needs.update-modules.result != 'success'
