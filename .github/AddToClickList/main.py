@@ -24,6 +24,12 @@ jsonshit2 = {
         "Useful": {}
     }
 }
+jsonshit3 = {
+    "CM": 0,
+    "CU": 0,
+    "RM": 0,
+    "RU": 0
+}
 jsonshitForChecking = {
     "Clicks": {
         "Meme": [],
@@ -62,6 +68,18 @@ def rename_files():
                     if o["name"] == name:
                         o["files"].append(filename)
                         o["fileCount"] += 1
+            e = ""
+            if clicksRelease == "Clicks":
+                e += "C"
+            else:
+                e += "R"
+            
+            if memeUseful == "Useful":
+                e += "U"
+            else:
+                e += "M"
+
+            jsonshit3[e] +=1
 
 if __name__ == "__main__":
     if os.path.exists("Output"):
@@ -72,7 +90,7 @@ if __name__ == "__main__":
 
     rename_files()
 
-    jsonshitall = {"Reg":jsonshit,"Back":jsonshit2}
+    jsonshitall = {"Reg":jsonshit,"Back":jsonshit2, "Len": jsonshit3}
 
     thingy = f'#pragma once\n#include <Geode/Geode.hpp>\n#include <matjson.hpp>\nusing namespace geode::prelude;\n\nauto jsonString = "{json.dumps(jsonshitall)}";\n\nmatjson::Value getJson() {{\nreturn matjson::parse(jsonString)\n}}'
     thingy2 = thingy.split("\n")
