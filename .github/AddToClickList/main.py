@@ -24,7 +24,7 @@ jsonshitForChecking = {
     }
 }
 
-def rename_files(folder_path2):
+def rename_files():
     folder_path = shutil.copytree("Update", "Output")
     shutil.rmtree("Update")
     for root, dirs, files in os.walk(folder_path):
@@ -54,14 +54,14 @@ if __name__ == "__main__":
     if os.path.exists("Output"):
         shutil.rmtree("Output")
     os.mkdir("Update")
-    shutil.copytree("../../../../clicks/Meme", "Update/Meme")
-    shutil.copytree("../../../../clicks/Useful", "Update/Useful")
+    shutil.copytree("../../../clicks/Meme", "Update/Meme")
+    shutil.copytree("../../../clicks/Useful", "Update/Useful")
 
-    rename_files(update_folder)
+    rename_files()
 
     thingy = f'#pragma once\n#include <Geode/Geode.hpp>\n#include <matjson.hpp>\nusing namespace geode::prelude;\n\nauto jsonString = "{json.dumps(jsonshit)}";\n\nmatjson::Value getJson() {{\nreturn matjson::parse(jsonString)\n}}'
     thingy2 = thingy.split("\n")
-    with open("../../../src/utils/getJSON.hpp", "w") as file:
+    with open("../../src/utils/getJSON.hpp", "w") as file:
         for line in thingy2:
             file.write(f'{line}\n')
     
