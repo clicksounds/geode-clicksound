@@ -13,6 +13,7 @@ protected:
     int m_currentPos;
     int m_currentClick;
     int m_currentMemeClick;
+    std::string m_kind
     std::string m_currentCustomClick;
     CCMenuItemToggler* usefulBtn;
     CCMenuItemToggler* memeBtn;
@@ -60,7 +61,7 @@ protected:
         if (!SettingNode::init(value))
             return false;
 
-       
+        m_kind = prefixText;
         m_currentPos = value->getTab();
         m_currentClick = value->getClick();
         m_currentMemeClick = value->getMemeClick();
@@ -191,7 +192,8 @@ protected:
 
         if (m_currentPos == 1 || m_currentPos == 2) {
             this->getChildByTag(5001)->setVisible(true);
-            this->getChildByTag(5002)->setVisible(false);
+            this->getChildByTag(5002)->setVisible(false);inputNode1->setString(Clicks::get()->.c_str());
+            if(m_currentPos == 1) {if(m_kind == "Click"){inputNode1->setString(Clicks::get()->getClickList()[m_currentClick].c_str());} else {inputNode1->setString(Clicks::get()->getReleaseList()[m_currentClick].c_str());}} else {if(m_kind == "Click"){inputNode1->setString(Clicks::get()->getClickList()[m_currentMemeClick].c_str());} else {inputNode1->setString(Clicks::get()->getReleaseList()[m_currentMemeClick].c_str());}} 
         } else if (m_currentPos == 3) {
             this->getChildByTag(5001)->setVisible(false);
             this->getChildByTag(5002)->setVisible(true);
@@ -217,7 +219,6 @@ protected:
                 dirs::getGameDir()
             },
             [&](auto path) {
-                static_cast<ClickTypeValue*>(m_value)->setCustomClick(path.string());
                 m_currentCustomClick = path.string();
                 inputNode2->setString(path.string().c_str());
             }
