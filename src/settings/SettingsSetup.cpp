@@ -7,6 +7,14 @@
 
 using namespace geode::prelude;
 
+Clicks* Clicks::get() {
+  if (gget == nullptr) {
+    gget = new (std::nothrow) Clicks();
+    gget->initJson()
+  }
+
+  return gget
+}
 
 SettingNode* SectionSettingValue::createNode(float width) {
     return SectionSettingNode::create(this, width);
@@ -149,5 +157,4 @@ $on_mod(Loaded) {
     Mod::get()->addCustomSetting<ReleaseTypeValue>("releasesound-type", matjson::parse(R"({"tab":1,"click":1,"memeClick":1,"customClick":"..."})"));
     Mod::get()->addCustomSetting<SectionSettingValue>("releasesound-section", "none");
     Mod::get()->addCustomSetting<SectionSettingValue>("misc-section", "none");
-    Clicks::initJson();
 }
