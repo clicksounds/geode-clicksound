@@ -192,7 +192,19 @@ protected:
         m_currentPos = tagToCorner(sender->getTag());
 
         if (m_currentPos == 1 || m_currentPos == 2) {
-            if(m_currentPos == 1) {if(m_kind == "Click"){inputNode1->setString(Clicks::get()->getClickList()[m_currentClick]["name"].as<std::string>().c_str());} else {inputNode1->setString(Clicks::get()->getReleaseList()[m_currentClick]["name"].as<std::string>().c_str());}} else {if(m_kind == "Click"){inputNode1->setString(Clicks::get()->getClickList()[m_currentMemeClick]["name"].as<std::string>().c_str());} else {inputNode1->setString(Clicks::get()->getReleaseList()[m_currentMemeClick]["name"].as<std::string>().c_str());}} 
+            if(m_currentPos == 1) {
+                if(m_kind == "Click"){
+                    inputNode1->setString(Clicks::get()->getClickList()["Useful"][m_currentClick]["name"].as_string().c_str());
+                } else {
+                    inputNode1->setString(Clicks::get()->getReleaseList()["Useful"][m_currentClick]["name"].as_string().c_str());
+                }
+            } else {
+                if(m_kind == "Click"){
+                    inputNode1->setString(Clicks::get()->getClickList()["Meme"][m_currentMemeClick]["name"].as_string().c_str());
+                } else {
+                    inputNode1->setString(Clicks::get()->getReleaseList()["Meme"][m_currentMemeClick]["name"].as_string().c_str());
+                }
+            } 
             this->getChildByTag(5001)->setVisible(true);
             this->getChildByTag(5002)->setVisible(false);
         } else if (m_currentPos == 3) {
