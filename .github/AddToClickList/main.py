@@ -92,7 +92,7 @@ if __name__ == "__main__":
 
     jsonshitall = {"Reg":jsonshit,"Back":jsonshit2, "Len": jsonshit3}
 
-    thingy = f'#pragma once\n#include <Geode/Geode.hpp>\n#include <matjson.hpp>\n#include "Clicks.hpp"\nusing namespace geode::prelude;\nClicks::initJson(\'{jsonshitall}\')'
+    thingy = f'#pragma once\n#include <Geode/Geode.hpp>\n#include <matjson.hpp>\n#include "Clicks.hpp"\nusing namespace geode::prelude;\nClicks::initJson("{jsonshitall}")'
     thingy2 = thingy.split("\n")
     with open("../../src/utils/getJSON.cpp", "w") as file:
         for line in thingy2:
