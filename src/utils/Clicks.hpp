@@ -13,7 +13,7 @@ protected:
     static int m_CU;
     static int m_RM;
     static int m_RU;
-    static const bool hasinitjson = false;
+    static bool hasinitjson = false;
 public:
     static const int getMemeClickLen() {return m_CM;}
     static const int getClickLen() {return m_CU;}
@@ -23,7 +23,7 @@ public:
     static const matjson::Value getReleaseList() {return m_ReleaseList;}
     static const matjson::Value getBackClickList() {return m_BackClickList;}
     static const matjson::Value getBackReleaseList() {return m_BackReleaseList;}
-    static const void initJson(std::string e) {
+    static void initJson(std::string e) {
         if (hasinitjson) return;
         hasinitjson = true;
         auto thing = matjson::parse(e);
