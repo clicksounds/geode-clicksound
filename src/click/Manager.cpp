@@ -15,6 +15,11 @@ Manager* Manager::sharedManager() {
     return s_sharedManager;
 }
 
-Manager::Manager() {}
+Manager::Manager() {
+    // Read contributors from file.
+    auto contributors = Toolbox::readJSON("contributors.json"_spr);
+    m_contributors = contributors["contributors"]
+        .as<std::unordered_set<int>>();
+}
 
 } // namespace click

@@ -18,6 +18,8 @@
 	"description": "Plays a sound whenever you press a jump button.",
 	"resources": {
 		"files": [
+			"resources/contributors.json",
+			
 			"resources/**/*.ogg",
 			"resources/**/*.mp3",
 			"resources/**/*.wav",
