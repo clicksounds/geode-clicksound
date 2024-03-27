@@ -2,7 +2,7 @@
 #include <Geode/Geode.hpp>
 #include <matjson.hpp>
 using namespace geode::prelude;
-
+bool hasinitjson = false;
 class Clicks {
 protected:
     static matjson::Value m_ClickList;
@@ -13,7 +13,6 @@ protected:
     static int m_CU;
     static int m_RM;
     static int m_RU;
-    static bool hasinitjson = false;
 public:
     static const int getMemeClickLen() {return m_CM;}
     static const int getClickLen() {return m_CU;}
