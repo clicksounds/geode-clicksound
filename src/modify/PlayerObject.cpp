@@ -4,9 +4,9 @@
 #include <string>
 #include <matjson.hpp>
 
-#include "../utils/ee.hpp"
-#include "../utils/Clicks.hpp"
-#include "../settings/ClickTypes.hpp"
+#include "../click/utils/ee.hpp"
+#include "../click/utils/Clicks.hpp"
+#include "../click/settings/ClickTypes.hpp"
 
 using namespace geode::prelude;
 

@@ -2,7 +2,7 @@
 #include <Geode/modify/EndLevelLayer.hpp>
 #include <Geode/ui/GeodeUI.hpp>
 
-#include "./utils/ee.hpp"
+#include "../click/utils/ee.hpp"
 
 using namespace geode::prelude;
 
