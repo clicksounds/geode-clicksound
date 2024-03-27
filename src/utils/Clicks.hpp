@@ -20,10 +20,10 @@ public:
     static const int getClickLen() {return m_CU;}
     static const int getMemeReleaseLen() {return m_RM;}
     static const int getReleaseLen() {return m_RU;}
-    static const matjson::Value* getClickList() {return m_ClickList;}
-    static const matjson::Value* getReleaseList() {return m_ReleaseList;}
-    static const matjson::Value* getBackClickList() {return m_BackClickList;}
-    static const matjson::Value* getBackReleaseList() {return m_BackReleaseList;}
+    static const matjson::Value getClickList() {return m_ClickList;}
+    static const matjson::Value getReleaseList() {return m_ReleaseList;}
+    static const matjson::Value getBackClickList() {return m_BackClickList;}
+    static const matjson::Value getBackReleaseList() {return m_BackReleaseList;}
     static const void initJson() {
         auto thing = getJson();
         m_ClickList = thing["Reg"]["Clicks"];
