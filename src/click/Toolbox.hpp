@@ -1,5 +1,8 @@
 #pragma once
 
+#include <matjson.hpp>
+#include <string>
+
 namespace click {
 
 //! @brief Static class with several helper methods.

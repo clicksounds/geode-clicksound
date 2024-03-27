@@ -1,5 +1,6 @@
 #include <Geode/modify/ProfilePage.hpp>
 
+#include <Geode/binding/CCMenuItemSpriteExtra.hpp>
 #include "../click/Manager.hpp"
 
 using namespace geode::prelude;

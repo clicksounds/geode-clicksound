@@ -1,5 +1,8 @@
 #include "Toolbox.hpp"
 
+#include <Geode/utils/file.hpp>
+#include <cocos2d.h>
+
 using namespace geode::prelude;
 
 namespace click {

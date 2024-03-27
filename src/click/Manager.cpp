@@ -1,5 +1,6 @@
 #include "Manager.hpp"
 
+#include <Geode/loader/Mod.hpp>
 #include <matjson/stl_serialize.hpp>
 #include "Toolbox.hpp"
 
