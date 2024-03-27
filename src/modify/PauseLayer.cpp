@@ -3,8 +3,6 @@
 #include "../click/Manager.hpp"
 #include "../click/SettingsButton.hpp"
 
-using namespace geode::prelude;
-
 class $modify(PauseLayer) {
     void customSetup() {
         PauseLayer::customSetup();

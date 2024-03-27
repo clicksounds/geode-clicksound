@@ -6,8 +6,6 @@
 
 #include "Toolbox.hpp"
 
-using namespace geode::prelude;
-
 namespace click {
 
 SettingsButton* SettingsButton::create() {
@@ -23,7 +21,7 @@ SettingsButton* SettingsButton::create() {
 }
 
 bool SettingsButton::init() {
-    if (!CCMenu::init()) {
+    if (!cocos2d::CCMenu::init()) {
         return false;
     }
 
@@ -48,7 +46,7 @@ bool SettingsButton::init() {
 }
 
 void SettingsButton::onClicked(CCObject* sender) {
-    geode::openSettingsPopup(Mod::get());
+    geode::openSettingsPopup(geode::Mod::get());
 }
 
 } // namespace click

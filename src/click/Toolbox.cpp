@@ -3,22 +3,20 @@
 #include <Geode/utils/file.hpp>
 #include <cocos2d.h>
 
-using namespace geode::prelude;
-
 namespace click {
 
 matjson::Value Toolbox::readJSON(std::string const& fileName) {
-    auto* fileUtils = CCFileUtils::sharedFileUtils();
+    auto* fileUtils = cocos2d::CCFileUtils::sharedFileUtils();
     std::string path = fileUtils->fullPathForFilename(
         fileName.c_str(),
         false
     );
 
-    return utils::file::readJson(path).unwrap();
+    return geode::utils::file::readJson(path).unwrap();
 }
 
-CCSprite* Toolbox::createSprite(std::string const& name) {
-    auto* sprite = CCSprite::create();
+cocos2d::CCSprite* Toolbox::createSprite(std::string const& name) {
+    auto* sprite = cocos2d::CCSprite::create();
 
     if (sprite && initSprite(sprite, name)) {
         return sprite;
@@ -27,7 +25,7 @@ CCSprite* Toolbox::createSprite(std::string const& name) {
     return nullptr;
 }
 
-bool Toolbox::initSprite(CCSprite* sprite, std::string const& name) {
+bool Toolbox::initSprite(cocos2d::CCSprite* sprite, std::string const& name) {
     if (sprite->initWithFile(name.c_str())) {
         return true;
     }

@@ -1,9 +1,9 @@
 #include <Geode/modify/ProfilePage.hpp>
 
 #include <Geode/binding/CCMenuItemSpriteExtra.hpp>
-#include "../click/Manager.hpp"
 
-using namespace geode::prelude;
+#include "../click/Toolbox.hpp"
+#include "../click/Manager.hpp"
 
 class $modify(CustomProfilePage, ProfilePage) {
     //! @brief Add developer badge to mod contributors.
@@ -24,7 +24,7 @@ class $modify(CustomProfilePage, ProfilePage) {
         }
 
         auto badge = CCMenuItemSpriteExtra::create(
-            CCSprite::create("csBadge.png"_spr),
+            click::Toolbox::createSprite("csBadge.png"_spr),
             this,
             menu_selector(CustomProfilePage::onBadgeClicked)
         );
@@ -36,7 +36,7 @@ class $modify(CustomProfilePage, ProfilePage) {
     }
 
     //! @brief On developer badge clicked.
-    void onBadgeClicked(CCObject* sender) {
+    void onBadgeClicked(cocos2d::CCObject* sender) {
         FLAlertLayer::create(
             "About",
 
