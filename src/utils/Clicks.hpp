@@ -5,10 +5,10 @@
 using namespace geode::prelude;
 class Clicks {
 protected:
-    static matjson::Value* m_ClickList;
-    static matjson::Value* m_ReleaseList;
-    static matjson::Value* m_BackClickList;
-    static matjson::Value* m_BackReleaseList;
+    static matjson::Value m_ClickList;
+    static matjson::Value m_ReleaseList;
+    static matjson::Value m_BackClickList;
+    static matjson::Value m_BackReleaseList;
     static int m_CM;
     static int m_CU;
     static int m_RM;
@@ -30,9 +30,9 @@ public:
         m_ReleaseList = thing["Reg"]["Releases"];
         m_BackClickList = thing["Back"]["Clicks"];
         m_BackReleaseList = thing["Back"]["Releases"];
-        m_CU = thing["Len"]["CU"];
-        m_CM = thing["Len"]["CM"];
-        m_RM = thing["Len"]["RM"];
-        m_RU = thing["Len"]["RU"];
+        m_CU = thing["Len"]["CU"].as<int>();
+        m_CM = thing["Len"]["CM"].as<int>();
+        m_RM = thing["Len"]["RM"].as<int>();
+        m_RU = thing["Len"]["RU"].as<int>();
     }
 };
