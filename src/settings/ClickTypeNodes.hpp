@@ -175,7 +175,19 @@ protected:
         );
         menu2->addChild(folderBtn);
 
-        if (currentCorner == 1) {inputNode1->setString(std::to_string(m_currentClick).c_str());} else if (currentCorner == 2) {inputNode1->setString(std::to_string(m_currentMemeClick).c_str());}
+        if(currentCorner == 1) {
+            if(m_kind == "Click"){
+                inputNode1->setString(Clicks::get()->getClickList()["Useful"][m_currentClick]["name"].as_string().c_str());
+            } else {
+                inputNode1->setString(Clicks::get()->getReleaseList()["Useful"][m_currentClick]["name"].as_string().c_str());
+            }
+        } else {
+            if(m_kind == "Click"){
+                inputNode1->setString(Clicks::get()->getClickList()["Meme"][m_currentMemeClick]["name"].as_string().c_str());
+            } else {
+                inputNode1->setString(Clicks::get()->getReleaseList()["Meme"][m_currentMemeClick]["name"].as_string().c_str());
+            }
+        } 
 
         if (currentCorner == 1 || currentCorner == 2) {
             menu1->setVisible(true);
