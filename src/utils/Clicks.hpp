@@ -22,10 +22,10 @@ public:
     static const matjson::Value getReleaseList() {return m_ReleaseList;}
     static const matjson::Value getBackClickList() {return m_BackClickList;}
     static const matjson::Value getBackReleaseList() {return m_BackReleaseList;}
-    static int initJson(std::string e) {
+    static int initJson() {
         if (hasinitjson) return 0;
         hasinitjson = true;
-        auto thing = matjson::parse(e);
+        auto thing = matjson::parse();
         m_ClickList = thing["Reg"]["Clicks"];
         m_ReleaseList = thing["Reg"]["Releases"];
         m_BackClickList = thing["Back"]["Clicks"];

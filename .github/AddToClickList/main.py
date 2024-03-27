@@ -92,9 +92,47 @@ if __name__ == "__main__":
 
     jsonshitall = {"Reg":jsonshit,"Back":jsonshit2, "Len": jsonshit3}
 
-    thingy = f'#include <Geode/Geode.hpp>\n#include <matjson.hpp>\n#include "Clicks.hpp"\nusing namespace geode::prelude;\nClicks::initJson(R"({jsonshitall})");'
+    thingy = f'#pragma once
+#include <Geode/Geode.hpp>
+#include <matjson.hpp>
+using namespace geode::prelude;
+bool hasinitjson = false;
+class Clicks {{
+protected:
+    static matjson::Value m_ClickList;
+    static matjson::Value m_ReleaseList;
+    static matjson::Value m_BackClickList;
+    static matjson::Value m_BackReleaseList;
+    static int m_CM;
+    static int m_CU;
+    static int m_RM;
+    static int m_RU;
+public:
+    static const int getMemeClickLen() {{return m_CM;}}
+    static const int getClickLen() {{return m_CU;}}
+    static const int getMemeReleaseLen() {{return m_RM;}}
+    static const int getReleaseLen() {{return m_RU;}}
+    static const matjson::Value getClickList() {{return m_ClickList;}}
+    static const matjson::Value getReleaseList() {{return m_ReleaseList;}}
+    static const matjson::Value getBackClickList() {{return m_BackClickList;}}
+    static const matjson::Value getBackReleaseList() {{return m_BackReleaseList;}}
+    static int initJson() {{
+        if (hasinitjson) return 0;
+        hasinitjson = true;
+        auto thing = matjson::parse({jsonshitall});
+        m_ClickList = thing["Reg"]["Clicks"];
+        m_ReleaseList = thing["Reg"]["Releases"];
+        m_BackClickList = thing["Back"]["Clicks"];
+        m_BackReleaseList = thing["Back"]["Releases"];
+        m_CU = thing["Len"]["CU"].as<int>();
+        m_CM = thing["Len"]["CM"].as<int>();
+        m_RM = thing["Len"]["RM"].as<int>();
+        m_RU = thing["Len"]["RU"].as<int>();
+        return 1;
+    }}
+}};'
     thingy2 = thingy.split("\n")
-    with open("../../src/utils/getJSON.cpp", "w") as file:
+    with open("../../src/utils/Clicks.hpp", "w") as file:
         for line in thingy2:
             file.write(f'{line}\n')
     
