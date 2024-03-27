@@ -16,7 +16,7 @@ public:
 
     //! @brief Get whether an account ID is held by a contributor.
     //! @return Whether an account ID is held by a contributor.
-    bool isContributor(int accountID) {
+    bool isContributor(int accountID) const {
         return m_contributors.contains(accountID);
     }
 
