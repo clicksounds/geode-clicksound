@@ -55,7 +55,7 @@ void SettingClickNode::onClickBtn(CCObject*) {
         #endif
       } else {
         if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) system->playSound(sound, nullptr, false, &channel);
-        channel->setVolume( (Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f) * calculateVolumeMultiplier() );
+        channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
       }
     }
 
@@ -71,14 +71,14 @@ void SettingClickNode::onClickBtn(CCObject*) {
       if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {
         #if defined(GEODE_IS_WINDOWS)
           if (fae->m_sfxVolume != 0) system->playSound(sound, nullptr, false, &channel);
-          channel->setVolume( (fae->m_sfxVolume*2.f) * calculateVolumeMultiplier() );
+          channel->setVolume(fae->m_sfxVolume*2.f);
         #else
           if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) system->playSound(sound, nullptr, false, &channel);
-          channel->setVolume( (Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f) * calculateVolumeMultiplier() );
+          channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
         #endif
       } else {
         if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) system->playSound(sound, nullptr, false, &channel);
-        channel->setVolume( (Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f) * calculateVolumeMultiplier() );
+        channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
       }
     }
 }
@@ -132,11 +132,11 @@ void SettingReleaseNode::onReleaseBtn(CCObject*) {
         channel->setVolume(fae->m_sfxVolume*2.f);
       #else
         if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) system->playSound(sound, nullptr, false, &channel);
-        channel->setVolume((Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f)* calculateVolumeMultiplier());
+        channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
       #endif
     } else {
       if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) system->playSound(sound, nullptr, false, &channel);
-      channel->setVolume((Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f) * calculateVolumeMultiplier());
+      channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
     }
   }
 }
