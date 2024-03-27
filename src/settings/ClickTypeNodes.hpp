@@ -192,7 +192,7 @@ protected:
 
         if (m_currentPos == 1 || m_currentPos == 2) {
             this->getChildByTag(5001)->setVisible(true);
-            this->getChildByTag(5002)->setVisible(false);inputNode1->setString(Clicks::get()->.c_str());
+            this->getChildByTag(5002)->setVisible(false);
             if(m_currentPos == 1) {if(m_kind == "Click"){inputNode1->setString(Clicks::get()->getClickList()[m_currentClick].c_str());} else {inputNode1->setString(Clicks::get()->getReleaseList()[m_currentClick].c_str());}} else {if(m_kind == "Click"){inputNode1->setString(Clicks::get()->getClickList()[m_currentMemeClick].c_str());} else {inputNode1->setString(Clicks::get()->getReleaseList()[m_currentMemeClick].c_str());}} 
         } else if (m_currentPos == 3) {
             this->getChildByTag(5001)->setVisible(false);
