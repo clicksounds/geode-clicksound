@@ -6,7 +6,6 @@
 #include "../click/Manager.hpp"
 
 class $modify(CustomProfilePage, ProfilePage) {
-    //! @brief Add developer badge to mod contributors.
     bool init(int accountID, bool p1) {
         if (!ProfilePage::init(accountID, p1)) {
             return false;
@@ -16,6 +15,7 @@ class $modify(CustomProfilePage, ProfilePage) {
         return true;
     }
 
+    //! @brief Add developer badge to mod contributors.
     void addContributorBadge() {
         auto* mgr = click::Manager::sharedManager();
 
