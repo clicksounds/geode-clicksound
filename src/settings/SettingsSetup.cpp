@@ -29,59 +29,56 @@ SettingNode* SettingClickValue::createNode(float width) {
 // TYSM JOUCA AND FIREE
 // TYSM JOUCA AND FIREE
 void SettingClickNode::onClickBtn(CCObject*) {
-	auto clickSliderValue = Mod::get()->getSettingValue<int64_t>("clicksound-currentsound");
-    auto customClickSound = Mod::get()->getSettingValue<ghc::filesystem::path>("custom-clicksound").string();
-    auto usingCustomClickSound = false;
-    std::string clickSoundInUse = Clicks::getClickSprite(clickSliderValue);
-
-    usingCustomClickSound = false;
-    if (clickSoundInUse == "__USECUSTOM__") usingCustomClickSound = true;
+	matjson::Value settings = Mod::get()->getSettingValue<CRTypeStruct>("clicksound-type").m_type;
     
-    
-    if (!usingCustomClickSound) {
+    if (Mod::get()->getSettingValue<bool>("enable-clicksound") && settings["tab"] != 3) {
       auto fae = FMODAudioEngine::sharedEngine();
       auto system = fae->m_system;
 
       FMOD::Channel* channel;
       FMOD::Sound* sound;
-
-      // System::createSound's first arg requires full c_string path
-      system->createSound((Mod::get()->getResourcesDir().parent_path() / clickSoundInUse).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
-        
-      if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {
-        #if defined(GEODE_IS_WINDOWS)
-          if (fae->m_sfxVolume != 0) system->playSound(sound, nullptr, false, &channel);
-          channel->setVolume(fae->m_sfxVolume*2.f);
-        #else
-          if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) system->playSound(sound, nullptr, false, &channel);
-          channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
-        #endif
-      } else {
-        if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) system->playSound(sound, nullptr, false, &channel);
-        channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
+      
+      if (settings["tab"] == 1){
+        system->createSound((Mod::get()->getResourcesDir().parent_path() / Clicks::getClickSprite(settings["click"].as<int>())).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
+      } else if (settings["tab"] == 2) {
+        system->createSound((Mod::get()->getResourcesDir().parent_path() / Clicks::getClickSprite(settings["memeClick"].as<int>())).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
       }
-    } 
 
-    if (usingCustomClickSound) {
+
+      if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {
+        #if defined(GEODE_IS_WINDOWS)
+          if (fae->m_sfxVolume != 0) system->playSound(sound, nullptr, false, &channel);
+          channel->setVolume( (fae->m_sfxVolume*2.f ) * calculateVolumeMultiplier() );
+        #else
+          if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) system->playSound(sound, nullptr, false, &channel);
+          channel->setVolume( (Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f )* calculateVolumeMultiplier() );
+        #endif
+      } else {
+        if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) system->playSound(sound, nullptr, false, &channel);
+        channel->setVolume( (Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f) * calculateVolumeMultiplier() );
+      }
+    }
+
+    if (Mod::get()->getSettingValue<bool>("enable-clicksound") && settings["tab"] == 3) {
       auto fae = FMODAudioEngine::sharedEngine();
       auto system = fae->m_system;
 
       FMOD::Channel* channel;
       FMOD::Sound* sound;
 
-      system->createSound(customClickSound.c_str(), FMOD_DEFAULT, nullptr, &sound);
-        
+      system->createSound(settings["customClick"].as<std::string>().c_str(), FMOD_DEFAULT, nullptr, &sound);
+      
       if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {
         #if defined(GEODE_IS_WINDOWS)
           if (fae->m_sfxVolume != 0) system->playSound(sound, nullptr, false, &channel);
-          channel->setVolume(fae->m_sfxVolume*2.f);
+          channel->setVolume( (fae->m_sfxVolume*2.f) * calculateVolumeMultiplier() );
         #else
           if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) system->playSound(sound, nullptr, false, &channel);
-          channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
+          channel->setVolume( (Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f) * calculateVolumeMultiplier() );
         #endif
       } else {
         if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) system->playSound(sound, nullptr, false, &channel);
-        channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
+        channel->setVolume( (Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f) * calculateVolumeMultiplier() );
       }
     }
 }
@@ -91,61 +88,57 @@ SettingNode* SettingReleaseValue::createNode(float width) {
 }
 
 void SettingReleaseNode::onReleaseBtn(CCObject*) {
-	auto releaseSliderValue = Mod::get()->getSettingValue<int64_t>("releasesound-currentsound");
-    auto customReleaseSound = Mod::get()->getSettingValue<ghc::filesystem::path>("custom-releasesound").string();
-    bool usingCustomReleaseSound;
-    std::string releaseSoundInUse = Clicks::getReleaseSprite(releaseSliderValue);
+	matjson::Value settings = Mod::get()->getSettingValue<CRTypeStruct>("releasesound-type").m_type;
 
+  if (Mod::get()->getSettingValue<bool>("enable-releasesound") && settings["tab"] != 3) {
+    auto fae = FMODAudioEngine::sharedEngine();
+    auto system = fae->m_system;
 
-    if (releaseSliderValue != 0) usingCustomReleaseSound = false;
-    if (releaseSoundInUse == "__USECUSTOM__") usingCustomReleaseSound = true;
- 
-    if (!usingCustomReleaseSound) {
-      auto fae = FMODAudioEngine::sharedEngine();
-      auto system = fae->m_system;
+    FMOD::Channel* channel;
+    FMOD::Sound* sound;
 
-      FMOD::Channel* channel;
-      FMOD::Sound* sound;
-
-      // System::createSound's first arg requires full c_string path
-      system->createSound((Mod::get()->getResourcesDir().parent_path() / releaseSoundInUse).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
-        
-      if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {
-        #if defined(GEODE_IS_WINDOWS)
-          if (fae->m_sfxVolume != 0) system->playSound(sound, nullptr, false, &channel);
-          channel->setVolume(fae->m_sfxVolume*2.f);
-        #else
-          if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) system->playSound(sound, nullptr, false, &channel);
-          channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
-        #endif
-      } else {
-        if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) system->playSound(sound, nullptr, false, &channel);
-        channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
-      }
-    } 
-
-    if (usingCustomReleaseSound) {
-      auto fae = FMODAudioEngine::sharedEngine();
-      auto system = fae->m_system;
-
-      FMOD::Channel* channel;
-      FMOD::Sound* sound;
-
-      system->createSound(customReleaseSound.c_str(), FMOD_DEFAULT, nullptr, &sound);
-        
-      if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {
-        #if defined(GEODE_IS_WINDOWS)
-          if (fae->m_sfxVolume != 0) system->playSound(sound, nullptr, false, &channel);
-          channel->setVolume(fae->m_sfxVolume*2.f);
-        #else
-          if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) system->playSound(sound, nullptr, false, &channel);
-          channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
-        #endif
-      } else {
-        if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) system->playSound(sound, nullptr, false, &channel);
-        channel->setVolume(Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f);
-      }
+    if (settings["tab"] == 1){
+      system->createSound((Mod::get()->getResourcesDir().parent_path() / Clicks::getReleaseSprite(settings["click"].as<int>())).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
+    } else if (settings["tab"] == 2) {
+      system->createSound((Mod::get()->getResourcesDir().parent_path() / Clicks::getReleaseSprite(settings["memeClick"].as<int>())).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
     }
+    
+    if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {
+      #if defined(GEODE_IS_WINDOWS)
+        if (fae->m_sfxVolume != 0) system->playSound(sound, nullptr, false, &channel);
+        channel->setVolume((fae->m_sfxVolume*2.f) * calculateVolumeMultiplier() );
+      #else
+        if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) system->playSound(sound, nullptr, false, &channel);
+        channel->setVolume( (Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f) * calculateVolumeMultiplier() );
+      #endif
+    } else {
+      if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) system->playSound(sound, nullptr, false, &channel);
+      channel->setVolume( (Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f ) * calculateVolumeMultiplier() );
+    }
+  }
+
+  if (Mod::get()->getSettingValue<bool>("enable-releasesound") && settings["tab"] == 3) {
+    auto fae = FMODAudioEngine::sharedEngine();
+    auto system = fae->m_system;
+
+    FMOD::Channel* channel;
+    FMOD::Sound* sound;
+
+    system->createSound(settings["customClick"].as<std::string>().c_str(), FMOD_DEFAULT, nullptr, &sound);
+    
+    if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {
+      #if defined(GEODE_IS_WINDOWS)
+        if (fae->m_sfxVolume != 0) system->playSound(sound, nullptr, false, &channel);
+        channel->setVolume(fae->m_sfxVolume*2.f);
+      #else
+        if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) system->playSound(sound, nullptr, false, &channel);
+        channel->setVolume((Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f)* calculateVolumeMultiplier());
+      #endif
+    } else {
+      if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) system->playSound(sound, nullptr, false, &channel);
+      channel->setVolume((Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f) * calculateVolumeMultiplier());
+    }
+  }
 }
 
 $on_mod(Loaded) {
