@@ -6,7 +6,7 @@
 #include "../utils/Clicks.hpp"
 
 using namespace geode::prelude;
-
+Clicks* Clicks::gget = nullptr;
 Clicks* Clicks::get() {
   if (gget == nullptr) {
     gget = new (std::nothrow) Clicks();
