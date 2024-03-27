@@ -59,9 +59,9 @@ public:
       FMOD::Sound* sound;
       
       if (settings["tab"] == 1){
-        system->createSound((Mod::get()->getResourcesDir().parent_path() / Clicks::getClickSprite(settings["click"].as<int>())).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
+        // system->createSound((Mod::get()->getResourcesDir().parent_path() / Clicks::getClickSprite(settings["click"].as<int>())).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
       } else if (settings["tab"] == 2) {
-        system->createSound((Mod::get()->getResourcesDir().parent_path() / Clicks::getClickSprite(settings["memeClick"].as<int>())).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
+        // system->createSound((Mod::get()->getResourcesDir().parent_path() / Clicks::getClickSprite(settings["memeClick"].as<int>())).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
       }
 
 
@@ -131,9 +131,9 @@ public:
       FMOD::Sound* sound;
 
       if (settings["tab"] == 1){
-        system->createSound((Mod::get()->getResourcesDir().parent_path() / Clicks::getReleaseSprite(settings["click"].as<int>())).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
+        // system->createSound((Mod::get()->getResourcesDir().parent_path() / Clicks::getReleaseSprite(settings["click"].as<int>())).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
       } else if (settings["tab"] == 2) {
-        system->createSound((Mod::get()->getResourcesDir().parent_path() / Clicks::getReleaseSprite(settings["memeClick"].as<int>())).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
+        // system->createSound((Mod::get()->getResourcesDir().parent_path() / Clicks::getReleaseSprite(settings["memeClick"].as<int>())).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
       }
       
       if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {

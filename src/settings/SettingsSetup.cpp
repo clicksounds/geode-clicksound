@@ -39,9 +39,9 @@ void SettingClickNode::onClickBtn(CCObject*) {
       FMOD::Sound* sound;
       
       if (settings["tab"] == 1){
-        system->createSound((Mod::get()->getResourcesDir().parent_path() / Clicks::getClickSprite(settings["click"].as<int>())).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
+        // system->createSound((Mod::get()->getResourcesDir().parent_path() / Clicks::getClickSprite(settings["click"].as<int>())).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
       } else if (settings["tab"] == 2) {
-        system->createSound((Mod::get()->getResourcesDir().parent_path() / Clicks::getClickSprite(settings["memeClick"].as<int>())).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
+        // system->createSound((Mod::get()->getResourcesDir().parent_path() / Clicks::getClickSprite(settings["memeClick"].as<int>())).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
       }
 
 
@@ -98,9 +98,9 @@ void SettingReleaseNode::onReleaseBtn(CCObject*) {
     FMOD::Sound* sound;
 
     if (settings["tab"] == 1){
-      system->createSound((Mod::get()->getResourcesDir().parent_path() / Clicks::getReleaseSprite(settings["click"].as<int>())).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
+      // system->createSound((Mod::get()->getResourcesDir().parent_path() / Clicks::getReleaseSprite(settings["click"].as<int>())).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
     } else if (settings["tab"] == 2) {
-      system->createSound((Mod::get()->getResourcesDir().parent_path() / Clicks::getReleaseSprite(settings["memeClick"].as<int>())).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
+      // system->createSound((Mod::get()->getResourcesDir().parent_path() / Clicks::getReleaseSprite(settings["memeClick"].as<int>())).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
     }
     
     if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {
@@ -149,4 +149,5 @@ $on_mod(Loaded) {
     Mod::get()->addCustomSetting<ReleaseTypeValue>("releasesound-type", matjson::parse(R"({"tab":1,"click":1,"memeClick":1,"customClick":"..."})"));
     Mod::get()->addCustomSetting<SectionSettingValue>("releasesound-section", "none");
     Mod::get()->addCustomSetting<SectionSettingValue>("misc-section", "none");
+    Clicks::initJson();
 }
