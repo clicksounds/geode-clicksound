@@ -1,8 +1,8 @@
 #pragma once
 #include <Geode/Geode.hpp>
 #include <matjson.hpp>
-#include "getJSON.hpp"
 using namespace geode::prelude;
+
 class Clicks {
 protected:
     static matjson::Value m_ClickList;
@@ -13,9 +13,8 @@ protected:
     static int m_CU;
     static int m_RM;
     static int m_RU;
+    static bool hasinitjson = false;
 public:
-    static const char* getClickSprite(int);
-    static const char* getReleaseSprite(int);
     static const int getMemeClickLen() {return m_CM;}
     static const int getClickLen() {return m_CU;}
     static const int getMemeReleaseLen() {return m_RM;}
@@ -24,8 +23,10 @@ public:
     static const matjson::Value getReleaseList() {return m_ReleaseList;}
     static const matjson::Value getBackClickList() {return m_BackClickList;}
     static const matjson::Value getBackReleaseList() {return m_BackReleaseList;}
-    static const void initJson() {
-        auto thing = getJson();
+    static const void initJson(std::string e) {
+        if (hasinitjson) return;
+        hasinitjson = true;
+        auto thing = matjson::parse(e);
         m_ClickList = thing["Reg"]["Clicks"];
         m_ReleaseList = thing["Reg"]["Releases"];
         m_BackClickList = thing["Back"]["Clicks"];
