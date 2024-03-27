@@ -1,26 +1,7 @@
 #pragma once
 #include <Geode/Geode.hpp>
 #include <Geode/loader/SettingNode.hpp>
-#include <chrono>
 using namespace geode::prelude;
-
-auto oldTime = std::chrono::steady_clock::now();
-
-bool isLessThanOneSecond(auto time) {
-      oldTime = std::chrono::steady_clock::now(); // resets the time for ya know
-     if (Mod::get()->getSettingValue<bool>("decrease-volume-on-spam-click")) {
-        return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - time).count() < 500;
-     }
-     return false;
-}
-
-float calculateVolumeMultiplier() { // ARE YOU CLICKING????
-    if ( isLessThanOneSecond(oldTime) ) {
-        return 0.3f; // a number i picked
-    } else {
-        return 1.0f; 
-    };
-}
 
 // TYSM JOUCA AND FIREE
 
