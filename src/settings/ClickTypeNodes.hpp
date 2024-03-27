@@ -13,7 +13,7 @@ protected:
     int m_currentPos;
     int m_currentClick;
     int m_currentMemeClick;
-    std::string m_kind
+    std::string m_kind;
     std::string m_currentCustomClick;
     CCMenuItemToggler* usefulBtn;
     CCMenuItemToggler* memeBtn;
