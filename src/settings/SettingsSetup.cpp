@@ -10,10 +10,10 @@ using namespace geode::prelude;
 Clicks* Clicks::get() {
   if (gget == nullptr) {
     gget = new (std::nothrow) Clicks();
-    gget->initJson()
+    gget->initJson();
   }
 
-  return gget
+  return gget;
 }
 
 SettingNode* SectionSettingValue::createNode(float width) {

@@ -4,6 +4,7 @@
 using namespace geode::prelude;
 class Clicks {
 protected:
+    Clicks* gget;
     matjson::Value m_ClickList;
     matjson::Value m_ReleaseList;
     matjson::Value m_BackClickList;
