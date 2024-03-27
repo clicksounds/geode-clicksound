@@ -54,3 +54,6 @@ build-*/
 
 # clangd
 .cache/
+
+# Setup script
+setup.sh
