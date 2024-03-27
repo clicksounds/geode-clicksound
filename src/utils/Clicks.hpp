@@ -13,7 +13,7 @@ protected:
     static int m_CU;
     static int m_RM;
     static int m_RU;
-    static bool hasinitjson = false;
+    static const bool hasinitjson = false;
 public:
     static const int getMemeClickLen() {return m_CM;}
     static const int getClickLen() {return m_CU;}
