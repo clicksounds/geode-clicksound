@@ -14,7 +14,6 @@ protected:
     int m_RM;
     int m_RU;
 public:
-<<<<<<< HEAD
     static Clicks* get();
     int getMemeClickLen() {return m_CM;}
     int getClickLen() {return m_CU;}
@@ -34,6 +33,5 @@ public:
         m_CM = thing["Len"]["CM"].as<int>();
         m_RM = thing["Len"]["RM"].as<int>();
         m_RU = thing["Len"]["RU"].as<int>();
-        return 1;
     }
 };
