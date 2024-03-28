@@ -109,4 +109,4 @@ Thank you so much to all of the people listed below for doing whatever they did 
 - [Jouca](https://github.com/Jouca) - Helped with the preview button
 - Rue - Made the icon of Click Sounds (v1.6.0) >w<
 - aceofspadesss - Provided a ton of unique click sounds for the mod! >w<
-(If you think I forgot to credit you, DM @beat___ on Discord. Credit is not given for asking a sound or feature request.)
+(If you think I forgot to credit you, DM @coopeeo on Discord. Credit is not given for asking a sound or feature request.)
