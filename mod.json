@@ -17,10 +17,14 @@
 	},
 	"description": "Plays a sound whenever you press a jump button.",
 	"resources": {
+		"spritesheets": {
+			"ClickSheet": [
+				"resources/ClickSheet/*.png"
+			]
+		},
 		"files": [
 			"resources/contributors.json"
-		],		
-		"sprites": ["resources/**/*.png"]
+		]
 	},
 	"settings": {
 		"volume-slider": {

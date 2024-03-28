@@ -28,7 +28,7 @@ bool SettingsButton::init() {
     ignoreAnchorPointForPosition(false);
     setAnchorPoint({ 0.5f, 0.5f });
 
-    auto* sprite = Toolbox::createSprite("Button.png"_spr);
+    auto* sprite = Toolbox::createSprite("clickBtn_001.png"_spr);
     sprite->setScale(0.6f);
 
     auto* button = CCMenuItemSpriteExtra::create(

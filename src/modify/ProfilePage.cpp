@@ -54,7 +54,7 @@ class $modify(CustomProfilePage, ProfilePage) {
         }
 
         auto badge = CCMenuItemSpriteExtra::create(
-            click::Toolbox::createSprite("csBadge.png"_spr),
+            click::Toolbox::createSprite("clickIcon_001.png"_spr),
             this,
             menu_selector(CustomProfilePage::onBadgeClicked)
         );
