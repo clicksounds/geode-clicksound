@@ -35,6 +35,12 @@ class $modify(ProfilePage) {
     if (!spr) {
       return true; // unable to find sprite
     }
+
+    std::string username = m_usernameLabel->getString();
+
+    if (csContributors.count(p0) > 0) 
+    {
+      
     auto btn = CCMenuItemSpriteExtra::create(
            spr, this, menu_selector(buttonfunctionthing::onButtonClick)
       );
@@ -42,16 +48,9 @@ class $modify(ProfilePage) {
 
     btn->setPosition(14.500, -132);
     btn->setZOrder(26);
-    btn->setID("cs-badge");
+    btn->setID("cs-badge"_spr);
     this->getChildByIDRecursive("left-menu")->addChild(btn);
-    btn->setVisible(false);
     this->getChildByIDRecursive("left-menu")->updateLayout();
-
-    std::string username = m_usernameLabel->getString();
-
-    if (csContributors.count(p0) > 0) 
-    {
-      btn->setVisible(true);
         }
 
     auto posX = m_usernameLabel->getPositionX();
