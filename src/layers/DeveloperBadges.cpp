@@ -48,9 +48,8 @@ class $modify(ProfilePage) {
 
     btn->setPosition(14.500, -132);
     btn->setZOrder(26);
-    btn->setID("cs-badge");
+    btn->setID("cs-badge"_spr);
     this->getChildByIDRecursive("left-menu")->addChild(btn);
-    btn->setVisible(false);
     this->getChildByIDRecursive("left-menu")->updateLayout();
         }
 
