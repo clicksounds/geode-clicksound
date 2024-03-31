@@ -12,47 +12,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  update-modules:
-    name: Update Modules
-    runs-on: ubuntu-latest
-    # https://stackoverflow.com/questions/64407333/using-github-actions-to-automatically-update-the-repos-submodules
-    defaults:
-      run:
-        shell: bash
-
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        #token: ${{ secrets.CI_TOKEN }}
-        path: code
-        submodules: true
-    - name: Checkout Clicks Repo
-      uses: actions/checkout@v4
-      with:
-        repository: clicksounds/clicks
-        path: clicks
-
-    # Update references
-    - name: Git Submodule Update
-      run: |
-        cd code
-        git pull --recurse-submodules
-        git submodule update --remote --recursive
-
-    - name: Run AddToClickList
-      run: cd code/.github/AddToClickList; python main.py
-
-    - name: Commit update
-      run: |
-        cd code
-        git config --global user.name 'Clicks Submodule/Click List Updater'
-        git config --global user.email 'bot@noreply.github.com'
-        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-        git commit -am "Update clicksounds/clicks module and update clicklist" && git push || echo "No changes to commit"
   build:
-    needs: ["update-modules"]
-    if: needs.update-modules.result == 'success' || needs.update-modules.result != 'success'
     strategy:
       fail-fast: false
       matrix:
@@ -87,8 +47,7 @@ jobs:
   package:
     name: Package builds
     runs-on: ubuntu-latest
-    needs: ['build', 'update-modules']
-    if: (needs.update-modules.result == 'success' || needs.update-modules.result != 'success') && needs.build.result == 'success'
+    needs: ['build']
 
     steps:
       - uses: geode-sdk/build-geode-mod@combine

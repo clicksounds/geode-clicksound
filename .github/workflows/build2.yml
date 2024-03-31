@@ -13,37 +13,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  #update-modules:
-  #  name: Update Modules
-  #  runs-on: ubuntu-latest
-    # https://stackoverflow.com/questions/64407333/using-github-actions-to-automatically-update-the-repos-submodules
-  #  defaults:
-  #    run:
-  #      shell: bash
-
-  #  steps:
-  #  - name: Checkout
-  #    uses: actions/checkout@v2
-  #    with:
-  #      #token: ${{ secrets.CI_TOKEN }}
-  #      submodules: true
-
-    # Update references
-  #  - name: Git Submodule Update
-  #    run: |
-  #      git pull --recurse-submodules
-  #      git submodule update --remote --recursive
-
-  #  - name: Commit update
-  #    run: |
-  #      git config --global user.name 'Clicks Submodule Updater'
-  #      git config --global user.email 'bot@noreply.github.com'
-  #      git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-  #      git commit -am "Update clicksounds/clicks module" && git push || echo "No changes to commit"
-
   build:
-    #needs: ["update-modules"]
-    #if: needs.update-modules.result == 'success' || needs.update-modules.result != 'success'
     strategy:
       fail-fast: false
       matrix:
