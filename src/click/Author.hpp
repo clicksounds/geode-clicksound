@@ -53,6 +53,6 @@ struct matjson::Serialize<click::Author::Type> {
     }
 
     static bool is_json(matjson::Value const& json) {
-        return false;
+        return true;
     }
 };

@@ -8,7 +8,10 @@ namespace click {
 
 //! @brief A click or release pack.
 class Pack final {
-public: 
+public:
+
+    Pack() {}
+
     //! @brief Construct Click Pack from JSON.
     //! @param json JSON value.
     //! @param isServer is this a mod on the server?
@@ -23,6 +26,7 @@ public:
     std::vector<click::Author> const& getAuthors() const { return m_authors; }
     std::vector<std::string> const& getClickFiles() const { return m_clickFiles; }
     std::vector<std::string> const& getReleaseFiles() const { return m_releaseFiles; }
+    matjson::Value const& getJSON() const { return m_alljson; }
     bool const& isServer() const { return m_isServer; }
 
 private:
@@ -32,6 +36,8 @@ private:
     std::vector<click::Author> m_authors;
     std::vector<std::string> m_clickFiles;
     std::vector<std::string> m_releaseFiles;
+    matjson::Value m_alljson;
+
     bool m_isServer;
 };
 
@@ -39,8 +45,12 @@ private:
 
 template<>
 struct matjson::Serialize<click::Pack> {
-    static click::Pack from_json(matjson::Value const& json, bool isServer=false) {
-        return click::Pack(json, isServer);
+    static click::Pack from_json(matjson::Value const& json) {
+        return click::Pack(json, false);
+    }
+
+    static matjson::Value to_json(const click::Pack& pack) {
+        return pack.getJSON();
     }
 
     static bool is_json(matjson::Value const& json) {
@@ -62,6 +72,6 @@ struct matjson::Serialize<click::Pack::Category> {
     }
 
     static bool is_json(matjson::Value const& json) {
-        return false;
+        return true;
     }
 };

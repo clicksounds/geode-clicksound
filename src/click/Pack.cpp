@@ -7,6 +7,7 @@ Pack::Pack(matjson::Value const& json, bool isServer) {
     m_id = json["id"].as_string();
     m_category = json["type"].as<click::Pack::Category>();
     m_isServer = isServer;
+    m_alljson = json;
 
     // Author sorting (shitty code incoming)
     std::vector<matjson::Value> unsortedAuthors = json["authors"].as<std::vector<matjson::Value>>();
