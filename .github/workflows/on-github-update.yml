@@ -17,7 +17,7 @@ jobs:
         id: runit
         shell: bash
         run: |
-          python3 click/.github/sendupdate.py
+          python3 click/.github/workflow-scripts/send-update.py
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           ROLE_ID: ${{ secrets.ROLE_ID }}

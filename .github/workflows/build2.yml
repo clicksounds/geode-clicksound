@@ -3,7 +3,7 @@ name: Build Geode Mod - New Index
 on:
   workflow_dispatch:
   push:
-    branches: "!main"
+    branches: "!**"
 
 permissions:
   contents: write
