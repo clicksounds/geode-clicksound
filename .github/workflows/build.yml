@@ -24,7 +24,7 @@ jobs:
           os: macos-latest
         
         - name: iOS
-          os: ubuntu-latest
+          os: macos-latest
           target: iOS
         
         - name: Android 32-bit
