@@ -16,7 +16,7 @@ class $modify(MyMenuLayer, MenuLayer) {
 		);
 		auto menu = this->getChildByID("bottom-menu");
 		menu->addChild(myButton);
-		myButton->setID("my-button"_spr);
+		myButton->setID("store"_spr);
 		menu->updateLayout();
 		return true;
 	}

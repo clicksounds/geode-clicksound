@@ -21,7 +21,11 @@
 			"resources/**/*.m4a",
 			"resources/**/*.flac"
 		],		
-		"sprites": ["resources/**/*.png"]
+		"spritesheets": {
+			"ClickSprites": [
+				"resources/sprites/*.png"
+			]
+		}
 	},
 	"settings": {
 		"volume-slider": {
