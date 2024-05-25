@@ -19,7 +19,7 @@ project(click-sound VERSION 1.0.0)
 
 # Add Everything under src dir
 file(GLOB_RECURSE SOURCES 
-    !src/old/*.cpp
+    !src/old/**.cpp
     src/*.cpp
 )
 

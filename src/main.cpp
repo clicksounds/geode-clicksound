@@ -1,4 +1,5 @@
 #include <Geode/Geode.hpp>
+#include "./StoreLayer.hpp"
 using namespace geode::prelude;
 
 
@@ -10,7 +11,7 @@ class $modify(MyMenuLayer, MenuLayer) {
 		}
 
 		auto myButton = CCMenuItemSpriteExtra::create(
-			CCSprite::createWithSpriteFrameName("GJ_likeBtn_001.png"),
+			CCSprite::createWithSpriteFrameName("csBtn"_spr),
 			this,
 			menu_selector(MyMenuLayer::onMyButton)
 		);
@@ -22,6 +23,7 @@ class $modify(MyMenuLayer, MenuLayer) {
 	}
 
 	void onMyButton(CCObject*) {
-		FLAlertLayer::create("Geode", "Hello from my custom mod!", "OK")->show();
+        auto store = StoreLayer::scene();
+		CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, store));
 	}
 };
