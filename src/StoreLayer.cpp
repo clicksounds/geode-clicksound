@@ -5,7 +5,7 @@
 #include <matjson.hpp>
 using namespace geode::prelude;
 
-StoreLayer* StoreLayer::create(CCScene* lastScene = nullptr)) {
+StoreLayer* StoreLayer::create(CCScene* lastScene = nullptr) {
     auto ret = new StoreLayer();
     m_lastScene = lastScene;
     if (ret && ret->init()) {
@@ -61,5 +61,5 @@ void StoreLayer::onClose(CCObject*) {
     } else {
         scene = m_lastScene;
     }
-    CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f));
+    CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, scene));
 }
