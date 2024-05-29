@@ -19,11 +19,6 @@ endif()
 
 # Add Everything under src dir
 file(GLOB_RECURSE SOURCES 
-    !src/old/*.cpp
-    !src/old/*/*.cpp
-    !src/old/layers/*.cpp
-    !src/old/settings/*.cpp
-    !src/old/utils/*.cpp
     src/*.cpp
 )
 
