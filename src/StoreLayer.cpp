@@ -5,8 +5,9 @@
 #include <matjson.hpp>
 using namespace geode::prelude;
 
-StoreLayer* StoreLayer::create() {
+StoreLayer* StoreLayer::create(CCScene* lastScene = nullptr) {
     auto ret = new StoreLayer();
+    ret->m_lastScene = lastScene;
     if (ret && ret->init()) {
         ret->autorelease();
         return ret;
@@ -15,8 +16,8 @@ StoreLayer* StoreLayer::create() {
     return nullptr;
 };
 
-CCScene* StoreLayer::scene() {
-    auto layer = StoreLayer::create();
+CCScene* StoreLayer::scene(CCScene* lastScene = nullptr) {
+    auto layer = StoreLayer::create(lastScene);
     auto scene = CCScene::create();
     scene->addChild(layer);
     return scene;
@@ -45,4 +46,20 @@ bool StoreLayer::init() {
     CCMenuItemSpriteExtra* backBtn = CCMenuItemSpriteExtra::create(backSpr, this, menu_selector(StoreLayer::onClose));
     backBtn->setPosition(-winSize.width / 2 + 25.0f, winSize.height / 2 - 25.0f);
     m_menu->addChild(backBtn);
+    
+    return true;
+}
+
+void StoreLayer::keyBackClicked() {
+    StoreLayer::onClose(nullptr);
+}
+
+void StoreLayer::onClose(CCObject*) {
+    CCScene* scene;
+    if (m_lastScene == nullptr) {
+        scene = MenuLayer::scene(false);
+    } else {
+        scene = m_lastScene;
+    }
+    CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, scene));
 }

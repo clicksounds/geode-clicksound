@@ -6,9 +6,10 @@ class StoreLayer : public cocos2d::CCLayer {
 protected:
     std::string m_idk;
     CCMenu* m_menu;
+    CCScene* m_lastScene;
 public:
-    static StoreLayer* create();
-    static cocos2d::CCScene* scene();
+    static StoreLayer* create(CCScene*);
+    static cocos2d::CCScene* scene(CCScene*);
     bool init();
     void onClose(CCObject*);
     void keyBackClicked();
