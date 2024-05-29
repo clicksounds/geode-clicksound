@@ -7,7 +7,7 @@ using namespace geode::prelude;
 
 StoreLayer* StoreLayer::create(CCScene* lastScene = nullptr) {
     auto ret = new StoreLayer();
-    m_lastScene = lastScene;
+    ret->m_lastScene = lastScene;
     if (ret && ret->init()) {
         ret->autorelease();
         return ret;
