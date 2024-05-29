@@ -4,7 +4,7 @@ using namespace geode::prelude;
 
 
 #include <Geode/modify/MenuLayer.hpp>
-class $modify(MyMenuLayer, MenuLayer) {
+class $modify(StoreLayerButton, MenuLayer) {
 	bool init() {
 		if (!MenuLayer::init()) {
 			return false;
@@ -13,7 +13,7 @@ class $modify(MyMenuLayer, MenuLayer) {
 		auto myButton = CCMenuItemSpriteExtra::create(
 			CCSprite::createWithSpriteFrameName("csBtn"_spr),
 			this,
-			menu_selector(MyMenuLayer::onMyButton)
+			menu_selector(StoreLayerButton::onMyButton)
 		);
 		auto menu = this->getChildByID("bottom-menu");
 		menu->addChild(myButton);
@@ -23,7 +23,8 @@ class $modify(MyMenuLayer, MenuLayer) {
 	}
 
 	void onMyButton(CCObject*) {
-        auto store = StoreLayer::scene();
-		CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, store));
+		auto director = CCDirector::sharedDirector();
+        auto store = StoreLayer::scene(director->getRunningScene());
+		director->pushScene(CCTransitionFade::create(0.5f, store));
 	}
 };
