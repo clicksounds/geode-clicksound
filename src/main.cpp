@@ -11,7 +11,7 @@ class $modify(StoreLayerButton, MenuLayer) {
 		}
 
 		auto myButton = CCMenuItemSpriteExtra::create(
-			CCSprite::createWithSpriteFrameName("csBtn"_spr),
+			CCSprite::createWithSpriteFrameName("csBtn.png"_spr),
 			this,
 			menu_selector(StoreLayerButton::onMyButton)
 		);

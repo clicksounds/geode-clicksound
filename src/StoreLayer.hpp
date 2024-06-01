@@ -4,7 +4,6 @@ using namespace geode::prelude;
 
 class StoreLayer : public cocos2d::CCLayer {
 protected:
-    std::string m_idk;
     CCMenu* m_menu;
     CCScene* m_lastScene;
 public:

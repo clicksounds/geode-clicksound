@@ -9,7 +9,7 @@ set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 project(click-sound VERSION 1.0.0)
 
 # iOS support
-if(${GEODE_TARGET_PLATFORM} STREQUAL "iOS" OR IOS)
+if("${GEODE_TARGET_PLATFORM}" STREQUAL "iOS" OR IOS)
     message(STATUS "building for ios :3")
     unset(CMAKE_OSX_ARCHITECTURES)
     set(CMAKE_OSX_ARCHITECTURES arm64)
