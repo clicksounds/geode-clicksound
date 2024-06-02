@@ -25,7 +25,17 @@
 		"spritesheets": {
 			"ClickSprites": [
 				"resources/sprites/*.png"
+			],
+			"MaterialIcons": [
+				"resources/material-icons/*.png"
 			]
+		},
+		"fonts": {
+			"NotoSans" : {
+				"path": "resources/fonts/NotoSans-Variable.ttf",
+				"size": 128,
+                "charset": "32-500,8226"
+			}
 		}
 	},
 	"settings": {

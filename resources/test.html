@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<div id="preview">
+<svg id="testSvg" xmlns="http://www.w3.org/2000/svg" class="circular" viewBox="25 25 50 50">
+  <circle id="e" class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" 
+      stroke-linecap="round" stroke-miterlimit="10" stroke="#fff">
+    <!--animate attributeName="stroke-dasharray" values="1,200; 89,200; 89,200" dur="1.5s" repeatCount="indefinite" />
+    <animate attributeName="stroke-dashoffset" values="0; -35; -124" dur="1.5s" repeatCount="indefinite" /-->
+  </circle>
+</svg>
+</div>
+
+
+<style>
+html {
+  height: 100%;
+}
+
+body {
+  background: hsl(224, 50%, 10%);
+  color: #111;
+  display: grid;
+  grid-template-rows: minmax(10em, 1fr) min-content;
+  min-height: 100%;
+}
+
+@media (orientation: landscape) and (min-width: 42em) {
+  body {
+    grid-template-columns: minmax(10em, 2fr) minmax(15em, 1fr);
+    grid-template-rows: auto;
+  }
+}
+
+#preview {
+  position: relative;
+}
+
+#testSvg {
+  height: auto;
+  left: 50%;
+  min-width: 64px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  width: 50%;
+  width: 66vmin;
+}
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/DrawSVGPlugin.min.js"></script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/MorphSVGPlugin.min.js"></script>
+<script src="https://unpkg.com/save-svg-as-png@1.4.14/lib/saveSvgAsPng.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.2.2/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
+<script>
+const svg = document.getElementById('testSvg');
+//const canvas = document.querySelector('canvas');
+//const ctx = canvas.getContext("2d");
+var timeline = new TimelineMax({repeat: -1, repeatDelay: -0.1});
+
+timeline.to('.path', .5, {
+  strokeDasharray: "1 200",
+  strokeDashoffset: 0,
+  ease: Power1.easeInOut
+}).to('.path', .5, {
+  strokeDasharray: "89 200",
+  strokeDashoffset: -35,
+  ease: Power1.easeInOut
+}).to('.path', .5, {
+    strokeDasharray: "89 200",
+  strokeDashoffset: -132,
+  ease: Power1.easeInOut
+})
+
+function generate(fps = 24, scale = 2) {
+    // Get duration from our timeline
+    const duration = timeline.duration();
+    // Calculate the total number of frames
+    const frames = Math.ceil(duration * fps);
+
+
+    let filePrefix = "spinner-";
+    let fileScale = scale === 1 ? "" : `@${scale}x`;
+    let fileExtension = ".png";
+
+    scale = scale / window.devicePixelRatio;
+    const zip = new JSZip();
+    let step = Promise.resolve();
+
+    // For every frame we need to generate…
+    for (let i = 0; i <= frames; i++) {
+        let position = duration / frames * i;
+        let filename = `${filePrefix}${i}${fileScale}${fileExtension}`;
+        // Begin this step when the previous finishes
+        step = step.then(() => {
+            timeline.pause(position);
+            return svgAsPngUri(svg, { scale, left: 25, top: 25 }).then(
+            uri => {
+                // Convert data URI to plain base64
+                let imgDataIndex = uri.indexOf("base64,") + "base64,".length;
+                let imgData = uri.substr(imgDataIndex);
+                zip.file(filename, imgData, { base64: true });
+            }
+            );
+        });
+    }
+
+    step.then(() => {
+        zip.generateAsync({ type: "blob" }).then(blob => {
+            saveAs(blob, `${filePrefix}frames.zip`);
+        });
+        // Resume animation
+        timeline.play()
+    });
+}
+
+
+
+/*setInterval(() => {
+    svg.pauseAnimations();
+  // clone svg
+  const copy = svg.cloneNode(true);
+  // remove the animations from the clone
+  copy.querySelectorAll('animate').forEach(animate => animate.remove());
+
+  // query all animate elements on the original
+  svg.querySelectorAll('animate').forEach(animate => {
+    // target element in original
+    const target = animate.targetElement;
+    const attr = animate.getAttribute('attributeName');
+    const type = animate.getAttribute('attributeType');
+    // target element in copy
+    const copyTarget = copy.getElementById(target.id);
+    // differentiate attribute type
+    //if (type === 'XML') {
+      /*const value = target[attr].animVal.valueAsString || target[attr].animVal;
+      copyTarget.setAttribute(attr, value);*/
+    //} else if (type === 'CSS') {
+      //const value = window.getComputedStyle(target)[attr];
+      //copyTarget.style[attr] = value
+    //}
+  /*});
+  svg.unpauseAnimations();
+
+  const xml = new XMLSerializer().serializeToString(copy);
+  const data = "data:image/svg+xml;base64," + btoa(xml);
+  const image = new Image();
+  
+  // image load is asynchronuous
+  image.onload = () => {ctx.clearRect(0, 0, canvas.width, canvas.height);ctx.drawImage(image, 0, 0);}
+  image.src = data;
+  //document.body.appendChild(canvas)
+},.1);*/
+</script>
+
+
+
+
+</body>
+</html>
