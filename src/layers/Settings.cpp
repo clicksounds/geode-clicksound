@@ -21,7 +21,7 @@ SettingNode* SettingClickValue::createNode(float width) {
 // TYSM JOUCA AND FIREE
 void SettingClickNode::onClickBtn(CCObject*) {
 	auto clickSliderValue = Mod::get()->getSettingValue<int64_t>("clicksound-currentsound");
-    auto customClickSound = Mod::get()->getSettingValue<ghc::filesystem::path>("custom-clicksound").string();
+    auto customClickSound = Mod::get()->getSettingValue<std::filesystem::path>("custom-clicksound").string();
     auto usingCustomClickSound = false;
     std::string clickSoundInUse = Clicks::getClickSprite(clickSliderValue);
 
@@ -83,7 +83,7 @@ SettingNode* SettingReleaseValue::createNode(float width) {
 
 void SettingReleaseNode::onReleaseBtn(CCObject*) {
 	auto releaseSliderValue = Mod::get()->getSettingValue<int64_t>("releasesound-currentsound");
-    auto customReleaseSound = Mod::get()->getSettingValue<ghc::filesystem::path>("custom-releasesound").string();
+    auto customReleaseSound = Mod::get()->getSettingValue<std::filesystem::path>("custom-releasesound").string();
     bool usingCustomReleaseSound;
     std::string releaseSoundInUse = Clicks::getReleaseSprite(releaseSliderValue);
 

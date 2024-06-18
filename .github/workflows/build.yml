@@ -4,6 +4,13 @@ on:
   workflow_dispatch:
   push:
 
+permissions:
+  contents: write
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     strategy:
@@ -15,22 +22,28 @@ jobs:
           
         - name: macOS
           os: macos-latest
-
-        - name: Android32
+        
+        #- name: iOS
+        #  os: macos-latest
+        #  target: iOS
+        
+        - name: Android 32-bit
           os: ubuntu-latest
           target: Android32
 
-        - name: Android64
+        - name: Android 64-bit
           os: ubuntu-latest
           target: Android64
 
     name: ${{ matrix.config.name }}
     runs-on: ${{ matrix.config.os }}
+    if: ${{ !endsWith(github.event.head_commit.message, '--nobuild') }}
 
     steps:
       - uses: actions/checkout@v4
 
       - name: Build the mod
+        #uses: RoootTheFox/build-geode-mod@main
         uses: geode-sdk/build-geode-mod@main
         with:
           combine: true
@@ -43,7 +56,8 @@ jobs:
     needs: ['build']
 
     steps:
-      - uses: geode-sdk/build-geode-mod@combine
+      #- uses: RoootTheFox/build-geode-mod/combine@main
+      - uses: geode-sdk/build-geode-mod/combine@main
         id: build
 
       - uses: actions/upload-artifact@v3

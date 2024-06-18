@@ -1,9 +1,9 @@
 # Click Sounds
 
 Plays a click sound whenever you press a jump button, or (optionally) a release sound whenever you release a jump button.
-If you want a new built-in click sound or feature to be added, join the [discord server](https://discord.gg/RwbRP8ADdc). <3
+If you want a new built-in click sound or feature to be added, join the [discord server](https://discord.com/invite/mNY5QTMkMF). <3
 
-### Uses Geode v2.0.0-beta.20 and Node-IDs v1.6.1
+### Uses Geode v3.0.0-beta.1 and Node-IDs v1.12.0
 Open the mod settings to change the click sound. Set the click sound to '0' to use a custom click sound.
 ## Click sounds:
 ### Useful click sounds (positive number):
@@ -92,13 +92,14 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 
 ## Credit
 Thank you so much to all of the people listed below for doing whatever they did to help create the mod!
-- [Beat](https://github.com/BeatACVR) - This is me! I made the mod.
-- [Viper](https://github.com/MuhXd) - Developer, helped me with android support :3
-- [Coop](https://github.com/coopeeo) - Developer, helped make coding the mod more efficient ^w^
-- [Firee](https://github.com/FireMario211) - Added mac support, thank you so much!
-- [Weebify](https://github.com/Weebifying) - Developer :3
-- [Uproxide](https://github.com/uproxide) - Developer, helped with the developer badge system! OwO
+- [Cooper](https://github.com/coopeeo) - Now Main Dev (Yep we went from 4 devs to 1 dev!)
+- [Uproxide](https://github.com/uproxide) - Developer, helped with the developer badge system! OwO (Dev)
+
+- [Beat](https://github.com/BeatACVR) - This is me! I made the mod. (Past Main Dev)
+- [Viper](https://github.com/MuhXd) - Developer, helped me with android support :3 (Past Dev)
+- [Firee](https://github.com/FireMario211) - Added mac support, thank you so much! 
+- [Weebify](https://github.com/Weebifying) - Developer :3 (Past Dev)
 - [Jouca](https://github.com/Jouca) - Helped with the preview button
 - Rue - Made the icon of Click Sounds (v1.6.0) >w<
 - aceofspadesss - Provided a ton of unique click sounds for the mod! >w<
-(If you think I forgot to credit you, DM @beat___ on Discord. Credit is not given for asking a sound or feature request.)
+(If you think I forgot to credit you, DM @coopeeo on Discord. Credit is not given for asking a sound or feature request.)

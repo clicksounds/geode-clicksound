@@ -1,20 +1,22 @@
 {
-	"geode": "2.0.0-beta.20",
-	"version": "v1.8.0",
+	"geode": "3.0.0-beta.1",
+	"version": "v1.8.1",
 	"id": "beat.click-sound",
 	"name": "Click Sounds",
 	"developers": [
-		"Beat",
-		"Coop",
-		"Viper",
-		"Weebify",
-		"Uproxide"
+		"Cooper"
 	],
 	"gd": {
-		"android": "2.205",
-        "win": "2.204",
-		"mac": "2.200"
+		"android": "2.206",
+        "win": "2.206",
+		"mac": "2.206"
 	},
+	"links": {
+		"homepage": "https://clicksounds.coopeeo.xyz",
+		"source": "https://github.com/clicksounds/geode-clicksound",
+		"community": "https://discord.com/invite/mNY5QTMkMF"
+	},
+	"repository": "https://github.com/clicksounds/geode-clicksound",
 	"description": "Plays a sound whenever you press a jump button.",
 	"resources": {
 		"files": [
@@ -136,12 +138,11 @@
 			"default": true
 		}
 	},
-	"repository": "https://github.com/BeatACVR/geode-clicksound",
 	"dependencies": [
         {
             "id": "geode.node-ids",
-            "version": ">=v1.6.1",
-            "importance": "suggested"
+            "version": ">=v1.12.0",
+            "importance": "required"
         }
     ],
 	"tags":	[
