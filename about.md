@@ -92,13 +92,18 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 
 ## Credit
 Thank you so much to all of the people listed below for doing whatever they did to help create the mod!
-- [Cooper](https://github.com/coopeeo) - Now Main Dev (Yep we went from 4 devs to 1 dev!)
-- [Uproxide](https://github.com/uproxide) - Developer, helped with the developer badge system! OwO (Dev)
 
+### Main Developers
+- [Cooper](https://github.com/coopeeo) - Now Main Dev (Yep we went from 4 devs to 1 dev!)
+
+### Past Developers
+- [Uproxide](https://github.com/uproxide) - Developer, helped with the developer badge system! OwO
 - [Beat](https://github.com/BeatACVR) - This is me! I made the mod. (Past Main Dev)
-- [Viper](https://github.com/MuhXd) - Developer, helped me with android support :3 (Past Dev)
-- [Firee](https://github.com/FireMario211) - Added mac support, thank you so much! 
-- [Weebify](https://github.com/Weebifying) - Developer :3 (Past Dev)
+- [Viper](https://github.com/MuhXd) - Developer, helped me with android support :3
+- [Weebify](https://github.com/Weebifying) - Developer :3
+
+### Other Credit
+- [Firee](https://github.com/FireMario211) - Added mac support on Geode v2, thank you so much!
 - [Jouca](https://github.com/Jouca) - Helped with the preview button
 - Rue - Made the icon of Click Sounds (v1.6.0) >w<
 - aceofspadesss - Provided a ton of unique click sounds for the mod! >w<
