@@ -32,7 +32,7 @@ def send_webhook(eee):
 		thePing = ""
 
 	data = {
-		'content': "# New Test for v" + eee["version"].replace("v","") + thePing + "\n" + os.getenv('DESC')
+		'content': "# New Test for v" + eee["version"].replace("v","") + thePing + "\n" + os.getenv('DESC').replace("\\n", "\n")
 	}
 	requests.post(os.getenv('DISCORD_WEBHOOK_URL'), data=data, files={"file": open('beat.click-sound.geode', "rb")})
 
