@@ -63,7 +63,7 @@ void SettingClickNode::onClickBtn(CCObject*) {
       system->createSound(customClickSound.c_str(), FMOD_DEFAULT, nullptr, &sound);
         
       if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {
-        #if defined(GEODE_IS_WINDOWS)
+        #if defined(GEODE_IS_WINDOWSD)
           if (fae->m_sfxVolume != 0) system->playSound(sound, nullptr, false, &channel);
           channel->setVolume(fae->m_sfxVolume*2.f);
         #else
@@ -102,7 +102,7 @@ void SettingReleaseNode::onReleaseBtn(CCObject*) {
       system->createSound((Mod::get()->getResourcesDir().parent_path() / releaseSoundInUse).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
         
       if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {
-        #if defined(GEODE_IS_WINDOWS)
+        #if defined(GEODE_IS_WINDOWSD)
           if (fae->m_sfxVolume != 0) system->playSound(sound, nullptr, false, &channel);
           channel->setVolume(fae->m_sfxVolume*2.f);
         #else
@@ -125,7 +125,7 @@ void SettingReleaseNode::onReleaseBtn(CCObject*) {
       system->createSound(customReleaseSound.c_str(), FMOD_DEFAULT, nullptr, &sound);
         
       if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {
-        #if defined(GEODE_IS_WINDOWS)
+        #if defined(GEODE_IS_WINDOWSD)
           if (fae->m_sfxVolume != 0) system->playSound(sound, nullptr, false, &channel);
           channel->setVolume(fae->m_sfxVolume*2.f);
         #else
