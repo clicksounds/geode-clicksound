@@ -44,7 +44,7 @@ public:
       system->createSound((Mod::get()->getResourcesDir().parent_path() / clickSoundInUse).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
 
       if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {
-        #if defined(GEODE_IS_WINDOWSD)
+        #if defined(GEODE_IS_WINDOWS)
           if (fae->m_sfxVolume != 0) system->playSound(sound, nullptr, false, &channel);
           channel->setVolume(fae->m_sfxVolume*2.f);
         #else
@@ -67,7 +67,7 @@ public:
       system->createSound(customClickSound.c_str(), FMOD_DEFAULT, nullptr, &sound);
       
       if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {
-        #if defined(GEODE_IS_WINDOWSD)
+        #if defined(GEODE_IS_WINDOWS)
           if (fae->m_sfxVolume != 0) system->playSound(sound, nullptr, false, &channel);
           channel->setVolume(fae->m_sfxVolume*2.f);
         #else
@@ -118,7 +118,7 @@ public:
       system->createSound((Mod::get()->getResourcesDir().parent_path() / releaseSoundInUse).string().c_str(), FMOD_DEFAULT, nullptr, &sound);
       
       if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {
-        #if defined(GEODE_IS_WINDOWSD)
+        #if defined(GEODE_IS_WINDOWS)
           if (fae->m_sfxVolume != 0) system->playSound(sound, nullptr, false, &channel);
           channel->setVolume(fae->m_sfxVolume*2.f);
         #else
@@ -141,7 +141,7 @@ public:
       system->createSound(customReleaseSound.c_str(), FMOD_DEFAULT, nullptr, &sound);
       
       if (Mod::get()->getSettingValue<bool>("use-sfx-volume")) {
-        #if defined(GEODE_IS_WINDOWSD)
+        #if defined(GEODE_IS_WINDOWS)
           if (fae->m_sfxVolume != 0) system->playSound(sound, nullptr, false, &channel);
           channel->setVolume(fae->m_sfxVolume*2.f);
         #else

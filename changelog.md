@@ -4,7 +4,6 @@
 * Updated for Geode v3.0.0-beta.1
 * Updated Node Ids Requirement to 1.12.0
 * Sorry for the lack of updates, currently trying to balence to many different things.
-* Disabled linked to sound effects slider (because of linker errors)
 * Removed Dev Badges
 * Removed Node IDs Popup (Requested By Geode Team)
 ## Version v1.8.0
