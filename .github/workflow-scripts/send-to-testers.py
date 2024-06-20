@@ -8,17 +8,18 @@ import re
 
 
 archive = zipfile.ZipFile('beat.click-sound.geode', 'r')
-e = json.loads(archive.read('mod.json'))
+modjson = json.loads(archive.read('mod.json'))
+changelog = archive.read('changelog.md')
 file_list = archive.namelist()	
 
 
 
-def send_webhook(eee):
+def send_webhook(modjson, changelog):
 	import requests
 	import json
 	import os
 
-	thePing = "\n## Testers: <@&"
+	thePing = "\n## Testers: <@"
 
 	leping = {
         'all': '1210765582685966387',
@@ -31,9 +32,13 @@ def send_webhook(eee):
 	else:
 		thePing = ""
 
+	changelog = changelog.split("##")[1]
+	changelogsplit = changelog.split("\n")
+	changelog = "\n".join(changelogsplit[1:(len(changelogsplit) - 1)])
+
 	data = {
-		'content': "# New Test for v" + eee["version"].replace("v","") + thePing + "\n" + os.getenv('DESC').replace("\\n", "\n")
+		'content': "# New Test for v" + modjson["version"].replace("v","") + thePing + "\n## What to test\n- " + os.getenv('DESC').replace("\\n", "\n") + "\n## Changelog: \n" + changelog
 	}
 	requests.post(os.getenv('DISCORD_WEBHOOK_URL'), data=data, files={"file": open('beat.click-sound.geode', "rb")})
 
-send_webhook(e)
+send_webhook(modjson, changelog)
