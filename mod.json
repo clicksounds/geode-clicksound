@@ -1,18 +1,22 @@
 {
-	"geode": "2.0.0-beta.27",
-	"version": "v2.0.0-alpha.2",
+	"geode": "3.0.0-beta.1",
+	"version": "v2.0.0-alpha.3",
 	"id": "beat.click-sound",
 	"name": "Click Sounds",
 	"developers": [
-		"Cooper",
-		"Uproxide"
+		"Cooper"
 	],
 	"gd": {
-		"android": "2.205",
-        "win": "2.204",
-		"mac": "2.200",
-		"ios": "2.205"
+		"android": "2.206",
+        "win": "2.206",
+		"mac": "2.206"
 	},
+	"links": {
+		"homepage": "https://clicksounds.coopeeo.xyz",
+		"source": "https://github.com/clicksounds/geode-clicksound",
+		"community": "https://discord.com/invite/mNY5QTMkMF"
+	},
+	"repository": "https://github.com/clicksounds/geode-clicksound",
 	"description": "Plays a sound whenever you press a jump button.",
 	"resources": {
 		"files": [
@@ -22,21 +26,7 @@
 			"resources/**/*.m4a",
 			"resources/**/*.flac"
 		],		
-		"spritesheets": {
-			"ClickSprites": [
-				"resources/sprites/*.png"
-			],
-			"MaterialIcons": [
-				"resources/material-icons/*.png"
-			]
-		},
-		"fonts": {
-			"NotoSans" : {
-				"path": "resources/fonts/NotoSans-Variable.ttf",
-				"size": 128,
-                "charset": "32-500,8226"
-			}
-		}
+		"sprites": ["resources/**/*.png"]
 	},
 	"settings": {
 		"volume-slider": {
@@ -63,16 +53,13 @@
 			"type": "custom",
 			"description": "This only works if you opened settings from the main menu."
 	 	},
-		"clicksound-type": {
-			"type": "custom"
-		},
 		"clicksound-currentsound": {
 			"name": "Current click sound",
 			"description": "Change the click sound. Negative numbers for meme sounds, 0 for custom sounds, and positive numbers for useful sounds. Check mod description for a sound list.",
 			"type": "int",
 			"default": 1,
 			"min": -27,
-			"max": 34,
+			"max": 32,
 			"control": {
 				"arrows": true,
 				"slider": false
@@ -104,25 +91,22 @@
 			"type": "custom",
 			"description": "This only works if you opened settings from the main menu."
 	 	},
-		"releasesound-type": {
-			"type": "custom"
-		},
 		"releasesound-currentsound": {
 			"name": "Current release sound",
 			"description": "Change the click sound. Negative numbers for meme sounds, 0 for custom sounds, and positive numbers for useful sounds. Check mod description for a sound list.",
 			"type": "int",
 			"default": 1,
 			"min": -1,
-			"max": 18,
+			"max": 16,
 			"control": {
 				"arrows": true,
 				"slider": false
 			}
 		},
 		"custom-releasesound": {
-            		"name": "Upload a custom release sound",
-            		"description": "Select a .ogg, .wav, .mp3, .m4a, or .flac format file to set as release sound 0. The best practice is to use a .ogg format sound that start loudly and immediately.",
-            		"type": "path",
+            	"name": "Upload a custom release sound",
+            	"description": "Select a .ogg, .wav, .mp3, .m4a, or .flac format file to set as release sound 0. The best practice is to use a .ogg format sound that start loudly and immediately.",
+            	"type": "path",
         		"default": "Upload a file first.",
 				"control": {
 					"filters": [
@@ -141,12 +125,6 @@
 			"type": "bool",
 			"default": true
 		},
-		"decrease-volume-on-spam-click": {
-			"name": "Decrease spam volume",
-			"description": "When enabled, If you click <500ms it decreases the volume",
-			"type": "bool",
-			"default": false
-		},
 		"use-sfx-volume": {
 			"name": "Use SFX Volume Slider (Windows ONLY)",
 			"description": "When enabled, the click sounds' volume will depend on the sound effects volume slider at the in the pause menu and game settings. When disabled, the click sounds' volume will depend on the volume slider at the top of settings",
@@ -160,12 +138,11 @@
 			"default": true
 		}
 	},
-	"repository": "https://github.com/BeatACVR/geode-clicksound",
 	"dependencies": [
         {
             "id": "geode.node-ids",
-            "version": ">=v1.11.0",
-            "importance": "suggested"
+            "version": ">=v1.12.0",
+            "importance": "required"
         }
     ],
 	"tags":	[

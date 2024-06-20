@@ -1,9 +1,9 @@
 # Click Sounds
 
 Plays a click sound whenever you press a jump button, or (optionally) a release sound whenever you release a jump button.
-If you want a new built-in click sound or feature to be added, join the [discord server](https://discord.gg/RwbRP8ADdc). <3
+If you want a new built-in click sound or feature to be added, join the [discord server](https://discord.com/invite/mNY5QTMkMF). <3
 
-### Uses Geode v2.0.0-beta.22 and Node-IDs v1.8.1
+### Uses Geode v3.0.0-beta.1 and Node-IDs v1.12.0
 Open the mod settings to change the click sound. Set the click sound to '0' to use a custom click sound.
 ## Click sounds:
 ### Useful click sounds (positive number):
@@ -27,23 +27,19 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 17 - Cursed Click
 - 18 - Spacebar Click/Release
 - 19 - Click 3
-- 20 - Viper's Spacebar Click/Release (randomized)
-- 21 - Logitech MX Anywhere 2S (randomized)
+- 20 - Viper Spacebar Click/Release (randomized)
+- 21 - Click/Release 5 (randomized)
 - 22 - Zoink Click/Release
-- 23 - Screen Tap 1 
+- 23 - Screen Tap 1
 - 24 - Plate
 - 25 - Neiro Click/Release
 - 26 - Doggie
 - 27 - Trusta
 - 28 - Gazonk
 - 29 - Sayo Device (randomized)
-- 30 - Viper Mouse Clicks/Release (randomized)
+- 30 - Viper's Clicks/Release (randomized)
 - 31 - Logitech G502 Clicks/Release (randomized)
 - 32 - Up arrow 4 Clicks/Release (randomized)
-- 33 - Mouse Click/Release 6 (randomized)
-- 34 - Pacity's Clicks/Release (randomized)
-- 35 - Mouse Click/Release 7 (randomized)
-- 36 - Electro Clicks/Release (randomized)
 ### Meme click sounds (negative number):
 - 1 - FIRE IN THE HOLE!
 - 2 - I loooove GD Cologne
@@ -88,24 +84,21 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 11 - Zoink Click/Release
 - 12 - Neiro Click/Release
 - 13 - Sayo Device (randomized)
-- 14 - Viper Mouse Clicks/Release (randomized)
+- 14 - Viper's Clicks/Release (randomized)
 - 15 - Logitech G502 Clicks/Release
 - 16 - Up arrow 4 Clicks/Release (randomized)
-- 17 - Mouse Click 6
-- 18 - Pacity's Clicks
-- 19 - Mouse Click 7
-- 20 - Electro Clicks
 ### Meme release sounds (negative number):
 - 1 - TikTok
 
 ## Credit
 Thank you so much to all of the people listed below for doing whatever they did to help create the mod!
-- [Beat](https://github.com/BeatACVR) - This is me! I made the mod.
-- [Viper](https://github.com/MuhXd) - Developer, helped me with android support :3
-- [Cooper](https://github.com/coopeeo) - Developer, helped make coding the mod more efficient ^w^
-- [Firee](https://github.com/FireMario211) - Added mac support, thank you so much!
-- [Weebify](https://github.com/Weebifying) - Developer, helped with settings UI in v2.0.0 :3
-- [Uproxide](https://github.com/uproxide) - Developer, helped with the developer badge system! OwO
+- [Cooper](https://github.com/coopeeo) - Now Main Dev (Yep we went from 4 devs to 1 dev!)
+- [Uproxide](https://github.com/uproxide) - Developer, helped with the developer badge system! OwO (Dev)
+
+- [Beat](https://github.com/BeatACVR) - This is me! I made the mod. (Past Main Dev)
+- [Viper](https://github.com/MuhXd) - Developer, helped me with android support :3 (Past Dev)
+- [Firee](https://github.com/FireMario211) - Added mac support, thank you so much! 
+- [Weebify](https://github.com/Weebifying) - Developer :3 (Past Dev)
 - [Jouca](https://github.com/Jouca) - Helped with the preview button
 - Rue - Made the icon of Click Sounds (v1.6.0) >w<
 - aceofspadesss - Provided a ton of unique click sounds for the mod! >w<

@@ -7,6 +7,13 @@
 * Added Pacity's Clicks (randomized clicks and releases)
 * Added Mouse Click 7 (randomized clicks and releases)
 * Added Electro Clicks (randomized clicks and releases)
+## Version v1.8.1
+* Nothing really new this update
+* Updated for Geode v3.0.0-beta.1
+* Updated Node Ids Requirement to 1.12.0
+* Sorry for the lack of updates, currently trying to balence to many different things.
+* Removed Dev Badges
+* Removed Node IDs Popup (Requested By Geode Team)
 ## Version v1.8.0
 * Added Viper's click sounds and release sounds (both randomized)
 * Added Logitech G502 click sounds and release sounds (clicks randomized)

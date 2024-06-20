@@ -20,12 +20,12 @@ jobs:
         - name: Windows
           os: windows-latest
           
-        - name: macOS
-          os: macos-latest
+        #- name: macOS
+        #  os: macos-latest
         
-        - name: iOS
-          os: macos-latest
-          target: iOS
+        #- name: iOS
+        #  os: macos-latest
+        #  target: iOS
         
         - name: Android 32-bit
           os: ubuntu-latest
@@ -43,7 +43,8 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Build the mod
-        uses: RoootTheFox/build-geode-mod@main
+        #uses: RoootTheFox/build-geode-mod@main
+        uses: geode-sdk/build-geode-mod@main
         with:
           combine: true
           sdk: nightly
@@ -55,10 +56,11 @@ jobs:
     needs: ['build']
 
     steps:
-      - uses: RoootTheFox/build-geode-mod@combine
+      #- uses: RoootTheFox/build-geode-mod/combine@main
+      - uses: geode-sdk/build-geode-mod/combine@main
         id: build
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: Build Output
           path: ${{ steps.build.outputs.build-output }}

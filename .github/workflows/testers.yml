@@ -13,6 +13,26 @@ on:
           - windows
           - mac
           - android
+          - ios (doesn't work yet)
+        # ping2:
+        #   description: 'What testers should be pinged'
+        #   required: false
+        #   type: choice
+        #   options:
+        #   - windows
+        #   - mac
+        #   - android
+        # ping3:
+        #   description: 'What testers should be pinged, if s'
+        #   required: false
+        #   type: choice
+        #   options:
+        #   - windows
+        #   - mac
+        #   - android
+        include-changelog:
+          description: 'Include Changelog at the bottom of the message'
+          type: bool
         desc:
           description: 'Description (what to test)'
           required: false
@@ -30,7 +50,7 @@ jobs:
       - name: Define variables
         id: defvar
         run: |
-          BRANCH=main
+          BRANCH=${GITHUB_REF#refs/heads/}
           API_URL="https://api.github.com/repos/clicksounds/geode-clicksound/actions/workflows/build.yml/runs?per_page=1&branch=$BRANCH&status=success"
           RUN_ID=$(curl $API_URL | jq .workflow_runs[0].id)
           echo "run_id=$RUN_ID" >> $GITHUB_OUTPUT
