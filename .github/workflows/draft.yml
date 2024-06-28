@@ -73,7 +73,7 @@ jobs:
               id: info
               shell: bash
               run: |
-                echo "The mod id is: ${{ steps.getmodid.outputs.modid }}"
+                echo "The mod id is: ${{ env.MOD_ID }}"
                 python3 repo/.github/workflow-scripts/get-info.py
               env:
                 MOD_ID: ${{ steps.getmodid.outputs.modid }}
