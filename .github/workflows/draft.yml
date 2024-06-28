@@ -10,6 +10,7 @@ on:
 
 env:
     Build_Workflow: build.yml
+    Version_Prefix: none # if this was set to "v" then github tags would be "5.2.6". - Set to "none" for no prefix. none would make the github tab be "5.2.6"
 
 
 jobs:
@@ -78,8 +79,8 @@ jobs:
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
-                tag_name: Release-v${{ steps.info.outputs.version }}
-                name: Click Sounds v${{ steps.info.outputs.version }} for Geode
+                tag_name: ${{ env.Version_Prefix != 'none' && env.Version_Prefix || '' }}${{ steps.info.outputs.version }}
+                name: ${{ steps.info.outputs.modname }} v${{ steps.info.outputs.version }}
                 body: ${{ steps.info.outputs.cl }}
                 draft: true
                 files: |
