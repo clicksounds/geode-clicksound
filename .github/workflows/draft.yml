@@ -70,7 +70,7 @@ jobs:
               id: info
               run: python3 repo/.github/workflow-scripts/get-info.py
               env:
-                modid: ${{ steps.getmodid.outputs.modid }}
+                MOD_ID: ${{ steps.getmodid.outputs.modid }}
             - name: Create Draft Release
               uses: softprops/action-gh-release@v1
               env:
