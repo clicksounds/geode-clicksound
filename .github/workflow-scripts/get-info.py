@@ -10,7 +10,7 @@ import subprocess
 
 
 
-archive = zipfile.ZipFile(os.getenv('modid') + '.geode', 'r')
+archive = zipfile.ZipFile(os.getenv('MOD_ID') + '.geode', 'r')
 eee = archive.open('changelog.md')
 eeee = []
 for eeeee in eee:
