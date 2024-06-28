@@ -71,7 +71,10 @@ jobs:
                 done
             - name: Get Info
               id: info
-              run: python3 repo/.github/workflow-scripts/get-info.py
+              shell: bash
+              run: |
+                echo "The mod id is: ${{ steps.getmodid.outputs.modid }}"
+                python3 repo/.github/workflow-scripts/get-info.py
               env:
                 MOD_ID: ${{ steps.getmodid.outputs.modid }}
             - name: Create Draft Release

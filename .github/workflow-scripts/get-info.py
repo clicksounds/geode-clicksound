@@ -8,7 +8,8 @@ import re
 from pathlib import Path
 import subprocess
 
-
+modid = os.getenv('MOD_ID')
+print("mod id is: {modid}")
 
 archive = zipfile.ZipFile(os.getenv('MOD_ID') + '.geode', 'r')
 eee = archive.open('changelog.md')
