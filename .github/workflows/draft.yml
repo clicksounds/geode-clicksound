@@ -4,7 +4,7 @@ on:
     workflow_dispatch:
         inputs:
           buildWorkflowOverride:
-            description: 'Build Workflow [Overrides the default]'
+            description: 'Build Workflow [Overrides the default, idk why i made this]'
             required: false
             type: string
 
