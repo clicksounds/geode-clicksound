@@ -10,7 +10,7 @@ on:
 
 env:
     Build_Workflow: build.yml
-    Version_Prefix: rel # if this was set to "v" then github tags would be "5.2.6". - Set to "none" for no prefix. none would make the github tab be "5.2.6"
+    Version_Prefix: Release-v # if this was set to "v" then github tags would be "5.2.6". - Set to "none" for no prefix. none would make the github tab be "5.2.6"
 
 
 jobs:
