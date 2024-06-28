@@ -62,7 +62,9 @@ jobs:
               run: |
                 for filename in *; do
                     if [[ "$filename" == *.geode ]]; then
-                        echo "modid=${filename%.geode}" >> GITHUB_OUTPUT
+                        $base_name="${filename%.geode}"
+                        echo "Found .geode file: $filename (base name: $base_name)"
+                        echo "modid=$base_name" >> GITHUB_OUTPUT
                         break
                     fi
                 done
