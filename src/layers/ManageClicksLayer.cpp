@@ -26,10 +26,15 @@ CCScene* ManageClicksLayer::scene(CCScene* lastScene = nullptr) {
 
 bool ManageClicksLayer::init() {
 
-    m_menu = CCMenu::create();
-    // bg
     auto winSize = CCDirector::sharedDirector()->getWinSize();
+    setKeyboardEnabled(true);
 
+    m_menu = CCMenu::create();
+    m_menu->setAnchorPoint({ 0.5, 0.5 });
+    m_menu->setContentSize({ winSize.width, winSize.height });
+    m_menu->setPosition({0,0});
+
+    // bg
     auto bg = CCSprite::create("GJ_gradientBG.png");
     auto bgSize = bg->getTextureRect().size;
 
@@ -42,19 +47,22 @@ bool ManageClicksLayer::init() {
     this->addChild(bg);
 
     // back button
-    CCSprite* backSpr = CCSprite::createWithSpriteFrameName("GJ_arrow_01_001.png");
+    CCSprite* backSpr = CCSprite::createWithSpriteFrameName("arrowback.png"_spr);
     CCMenuItemSpriteExtra* backBtn = CCMenuItemSpriteExtra::create(backSpr, this, menu_selector(ManageClicksLayer::onClose));
-    backBtn->setPosition(-winSize.width / 2 + 25.0f, winSize.height / 2 - 25.0f);
+    backBtn->setPosition(25.0f, winSize.height - 25.0f);
     m_menu->addChild(backBtn);
+
+    // bottom buttons
+    // settings button
+    CCSprite* settingsSpr = CCSprite::createWithSpriteFrameName("settings.png"_spr);
+    CCMenuItemSpriteExtra* settingsBtn = CCMenuItemSpriteExtra::create(settingsSpr, this, menu_selector(ManageClicksLayer::onClose));
+    settingsBtn->setPosition(25.0f, 25.0f);
+    m_menu->addChild(settingsBtn);
 
 
     this->addChild(m_menu);
     
     return true;
-}
-
-void ManageClicksLayer::keyBackClicked() {
-    this->onClose(nullptr);
 }
 
 void ManageClicksLayer::onClose(CCObject*) {
@@ -65,4 +73,8 @@ void ManageClicksLayer::onClose(CCObject*) {
         scene = m_lastScene;
     }
     CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, scene));
+}
+
+void ManageClicksLayer::keyBackClicked() {
+    ManageClicksLayer::onClose(nullptr);
 }

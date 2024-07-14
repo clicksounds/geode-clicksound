@@ -32,7 +32,7 @@ on:
         #   - android
         include-changelog:
           description: 'Include Changelog at the bottom of the message'
-          type: bool
+          type: boolean
         desc:
           description: 'Description (what to test)'
           required: false

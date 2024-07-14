@@ -1,5 +1,5 @@
 {
-	"geode": "3.0.0-beta.5",
+	"geode": "3.2.0",
 	"version": "v2.0.0-alpha.3",
 	"id": "beat.click-sound",
 	"name": "Click Sounds",
@@ -26,7 +26,58 @@
 			"resources/**/*.m4a",
 			"resources/**/*.flac"
 		],		
-		"sprites": ["resources/**/*.png"]
+		"spritesheets": {
+			"MainSheet" : [
+				"resources/sprites/*.png",
+				"resources/sprites/*.jpg",
+				"resources/sprites/*.jpeg",
+				"resources/sprites/*.ico"
+			],
+			"SpinnerSheet" : [
+				"resources/spinner/*.png",
+				"resources/spinner/*.jpg",
+				"resources/spinner/*.jpeg",
+				"resources/sprites/*.ico"
+			],
+			"MaterialIcons" : [
+				"resources/material-icons/*.png",
+				"resources/material-icons/*.jpg",
+				"resources/material-icons/*.jpeg",
+				"resources/material-icons/*.ico"
+			]
+		},
+		"fonts": {
+            "NotoSans80": {
+                "path": "resources/fonts/NotoSans-Variable.ttf",
+                "size": 80,
+                "charset": "32-500,8226"
+            },
+			"NotoSans60": {
+                "path": "resources/fonts/NotoSans-Variable.ttf",
+                "size": 60,
+                "charset": "32-500,8226"
+            },
+			"NotoSans40": {
+                "path": "resources/fonts/NotoSans-Variable.ttf",
+                "size": 40,
+                "charset": "32-500,8226"
+            },
+			"NotoSansItalic80": {
+                "path": "resources/fonts/NotoSans-Italic-Variable.ttf",
+                "size": 80,
+                "charset": "32-500,8226"
+            },
+			"NotoSansItalic60": {
+                "path": "resources/fonts/NotoSans-Italic-Variable.ttf",
+                "size": 60,
+                "charset": "32-500,8226"
+            },
+			"NotoSansItalic40": {
+                "path": "resources/fonts/NotoSans-Italic-Variable.ttf",
+                "size": 40,
+                "charset": "32-500,8226"
+            }
+        }
 	},
 	"settings": {
 		"volume-slider": {
@@ -146,9 +197,9 @@
         }
     ],
 	"tags":	[
-		"Gameplay",
-		"Enhancement",
-		"Customization",
-		"Offline"
+		"gameplay",
+		"enhancement",
+		"customization",
+		"offline"
 	] 
 }

@@ -23,7 +23,7 @@ class $modify(ManageClicksLayerButton, MenuLayer) {
 
 	void onMyButton(CCObject*) {
 		auto director = CCDirector::sharedDirector();
-        auto ManageClicks = ManageClicksLayer::scene(director->getRunningScene());
+        auto ManageClicks = ManageClicksLayer::scene(nullptr);
 		director->pushScene(CCTransitionFade::create(0.5f, ManageClicks));
 	}
 };

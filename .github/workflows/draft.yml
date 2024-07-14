@@ -2,6 +2,16 @@ name: Draft Release
 
 on:
     workflow_dispatch:
+        inputs:
+          buildWorkflowOverride:
+            description: 'Build Workflow [Overrides the default, idk why i made this]'
+            required: false
+            type: string
+
+env:
+    Build_Workflow: build.yml
+    Version_Prefix: Release-v # if this was set to "v" then github tags would be "5.2.6". - Set to "none" for no prefix. none would make the github tab be "5.2.6"
+
 
 jobs:
     draft:
@@ -16,7 +26,7 @@ jobs:
               id: defvar
               run: |
                 BRANCH=${GITHUB_REF#refs/heads/}
-                API_URL="https://api.github.com/repos/clicksounds/geode-clicksound/actions/workflows/build.yml/runs?per_page=1&branch=$BRANCH&status=success"
+                API_URL="https://api.github.com/repos/${{ github.repository }}/actions/workflows/${{ inputs.buildWorkflowOverride != 0 && inputs.buildWorkflowOverride || env.Build_Workflow }}/runs?per_page=1&branch=$BRANCH&status=success"
                 RUN_ID=$(curl $API_URL | jq .workflow_runs[0].id)
                 echo "run_id=$RUN_ID" >> $GITHUB_OUTPUT
             - name: Download artifacts
@@ -29,36 +39,51 @@ jobs:
                     await fs.mkdir(path, { recursive: true });
 
                     const allArtifacts = await github.rest.actions.listWorkflowRunArtifacts({
-                    owner: context.repo.owner,
-                    repo: context.repo.repo,
-                    run_id: ${{ steps.defvar.outputs.run_id }},
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        run_id: ${{ steps.defvar.outputs.run_id }},
                     });
                     console.log(`Found ${allArtifacts.data.artifacts.length} artifacts!`);
                     for (const artifact of allArtifacts.data.artifacts) {
-                    console.log(`Downloading ${artifact.name}`);
-                    const download = await github.rest.actions.downloadArtifact({
-                        owner: context.repo.owner,
-                        repo: context.repo.repo,
-                        artifact_id: artifact.id,
-                        archive_format: 'zip',
-                    });
+                        console.log(`Downloading ${artifact.name}`);
+                        const download = await github.rest.actions.downloadArtifact({
+                            owner: context.repo.owner,
+                            repo: context.repo.repo,
+                            artifact_id: artifact.id,
+                            archive_format: 'zip',
+                        });
                     
-                    await fs.writeFile(`${path}/${artifact.name}.zip`, Buffer.from(download.data));
+                        await fs.writeFile(`${path}/${artifact.name}.zip`, Buffer.from(download.data));
                     }
             - name: Unzip Build
               run: |
                 7z x "./artifacts/Build Output.zip" -o"./"
+            - name: Get Mod ID
+              id: getmodid
+              run: |
+                for filename in *; do
+                    if [[ "$filename" == *.geode ]]; then
+                        base_name="${filename%.geode}"
+                        echo "Found .geode file: $filename (base name: $base_name)"
+                        echo "modid=$base_name" >> "$GITHUB_OUTPUT"
+                        break
+                    fi
+                done
             - name: Get Info
               id: info
-              run: python3 repo/.github/workflow-scripts/get-info.py
+              shell: bash
+              run: |
+                python3 repo/.github/workflow-scripts/get-info.py
+              env:
+                MOD_ID: ${{ steps.getmodid.outputs.modid }}
             - name: Create Draft Release
               uses: softprops/action-gh-release@v1
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
-                tag_name: Release-v${{ steps.info.outputs.version }}
-                name: Click Sounds v${{ steps.info.outputs.version }} for Geode
+                tag_name: ${{ env.Version_Prefix != 'none' && env.Version_Prefix || '' }}${{ steps.info.outputs.version }}
+                name: ${{ steps.info.outputs.modname }} v${{ steps.info.outputs.version }}
                 body: ${{ steps.info.outputs.cl }}
                 draft: true
                 files: |
-                  ./beat.click-sound.geode
+                  ./${{ steps.getmodid.outputs.modid }}.geode

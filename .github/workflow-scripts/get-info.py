@@ -8,9 +8,7 @@ import re
 from pathlib import Path
 import subprocess
 
-
-
-archive = zipfile.ZipFile('beat.click-sound.geode', 'r')
+archive = zipfile.ZipFile(os.getenv('MOD_ID') + '.geode', 'r')
 eee = archive.open('changelog.md')
 eeee = []
 for eeeee in eee:
@@ -18,12 +16,18 @@ for eeeee in eee:
 
 eeeeee = ''.join(eeee)
 
-one = ('## ' + eeeeee.split('##')[1]).replace((eeeeee.split('##')[1]).split('\r')[0], 'What\'s New This Update').replace('\n', "")
-two = json.loads(archive.read('mod.json'))["version"].replace("v","")
+changelog = ('## ' + eeeeee.split('##')[1]).replace((eeeeee.split('##')[1]).split('\r')[0], 'What\'s New This Update').replace('\n', "")
+modjson = json.loads(archive.read('mod.json'))
+versionString = modjson["version"].replace("v","")
+modName = modjson["name"]
+
 
 if os.getenv('GITHUB_OUTPUT'):
 	with open(os.getenv('GITHUB_OUTPUT'), 'a') as file:
-		file.write(f'cl={one}\n')
+		file.write(f'cl={changelog}\n')
 if os.getenv('GITHUB_OUTPUT'):
 	with open(os.getenv('GITHUB_OUTPUT'), 'a') as file:
-		file.write(f'version={two}\n')
+		file.write(f'version={versionString}\n')
+if os.getenv('GITHUB_OUTPUT'):
+	with open(os.getenv('GITHUB_OUTPUT'), 'a') as file:
+		file.write(f'modname={modName}\n')
