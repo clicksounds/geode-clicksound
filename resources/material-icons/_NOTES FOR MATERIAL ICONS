@@ -1,6 +1,7 @@
 Style: Material Symbols NOT ICONS!!
 Style: Rounded
+Fill: 1/True
 Weight: 400
 Grade: 0
-Optical Size: 40
-Size for icon: 35 (can be a different size depending on the icon, if it is different, at the end of the file name should be its size (with no px))
+Optical Size: 24
+Size for icon: 24 (can be a different size depending on the icon, if it is different, at the end of the file name should be its size (with no px))

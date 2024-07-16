@@ -30,20 +30,15 @@
 			"MainSheet" : [
 				"resources/sprites/*.png",
 				"resources/sprites/*.jpg",
-				"resources/sprites/*.jpeg",
-				"resources/sprites/*.ico"
+				"resources/sprites/*.jpeg"
 			],
 			"SpinnerSheet" : [
 				"resources/spinner/*.png",
 				"resources/spinner/*.jpg",
-				"resources/spinner/*.jpeg",
-				"resources/sprites/*.ico"
+				"resources/spinner/*.jpeg"
 			],
 			"MaterialIcons" : [
-				"resources/material-icons/*.png",
-				"resources/material-icons/*.jpg",
-				"resources/material-icons/*.jpeg",
-				"resources/material-icons/*.ico"
+				"resources/material-icons/*.png"
 			]
 		},
 		"fonts": {

@@ -1,13 +1,19 @@
 #include <Geode/Geode.hpp>
+#include <Geode/loader/Mod.hpp>
+#include <Geode/ui/GeodeUI.hpp>
+
 #include "./ManageClicksLayer.hpp"
+#include "../ui/Spinner.hpp"
+
 #include <cctype>
 #include <algorithm>
 #include <matjson.hpp>
+
 using namespace geode::prelude;
 
-ManageClicksLayer* ManageClicksLayer::create(CCScene* lastScene = nullptr) {
+ManageClicksLayer* ManageClicksLayer::create(bool GoToLastSceneOnBack) {
     auto ret = new ManageClicksLayer();
-    ret->m_lastScene = lastScene;
+    ret->m_shouldGoToLastScene = false;
     if (ret && ret->init()) {
         ret->autorelease();
         return ret;
@@ -16,8 +22,8 @@ ManageClicksLayer* ManageClicksLayer::create(CCScene* lastScene = nullptr) {
     return nullptr;
 };
 
-CCScene* ManageClicksLayer::scene(CCScene* lastScene = nullptr) {
-    auto layer = ManageClicksLayer::create(lastScene);
+CCScene* ManageClicksLayer::scene(bool GoToLastSceneOnBack) {
+    auto layer = ManageClicksLayer::create(GoToLastSceneOnBack);
     auto scene = CCScene::create();
     scene->addChild(layer);
     return scene;
@@ -26,11 +32,11 @@ CCScene* ManageClicksLayer::scene(CCScene* lastScene = nullptr) {
 
 bool ManageClicksLayer::init() {
 
-    auto winSize = CCDirector::sharedDirector()->getWinSize();
-    setKeyboardEnabled(true);
+    auto director = CCDirector::sharedDirector();
+    auto winSize = director->getWinSize();
 
     m_menu = CCMenu::create();
-    m_menu->setAnchorPoint({ 0.5, 0.5 });
+    m_menu->setAnchorPoint({ 0.5f, 0.5f });
     m_menu->setContentSize({ winSize.width, winSize.height });
     m_menu->setPosition({0,0});
 
@@ -52,29 +58,38 @@ bool ManageClicksLayer::init() {
     backBtn->setPosition(25.0f, winSize.height - 25.0f);
     m_menu->addChild(backBtn);
 
-    // bottom buttons
+    // bottom left buttons
     // settings button
     CCSprite* settingsSpr = CCSprite::createWithSpriteFrameName("settings.png"_spr);
-    CCMenuItemSpriteExtra* settingsBtn = CCMenuItemSpriteExtra::create(settingsSpr, this, menu_selector(ManageClicksLayer::onClose));
+    CCMenuItemSpriteExtra* settingsBtn = CCMenuItemSpriteExtra::create(settingsSpr, this, menu_selector(ManageClicksLayer::onSettings));
     settingsBtn->setPosition(25.0f, 25.0f);
     m_menu->addChild(settingsBtn);
 
+    // spinner
+    m_spinner = Spinner::create();
+    m_spinner->setAnchorPoint({ 0.5f, 0.5f });
+    m_spinner->setPosition({ winSize.width / 2, winSize.height / 2 });
+    m_menu->addChild(m_spinner);
 
     this->addChild(m_menu);
     
     return true;
 }
 
+// button actions
 void ManageClicksLayer::onClose(CCObject*) {
-    CCScene* scene;
-    if (m_lastScene == nullptr) {
-        scene = MenuLayer::scene(false);
+    if (m_shouldGoToLastScene == false) {
+        CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, MenuLayer::scene(false)));
     } else {
-        scene = m_lastScene;
+        CCDirector::sharedDirector()->popSceneWithTransition(0.5f, PopTransition::kPopTransitionFade);
     }
-    CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, scene));
 }
 
+void ManageClicksLayer::onSettings(CCObject*) {
+    geode::openSettingsPopup(Mod::get());
+}
+
+// key back clicked
 void ManageClicksLayer::keyBackClicked() {
-    ManageClicksLayer::onClose(nullptr);
+    onClose(nullptr);
 }

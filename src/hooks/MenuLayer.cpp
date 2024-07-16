@@ -10,7 +10,7 @@ class $modify(ManageClicksLayerButton, MenuLayer) {
 		}
 
 		auto myButton = CCMenuItemSpriteExtra::create(
-			CCSprite::createWithSpriteFrameName("csBtn.png"_spr),
+			CCSprite::createWithSpriteFrameName("cs-logo-btn-shadow.png"_spr),
 			this,
 			menu_selector(ManageClicksLayerButton::onMyButton)
 		);
@@ -23,7 +23,7 @@ class $modify(ManageClicksLayerButton, MenuLayer) {
 
 	void onMyButton(CCObject*) {
 		auto director = CCDirector::sharedDirector();
-        auto ManageClicks = ManageClicksLayer::scene(nullptr);
+        auto ManageClicks = ManageClicksLayer::scene(false);
 		director->pushScene(CCTransitionFade::create(0.5f, ManageClicks));
 	}
 };
