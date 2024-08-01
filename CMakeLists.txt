@@ -6,15 +6,6 @@ set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
 project(click-sound VERSION 1.0.0)
 
-# iOS support
-if("${GEODE_TARGET_PLATFORM}" STREQUAL "iOS" OR IOS)
-    message(STATUS "building for ios :3")
-    unset(CMAKE_OSX_ARCHITECTURES)
-    set(CMAKE_OSX_ARCHITECTURES arm64)
-    set(CMAKE_OSX_DEPLOYMENT_TARGET "14.0")
-    set(CMAKE_SYSTEM_NAME "iOS")
-endif()
-
 # Add Everything under src dir
 file(GLOB_RECURSE SOURCES 
     src/*.cpp
