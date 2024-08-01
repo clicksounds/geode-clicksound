@@ -1,4 +1,11 @@
 # Changelog
+## Version v1.8.3
+* Same as v1.8.2 but I just forgot a thing
+* Removed click sound number -26 (this was due to the index rules and so the mod does not get delisted)
+* Replaced sound -26 with a new one called "aw dang it" (thanks uproxide for le sound)
+* Updated Geode SDK version to v3.4.0
+* Updated Node IDs requirement to v1.13.1
+* Add Mac Support
 ## Version v1.8.2
 * Removed click sound number -26 (this was due to the index rules and so the mod does not get delisted)
 * Replaced sound -26 with a new one called "aw dang it" (thanks uproxide for le sound)
