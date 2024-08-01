@@ -81,7 +81,7 @@ const char* Clicks::getClickSprite(int clickSliderValue) {
       case -23: clickSoundInUse = "soda.ogg"_spr; break;
       case -24: clickSoundInUse = "water-on-the-hill.ogg"_spr; break;
       case -25: clickSoundInUse = "riot-quack.ogg"_spr; break;
-      case -26: clickSoundInUse = "fuck.ogg"_spr; break;
+      case -26: clickSoundInUse = "aw-dang-it.ogg"_spr; break;
       case -27: clickSoundInUse = "gravity-coil.ogg"_spr; break;
     }
     return clickSoundInUse;

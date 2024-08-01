@@ -1,4 +1,9 @@
 # Changelog
+## Version v1.8.2
+* Removed click sound number -26 (this was due to the index rules and so the mod does not get delisted)
+* Replaced sound -26 with a new one called "aw dang it" (thanks uproxide for le sound)
+* Updated Geode SDK version to v3.4.0
+* Updated Node IDs requirement to v1.13.1
 ## Version v1.8.1
 * Nothing really new this update
 * Updated for Geode v3.0.0-beta.1
@@ -53,7 +58,7 @@
 ## Version v1.4.7
 * 'Plate' useful click sound added!
 * 'Riot Quack' meme click sound added!
-* 'FUCK' meme click sound added!
+* add -26 meme click sound added! (used to be a different sound but is now the aw dang it sound)
 * Credited Weebify for developing :3 (i luv u weebify <3)
 ## Version v1.4.6
 * Requirements: Geode v2.0.0-beta.19 / Node-IDs v1.5.1

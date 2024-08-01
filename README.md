@@ -3,7 +3,7 @@
 Plays a click sound whenever you press a jump button, or (optionally) a release sound whenever you release a jump button.
 If you want a new built-in click sound or feature to be added, join the [discord server](https://discord.com/invite/mNY5QTMkMF). <3
 
-### Uses Geode v3.0.0-beta.1 and Node-IDs v1.12.0
+### Uses Geode v3.4.0 and Node-IDs v1.12.0
 Open the mod settings to change the click sound. Set the click sound to '0' to use a custom click sound.
 ## Click sounds:
 ### Useful click sounds (positive number):
@@ -66,7 +66,7 @@ Open the mod settings to change the click sound. Set the click sound to '0' to u
 - 23 - Joe Biden Soda
 - 24 - Water on the Hill
 - 25 - Riot Quack
-- 26 - FUCK
+- 26 - aw dang it
 - 27 - Gravity Coil
 ## Release sounds
 ### Useful release sounds:

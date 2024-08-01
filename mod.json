@@ -1,6 +1,6 @@
 {
-	"geode": "3.1.1",
-	"version": "v1.8.2-alpha",
+	"geode": "3.4.0",
+	"version": "v1.8.2",
 	"id": "beat.click-sound",
 	"name": "Click Sounds",
 	"developers": [
@@ -8,7 +8,7 @@
 	],
 	"gd": {
 		"android": "2.206",
-        	"win": "2.206",
+        "win": "2.206",
 		"mac": "2.206"
 	},
 	"links": {
@@ -149,7 +149,7 @@
 	"dependencies": [
         {
             "id": "geode.node-ids",
-            "version": ">=v1.12.0",
+            "version": ">=v1.13.1",
             "importance": "required"
         }
     ],
