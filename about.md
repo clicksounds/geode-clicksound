@@ -69,7 +69,7 @@ Open the mod settings to change the click sound.
 - 23 - Joe Biden Soda
 - 24 - Water on the Hill
 - 25 - Riot Quack
-- 26 - FUCK
+- 26 - Aw dang it!
 - 27 - Gravity Coil
 ## Release sounds
 ### Useful release sounds:
