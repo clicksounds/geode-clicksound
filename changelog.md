@@ -4,6 +4,7 @@
 * Replaced sound -26 with a new one called "aw dang it" (thanks uproxide for le sound)
 * Updated Geode SDK version to v3.4.0
 * Updated Node IDs requirement to v1.13.1
+* Add Mac Support
 ## Version v1.8.1
 * Nothing really new this update
 * Updated for Geode v3.0.0-beta.1
