@@ -1,6 +1,6 @@
 {
-	"geode": "2.0.0-beta.22",
-	"version": "v2.0.0-alpha.2",
+	"geode": "4.0.1",
+	"version": "v2.0.0-alpha.3",
 	"id": "beat.click-sound",
 	"name": "Click Sounds",
 	"developers": [
@@ -11,9 +11,9 @@
 		"Uproxide"
 	],
 	"gd": {
-		"android": "2.205",
-        "win": "2.204",
-		"mac": "2.200"
+		"android": "2.2074",
+        	"win": "2.2074",
+		"mac": "2.2074"
 	},
 	"description": "Plays a sound whenever you press a jump button.",
 	"resources": {
