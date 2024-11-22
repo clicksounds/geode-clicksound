@@ -1,6 +1,6 @@
 {
 	"geode": "4.0.1",
-	"version": "v2.0.0-alpha.3",
+	"version": "v2.0.1",
 	"id": "beat.click-sound",
 	"name": "Click Sounds",
 	"developers": [
@@ -31,7 +31,7 @@
 			"name": "Click sounds volume (%)",
 			"type": "int",
 			"default": 100,
-			"min": 0,
+			"min": 1,
 			"max": 100,
 			"control": {
 				"slider": true	
