@@ -73,10 +73,9 @@ public:
           if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) system->playSound(sound, nullptr, false, &channel);
           channel->setVolume( (Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f )* calculateVolumeMultiplier() );
         #endif
-      } else {
-        if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) system->playSound(sound, nullptr, false, &channel);
+      } else if (Mod::get()->getSettingValue<int64_t>("volume-slider") != 0) { system->playSound(sound, nullptr, false, &channel);
         channel->setVolume( (Mod::get()->getSettingValue<int64_t>("volume-slider")/50.f) * calculateVolumeMultiplier() );
-      }
+      } else return;
     }
 
     if (Mod::get()->getSettingValue<bool>("enable-clicksound") && settings["tab"] == 3) {
