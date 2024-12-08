@@ -6,11 +6,17 @@
         "mac": "2.2074",
         "ios": "2.2074"
     	},
-	"version": "v1.0.8",
-	"id": "beat.click_sounds_lite",
-	"name": "Click Sounds Lite",
-	"developers": ["Beat", "Dwang-ML"],
-	"description": "A lighter version of click sounds.",
+	"version": "v2.0.1",
+	"id": "beat.click-sound",
+	"name": "Click Sounds",
+	"developers": [
+		"Beat",
+		"Cooper",
+		"Viper",
+		"Weebify",
+		"Uproxide"
+	],
+	"description": "Plays a sound whenever you press a jump button.",
 	"resources": {
 		"files": [
 			"resources/**/*.ogg",
@@ -31,6 +37,13 @@
 		"editor",
 		"offline",
 		"customization"
+	],
+	"dependencies": [
+        {
+            "id": "geode.node-ids",
+            "version": ">=v1.8.1",
+            "importance": "suggested"
+        }
 	],
 	"settings": {
 		"clicksounds-section": {
