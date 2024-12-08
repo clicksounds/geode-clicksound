@@ -3,7 +3,6 @@
 #include <Geode/modify/ProfilePage.hpp>
 #include <Geode/binding/ProfilePage.hpp>
 #include <Geode/Bindings.hpp>
-#include <Geode/loader/Loader.hpp>
 
 using namespace geode::prelude;
 
@@ -20,8 +19,6 @@ class buttonfunctionthing : public CCLayer {
 };
 
 class $modify(ProfilePage) {
-  bool m_hasBeenOpened = false;
-
   bool init(int p0, bool p1) {
     if (!ProfilePage::init(p0, p1)) return false;
 
