@@ -90,13 +90,14 @@ protected:
         
         this->setContentSize({ width, 70.f });
         CCSprite* folderSpr = CCSprite::createWithSpriteFrameName("gj_folderBtn_001.png");
-        folderSpr->setScale(1.0f);
+        folderSpr->setScale(1.0f); // scale by 1.2
         m_folderBtn = CCMenuItemSpriteExtra::create(
             folderSpr,
             this,
             menu_selector(MyCustomSettingNodeV3::onFolder)
         );
         this->removeChild(this->getNameMenu(),false);
+         this->removeChild(this->getButtonMenu(),false);
         this->getNameMenu()->setLayout(
             RowLayout::create()
             ->setAxisAlignment(AxisAlignment::Start)
@@ -107,11 +108,13 @@ protected:
         this->addChildAtPosition(this->getNameMenu(), Anchor::TopLeft, ccp(10, 0), ccp(0, 1.0f));
         this->removeChild(this->getButtonMenu(),false);
         this->addChildAtPosition(this->getButtonMenu(), Anchor::TopRight, ccp(-10, 0), ccp(1.0f, 1.0f));
+        this->getButtonMenu()->setScale(1.2);
+        this->getNameMenu()->setScale(1.2);
         m_menufolder = CCMenu::create();
         m_menufolder->addChild(m_folderBtn);
         m_menufolder->setScale(1);
         m_menufolder->setLayout(RowLayout::create());
-        m_menufolder->setPosition(ccp(this->getContentSize().width / 2, this->getButtonMenu()->getPositionY() - this->getButtonMenu()->getContentSize().height / 2));
+        m_menufolder->setPosition(ccp(this->getContentSize().width / 2, this->getButtonMenu()->getPositionY() - this->getButtonMenu()->getContentSize().height / 1.1));
         this->addChild(m_menufolder);
         
         int count = 0;
