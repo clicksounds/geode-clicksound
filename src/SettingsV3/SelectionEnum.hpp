@@ -82,10 +82,37 @@ struct geode::SettingTypeForValueType<MyComplexSettingValue> {
 class MyCustomSettingNodeV3 : public SettingValueNodeV3<MyCustomSettingV3> {
 protected:
     std::vector<CCMenuItemToggler*> m_toggles;
-
+    CCMenuItemSpriteExtra* m_folderBtn;
+    CCMenu* m_menufolder;
     bool init(std::shared_ptr<MyCustomSettingV3> setting, float width) {
         if (!SettingValueNodeV3::init(setting, width))
             return false;
+        
+        this->setContentSize({ width, 70.f });
+        CCSprite* folderSpr = CCSprite::createWithSpriteFrameName("gj_folderBtn_001.png");
+        folderSpr->setScale(1.0f);
+        m_folderBtn = CCMenuItemSpriteExtra::create(
+            folderSpr,
+            this,
+            menu_selector(MyCustomSettingNodeV3::onFolder)
+        );
+        this->removeChild(this->getNameMenu(),false);
+        this->getNameMenu()->setLayout(
+            RowLayout::create()
+            ->setAxisAlignment(AxisAlignment::Start)
+            ->setCrossAxisLineAlignment(AxisAlignment::Start)
+            ->setCrossAxisAlignment(AxisAlignment::Start)
+        );
+        
+        this->addChildAtPosition(this->getNameMenu(), Anchor::TopLeft, ccp(10, 0), ccp(0, 1.0f));
+        this->removeChild(this->getButtonMenu(),false);
+        this->addChildAtPosition(this->getButtonMenu(), Anchor::TopRight, ccp(-10, 0), ccp(1.0f, 1.0f));
+        m_menufolder = CCMenu::create();
+        m_menufolder->addChild(m_folderBtn);
+        m_menufolder->setScale(1);
+        m_menufolder->setLayout(RowLayout::create());
+        m_menufolder->setPosition(ccp(this->getContentSize().width / 2, this->getButtonMenu()->getPositionY() - this->getButtonMenu()->getContentSize().height / 2));
+        this->addChild(m_menufolder);
         
         int count = 0;
         for (auto value : {
@@ -105,9 +132,8 @@ protected:
             m_toggles.push_back(toggle);
             this->getButtonMenu()->addChild(toggle);
         }
-        this->getButtonMenu()->setContentWidth(count);
         this->getButtonMenu()->setLayout(RowLayout::create());
-
+        this->getButtonMenu()->updateLayout();
         this->updateState(nullptr);
         
         return true;
@@ -116,6 +142,7 @@ protected:
     void updateState(CCNode* invoker) override {
         SettingValueNodeV3::updateState(invoker);
         auto shouldEnable = this->getSetting()->shouldEnable();
+        m_menufolder->setVisible(static_cast<int>(this->getValue().m_tab) == 2);
         for (auto toggle : m_toggles) {
             toggle->toggle(toggle->getTag() == static_cast<int>(this->getValue().m_tab));
             toggle->setEnabled(shouldEnable);
@@ -130,6 +157,23 @@ protected:
         Changes.m_tab = sender->getTag();
         this->setValue(Changes, static_cast<CCNode*>(sender));
     }
+     void onFolder(CCObject* sender) {
+        file::FilePickOptions::Filter textFilter;
+        file::FilePickOptions fileOptions;
+        textFilter.description = "Sound";
+        textFilter.files = {"*.ogg", "*.mp3", "*.wav"};
+        fileOptions.filters.push_back(textFilter);
+
+        file::pick(file::PickMode::OpenFile, { Mod::get()->getResourcesDir(), { textFilter } }).listen([this,sender](Result<std::filesystem::path>* res) {
+            if (res->isOk()) {
+                    std::filesystem::path path = res->unwrap();
+                    MyComplexSettingValue Changes = this->getValue();
+                    Changes.CustomSoundPath = path.string().c_str();
+                    this->setValue(Changes, static_cast<CCNode*>(sender));
+                }
+            });
+    }
+
 
 public:
     static MyCustomSettingNodeV3* create(std::shared_ptr<MyCustomSettingV3> setting, float width) {
