@@ -4,35 +4,64 @@
 
 using namespace geode::prelude;
 
-enum class MyCustomEnum {
-    Meme,
-    Useful,
-    Custom
+struct MyComplexSettingValue {
+    int m_currentMemeClick = 0;
+    int m_currentClick = 0;
+    int m_tab = 0;
+    std::string CustomSoundPath;
+
+    // Comparison operator
+    bool operator==(MyComplexSettingValue const& other) const = default;
+
+    // Implicit conversion to std::string
+      operator std::string() const {
+       return matjson::makeObject({
+            {"Tab", m_tab},
+            {"Current_Sound_Useful", m_currentClick},
+            {"Current_Sound_Meme", m_currentMemeClick},
+            {"Custom_Sound_Path", CustomSoundPath}
+        }).dump(matjson::NO_INDENTATION);
+    }
+
+    // Constructors
+    MyComplexSettingValue() = default;
+
+    MyComplexSettingValue(int i1, int i2, int i3, std::string_view val)
+        : m_tab(i1), m_currentClick(i2), m_currentMemeClick(i3), CustomSoundPath(val) {}
+
+    MyComplexSettingValue(MyComplexSettingValue const&) = default;
 };
 
 template <>
-struct matjson::Serialize<MyCustomEnum> {
-    static matjson::Value toJson(MyCustomEnum const& value) {
-        switch (value) {
-            default:
-            case MyCustomEnum::Meme: return "Meme";
-            case MyCustomEnum::Useful: return "Useful";
-            case MyCustomEnum::Custom: return "Custom";
+struct matjson::Serialize<MyComplexSettingValue> {
+
+    static Result<MyComplexSettingValue> fromJson(matjson::Value const& v) {
+        GEODE_UNWRAP_INTO(std::string x, v.asString());
+        if (x == "") {
+           return Ok(MyComplexSettingValue(0, 0, 0, " ")); 
         }
-        
+       try {
+        auto value = matjson::parse(x).unwrap();
+        return Ok(MyComplexSettingValue(
+            value["Tab"].asInt().unwrap(), 
+            value["Current_Sound_Useful"].asInt().unwrap(), 
+            value["Current_Sound_Meme"].asInt().unwrap(), 
+            value["Custom_Sound_Path"].asString().unwrap()
+        ));
+        } catch (const std::exception& e) {
+            return Ok(MyComplexSettingValue(0, 0, 0, " "));
+        }
     }
-    static Result<MyCustomEnum> fromJson(matjson::Value const& value) {
-        GEODE_UNWRAP_INTO(auto str, value.asString());
-        switch (hash(str)) {
-            case hash("Meme"): return Ok(MyCustomEnum::Meme);
-            case hash("Useful"): return Ok(MyCustomEnum::Useful);
-            case hash("Custom"): return Ok(MyCustomEnum::Custom);
-            default: return Ok(MyCustomEnum::Useful);
-        }
+
+    static bool is_json(matjson::Value const& json) {
+        return json.isString();
     }
 };
 
-class MyCustomSettingV3 : public SettingBaseValueV3<MyCustomEnum> {
+
+
+
+class MyCustomSettingV3 : public SettingBaseValueV3<MyComplexSettingValue> {
 public:
     static Result<std::shared_ptr<SettingV3>> parse(std::string const& key, std::string const& modID, matjson::Value const& json) {
         auto res = std::make_shared<MyCustomSettingV3>();
@@ -41,12 +70,12 @@ public:
         root.checkUnknownKeys();
         return root.ok(std::static_pointer_cast<SettingV3>(res));
     }
-    
+
     SettingNodeV3* createNode(float width) override;
 };
 
 template <>
-struct geode::SettingTypeForValueType<MyCustomEnum> {
+struct geode::SettingTypeForValueType<MyComplexSettingValue> {
     using SettingType = MyCustomSettingV3;
 };
 
@@ -60,9 +89,9 @@ protected:
         
         int count = 0;
         for (auto value : {
-            std::make_pair(MyCustomEnum::Meme, "Meme"),
-            std::make_pair(MyCustomEnum::Useful, "Useful"),
-            std::make_pair(MyCustomEnum::Custom, "Custom")
+            std::make_pair(0, "Meme"),
+            std::make_pair(1, "Useful"),
+            std::make_pair(2, "Custom")
         }) {
             count+=40;
             auto offSpr = ButtonSprite::create(value.second, 40.f, true, "bigFont.fnt", "GJ_button_04.png", 20.f, 1.0f);
@@ -88,7 +117,7 @@ protected:
         SettingValueNodeV3::updateState(invoker);
         auto shouldEnable = this->getSetting()->shouldEnable();
         for (auto toggle : m_toggles) {
-            toggle->toggle(toggle->getTag() == static_cast<int>(this->getValue()));
+            toggle->toggle(toggle->getTag() == static_cast<int>(this->getValue().m_tab));
             toggle->setEnabled(shouldEnable);
             auto children = toggle->getChildren();
             for (auto children : CCArrayExt<CCNode*>(children)) {
@@ -97,7 +126,9 @@ protected:
         }
     }
     void onToggle(CCObject* sender) {
-        this->setValue(static_cast<MyCustomEnum>(sender->getTag()), static_cast<CCNode*>(sender));
+        MyComplexSettingValue Changes = this->getValue();
+        Changes.m_tab = sender->getTag();
+        this->setValue(Changes, static_cast<CCNode*>(sender));
     }
 
 public:
