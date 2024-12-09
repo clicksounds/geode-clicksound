@@ -106,7 +106,6 @@ protected:
         );
         
         this->addChildAtPosition(this->getNameMenu(), Anchor::TopLeft, ccp(10, 0), ccp(0, 1.0f));
-        this->removeChild(this->getButtonMenu(),false);
         this->addChildAtPosition(this->getButtonMenu(), Anchor::TopRight, ccp(-10, 0), ccp(1.0f, 1.0f));
         this->getButtonMenu()->setScale(1.2);
         this->getNameMenu()->setScale(1.2);
