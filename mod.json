@@ -114,7 +114,7 @@
 		},
 		"selection-release": {
 			"type": "custom:selectionclicks",
-			"name": "Click Sounds",
+			"name": "Release Sounds",
 			"default": "Useful",
 			"enable-if": "setting:enable-releasesounds"
 		},
