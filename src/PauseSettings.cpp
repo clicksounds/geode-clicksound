@@ -15,7 +15,7 @@ public:
 	}
 };
 
-class $modify(pause,PauseLayer) {
+class $modify(PauseLayer) {
   void customSetup() {
     PauseLayer::customSetup();
     auto menu = this->getChildByID("left-button-menu");
@@ -36,7 +36,7 @@ class $modify(pause,PauseLayer) {
   }
 };
 
-class $modify(editor,EditorPauseLayer) {
+class $modify(EditorPauseLayer) {
   bool init(LevelEditorLayer* po) {
     if (!EditorPauseLayer::init(po)) return false;
     auto menu = this->getChildByID("settings-menu");
