@@ -1,5 +1,6 @@
 #pragma once
 #include <Geode/Geode.hpp>
+#include "jsonReader/Getsettingsinfo.hpp"
 
 using namespace geode::prelude;
 // Custom class for Caching sounds (Make it less laggy for mobile platforms and such)
@@ -22,7 +23,7 @@ class SoundCache {
                 } 
         }
         void Play() { 
-            std::string  Paths =  Mod::get()->getSettingValue<std::filesystem::path>(custom).string();
+            std::string  Paths =  GetSettingJsonRead(custom).Custom_Sound_Path;
             if (m_soundFile != Paths) {
                 Setsound(Paths);
             }
@@ -48,5 +49,5 @@ class SoundCache {
 
 
 // Create the classes for Caching
-static SoundCache* ClickSound = new SoundCache("click-volume","custom-presssound");
-static SoundCache* ReleaseSound = new SoundCache("release-volume","custom-releasesound");
+static SoundCache* ClickSound = new SoundCache("click-volume","selection-clicks");
+static SoundCache* ReleaseSound = new SoundCache("release-volume","selection-release");

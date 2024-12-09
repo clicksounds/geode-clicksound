@@ -6,7 +6,7 @@
 #include "SettingsV3/PlaySound.hpp"
 #include "SettingsV3/SelectionEnum.hpp"
 #include "StaticClasses.hpp"
-
+#include "jsonReader/Getsettingsinfo.hpp"
 using namespace geode::prelude;
 
 
@@ -74,8 +74,6 @@ public:
         if (!integrityCheck(this,p0)) {
             return ret;
         };
-
-        auto clickSoundFile = Mod::get()->getSettingValue<std::filesystem::path>("custom-presssound").string();
         auto isClickEnabled = Mod::get()->getSettingValue<bool>("enable-clicksounds");
         auto click_vol = Mod::get()->getSettingValue<int64_t>("click-volume");
         // set the direction bool to true
@@ -102,9 +100,9 @@ public:
             return ret;
         };
 
-        auto releaseSoundFile = Mod::get()->getSettingValue<std::filesystem::path>("custom-releasesound").string();
         auto isReleaseEnabled = Mod::get()->getSettingValue<bool>("enable-releasesounds");
         auto release_vol = Mod::get()->getSettingValue<int64_t>("release-volume");
+
         // set the direction bool to false
         SetupNewDirections(p0,false);
         // is it enabled or is volume < 0
@@ -121,17 +119,19 @@ public:
 // on the mod loading
 $execute {
     // Does the release-sound path setting change?
-    listenForSettingChanges("custom-releasesound", [](std::filesystem::path releaseSoundFile) {
-        ReleaseSound->Setsound(releaseSoundFile.string());
+    listenForSettingChanges("selection-release", [](ClicksoundSettingValue releaseSoundFile) {
+        auto Settings = GetSettingJsonRead("selection-release");
+        ReleaseSound->Setsound(Settings.Custom_Sound_Path);
     });
     // Does the click-sound path setting change?
-     listenForSettingChanges("custom-presssound", [](std::filesystem::path PressSoundSoundFile) {
-        ClickSound->Setsound(PressSoundSoundFile.string());
+     listenForSettingChanges("selection-clicks", [](ClicksoundSettingValue PressSoundSoundFile) {
+        auto Settings = GetSettingJsonRead("selection-clicks");
+        ClickSound->Setsound(Settings.Custom_Sound_Path);
     });
     // on boot set Sound Caches
-    std::string releaseSoundFile = Mod::get()->getSettingValue<std::filesystem::path>("custom-releasesound").string();
-    ReleaseSound->Setsound(releaseSoundFile);
-    std::string clickSoundFile = Mod::get()->getSettingValue<std::filesystem::path>("custom-presssound").string();
-    ClickSound->Setsound(clickSoundFile);
+    auto selection_release = GetSettingJsonRead("selection-release");
+    ReleaseSound->Setsound(selection_release.Custom_Sound_Path);
+    auto selection_clicks = GetSettingJsonRead("selection-clicks");
+    ClickSound->Setsound(selection_clicks.Custom_Sound_Path);
 }
 

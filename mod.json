@@ -79,18 +79,6 @@
 			"clicksound" : true,
 			"enable-if": "setting:enable-clicksounds"
 		},
-		"custom-presssound": {
-			"name": "Click Sound File",
-			"type": "file",
-			"default": "Select a file",
-			"control": {
-				"filters": [
-					{"files": ["*.ogg", "*.mp3", "*.wav"],
-				 	"description": "Audio file"}
-				]
-			},
-			"enable-if": "setting:enable-clicksounds"
-		},
 		"release-section": {
             "name": "Release Sounds",
             "description": "This category is for settings that are for <cr>Release Sounds</c>",
@@ -122,18 +110,6 @@
 			"type": "custom:clicksoundeffect",
 			"name": "Test Sound",
 			"clicksound" : false,
-			"enable-if": "setting:enable-releasesounds"
-		},
-		"custom-releasesound": {
-			"name": "Release Sound File",
-			"type": "file",
-			"default": "Select a file",
-			"control": {
-				"filters": [
-					{"files": ["*.ogg", "*.mp3", "*.wav"],
-				 	"description": "Audio file"}
-				]
-			},
 			"enable-if": "setting:enable-releasesounds"
 		},
 		"Miscellaneous-section": {

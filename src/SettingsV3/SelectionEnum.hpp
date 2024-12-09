@@ -1,17 +1,17 @@
-// THIS IS UNUSED I DUNNO HOW TO MATJSON :Skull:
+#pragma once
 #include <Geode/loader/SettingV3.hpp>
 #include <Geode/loader/Mod.hpp>
 
 using namespace geode::prelude;
 
-struct MyComplexSettingValue {
+static struct ClicksoundSettingValue {
     int m_currentMemeClick = 0;
     int m_currentClick = 0;
     int m_tab = 0;
     std::string CustomSoundPath;
 
     // Comparison operator
-    bool operator==(MyComplexSettingValue const& other) const = default;
+    bool operator==(ClicksoundSettingValue const& other) const = default;
 
     // Implicit conversion to std::string
       operator std::string() const {
@@ -24,32 +24,32 @@ struct MyComplexSettingValue {
     }
 
     // Constructors
-    MyComplexSettingValue() = default;
+    ClicksoundSettingValue() = default;
 
-    MyComplexSettingValue(int i1, int i2, int i3, std::string_view val)
+    ClicksoundSettingValue(int i1, int i2, int i3, std::string_view val)
         : m_tab(i1), m_currentClick(i2), m_currentMemeClick(i3), CustomSoundPath(val) {}
 
-    MyComplexSettingValue(MyComplexSettingValue const&) = default;
+    ClicksoundSettingValue(ClicksoundSettingValue const&) = default;
 };
 
 template <>
-struct matjson::Serialize<MyComplexSettingValue> {
+struct matjson::Serialize<ClicksoundSettingValue> {
 
-    static Result<MyComplexSettingValue> fromJson(matjson::Value const& v) {
+    static Result<ClicksoundSettingValue> fromJson(matjson::Value const& v) {
         GEODE_UNWRAP_INTO(std::string x, v.asString());
         if (x == "") {
-           return Ok(MyComplexSettingValue(0, 0, 0, " ")); 
+           return Ok(ClicksoundSettingValue(0, 0, 0, " ")); 
         }
        try {
         auto value = matjson::parse(x).unwrap();
-        return Ok(MyComplexSettingValue(
+        return Ok(ClicksoundSettingValue(
             value["Tab"].asInt().unwrap(), 
             value["Current_Sound_Useful"].asInt().unwrap(), 
             value["Current_Sound_Meme"].asInt().unwrap(), 
             value["Custom_Sound_Path"].asString().unwrap()
         ));
         } catch (const std::exception& e) {
-            return Ok(MyComplexSettingValue(0, 0, 0, " "));
+            return Ok(ClicksoundSettingValue(0, 0, 0, " "));
         }
     }
 
@@ -61,7 +61,7 @@ struct matjson::Serialize<MyComplexSettingValue> {
 
 
 
-class MyCustomSettingV3 : public SettingBaseValueV3<MyComplexSettingValue> {
+class MyCustomSettingV3 : public SettingBaseValueV3<ClicksoundSettingValue> {
 public:
     static Result<std::shared_ptr<SettingV3>> parse(std::string const& key, std::string const& modID, matjson::Value const& json) {
         auto res = std::make_shared<MyCustomSettingV3>();
@@ -75,7 +75,7 @@ public:
 };
 
 template <>
-struct geode::SettingTypeForValueType<MyComplexSettingValue> {
+struct geode::SettingTypeForValueType<ClicksoundSettingValue> {
     using SettingType = MyCustomSettingV3;
 };
 
@@ -153,21 +153,21 @@ protected:
         }
     }
     void onToggle(CCObject* sender) {
-        MyComplexSettingValue Changes = this->getValue();
+        ClicksoundSettingValue Changes = this->getValue();
         Changes.m_tab = sender->getTag();
         this->setValue(Changes, static_cast<CCNode*>(sender));
     }
      void onFolder(CCObject* sender) {
         file::FilePickOptions::Filter textFilter;
         file::FilePickOptions fileOptions;
-        textFilter.description = "Sound";
+        textFilter.description = "Sound effect";
         textFilter.files = {"*.ogg", "*.mp3", "*.wav"};
         fileOptions.filters.push_back(textFilter);
 
         file::pick(file::PickMode::OpenFile, { Mod::get()->getResourcesDir(), { textFilter } }).listen([this,sender](Result<std::filesystem::path>* res) {
             if (res->isOk()) {
                     std::filesystem::path path = res->unwrap();
-                    MyComplexSettingValue Changes = this->getValue();
+                    ClicksoundSettingValue Changes = this->getValue();
                     Changes.CustomSoundPath = path.string().c_str();
                     this->setValue(Changes, static_cast<CCNode*>(sender));
                 }
