@@ -18,6 +18,7 @@ class SoundCache {
         void Setsound(std::string soundFile) {
                 if (soundFile.c_str()) {
                     if (FMODAudioEngine::sharedEngine()->m_system->createSound(soundFile.c_str(), FMOD_DEFAULT, nullptr, &m_sound) == FMOD_OK) {
+                       m_sound->setMode(FMOD_LOOP_OFF);
                        m_soundFile = soundFile;
                     }
                 } 

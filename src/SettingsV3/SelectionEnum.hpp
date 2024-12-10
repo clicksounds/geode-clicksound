@@ -84,6 +84,7 @@ protected:
     std::vector<CCMenuItemToggler*> m_toggles;
     CCMenuItemSpriteExtra* m_folderBtn;
     CCMenu* m_menufolder;
+    CCLabelBMFont* m_nameLabel;
     bool init(std::shared_ptr<MyCustomSettingV3> setting, float width) {
         if (!SettingValueNodeV3::init(setting, width))
             return false;
@@ -96,6 +97,7 @@ protected:
             this,
             menu_selector(MyCustomSettingNodeV3::onFolder)
         );
+        m_nameLabel = CCLabelBMFont::create("", "bigFont.fnt");
         this->removeChild(this->getNameMenu(),false);
          this->removeChild(this->getButtonMenu(),false);
         this->getNameMenu()->setLayout(
@@ -113,8 +115,13 @@ protected:
         m_menufolder->addChild(m_folderBtn);
         m_menufolder->setScale(1);
         m_menufolder->setLayout(RowLayout::create());
-        m_menufolder->setPosition(ccp(this->getContentSize().width / 2, this->getButtonMenu()->getPositionY() - this->getButtonMenu()->getContentSize().height / 1.1));
+        m_menufolder->setPosition(ccp(this->getContentSize().width / 2, this->getContentSize().height / 2));
         this->addChild(m_menufolder);
+        m_nameLabel->setPosition(m_menufolder->getPosition() - ccp(0,m_menufolder->getContentSize().height));
+        m_nameLabel->setScale(0.5);
+        m_nameLabel->setAnchorPoint({0.5,0});
+        this->addChild(m_nameLabel);
+
         
         int count = 0;
         for (auto value : {
@@ -145,6 +152,18 @@ protected:
         SettingValueNodeV3::updateState(invoker);
         auto shouldEnable = this->getSetting()->shouldEnable();
         m_menufolder->setVisible(static_cast<int>(this->getValue().m_tab) == 2);
+        m_nameLabel->setVisible(static_cast<int>(this->getValue().m_tab) == 2);
+        std::error_code ec;
+        auto Custompa = this->getValue().CustomSoundPath;
+        if (Custompa.empty() || Custompa == " " || !std::filesystem::is_regular_file(Custompa, ec)) {
+            m_nameLabel->setColor(ccGRAY);
+            m_nameLabel->setOpacity(155);
+        } else {
+            std::filesystem::path filePath(Custompa);
+            m_nameLabel->setString(filePath.filename().string().c_str());
+            m_nameLabel->setColor(ccWHITE);
+            m_nameLabel->setOpacity(255);
+        }
         for (auto toggle : m_toggles) {
             toggle->toggle(toggle->getTag() == static_cast<int>(this->getValue().m_tab));
             toggle->setEnabled(shouldEnable);
