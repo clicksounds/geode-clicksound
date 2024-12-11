@@ -109,6 +109,9 @@ protected:
         
         this->addChildAtPosition(this->getNameMenu(), Anchor::TopLeft, ccp(10, 0), ccp(0, 1.0f));
         this->addChildAtPosition(this->getButtonMenu(), Anchor::TopRight, ccp(-10, 0), ccp(1.0f, 1.0f));
+        this->getStatusLabel()->setPosition(this->getNameMenu()->getPosition() - ccp(0,this->getNameMenu()->getContentHeight() + 2));
+        this->getStatusLabel()->setScale(0.175);
+        this->getStatusLabel()->setAnchorPoint({0,1});
         this->getButtonMenu()->setScale(1.2);
         this->getNameMenu()->setScale(1.2);
         m_menufolder = CCMenu::create();
@@ -150,7 +153,8 @@ protected:
     
     void updateState(CCNode* invoker) override {
         SettingValueNodeV3::updateState(invoker);
-        auto shouldEnable = this->getSetting()->shouldEnable();
+        float shouldEnable = this->getSetting()->shouldEnable();
+        
         m_menufolder->setVisible(static_cast<int>(this->getValue().m_tab) == 2);
         m_nameLabel->setVisible(static_cast<int>(this->getValue().m_tab) == 2);
         std::error_code ec;
@@ -158,14 +162,25 @@ protected:
         if (Custompa.empty() || Custompa == " " || !std::filesystem::is_regular_file(Custompa, ec)) {
             m_nameLabel->setColor(ccGRAY);
             m_nameLabel->setOpacity(155);
+            m_nameLabel->setString("");
         } else {
             std::filesystem::path filePath(Custompa);
             m_nameLabel->setString(filePath.filename().string().c_str());
             m_nameLabel->setColor(ccWHITE);
             m_nameLabel->setOpacity(255);
         }
+        m_folderBtn->setEnabled(shouldEnable);
+        if (!shouldEnable) {
+           m_nameLabel->setColor(ccGRAY);
+        }
         for (auto toggle : m_toggles) {
-            toggle->toggle(toggle->getTag() == static_cast<int>(this->getValue().m_tab));
+            if (!shouldEnable) {
+                toggle->toggle(toggle->getTag() == static_cast<int>(this->getValue().m_tab));
+                toggle->setVisible(true);
+            } else {
+              (toggle->toggle(false)); 
+              (toggle->setVisible(false));
+            }
             toggle->setEnabled(shouldEnable);
             auto children = toggle->getChildren();
             for (auto children : CCArrayExt<CCNode*>(children)) {
