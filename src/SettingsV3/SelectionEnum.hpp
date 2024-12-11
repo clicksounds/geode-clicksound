@@ -174,7 +174,7 @@ protected:
            m_nameLabel->setColor(ccGRAY);
         }
         for (auto toggle : m_toggles) {
-            if (!shouldEnable) {
+            if (shouldEnable) {
                 toggle->toggle(toggle->getTag() == static_cast<int>(this->getValue().m_tab));
                 toggle->setVisible(true);
             } else {
