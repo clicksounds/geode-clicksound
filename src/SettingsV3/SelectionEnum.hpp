@@ -5,8 +5,8 @@
 using namespace geode::prelude;
 
 static struct ClicksoundSettingValue {
-    std::string  m_currentMemeClick = 0;
-    std::string  m_currentClick = 0;
+    std::string  m_currentMemeClick;
+    std::string  m_currentClick;
     int m_tab = 0;
     std::string CustomSoundPath;
 
@@ -42,6 +42,7 @@ struct matjson::Serialize<ClicksoundSettingValue> {
         }
        try {
         auto value = matjson::parse(x).unwrap();
+            
         return Ok(ClicksoundSettingValue(
             value["Tab"].asInt().unwrap(), 
             value["Current_Sound_Useful"].asString().unwrap(), 
