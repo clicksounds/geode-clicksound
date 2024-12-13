@@ -11,6 +11,7 @@ class SoundCache {
         std::string Volume;
         std::string custom;
         FMOD::Channel* Soundchannel;
+        
         SoundCache(std::string x,std::string x2) {
             Volume = x;
             custom = x2;

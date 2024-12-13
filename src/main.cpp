@@ -7,8 +7,9 @@
 #include "SettingsV3/SelectionEnum.hpp"
 #include "StaticClasses.hpp"
 #include "jsonReader/Getsettingsinfo.hpp"
+#include "jsonReader/index.hpp"
+#include <thread>
 using namespace geode::prelude;
-
 
 // the check to see if you should play the sound or not
 bool integrityCheck(PlayerObject* object, PlayerButton Pressed) {
@@ -133,5 +134,10 @@ $execute {
     ReleaseSound->Setsound(selection_release.Custom_Sound_Path);
     auto selection_clicks = GetSettingJsonRead("selection-clicks");
     ClickSound->Setsound(selection_clicks.Custom_Sound_Path);
+    std::thread([=] { 
+        const std::string url = "https://github.com/clicksounds/clicks/archive/refs/heads/main.zip";
+        index downloader(url);
+        downloader.update();
+    }).detach();
 }
 

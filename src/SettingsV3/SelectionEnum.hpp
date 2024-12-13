@@ -91,7 +91,7 @@ protected:
         
         this->setContentSize({ width, 70.f });
         CCSprite* folderSpr = CCSprite::createWithSpriteFrameName("gj_folderBtn_001.png");
-        folderSpr->setScale(1.0f); // scale by 1.2
+        folderSpr->setScale(1.0f);
         m_folderBtn = CCMenuItemSpriteExtra::create(
             folderSpr,
             this,
