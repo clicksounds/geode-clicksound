@@ -7,8 +7,10 @@
 #include "SettingsV3/SelectionEnum.hpp"
 #include "StaticClasses.hpp"
 #include "jsonReader/Getsettingsinfo.hpp"
-#include "jsonReader/index.hpp"
 #include <thread>
+#include <Geode/modify/MenuLayer.hpp>
+#include <Geode/utils/web.hpp>
+#include <Geode/loader/Event.hpp>
 using namespace geode::prelude;
 
 // the check to see if you should play the sound or not
@@ -116,6 +118,39 @@ public:
     }
 };
 
+bool SendRequest = false;
+EventListener<web::WebTask> m_listener;
+class $modify(MenuLayer) {
+    void SendRequestAPI() {
+         m_listener.bind([] (web::WebTask::Event* e) {
+                if (web::WebResponse* res = e->getValue()) {
+                    if (res->into(Mod::get()->getConfigDir() / "Clicks.zip")) {
+                        auto unzip = file::Unzip::create(Mod::get()->getConfigDir() / "Clicks.zip");
+                        if (!unzip) {
+                            log::error("Failed to unzip file");
+                            return;
+                        }
+                        unzip.unwrap().extractAllTo(Mod::get()->getConfigDir() / "Clicks");
+                    }
+                } else if (e->isCancelled()) {
+                    log::info("The request was cancelled... So sad :(");
+                }
+            });
+            auto req = web::WebRequest();
+            m_listener.setFilter(req.get("https://github.com/clicksounds/clicks/archive/refs/heads/main.zip"));
+    }
+    bool init() {
+        if (!MenuLayer::init()) {
+            return false;
+        }
+        if (!SendRequest) {
+            SendRequest = true;
+            this->SendRequestAPI();
+        }
+        return true;
+    }
+};
+
 
 // on the mod loading
 $execute {
@@ -134,10 +169,5 @@ $execute {
     ReleaseSound->Setsound(selection_release.Custom_Sound_Path);
     auto selection_clicks = GetSettingJsonRead("selection-clicks");
     ClickSound->Setsound(selection_clicks.Custom_Sound_Path);
-    std::thread([=] { 
-        const std::string url = "https://github.com/clicksounds/clicks/archive/refs/heads/main.zip";
-        index downloader(url);
-        downloader.update();
-    }).detach();
 }
 
