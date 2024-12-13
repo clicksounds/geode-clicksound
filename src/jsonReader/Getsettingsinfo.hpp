@@ -7,8 +7,8 @@ using namespace geode::prelude;
 static struct ReadingSettings
 {
     int M_Tab;
-    int Current_Sound_Useful;
-    int Current_Sound_Meme;
+    std::string Current_Sound_Useful;
+    std::string Current_Sound_Meme;
     std::string Custom_Sound_Path;
     std::string SettingName;
 };

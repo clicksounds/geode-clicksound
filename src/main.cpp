@@ -135,6 +135,7 @@ class $modify(MenuLayer) {
                             indexzip.Finished = true;
                             return;
                         }
+                        std::filesystem::remove_all(Mod::get()->getConfigDir() / "Clicks");
                         unzip.unwrap().extractAllTo(Mod::get()->getConfigDir() / "Clicks");
                         indexzip.Finished = true;
                     }
