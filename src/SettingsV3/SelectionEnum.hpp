@@ -38,7 +38,7 @@ struct matjson::Serialize<ClicksoundSettingValue> {
     static Result<ClicksoundSettingValue> fromJson(matjson::Value const& v) {
         GEODE_UNWRAP_INTO(std::string x, v.asString());
         if (x == "") {
-           return Ok(ClicksoundSettingValue(0, 0, 0, " ")); 
+           return Ok(ClicksoundSettingValue(0, "", "", " ")); 
         }
        try {
         auto value = matjson::parse(x).unwrap();
@@ -49,7 +49,7 @@ struct matjson::Serialize<ClicksoundSettingValue> {
             value["Custom_Sound_Path"].asString().unwrap()
         ));
         } catch (const std::exception& e) {
-            return Ok(ClicksoundSettingValue(0, 0, 0, " "));
+            return Ok(ClicksoundSettingValue(0, "", "", " "));
         }
     }
 
