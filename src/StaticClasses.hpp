@@ -1,6 +1,13 @@
 #pragma once
 #include <Geode/Geode.hpp>
 #include "jsonReader/Getsettingsinfo.hpp"
+struct downloadedzipStruc {
+    bool Finished = false;
+    bool Failed = false;
+    bool StartedDownloading = false;
+};
+
+static downloadedzipStruc indexzip;
 
 using namespace geode::prelude;
 // Custom class for Caching sounds (Make it less laggy for mobile platforms and such)

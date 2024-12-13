@@ -118,33 +118,39 @@ public:
     }
 };
 
-bool SendRequest = false;
 EventListener<web::WebTask> m_listener;
 class $modify(MenuLayer) {
     void SendRequestAPI() {
          m_listener.bind([] (web::WebTask::Event* e) {
                 if (web::WebResponse* res = e->getValue()) {
+                    if (res->string().unwrapOr("failed") == "failed") {
+                        indexzip.Failed = true;
+                        indexzip.Finished = true;
+                        return;
+                    }
                     if (res->into(Mod::get()->getConfigDir() / "Clicks.zip")) {
                         auto unzip = file::Unzip::create(Mod::get()->getConfigDir() / "Clicks.zip");
                         if (!unzip) {
-                            log::error("Failed to unzip file");
+                            indexzip.Failed = true;
+                            indexzip.Finished = true;
                             return;
                         }
                         unzip.unwrap().extractAllTo(Mod::get()->getConfigDir() / "Clicks");
+                        indexzip.Finished = true;
                     }
                 } else if (e->isCancelled()) {
-                    log::info("The request was cancelled... So sad :(");
+                    indexzip.Failed = true;
+                    indexzip.Finished = true;
                 }
             });
-            auto req = web::WebRequest();
-            m_listener.setFilter(req.get("https://github.com/clicksounds/clicks/archive/refs/heads/main.zip"));
+            m_listener.setFilter(web::WebRequest().get("https://github.com/clicksounds/clicks/archive/refs/heads/main.zip"));
     }
     bool init() {
         if (!MenuLayer::init()) {
             return false;
         }
-        if (!SendRequest) {
-            SendRequest = true;
+        if (!indexzip.StartedDownloading) {
+            indexzip.StartedDownloading = true;
             this->SendRequestAPI();
         }
         return true;
