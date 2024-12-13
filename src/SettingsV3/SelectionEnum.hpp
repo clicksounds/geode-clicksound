@@ -26,7 +26,7 @@ static struct ClicksoundSettingValue {
     // Constructors
     ClicksoundSettingValue() = default;
 
-    ClicksoundSettingValue(int i1,  std::string i2,  std::string i3, std::string_view val)
+    ClicksoundSettingValue(int i1,  std::string_view i2,  std::string_view i3, std::string_view val)
         : m_tab(i1), m_currentClick(i2), m_currentMemeClick(i3), CustomSoundPath(val) {}
 
     ClicksoundSettingValue(ClicksoundSettingValue const&) = default;
@@ -38,7 +38,7 @@ struct matjson::Serialize<ClicksoundSettingValue> {
     static Result<ClicksoundSettingValue> fromJson(matjson::Value const& v) {
         GEODE_UNWRAP_INTO(std::string x, v.asString());
         if (x == "") {
-           return Ok(ClicksoundSettingValue(0, "", "", " ")); 
+           return Ok(ClicksoundSettingValue(0, " ", " ", " ")); 
         }
        try {
         auto value = matjson::parse(x).unwrap();
@@ -49,7 +49,7 @@ struct matjson::Serialize<ClicksoundSettingValue> {
             value["Custom_Sound_Path"].asString().unwrap()
         ));
         } catch (const std::exception& e) {
-            return Ok(ClicksoundSettingValue(0, "", "", " "));
+            return Ok(ClicksoundSettingValue(0, " ", " ", " "));
         }
     }
 
