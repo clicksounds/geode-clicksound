@@ -7,6 +7,7 @@
 #include "SettingsV3/SelectionEnum.hpp"
 #include "StaticClasses.hpp"
 #include "jsonReader/Getsettingsinfo.hpp"
+#include "jsonReader/Json.hpp"
 #include <thread>
 #include <Geode/modify/MenuLayer.hpp>
 #include <Geode/utils/web.hpp>
@@ -138,6 +139,7 @@ class $modify(MenuLayer) {
                         std::filesystem::remove_all(Mod::get()->getConfigDir() / "Clicks");
                         unzip.unwrap().extractAllTo(Mod::get()->getConfigDir() / "Clicks");
                         indexzip.Finished = true;
+                        ClickJson->loadData();
                     }
                 } else if (e->isCancelled()) {
                     indexzip.Failed = true;
@@ -150,7 +152,9 @@ class $modify(MenuLayer) {
         if (!MenuLayer::init()) {
             return false;
         }
+        ClickJson->displayData();
         if (!indexzip.StartedDownloading) {
+            ClickJson->loadData();
             indexzip.StartedDownloading = true;
             this->SendRequestAPI();
         }

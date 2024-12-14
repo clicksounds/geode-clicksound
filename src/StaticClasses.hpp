@@ -31,7 +31,7 @@ class SoundCache {
                     }
                 } 
         }
-        void Play() { 
+        void Play(bool TestButton = false) { 
             std::string  Paths =  GetSettingJsonRead(custom).Custom_Sound_Path;
             if (m_soundFile != Paths) {
                 Setsound(Paths);

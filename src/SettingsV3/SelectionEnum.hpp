@@ -64,10 +64,12 @@ struct matjson::Serialize<ClicksoundSettingValue> {
 
 class MyCustomSettingV3 : public SettingBaseValueV3<ClicksoundSettingValue> {
 public:
+    bool clicksound = false;
     static Result<std::shared_ptr<SettingV3>> parse(std::string const& key, std::string const& modID, matjson::Value const& json) {
         auto res = std::make_shared<MyCustomSettingV3>();
         auto root = checkJson(json, "selectionclicks");
         res->parseBaseProperties(key, modID, root);
+        root.has("clicksound").into(res->clicksound);
         root.checkUnknownKeys();
         return root.ok(std::static_pointer_cast<SettingV3>(res));
     }
