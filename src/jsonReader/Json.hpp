@@ -16,6 +16,7 @@ public:
     struct CategoryData {
         std::vector<std::string> clicks;
         std::vector<std::string> releases;
+        std::string jsonpath;
     };
 
     std::map<std::string, CategoryData> memeData;
@@ -44,13 +45,17 @@ public:
             if (std::filesystem::exists(fs / "pack.json") ) {
                 std::string filename = entry.path().filename().string();
                 CategoryData cat;
-
+                cat.jsonpath = std::filesystem::path(fs / "pack.json").string();
                 if (std::filesystem::exists(fs / "Clicks")){
-                    cat.clicks.push_back(filename);
+                     for (const auto& Rl : std::filesystem::directory_iterator(fs / "Clicks")) {
+                        cat.clicks.push_back(Rl.path().string());
+                     }
                 }
 
                 if (std::filesystem::exists(fs / "Releases")) {
-                    cat.releases.push_back(filename);
+                     for (const auto& Rl : std::filesystem::directory_iterator(fs / "Releases")) {
+                        cat.releases.push_back(Rl.path().string());
+                     }
                 }
 
                 categoryData[filename] = cat;
