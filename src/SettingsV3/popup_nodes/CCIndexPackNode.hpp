@@ -18,6 +18,7 @@ public:
     CCLabelBMFont* Text;
     CCLabelBMFont* Author;
     CCMenu* _Apply_Menu;
+    CCMenu* DEVS;
     std::string authorsListWhole = "";
     void OnDevelopers(auto sender) {
         FLAlertLayer::create( 
@@ -163,7 +164,7 @@ public:
                         }
 
                         Author->setString(authorsList.c_str());
-                        CCMenu* DEVS = CCMenu::create();
+                        DEVS = CCMenu::create();
                         DEVS->setID("developers-menu");
                         DEVS->ignoreAnchorPointForPosition(false);
                         Author->updateAnchoredPosition(Anchor::Bottom, ccp(0, -10), ccp(.5f, .5f));
