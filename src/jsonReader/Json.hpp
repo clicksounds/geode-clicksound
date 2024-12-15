@@ -9,15 +9,15 @@
 
 using namespace geode::prelude;
 
+static struct CategoryData {
+    std::vector<std::string> clicks;
+    std::vector<std::string> releases;
+    std::string jsonpath;
+};
+
 class JsonReader {
 public:
     JsonReader() {}
-
-    struct CategoryData {
-        std::vector<std::string> clicks;
-        std::vector<std::string> releases;
-        std::string jsonpath;
-    };
 
     std::map<std::string, CategoryData> memeData;
     std::map<std::string, CategoryData> usefulData;
@@ -63,11 +63,53 @@ public:
         }
     }
 
+   std::map<std::string, CategoryData> GetMemeReleases() {
+        std::map<std::string, CategoryData> List;
+        for (const auto& [filename, data] : memeData) {
+            if (!data.releases.empty()) {
+                List[filename] = data; 
+            }
+        }
+        return List;
+    }
+    std::map<std::string, CategoryData> GetMemeClicks() {
+        std::map<std::string, CategoryData> List;
+        for (const auto& [filename, data] : memeData) {
+            if (!data.clicks.empty()) {
+                List[filename] = data; 
+            }
+        }
+        return List;
+    }
+    // usefull
+
+     std::map<std::string, CategoryData> GetUsefulReleases() {
+        std::map<std::string, CategoryData> List;
+        for (const auto& [filename, data] : usefulData) {
+            if (!data.releases.empty()) {
+                List[filename] = data; 
+            }
+        }
+        return List;
+    }
+    std::map<std::string, CategoryData> GetUsefulClicks() {
+        std::map<std::string, CategoryData> List;
+        for (const auto& [filename, data] : usefulData) {
+            if (!data.clicks.empty()) {
+                List[filename] = data; 
+            }
+        }
+        return List;
+    }
+
+
+
     void displayData() const {
         // Display meme data
         log::info("Meme Data:");
         for (const auto& [filename, data] : memeData) {
             log::info("SOUND ID: {}", filename);
+            log::info("JSON: {}", data.jsonpath);
             log::info("Clicks: {}", formatData(data.clicks));
             log::info("Releases: {}", formatData(data.releases));
         }
@@ -76,6 +118,7 @@ public:
         log::info("Useful Data:");
         for (const auto& [filename, data] : usefulData) {
             log::info("SOUND ID: {}", filename);
+            log::info("JSON: {}", data.jsonpath);
             log::info("Clicks: {}", formatData(data.clicks));
             log::info("Releases: {}", formatData(data.releases));
         }

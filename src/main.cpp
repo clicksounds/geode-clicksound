@@ -149,16 +149,13 @@ class $modify(MenuLayer) {
             m_listener.setFilter(web::WebRequest().get("https://github.com/clicksounds/clicks/archive/refs/heads/main.zip"));
     }
     bool init() {
-        if (!MenuLayer::init()) {
-            return false;
-        }
         ClickJson->displayData();
         if (!indexzip.StartedDownloading) {
             ClickJson->loadData();
             indexzip.StartedDownloading = true;
             this->SendRequestAPI();
         }
-        return true;
+        return MenuLayer::init();
     }
 };
 

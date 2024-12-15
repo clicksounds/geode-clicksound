@@ -1,6 +1,7 @@
 #pragma once
 #include <Geode/loader/SettingV3.hpp>
 #include <Geode/loader/Mod.hpp>
+#include "SettingsV3/popup.hpp"
 
 using namespace geode::prelude;
 
@@ -109,6 +110,9 @@ protected:
             ->setCrossAxisLineAlignment(AxisAlignment::Start)
             ->setCrossAxisAlignment(AxisAlignment::Start)
         );
+        auto popup = Select::create();
+       	popup->m_noElasticity = false;
+        popup->show();
         
         this->addChildAtPosition(this->getNameMenu(), Anchor::TopLeft, ccp(10, 0), ccp(0, 1.0f));
         this->addChildAtPosition(this->getButtonMenu(), Anchor::TopRight, ccp(-10, 0), ccp(1.0f, 1.0f));
