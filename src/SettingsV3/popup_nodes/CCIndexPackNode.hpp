@@ -11,7 +11,7 @@
 #include <Geode/utils/file.hpp>
 #include "../../jsonReader/Json.hpp"
 using namespace geode::prelude;
-#define MEN(class,child) class = CCMenu::create(); 
+#define MEN(class) class = CCMenu::create(); 
 class CCIndexPackNode : public CCLayerColor {
 public:
     CategoryData Infomation;
@@ -22,12 +22,13 @@ public:
     std::string authorsListWhole = "";
     void OnDevelopers(auto sender) {
         FLAlertLayer::create( 
-            new FLAlertLayerProtocol,
+            nullptr,
             "Developers",
             "The Developers for the sound are "+authorsListWhole,  
             "OK",nullptr, 420.f,true,210.f,1.f
             )->show();
     };
+
     void getlistfull() {
          if (!Infomation.jsonpath.empty() && std::filesystem::exists(Infomation.jsonpath)) {
             std::filesystem::path fs = std::filesystem::path(Infomation.jsonpath);
@@ -117,7 +118,9 @@ public:
             Author = CCLabelBMFont::create("ITEM NODE", "goldFont.fnt");
             Author->setID("Author-label");
             Author->setLayoutOptions(AxisLayoutOptions::create()->setScalePriority(1));
+            Author->setScale(0.5);
             std::string authorsList = "by ";
+            int Number = 0;
             if (!Infomation.jsonpath.empty() && std::filesystem::exists(Infomation.jsonpath)) {
             std::filesystem::path fs = std::filesystem::path(Infomation.jsonpath);
             std::ifstream file(fs, std::ios::in | std::ios::binary);
@@ -130,7 +133,6 @@ public:
                        if (jsonObject2.contains("authors") && jsonObject2["authors"].isArray()) {
                         bool add_sill = false;
                         bool countonly = false;
-                        int Number = 0;
                         std::string old = authorsList;
                         for (const auto& author : jsonObject2["authors"].asArray().unwrap()) {
                             if (author.contains("name") && author["name"].isString()) {
@@ -146,6 +148,11 @@ public:
                                 } else {
                                     if (!author["name"].asString().unwrap().empty()) {
                                         add_sill = true;  
+                                        authorsList += author["name"].asString().unwrap();
+                                        if (authorsList.length() > 11) {
+                                            Author->setScale(clampf( (11  / authorsList.length()), 0.2,0.5));
+                                        }
+                                        continue;
                                     }
                                 }
 
@@ -158,23 +165,22 @@ public:
                             }
                         }
                         if (Number > 0) {
-                           authorsList+=" +";
-                           authorsList+=Number;
+                           authorsList+=" + "+std::to_string(Number);
                            authorsList+=" more";
                         }
 
                         Author->setString(authorsList.c_str());
-                        DEVS = CCMenu::create();
-                        DEVS->setID("developers-menu");
+                        MEN(DEVS)
+                        DEVS->setID("developers");
                         DEVS->ignoreAnchorPointForPosition(false);
-                        Author->updateAnchoredPosition(Anchor::Bottom, ccp(0, -10), ccp(.5f, .5f));
-                        Author->setScale(0.5);
+                        //Author->updateAnchoredPosition(Anchor::Bottom, ccp(0, -10), ccp(.5f, .5f));
                         auto developersBtn = CCMenuItemSpriteExtra::create(
                             Author, this, menu_selector(CCIndexPackNode::OnDevelopers)
                         );
                         developersBtn->setID("developers-button");
+                        developersBtn->setAnchorPoint({0,0});
                         DEVS->addChild(developersBtn);
-                        DEVS->updateAnchoredPosition(Anchor::Bottom, ccp(0, -10), ccp(.5f, .5f));
+                        DEVS->updateAnchoredPosition(Anchor::Bottom, ccp(0, 0), ccp(0, 0));
                         DEVS->updateLayout();
                     } else {
                         std::cerr << "\"authors\" key is missing or not an array in the JSON." << std::endl;
@@ -189,13 +195,22 @@ public:
             }
             this->addChildAtPosition(DEVS, Anchor::BottomLeft, ccp(3, 0), ccp(0, 0));
 
-            CCLayerGradient* gradient = CCLayerGradient::create(ccc4(0, 0, 0, 100), ccc4(0, 255, 0, 100));
-            gradient->setContentSize(this->getContentSize());
-            gradient->setZOrder(-3);
-            gradient->setVector(ccp(90, 0));
-            this->addChild(gradient);
-            this->setOpacity(0); 
-            return true;
+        CCLayerGradient* gradient = CCLayerGradient::create(ccc4(0, 0, 0, 100), ccc4(0, 0, 0, 100));
+        gradient->setContentSize(this->getContentSize());
+        gradient->setZOrder(-3);
+        gradient->setVector(ccp(90, 0));
+        this->addChild(gradient);
+        this->setOpacity(0); 
+            // GJ_button_06
+        auto ConfirmSprite = ButtonSprite::create("Set", 40.f, true, "bigFont.fnt", "GJ_button_01.png", 20.f, 1.0f);
+        MEN(_Apply_Menu)
+        _Apply_Menu->setID("apply");
+        _Apply_Menu->ignoreAnchorPointForPosition(false);
+        _Apply_Menu->addChild(ConfirmSprite);
+        _Apply_Menu->updateLayout();
+        this->addChildAtPosition(_Apply_Menu, Anchor::BottomRight, ccp(3, 0), ccp(0, 0));
+        _Apply_Menu->setAnchorPoint({0.250,-0.05});
+        return true;
      }
      static CCIndexPackNode* create(CategoryData x) {
             CCIndexPackNode* pRet = new CCIndexPackNode();
