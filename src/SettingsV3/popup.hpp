@@ -54,7 +54,7 @@ protected:
         return true;
     };
 public:
-    static Select* create(bool meme = false, bool clicksound = true, std::function<void(std::string)> setting = [=](std::string x) {}) {
+    static Select* create(bool meme = false, bool clicksound = true, std::function<void(std::string)> setting = [](std::string x) {}) {
           auto ret = new Select;
         if (ret && ret->initAnchored(420.f, 210.f)) {
             ret->autorelease();
