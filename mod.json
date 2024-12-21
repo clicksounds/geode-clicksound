@@ -35,7 +35,7 @@
 		"universal",
 		"gameplay",
 		"editor",
-		"offline",
+		"online",
 		"customization"
 	],
 	"dependencies": [
