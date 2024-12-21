@@ -9,6 +9,7 @@
 #include <fstream>
 #include <iostream>
 #include <Geode/utils/file.hpp>
+#include "../popup.hpp"
 #include "../../jsonReader/Json.hpp"
 using namespace geode::prelude;
 #define MEN(class) class = CCMenu::create(); 
@@ -18,6 +19,7 @@ public:
     CCLabelBMFont* Text;
     CCLabelBMFont* Author;
     CCMenu* _Apply_Menu;
+    std::function<void()> selectionobject;
     CCMenu* DEVS;
     std::string authorsListWhole = "";
     void OnDevelopers(auto sender) {
@@ -28,7 +30,12 @@ public:
             "OK",nullptr, 420.f,true,210.f,1.f
             )->show();
     };
-
+    void selected(CCObject*) {
+        if (selectionobject) {
+            // todo update setting
+            selectionobject();
+        }
+    }
     void getlistfull() {
          if (!Infomation.jsonpath.empty() && std::filesystem::exists(Infomation.jsonpath)) {
             std::filesystem::path fs = std::filesystem::path(Infomation.jsonpath);
@@ -73,9 +80,10 @@ public:
                 }
             }
     }
-     bool init(CategoryData x) {
+     bool init(CategoryData x, std::function<void()> Objectt) {
             if (!CCLayerColor::init())
                 return false;
+            selectionobject = Objectt;
             Infomation = x;
             
             this->setContentSize(ccp(315, 35));
@@ -102,15 +110,11 @@ public:
                             //limitNodeWidth(Text, this->getContentSize() - CCSize(this->getContentSize().width, 0), .8f, .1f);
                             Text->setScale(clamp((this->getContentSize().width / 3) / Text->getContentSize().width, 0.1f, 0.5f));
                             Text->updateLayout();
-                        } else {
-                            std::cerr << "\"name\" key not found in the JSON." << std::endl;
                         }
                     } catch (const std::exception& e) {
-                        std::cerr << "Error parsing JSON: " << e.what() << std::endl;
+                       // std::cerr << "Error parsing JSON: " << e.what() << std::endl;
                     }
-                } else {
-                    std::cerr << "Failed to open the file: " << fs << std::endl;
-                }
+                } 
             }
             this->getlistfull();
             this->addChildAtPosition(Text, Anchor::TopLeft, ccp(3, 0), ccp(0, 1.0f));
@@ -122,8 +126,8 @@ public:
             std::string authorsList = "by ";
             int Number = 0;
             if (!Infomation.jsonpath.empty() && std::filesystem::exists(Infomation.jsonpath)) {
-            std::filesystem::path fs = std::filesystem::path(Infomation.jsonpath);
-            std::ifstream file(fs, std::ios::in | std::ios::binary);
+                std::filesystem::path fs = std::filesystem::path(Infomation.jsonpath);
+                std::ifstream file(fs, std::ios::in | std::ios::binary);
                 if (file.is_open()) {
                     std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
                     file.close();
@@ -182,15 +186,11 @@ public:
                         DEVS->addChild(developersBtn);
                         DEVS->updateAnchoredPosition(Anchor::Bottom, ccp(0, 0), ccp(0, 0));
                         DEVS->updateLayout();
-                    } else {
-                        std::cerr << "\"authors\" key is missing or not an array in the JSON." << std::endl;
-                    }
+                    } 
 
                     } catch (const std::exception& e) {
-                        std::cerr << "Error parsing JSON: " << e.what() << std::endl;
+                        //std::cerr << "Error parsing JSON: " << e.what() << std::endl;
                     }
-                } else {
-                    std::cerr << "Failed to open the file: " << fs << std::endl;
                 }
             }
             this->addChildAtPosition(DEVS, Anchor::BottomLeft, ccp(3, 0), ccp(0, 0));
@@ -202,7 +202,8 @@ public:
         this->addChild(gradient);
         this->setOpacity(0); 
             // GJ_button_06
-        auto ConfirmSprite = ButtonSprite::create("Set", 40.f, true, "bigFont.fnt", "GJ_button_01.png", 20.f, 1.0f);
+        auto ConfirmSprite = CCMenuItemSpriteExtra::create(ButtonSprite::create("Set", 40.f, true, "bigFont.fnt", "GJ_button_01.png", 20.f, 1.0f), this, menu_selector(CCIndexPackNode::selected));
+                        
         MEN(_Apply_Menu)
         _Apply_Menu->setID("apply");
         _Apply_Menu->ignoreAnchorPointForPosition(false);
@@ -212,9 +213,9 @@ public:
         _Apply_Menu->setAnchorPoint({0.250,-0.05});
         return true;
      }
-     static CCIndexPackNode* create(CategoryData x) {
+     static CCIndexPackNode* create(CategoryData x, std::function<void()> Objectt) {
             CCIndexPackNode* pRet = new CCIndexPackNode();
-            if (pRet && pRet->init(x)) {
+            if (pRet && pRet->init(x,Objectt)) {
                 pRet->autorelease();
                 return pRet;
             } else {

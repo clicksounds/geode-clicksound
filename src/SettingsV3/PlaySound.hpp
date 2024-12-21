@@ -72,9 +72,17 @@ protected:
     }
     void onButton(CCObject*) {
         if (m_setting->clicksound) {
-            ClickSound->Play();
+            if (Custom_OnClick) {
+                ClickSound->Play();
+            } else {
+                ClickSoundIndex->PlayRandom();
+            }
         } else {
+        if (Custom_OnLetGo) {
             ReleaseSound->Play();
+        } else {
+            ReleaseSoundIndex->PlayRandom();
+        }
         }
     }
 

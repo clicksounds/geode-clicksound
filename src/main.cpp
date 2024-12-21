@@ -14,6 +14,47 @@
 #include <Geode/loader/Event.hpp>
 using namespace geode::prelude;
 
+void onsettingsUpdate() {
+    auto selection_release = GetSettingJsonRead("selection-release");
+    ReleaseSound->Setsound(selection_release.Custom_Sound_Path);
+
+    auto selection_clicks = GetSettingJsonRead("selection-clicks");
+    ClickSound->Setsound(selection_clicks.Custom_Sound_Path);
+    if (ClickJson->hassomedata) {
+
+        Custom_OnClick = selection_clicks.M_Tab == 2;
+        if (selection_clicks.M_Tab == 0) {
+            auto list = ClickJson->GetMemeClicks();
+            auto sound = list.find(selection_clicks.Current_Sound_Meme);
+            if (sound != list.end()) {
+                ClickSoundIndex->SetSounds(sound->second.clicks, "click-volume","selection-clicks");
+            }
+        } else {
+            auto list = ClickJson->GetUsefulClicks();
+            auto sound = list.find(selection_clicks.Current_Sound_Useful);
+            if (sound != list.end()) {
+                ClickSoundIndex->SetSounds(sound->second.clicks, "click-volume","selection-clicks");
+            }
+        }
+
+        Custom_OnLetGo = selection_release.M_Tab == 2;
+         if (selection_release.M_Tab == 0) {
+            auto list = ClickJson->GetMemeReleases();
+            auto sound = list.find(selection_release.Current_Sound_Meme);
+            if (sound != list.end()) {
+                ReleaseSoundIndex->SetSounds(sound->second.releases, "release-volume","selection-release");
+            }
+        } else {
+            auto list = ClickJson->GetUsefulReleases();
+            auto sound = list.find(selection_release.Current_Sound_Useful);
+            if (sound != list.end()) {
+                ReleaseSoundIndex->SetSounds(sound->second.releases, "release-volume","selection-release");
+            }
+        }
+
+    }
+}
+
 // the check to see if you should play the sound or not
 bool integrityCheck(PlayerObject* object, PlayerButton Pressed) {
     // play sounds when "only play on jump" settings is enabled and the player input is a jump, left movement, or right movement.
@@ -87,7 +128,11 @@ public:
         if (click_vol <= 0 || !isClickEnabled) return ret;
         
         // Sound Player
-        ClickSound->Play();
+        if (Custom_OnClick) {
+            ClickSound->Play();
+        } else {
+            ClickSoundIndex->PlayRandom();
+        }
 
         return ret;
     }
@@ -113,7 +158,11 @@ public:
         if (release_vol <= 0 || !isReleaseEnabled) return ret;
 
         // Sound Player
-        ReleaseSound->Play();
+        if (Custom_OnLetGo) {
+            ReleaseSound->Play();
+        } else {
+            ReleaseSoundIndex->PlayRandom();
+        }
 
         return ret;
     }
@@ -140,6 +189,7 @@ class $modify(MenuLayer) {
                         unzip.unwrap().extractAllTo(Mod::get()->getConfigDir() / "Clicks");
                         indexzip.Finished = true;
                         ClickJson->loadData();
+                        onsettingsUpdate();
                     }
                 } else if (e->isCancelled()) {
                     indexzip.Failed = true;
@@ -149,7 +199,6 @@ class $modify(MenuLayer) {
             m_listener.setFilter(web::WebRequest().get("https://github.com/clicksounds/clicks/archive/refs/heads/main.zip"));
     }
     bool init() {
-        ClickJson->displayData();
         if (!indexzip.StartedDownloading) {
             ClickJson->loadData();
             indexzip.StartedDownloading = true;
@@ -162,20 +211,16 @@ class $modify(MenuLayer) {
 
 // on the mod loading
 $execute {
+    // on boot set Sound Caches
+    ClickJson->displayData();
     // Does the release-sound path setting change?
     listenForSettingChanges("selection-release", [](ClicksoundSettingValue releaseSoundFile) {
-        auto Settings = GetSettingJsonRead("selection-release");
-        ReleaseSound->Setsound(Settings.Custom_Sound_Path);
+        onsettingsUpdate();
     });
     // Does the click-sound path setting change?
      listenForSettingChanges("selection-clicks", [](ClicksoundSettingValue PressSoundSoundFile) {
-        auto Settings = GetSettingJsonRead("selection-clicks");
-        ClickSound->Setsound(Settings.Custom_Sound_Path);
+        onsettingsUpdate();
     });
-    // on boot set Sound Caches
-    auto selection_release = GetSettingJsonRead("selection-release");
-    ReleaseSound->Setsound(selection_release.Custom_Sound_Path);
-    auto selection_clicks = GetSettingJsonRead("selection-clicks");
-    ClickSound->Setsound(selection_clicks.Custom_Sound_Path);
+    onsettingsUpdate();
 }
 

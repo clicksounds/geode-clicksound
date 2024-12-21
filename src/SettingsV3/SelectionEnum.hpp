@@ -2,6 +2,11 @@
 #include <Geode/loader/SettingV3.hpp>
 #include <Geode/loader/Mod.hpp>
 #include "SettingsV3/popup.hpp"
+#include "../jsonReader/Json.hpp"
+#include <cctype>
+#include <algorithm>
+#include <fstream>
+#include <iostream>
 
 using namespace geode::prelude;
 
@@ -88,11 +93,29 @@ protected:
     std::vector<CCMenuItemToggler*> m_toggles;
     CCMenuItemSpriteExtra* m_folderBtn;
     CCMenu* m_menufolder;
+    CCMenu* m_selectionpopup;
+    std::shared_ptr<MyCustomSettingV3> m_setting;
     CCLabelBMFont* m_nameLabel;
+    void Popup(CCObject*) {
+        auto popup = Select::create(static_cast<int>(this->getValue().m_tab) == 0,m_setting->clicksound,[=](std::string modid) {
+                ClicksoundSettingValue Changes = this->getValue();
+                if (static_cast<int>(this->getValue().m_tab) == 0) {
+                    Changes.m_currentMemeClick = modid;
+                } else {
+                    Changes.m_currentClick = modid;
+                }
+                this->setValue(Changes, nullptr);
+        });
+        popup->m_noElasticity = false;
+        popup->show();
+    };
+    
     bool init(std::shared_ptr<MyCustomSettingV3> setting, float width) {
         if (!SettingValueNodeV3::init(setting, width))
             return false;
-        
+
+        m_setting = setting;
+
         this->setContentSize({ width, 70.f });
         CCSprite* folderSpr = CCSprite::createWithSpriteFrameName("gj_folderBtn_001.png");
         folderSpr->setScale(1.0f);
@@ -110,9 +133,6 @@ protected:
             ->setCrossAxisLineAlignment(AxisAlignment::Start)
             ->setCrossAxisAlignment(AxisAlignment::Start)
         );
-        auto popup = Select::create();
-       	popup->m_noElasticity = false;
-        popup->show();
         
         this->addChildAtPosition(this->getNameMenu(), Anchor::TopLeft, ccp(10, 0), ccp(0, 1.0f));
         this->addChildAtPosition(this->getButtonMenu(), Anchor::TopRight, ccp(-10, 0), ccp(1.0f, 1.0f));
@@ -127,6 +147,21 @@ protected:
         m_menufolder->setLayout(RowLayout::create());
         m_menufolder->setPosition(ccp(this->getContentSize().width / 2, this->getContentSize().height / 2));
         this->addChild(m_menufolder);
+
+        m_selectionpopup = CCMenu::create();
+        auto btnspr = CCSprite::create("nobglogo.png"_spr);
+        btnspr->setScale(0.4);
+        auto nobglogobtn = CCMenuItemSpriteExtra::create(
+            btnspr,
+            this,
+            menu_selector(MyCustomSettingNodeV3::Popup)
+        );
+        m_selectionpopup->addChild(nobglogobtn);
+        m_selectionpopup->setLayout(RowLayout::create());
+        m_selectionpopup->setPosition(ccp(this->getContentSize().width / 2, this->getContentSize().height / 2));
+        m_selectionpopup->setAnchorPoint({0.5,0.5});
+        this->addChild(m_selectionpopup);
+
         m_nameLabel->setPosition(m_menufolder->getPosition() - ccp(0,m_menufolder->getContentSize().height));
         m_nameLabel->setScale(0.5);
         m_nameLabel->setAnchorPoint({0.5,0});
@@ -157,24 +192,72 @@ protected:
         
         return true;
     }
-    
+    std::string GetJsonName(auto Infomation) {
+        if (!Infomation.jsonpath.empty() && std::filesystem::exists(Infomation.jsonpath)) {
+            std::filesystem::path fs = std::filesystem::path(Infomation.jsonpath);
+            std::ifstream file(fs, std::ios::in | std::ios::binary);
+                if (file.is_open()) {
+                    std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+                    file.close();
+                    try {
+                        matjson::Value jsonObject = matjson::parse(content).unwrap();
+
+                        if (jsonObject.contains("name")) {
+                            return jsonObject["name"].asString().unwrap();
+                        } 
+                    } catch (const std::exception& e) {
+                        
+                    };
+                };
+            };
+        return "";
+    };
+
     void updateState(CCNode* invoker) override {
         SettingValueNodeV3::updateState(invoker);
         float shouldEnable = this->getSetting()->shouldEnable();
         
         m_menufolder->setVisible(static_cast<int>(this->getValue().m_tab) == 2);
-        m_nameLabel->setVisible(static_cast<int>(this->getValue().m_tab) == 2);
-        std::error_code ec;
-        auto Custompa = this->getValue().CustomSoundPath;
-        if (Custompa.empty() || Custompa == " " || !std::filesystem::is_regular_file(Custompa, ec)) {
-            m_nameLabel->setColor(ccGRAY);
-            m_nameLabel->setOpacity(155);
-            m_nameLabel->setString("");
-        } else {
-            std::filesystem::path filePath(Custompa);
-            m_nameLabel->setString(filePath.filename().string().c_str());
-            m_nameLabel->setColor(ccWHITE);
-            m_nameLabel->setOpacity(255);
+        m_selectionpopup->setVisible(static_cast<int>(this->getValue().m_tab) != 2);
+        if (this->getValue().m_tab == 2) {
+            std::error_code ec;
+            auto Custompa = this->getValue().CustomSoundPath;
+            if (Custompa.empty() || Custompa == " " || !std::filesystem::is_regular_file(Custompa, ec)) {
+                m_nameLabel->setColor(ccGRAY);
+                m_nameLabel->setOpacity(155);
+                m_nameLabel->setString("");
+            } else {
+                std::filesystem::path filePath(Custompa);
+                m_nameLabel->setString(filePath.filename().string().c_str());
+                m_nameLabel->setColor(ccWHITE);
+                m_nameLabel->setOpacity(255);
+            }
+        }
+        if (this->getValue().m_tab == 1) {
+            // current
+            auto Custompa = this->getValue().m_currentClick;
+            if (Custompa.empty() || Custompa == " ") {
+                    m_nameLabel->setColor(ccGRAY);
+                    m_nameLabel->setOpacity(155);
+                    m_nameLabel->setString("");
+                } else {
+                    m_nameLabel->setString(GetJsonName(ClickJson->usefulData.at(Custompa)).c_str());
+                    m_nameLabel->setColor(ccWHITE);
+                    m_nameLabel->setOpacity(255);
+                }
+        }
+        if (this->getValue().m_tab == 0) {
+            // meme
+            auto Custompa = this->getValue().m_currentMemeClick;
+            if (Custompa.empty() || Custompa == " ") {
+                    m_nameLabel->setColor(ccGRAY);
+                    m_nameLabel->setOpacity(155);
+                    m_nameLabel->setString("");
+                } else {
+                    m_nameLabel->setString(GetJsonName(ClickJson->memeData.at(Custompa)).c_str());
+                    m_nameLabel->setColor(ccWHITE);
+                    m_nameLabel->setOpacity(255);
+                }
         }
         m_folderBtn->setEnabled(shouldEnable);
         if (!shouldEnable) {

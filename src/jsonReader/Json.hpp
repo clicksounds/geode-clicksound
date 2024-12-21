@@ -13,6 +13,7 @@ static struct CategoryData {
     std::vector<std::string> clicks;
     std::vector<std::string> releases;
     std::string jsonpath;
+    std::string Name;
 };
 
 class JsonReader {
@@ -21,6 +22,7 @@ public:
 
     std::map<std::string, CategoryData> memeData;
     std::map<std::string, CategoryData> usefulData;
+    bool hassomedata = false;
 
     void loadData() {
         auto configDir = Mod::get()->getConfigDir();
@@ -28,6 +30,7 @@ public:
         if (std::filesystem::exists(clicksPath)) {
             loadCategoryData(clicksPath / "Meme", memeData);
             loadCategoryData(clicksPath / "Useful", usefulData);
+            hassomedata = true;
             log::debug("Loaded Category!");
         } else {
             //log::error("Unable to load Categories");
