@@ -1,6 +1,7 @@
 # Changelog
 ## Version **v2.0.0** (SETTINGS UPDATE)
 * A WHOLE NEW LOOK AND FEEL FOR SETTINGS!
+* Compatible with GD 2.2074
 * Easier to see what click sound is selected
 * No More Numbers!
 * Added Mouse Click 6 (randomized clicks and releases)
