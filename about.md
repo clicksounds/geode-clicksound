@@ -3,10 +3,10 @@
 Plays a click sound whenever you press a jump button, or (optionally) a release sound whenever you release a jump button.
 If you want a new built-in click sound or feature to be added, join the [discord server](https://discord.gg/RwbRP8ADdc). <3
 
-### Uses Geode v2.0.0-beta.22 and Node-IDs v1.8.1
+### Uses Geode v4.0.1 and Node-IDs
 Open the mod settings to change the click sound. 
 ## Click sounds:
-### Useful click sounds (positive number):
+### Useful click sounds:
 - 0 - Custom sound
 - 1 - Default
 - 2 - Metronome
@@ -43,7 +43,7 @@ Open the mod settings to change the click sound.
 - 33 - Mouse Click 6
 - 34 - Pacity's Clicks
 - 35 - Mouse Click 7
-### Meme click sounds (negative number):
+### Meme click sounds:
 - 1 - FIRE IN THE HOLE!
 - 2 - I loooove GD Cologne
 - 3 - Vine Boom
@@ -93,18 +93,18 @@ Open the mod settings to change the click sound.
 - 17 - Mouse Click 6
 - 18 - Pacity's Clicks
 - 19 - Mouse Click 7
-### Meme release sounds (negative number):
+### Meme release sounds:
 - 1 - TikTok
 
 ## Credit
 Thank you so much to all of the people listed below for doing whatever they did to help create the mod!
-- [Beat](https://github.com/BeatACVR) - This is me! I made the mod.
-- [Viper](https://github.com/MuhXd) - Developer, helped me with android support :3
-- [Cooper](https://github.com/coopeeo) - Developer, helped make coding the mod more efficient ^w^
+- [Beat](https://github.com/BeatACVR) - Original developer of Click Sounds
+- [Viper](https://github.com/MuhXd) - Developer, helped me with android support
+- [Cooper](https://github.com/coopeeo) - Developer, helped make coding the mod more efficient
 - [Firee](https://github.com/FireMario211) - Added mac support, thank you so much!
-- [Weebify](https://github.com/Weebifying) - Developer, helped with settings UI in v2.0.0 :3
-- [Uproxide](https://github.com/uproxide) - Developer, helped with the developer badge system! OwO
+- [Weebify](https://github.com/Weebifying) - Developer, helped with settings UI in v2.0.0
+- [Uproxide](https://github.com/uproxide) - Developer, helped with the developer badge system!
 - [Jouca](https://github.com/Jouca) - Helped with the preview button
-- Rue - Made the icon of Click Sounds (v1.6.0) >w<
-- aceofspadesss - Provided a ton of unique click sounds for the mod! >w<
+- Rue - Made the icon of Click Sounds (v1.6.0)
+- aceofspadesss - Provided a ton of unique click sounds for the mod!
 (If you think I forgot to credit you, DM @coopeeo on Discord. Credit is not given for asking a sound or feature request.)
