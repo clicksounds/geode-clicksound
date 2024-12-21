@@ -12,6 +12,13 @@
 #include "../popup.hpp"
 #include "../../jsonReader/Json.hpp"
 using namespace geode::prelude;
+
+float clampf_f(float value, float min, float max) {
+    if (value < min) return min;
+    if (value > max) return max;
+    return value;
+}
+
 #define MEN(class) class = CCMenu::create(); 
 class CCIndexPackNode : public CCLayerColor {
 public:
@@ -154,7 +161,7 @@ public:
                                         add_sill = true;  
                                         authorsList += author["name"].asString().unwrap();
                                         if (authorsList.length() > 11) {
-                                            Author->setScale(clampf( (11  / authorsList.length()), 0.2,0.5));
+                                            Author->setScale(clampf_f( (11  / authorsList.length()), 0.2,0.5));
                                         }
                                         continue;
                                     }
