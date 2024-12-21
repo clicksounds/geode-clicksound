@@ -47,7 +47,7 @@
 	],
 	"incompatibilities": [
 		{
-			"id": "beat.click-sounds-lite",
+			"id": "beat.click_sounds_lite",
 			"importance": "conflicting",
 			"version": ">=v1.0.0"
 		}
