@@ -45,6 +45,13 @@
             "importance": "suggested"
         }
 	],
+	"incompatibilities": [
+		{
+			"id": "beat.click-sounds-lite",
+			"importance": "conflicting",
+			"version": ">=v1.0.0"
+		}
+	],
 	"settings": {
 		"clicksounds-section": {
             "name": "Click Sounds",
