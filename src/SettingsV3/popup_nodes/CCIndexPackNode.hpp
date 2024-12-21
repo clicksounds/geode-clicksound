@@ -75,15 +75,11 @@ public:
                         
 
                         
-                    } else {
-                        std::cerr << "\"authors\" key is missing or not an array in the JSON." << std::endl;
-                    }
+                    } 
 
                     } catch (const std::exception& e) {
-                        std::cerr << "Error parsing JSON: " << e.what() << std::endl;
+                        //std::cerr << "Error parsing JSON: " << e.what() << std::endl;
                     }
-                } else {
-                    std::cerr << "Failed to open the file: " << fs << std::endl;
                 }
             }
     }

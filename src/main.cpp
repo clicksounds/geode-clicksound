@@ -200,7 +200,6 @@ class $modify(MenuLayer) {
     }
     bool init() {
         if (!indexzip.StartedDownloading) {
-            ClickJson->loadData();
             indexzip.StartedDownloading = true;
             this->SendRequestAPI();
         }
@@ -212,7 +211,7 @@ class $modify(MenuLayer) {
 // on the mod loading
 $execute {
     // on boot set Sound Caches
-    ClickJson->displayData();
+    ClickJson->loadData();
     // Does the release-sound path setting change?
     listenForSettingChanges("selection-release", [](ClicksoundSettingValue releaseSoundFile) {
         onsettingsUpdate();
