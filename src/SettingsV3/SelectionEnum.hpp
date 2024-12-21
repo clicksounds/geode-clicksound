@@ -1,7 +1,7 @@
 #pragma once
 #include <Geode/loader/SettingV3.hpp>
 #include <Geode/loader/Mod.hpp>
-#include "SettingsV3/popup.hpp"
+#include "popup.hpp"
 #include "../jsonReader/Json.hpp"
 #include <cctype>
 #include <algorithm>
