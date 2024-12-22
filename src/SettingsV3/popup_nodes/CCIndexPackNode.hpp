@@ -89,7 +89,7 @@ public:
             selectionobject = Objectt;
             Infomation = x;
             
-            this->setContentSize(ccp(315, 35));
+            this->setContentSize(ccp(250, 35));
             this->setAnchorPoint(ccp(0, 1));
             this->setPositionY(207);
             this->setOpacity(100);
@@ -108,11 +108,10 @@ public:
 
                         if (jsonObject.contains("name")) {
                             std::string name = jsonObject["name"].asString().unwrap();
-                            Text->setString(name.c_str());
                             Text->updateAnchoredPosition(Anchor::Top, ccp(0, -10), ccp(.5f, .5f));
                             //limitNodeWidth(Text, this->getContentSize() - CCSize(this->getContentSize().width, 0), .8f, .1f);
-                            Text->setScale(clamp((this->getContentSize().width / 3) / Text->getContentSize().width, 0.1f, 0.5f));
-                            Text->updateLayout();
+                            Text->setScale(0.5f);
+                            Text->setString(name.c_str());
                         }
                     } catch (const std::exception& e) {
                        // std::cerr << "Error parsing JSON: " << e.what() << std::endl;
@@ -154,17 +153,17 @@ public:
                                     authorsList += ", ";
                                 } else {
                                     if (!author["name"].asString().unwrap().empty()) {
-                                        add_sill = true;  
-                                        authorsList += author["name"].asString().unwrap();
-                                        if (authorsList.length() > 11) {
-                                            Author->setScale(clampf_f( (11  / authorsList.length()), 0.2,0.5));
+                                        std::string name = author["name"].asString().unwrap();
+                                        add_sill = true;
+                                        if (name.length() > 13) {
+                                            name = name.substr(0, 13) + "...";
                                         }
+                                        authorsList += name;  
                                         continue;
                                     }
                                 }
 
-                                authorsList += author["name"].asString().unwrap();
-                                if (authorsList.length() > 15 && add_sill) {
+                                if (add_sill) {
                                     authorsList = old;
                                     Number += 1;
                                     countonly = true;
@@ -176,6 +175,7 @@ public:
                            authorsList+=" more";
                         }
 
+                        Author->setScale(0.5f);
                         Author->setString(authorsList.c_str());
                         MEN(DEVS)
                         DEVS->setID("developers");
@@ -184,6 +184,7 @@ public:
                         auto developersBtn = CCMenuItemSpriteExtra::create(
                             Author, this, menu_selector(CCIndexPackNode::OnDevelopers)
                         );
+                        developersBtn->m_scaleMultiplier = 1.1;
                         developersBtn->setID("developers-button");
                         developersBtn->setAnchorPoint({0,0});
                         DEVS->addChild(developersBtn);
@@ -199,21 +200,28 @@ public:
             this->addChildAtPosition(DEVS, Anchor::BottomLeft, ccp(3, 0), ccp(0, 0));
 
         CCLayerGradient* gradient = CCLayerGradient::create(ccc4(0, 0, 0, 100), ccc4(0, 0, 0, 100));
-        gradient->setContentSize(this->getContentSize());
+        gradient->setContentSize(this->getContentSize() + ccp(30,0));
         gradient->setZOrder(-3);
         gradient->setVector(ccp(90, 0));
         this->addChild(gradient);
         this->setOpacity(0); 
             // GJ_button_06
         auto ConfirmSprite = CCMenuItemSpriteExtra::create(ButtonSprite::create("Set", 40.f, true, "bigFont.fnt", "GJ_button_01.png", 20.f, 1.0f), this, menu_selector(CCIndexPackNode::selected));
-                        
+        ConfirmSprite->m_scaleMultiplier = 0.9;
         MEN(_Apply_Menu)
         _Apply_Menu->setID("apply");
         _Apply_Menu->ignoreAnchorPointForPosition(false);
         _Apply_Menu->addChild(ConfirmSprite);
+        _Apply_Menu->setLayout(RowLayout::create()
+            ->setAxisAlignment(AxisAlignment::Start)
+            ->setCrossAxisLineAlignment(AxisAlignment::Start)
+            ->setCrossAxisAlignment(AxisAlignment::Start)
+        );
+        _Apply_Menu->setContentSize(ConfirmSprite->getContentSize());
+        _Apply_Menu->setPosition(ccp(this->getContentSize().width,this->getContentSize().height / 2));
         _Apply_Menu->updateLayout();
-        this->addChildAtPosition(_Apply_Menu, Anchor::BottomRight, ccp(3, 0), ccp(0, 0));
-        _Apply_Menu->setAnchorPoint({0.250,-0.05});
+        this->addChild(_Apply_Menu);
+        _Apply_Menu->setAnchorPoint({0.5,0.5});
         return true;
      }
      static CCIndexPackNode* create(CategoryData x, std::function<void()> Objectt) {

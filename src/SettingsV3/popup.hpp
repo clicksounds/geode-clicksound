@@ -18,9 +18,9 @@ protected:
     }
     bool setup() {
         auto winSize = CCDirector::get()->getWinSize();
-		scroll = ScrollLayer::create(ccp(m_mainLayer->getContentSize().width / 2, m_mainLayer->getContentSize().height - 15));
+		scroll = ScrollLayer::create(ccp(m_mainLayer->getContentSize().width / 1.5, m_mainLayer->getContentSize().height - 15));
         scroll->setAnchorPoint(ccp(0, 0));
-        scroll->setPosition(ccp(110, 10 ));
+        scroll->setPosition(ccp(88, 10 ));
         m_mainLayer->addChild(scroll);
         return true;
     };
