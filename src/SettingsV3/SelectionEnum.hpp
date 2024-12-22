@@ -94,10 +94,10 @@ protected:
     CCMenuItemSpriteExtra* m_folderBtn;
     CCMenu* m_menufolder;
     CCMenu* m_selectionpopup;
-    std::shared_ptr<MyCustomSettingV3> m_setting;
     CCLabelBMFont* m_nameLabel;
+    bool cs = false;
     void Popup(CCObject*) {
-        auto popup = Select::create(static_cast<int>(this->getValue().m_tab) == 0,m_setting->clicksound,[=](std::string modid) {
+        auto popup = Select::create(static_cast<int>(this->getValue().m_tab) == 0,cs,[=](std::string modid) {
                 ClicksoundSettingValue Changes = this->getValue();
                 if (static_cast<int>(this->getValue().m_tab) == 0) {
                     Changes.m_currentMemeClick = modid;
@@ -113,8 +113,11 @@ protected:
     bool init(std::shared_ptr<MyCustomSettingV3> setting, float width) {
         if (!SettingValueNodeV3::init(setting, width))
             return false;
+        try {
+            cs = setting->clicksound || false;
+        } catch (const std::exception& e) {
 
-        m_setting = setting;
+        }
 
         this->setContentSize({ width, 70.f });
         CCSprite* folderSpr = CCSprite::createWithSpriteFrameName("gj_folderBtn_001.png");
@@ -193,23 +196,29 @@ protected:
         return true;
     }
     std::string GetJsonName(auto Infomation) {
-        if (!Infomation.jsonpath.empty() && std::filesystem::exists(Infomation.jsonpath)) {
-            std::filesystem::path fs = std::filesystem::path(Infomation.jsonpath);
-            std::ifstream file(fs, std::ios::in | std::ios::binary);
-                if (file.is_open()) {
-                    std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
-                    file.close();
-                    try {
-                        matjson::Value jsonObject = matjson::parse(content).unwrap();
+        try {
+            if (!Infomation.jsonpath.empty() && std::filesystem::exists(Infomation.jsonpath)) {
+                std::filesystem::path fs = std::filesystem::path(Infomation.jsonpath);
+                std::ifstream file(fs, std::ios::in | std::ios::binary);
+                    if (file.is_open()) {
+                        std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+                        file.close();
+                        try {
+                            matjson::Value jsonObject = matjson::parse(content).unwrap();
 
-                        if (jsonObject.contains("name")) {
-                            return jsonObject["name"].asString().unwrap();
-                        } 
-                    } catch (const std::exception& e) {
-                        
+                            if (jsonObject.contains("name")) {
+                                return jsonObject["name"].asString().unwrap();
+                            } 
+                        } catch (const std::exception& e) {
+                            
+                        };
                     };
                 };
-            };
+            }
+            catch (const std::exception& e) {
+                        
+        };
+
         return "";
     };
 
