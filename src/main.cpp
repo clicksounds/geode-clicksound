@@ -200,12 +200,13 @@ class $modify(MenuLayer) {
     }
     bool init() {
         if (!indexzip.StartedDownloading) {
-            // on boot set Sound Caches
-            ClickJson->loadData();
-            onsettingsUpdate();
-
             indexzip.StartedDownloading = true;
-            this->SendRequestAPI();
+            std::thread([=] { 
+                // on boot set Sound Caches
+                ClickJson->loadData();
+                onsettingsUpdate();
+                this->SendRequestAPI(); 
+            }).detach();
         }
         return MenuLayer::init();
     }
