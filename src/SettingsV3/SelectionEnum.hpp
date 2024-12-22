@@ -83,6 +83,9 @@ public:
         } catch (const std::exception& e) {
             log::error("UH OH {}", e.what());
         };
+        auto res = std::make_shared<ClicksoundSetterV3>();
+        auto root = checkJson(json, "selectionclicks");
+        return root.ok(std::static_pointer_cast<SettingV3>(res));
     }
 
     SettingNodeV3* createNode(float width) override;
