@@ -47,22 +47,14 @@ struct matjson::Serialize<ClicksoundSettingValue> {
         if (x == "") {
            return Ok(ClicksoundSettingValue(0, " ", " ", " ")); 
         }
-       try {
-        auto value = matjson::parse(x).unwrap();
+        auto value = matjson::parse(x).unwrapOrDefault();
             
         return Ok(ClicksoundSettingValue(
-            value["Tab"].asInt().unwrap(), 
-            value["Current_Sound_Useful"].asString().unwrap(), 
-            value["Current_Sound_Meme"].asString().unwrap(), 
-            value["Custom_Sound_Path"].asString().unwrap()
+            value["Tab"].asInt().unwrapOr(0), 
+            value["Current_Sound_Useful"].asString().unwrapOr(" "), 
+            value["Current_Sound_Meme"].asString().unwrapOr(" "), 
+            value["Custom_Sound_Path"].asString().unwrapOr(" ")
         ));
-        } catch (const std::exception& e) {
-            return Ok(ClicksoundSettingValue(0, " ", " ", " "));
-        }
-    }
-
-    static bool is_json(matjson::Value const& json) {
-        return json.isString();
     }
 };
 
@@ -73,18 +65,11 @@ class ClicksoundSetterV3 : public SettingBaseValueV3<ClicksoundSettingValue> {
 public:
     bool clicksound = false;
     static Result<std::shared_ptr<SettingV3>> parse(std::string const& key, std::string const& modID, matjson::Value const& json) {
-         try {
-           auto res = std::make_shared<ClicksoundSetterV3>();
-            auto root = checkJson(json, "selectionclicks");
-            res->parseBaseProperties(key, modID, root);
-            root.has("clicksound").into(res->clicksound);
-            root.checkUnknownKeys();
-            return root.ok(std::static_pointer_cast<SettingV3>(res));
-        } catch (const std::exception& e) {
-            log::error("UH OH {}", e.what());
-        };
         auto res = std::make_shared<ClicksoundSetterV3>();
         auto root = checkJson(json, "selectionclicks");
+        res->parseBaseProperties(key, modID, root);
+        root.has("clicksound").into(res->clicksound);
+        root.checkUnknownKeys();
         return root.ok(std::static_pointer_cast<SettingV3>(res));
     }
 
@@ -122,11 +107,7 @@ protected:
         if (!SettingValueNodeV3::init(setting, width))
             return false;
 
-        try {
-            cs = setting->clicksound || false;
-        } catch (const std::exception& e) {
-
-        }
+        cs = setting->clicksound;
 
         this->setContentSize({ width, 70.f });
         CCSprite* folderSpr = CCSprite::createWithSpriteFrameName("gj_folderBtn_001.png");
@@ -205,28 +186,19 @@ protected:
         return true;
     }
     std::string GetJsonName(auto Infomation) {
-        try {
-            if (!Infomation.jsonpath.empty() && std::filesystem::exists(Infomation.jsonpath)) {
-                std::filesystem::path fs = std::filesystem::path(Infomation.jsonpath);
-                std::ifstream file(fs, std::ios::in | std::ios::binary);
-                    if (file.is_open()) {
-                        std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
-                        file.close();
-                        try {
-                            matjson::Value jsonObject = matjson::parse(content).unwrap();
+        if (!Infomation.jsonpath.empty() && std::filesystem::exists(Infomation.jsonpath)) {
+            std::filesystem::path fs = std::filesystem::path(Infomation.jsonpath);
+            std::ifstream file(fs, std::ios::in | std::ios::binary);
+                if (file.is_open()) {
+                    std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+                    file.close();
+                    matjson::Value jsonObject = matjson::parse(content).unwrapOrDefault();
 
-                            if (jsonObject.contains("name")) {
-                                return jsonObject["name"].asString().unwrap();
-                            } 
-                        } catch (const std::exception& e) {
-                            
-                        };
-                    };
+                    if (jsonObject.contains("name")) {
+                        return jsonObject["name"].asString().unwrap();
+                    }
                 };
-            }
-            catch (const std::exception& e) {
-                        
-        };
+            };
 
         return "";
     };
