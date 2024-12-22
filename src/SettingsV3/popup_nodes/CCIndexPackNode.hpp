@@ -84,10 +84,9 @@ public:
                 if (file.is_open()) {
                     std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
                     file.close();
-                    try {
-                        matjson::Value jsonObject2 = matjson::parse(content).unwrap();
+                    matjson::Value jsonObject2 = matjson::parse(content).unwrapOrDefault();
 
-                       if (jsonObject2.contains("authors") && jsonObject2["authors"].isArray()) {
+                    if (jsonObject2.contains("authors") && jsonObject2["authors"].isArray()) {
                       
                         bool add_sill = false;
                         for (const auto& author : jsonObject2["authors"].asArray().unwrap()) {
@@ -109,10 +108,6 @@ public:
                         
 
                         
-                    } 
-
-                    } catch (const std::exception& e) {
-                        //std::cerr << "Error parsing JSON: " << e.what() << std::endl;
                     }
                 }
             }
@@ -140,18 +135,14 @@ public:
                 if (file.is_open()) {
                     std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
                     file.close();
-                    try {
-                        matjson::Value jsonObject = matjson::parse(content).unwrap();
+                    matjson::Value jsonObject = matjson::parse(content).unwrapOrDefault();
 
-                        if (jsonObject.contains("name")) {
-                            std::string name = jsonObject["name"].asString().unwrap();
-                            Text->updateAnchoredPosition(Anchor::Top, ccp(0, -10), ccp(.5f, .5f));
-                            //limitNodeWidth(Text, this->getContentSize() - CCSize(this->getContentSize().width, 0), .8f, .1f);
-                            Text->setScale(0.5f);
-                            Text->setString(name.c_str());
-                        }
-                    } catch (const std::exception& e) {
-                       // std::cerr << "Error parsing JSON: " << e.what() << std::endl;
+                    if (jsonObject.contains("name") && jsonObject["name"].isString()) {
+                        std::string name = jsonObject["name"].asString().unwrap();
+                        Text->updateAnchoredPosition(Anchor::Top, ccp(0, -10), ccp(.5f, .5f));
+                        //limitNodeWidth(Text, this->getContentSize() - CCSize(this->getContentSize().width, 0), .8f, .1f);
+                        Text->setScale(0.5f);
+                        Text->setString(name.c_str());
                     }
                 } 
             }
@@ -169,10 +160,9 @@ public:
                 if (file.is_open()) {
                     std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
                     file.close();
-                    try {
-                        matjson::Value jsonObject2 = matjson::parse(content).unwrap();
+                    matjson::Value jsonObject2 = matjson::parse(content).unwrapOrDefault();
 
-                       if (jsonObject2.contains("authors") && jsonObject2["authors"].isArray()) {
+                    if (jsonObject2.contains("authors") && jsonObject2["authors"].isArray()) {
                         bool add_sill = false;
                         bool countonly = false;
                         std::string old = authorsList;
@@ -227,10 +217,6 @@ public:
                         DEVS->addChild(developersBtn);
                         DEVS->updateAnchoredPosition(Anchor::Bottom, ccp(0, 0), ccp(0, 0));
                         DEVS->updateLayout();
-                    } 
-
-                    } catch (const std::exception& e) {
-                        //std::cerr << "Error parsing JSON: " << e.what() << std::endl;
                     }
                 }
             }
