@@ -81,7 +81,7 @@ public:
             root.checkUnknownKeys();
             return root.ok(std::static_pointer_cast<SettingV3>(res));
         } catch (const std::exception& e) {
-            log::error("UH OH");
+            log::error("UH OH {}", e.what());
         };
     }
 
