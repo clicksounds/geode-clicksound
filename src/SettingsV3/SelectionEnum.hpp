@@ -42,6 +42,7 @@ template <>
 struct matjson::Serialize<ClicksoundSettingValue> {
 
     static Result<ClicksoundSettingValue> fromJson(matjson::Value const& v) {
+        log::debug("Unwrapping");
         GEODE_UNWRAP_INTO(std::string x, v.asString());
         if (x == "") {
            return Ok(ClicksoundSettingValue(0, " ", " ", " ")); 
@@ -72,12 +73,16 @@ class ClicksoundSetterV3 : public SettingBaseValueV3<ClicksoundSettingValue> {
 public:
     bool clicksound = false;
     static Result<std::shared_ptr<SettingV3>> parse(std::string const& key, std::string const& modID, matjson::Value const& json) {
-        auto res = std::make_shared<ClicksoundSetterV3>();
-        auto root = checkJson(json, "selectionclicks");
-        res->parseBaseProperties(key, modID, root);
-        root.has("clicksound").into(res->clicksound);
-        root.checkUnknownKeys();
-        return root.ok(std::static_pointer_cast<SettingV3>(res));
+         try {
+           auto res = std::make_shared<ClicksoundSetterV3>();
+            auto root = checkJson(json, "selectionclicks");
+            res->parseBaseProperties(key, modID, root);
+            root.has("clicksound").into(res->clicksound);
+            root.checkUnknownKeys();
+            return root.ok(std::static_pointer_cast<SettingV3>(res));
+        } catch (const std::exception& e) {
+            log::error("UH OH");
+        };
     }
 
     SettingNodeV3* createNode(float width) override;
@@ -328,6 +333,7 @@ SettingNodeV3* ClicksoundSetterV3::createNode(float width) {
 }
 
 $execute {
+    log::debug("Loading");
         auto ret = Mod::get()->registerCustomSettingType("selectionclicks", &ClicksoundSetterV3::parse);
         if (!ret) {
             log::error("Unable to register setting type: {}", ret.unwrapErr());
