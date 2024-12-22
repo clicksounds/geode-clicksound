@@ -12,6 +12,7 @@ Thank you so much to all of the people listed below for doing whatever they did 
 - [Weebify](https://github.com/Weebifying) - Developer, helped with settings UI in v2.0.0
 - [Uproxide](https://github.com/uproxide) - Developer, helped with the developer badge system!
 - [Jouca](https://github.com/Jouca) - Helped with the preview button
+- [Jasmine](https://github.com/hiimjustin000) - Fixed android json unwrapping
 - Rue - Made the icon of Click Sounds (v1.6.0)
 - aceofspadesss - Provided a ton of unique click sounds for the mod!
 (If you think I forgot to credit you, DM @coopeeo on Discord. Credit is not given for asking a sound or feature request.)
