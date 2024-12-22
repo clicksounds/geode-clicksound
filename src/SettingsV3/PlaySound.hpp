@@ -120,5 +120,8 @@ SettingNodeV3* MyButtonSettingV3::createNode(float width) {
 }
 
 $execute {
-    (void)Mod::get()->registerCustomSettingType("clicksoundeffect", &MyButtonSettingV3::parse);
+   auto ret = Mod::get()->registerCustomSettingType("clicksoundeffect", &MyButtonSettingV3::parse);
+    if (!ret) {
+        log::error("Unable to register setting type: {}", ret.unwrapErr());
+    }
 }

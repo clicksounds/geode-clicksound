@@ -32,6 +32,7 @@ class $modify(PauseLayer) {
       btn->setPosition({menu->getContentSize().width/2, btn->getContentSize().height/2});
       btn->setID("SettingButton"_spr);
       menu->addChild(btn);
+      menu->updateLayout();
     }
   }
 };

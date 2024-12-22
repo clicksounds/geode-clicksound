@@ -42,37 +42,30 @@ template <>
 struct matjson::Serialize<ClicksoundSettingValue> {
 
     static Result<ClicksoundSettingValue> fromJson(matjson::Value const& v) {
+        log::debug("Unwrapping");
         GEODE_UNWRAP_INTO(std::string x, v.asString());
         if (x == "") {
            return Ok(ClicksoundSettingValue(0, " ", " ", " ")); 
         }
-       try {
-        auto value = matjson::parse(x).unwrap();
+        auto value = matjson::parse(x).unwrapOrDefault();
             
         return Ok(ClicksoundSettingValue(
-            value["Tab"].asInt().unwrap(), 
-            value["Current_Sound_Useful"].asString().unwrap(), 
-            value["Current_Sound_Meme"].asString().unwrap(), 
-            value["Custom_Sound_Path"].asString().unwrap()
+            value["Tab"].asInt().unwrapOr(0), 
+            value["Current_Sound_Useful"].asString().unwrapOr(" "), 
+            value["Current_Sound_Meme"].asString().unwrapOr(" "), 
+            value["Custom_Sound_Path"].asString().unwrapOr(" ")
         ));
-        } catch (const std::exception& e) {
-            return Ok(ClicksoundSettingValue(0, " ", " ", " "));
-        }
-    }
-
-    static bool is_json(matjson::Value const& json) {
-        return json.isString();
     }
 };
 
 
 
 
-class MyCustomSettingV3 : public SettingBaseValueV3<ClicksoundSettingValue> {
+class ClicksoundSetterV3 : public SettingBaseValueV3<ClicksoundSettingValue> {
 public:
     bool clicksound = false;
     static Result<std::shared_ptr<SettingV3>> parse(std::string const& key, std::string const& modID, matjson::Value const& json) {
-        auto res = std::make_shared<MyCustomSettingV3>();
+        auto res = std::make_shared<ClicksoundSetterV3>();
         auto root = checkJson(json, "selectionclicks");
         res->parseBaseProperties(key, modID, root);
         root.has("clicksound").into(res->clicksound);
@@ -85,19 +78,19 @@ public:
 
 template <>
 struct geode::SettingTypeForValueType<ClicksoundSettingValue> {
-    using SettingType = MyCustomSettingV3;
+    using SettingType = ClicksoundSetterV3;
 };
 
-class MyCustomSettingNodeV3 : public SettingValueNodeV3<MyCustomSettingV3> {
+class ClicksoundSetterNodeV3 : public SettingValueNodeV3<ClicksoundSetterV3> {
 protected:
     std::vector<CCMenuItemToggler*> m_toggles;
     CCMenuItemSpriteExtra* m_folderBtn;
     CCMenu* m_menufolder;
     CCMenu* m_selectionpopup;
-    std::shared_ptr<MyCustomSettingV3> m_setting;
     CCLabelBMFont* m_nameLabel;
+    bool cs = false;
     void Popup(CCObject*) {
-        auto popup = Select::create(static_cast<int>(this->getValue().m_tab) == 0,m_setting->clicksound,[=](std::string modid) {
+        auto popup = Select::create(static_cast<int>(this->getValue().m_tab) == 0,cs,[=](std::string modid) {
                 ClicksoundSettingValue Changes = this->getValue();
                 if (static_cast<int>(this->getValue().m_tab) == 0) {
                     Changes.m_currentMemeClick = modid;
@@ -110,11 +103,11 @@ protected:
         popup->show();
     };
     
-    bool init(std::shared_ptr<MyCustomSettingV3> setting, float width) {
+    bool init(std::shared_ptr<ClicksoundSetterV3> setting, float width) {
         if (!SettingValueNodeV3::init(setting, width))
             return false;
 
-        m_setting = setting;
+        cs = setting->clicksound;
 
         this->setContentSize({ width, 70.f });
         CCSprite* folderSpr = CCSprite::createWithSpriteFrameName("gj_folderBtn_001.png");
@@ -122,7 +115,7 @@ protected:
         m_folderBtn = CCMenuItemSpriteExtra::create(
             folderSpr,
             this,
-            menu_selector(MyCustomSettingNodeV3::onFolder)
+            menu_selector(ClicksoundSetterNodeV3::onFolder)
         );
         m_nameLabel = CCLabelBMFont::create("", "bigFont.fnt");
         this->removeChild(this->getNameMenu(),false);
@@ -154,7 +147,7 @@ protected:
         auto nobglogobtn = CCMenuItemSpriteExtra::create(
             btnspr,
             this,
-            menu_selector(MyCustomSettingNodeV3::Popup)
+            menu_selector(ClicksoundSetterNodeV3::Popup)
         );
         m_selectionpopup->addChild(nobglogobtn);
         m_selectionpopup->setLayout(RowLayout::create());
@@ -179,7 +172,7 @@ protected:
             offSpr->setOpacity(90);
             auto onSpr = ButtonSprite::create(value.second, 40.f, true, "bigFont.fnt", "GJ_button_01.png", 20.f, 1.0f);
             auto toggle = CCMenuItemToggler::create(
-                offSpr, onSpr, this, menu_selector(MyCustomSettingNodeV3::onToggle)
+                offSpr, onSpr, this, menu_selector(ClicksoundSetterNodeV3::onToggle)
             );
             toggle->m_notClickable = true;
             toggle->setTag(static_cast<int>(value.first));
@@ -199,17 +192,14 @@ protected:
                 if (file.is_open()) {
                     std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
                     file.close();
-                    try {
-                        matjson::Value jsonObject = matjson::parse(content).unwrap();
+                    matjson::Value jsonObject = matjson::parse(content).unwrapOrDefault();
 
-                        if (jsonObject.contains("name")) {
-                            return jsonObject["name"].asString().unwrap();
-                        } 
-                    } catch (const std::exception& e) {
-                        
-                    };
+                    if (jsonObject.contains("name") && jsonObject["name"].isString()) {
+                        return jsonObject["name"].asString().unwrap();
+                    }
                 };
             };
+
         return "";
     };
 
@@ -302,8 +292,8 @@ protected:
 
 
 public:
-    static MyCustomSettingNodeV3* create(std::shared_ptr<MyCustomSettingV3> setting, float width) {
-        auto ret = new MyCustomSettingNodeV3();
+    static ClicksoundSetterNodeV3* create(std::shared_ptr<ClicksoundSetterV3> setting, float width) {
+        auto ret = new ClicksoundSetterNodeV3();
         if (ret && ret->init(setting, width)) {
             ret->autorelease();
             return ret;
@@ -313,13 +303,14 @@ public:
     }
 };
 
-SettingNodeV3* MyCustomSettingV3::createNode(float width) {
-    return MyCustomSettingNodeV3::create(std::static_pointer_cast<MyCustomSettingV3>(shared_from_this()), width);
+SettingNodeV3* ClicksoundSetterV3::createNode(float width) {
+    return ClicksoundSetterNodeV3::create(std::static_pointer_cast<ClicksoundSetterV3>(shared_from_this()), width);
 }
 
 $execute {
-    auto ret = Mod::get()->registerCustomSettingType("selectionclicks", &MyCustomSettingV3::parse);
-    if (!ret) {
-        log::error("Unable to register setting type: {}", ret.unwrapErr());
-    }
+    log::debug("Loading");
+        auto ret = Mod::get()->registerCustomSettingType("selectionclicks", &ClicksoundSetterV3::parse);
+        if (!ret) {
+            log::error("Unable to register setting type: {}", ret.unwrapErr());
+        }
 }

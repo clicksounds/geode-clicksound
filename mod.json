@@ -1,5 +1,5 @@
 {
-	"geode": "4.0.1",
+	"geode": "4.1.1",
 	"gd": {
         "win": "2.2074",
         "android": "2.2074",
@@ -111,6 +111,7 @@
 		"selection-release": {
 			"type": "custom:selectionclicks",
 			"name": "Release Sounds",
+			"clicksound" : false,
 			"default": "Useful",
 			"enable-if": "setting:enable-releasesounds"
 		},

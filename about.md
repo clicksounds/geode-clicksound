@@ -3,7 +3,7 @@
 Plays a click sound whenever you press a jump button, or (optionally) a release sound whenever you release a jump button.
 If you want a new built-in click sound or feature to be added, join the [discord server](https://discord.gg/RwbRP8ADdc). <3
 
-### Uses Geode v4.0.1 and Node-IDs
+### Uses Geode v4.1.1 and Node-IDs
 Open the mod settings to change the click sound. 
 ## Click sounds:
 ### Useful click sounds:
@@ -105,6 +105,7 @@ Thank you so much to all of the people listed below for doing whatever they did 
 - [Weebify](https://github.com/Weebifying) - Developer, helped with settings UI in v2.0.0
 - [Uproxide](https://github.com/uproxide) - Developer, helped with the developer badge system!
 - [Jouca](https://github.com/Jouca) - Helped with the preview button
+- [Jasmine](https://github.com/hiimjustin000) - Fixed android json unwrapping
 - Rue - Made the icon of Click Sounds (v1.6.0)
 - aceofspadesss - Provided a ton of unique click sounds for the mod!
 (If you think I forgot to credit you, DM @coopeeo on Discord. Credit is not given for asking a sound or feature request.)
