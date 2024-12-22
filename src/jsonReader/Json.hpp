@@ -25,6 +25,7 @@ public:
     bool hassomedata = false;
 
     void loadData() {
+        std::thread([=] { 
         auto configDir = Mod::get()->getConfigDir();
         auto clicksPath = configDir / "Clicks" / "clicks-main";
         if (std::filesystem::exists(clicksPath)) {
@@ -35,6 +36,7 @@ public:
         } else {
             //log::error("Unable to load Categories");
         }
+         }).detach();
     }
 
     void loadCategoryData(const std::filesystem::path& categoryDir, std::map<std::string, CategoryData>& categoryData) {

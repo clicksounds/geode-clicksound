@@ -168,46 +168,48 @@ public:
     }
 };
 
-EventListener<web::WebTask> m_listener;
 class $modify(MenuLayer) {
     void SendRequestAPI() {
-         m_listener.bind([] (web::WebTask::Event* e) {
-                if (web::WebResponse* res = e->getValue()) {
-                    if (res->string().unwrapOr("failed") == "failed") {
-                        indexzip.Failed = true;
-                        indexzip.Finished = true;
-                        return;
-                    }
-                    if (res->into(Mod::get()->getConfigDir() / "Clicks.zip")) {
-                        auto unzip = file::Unzip::create(Mod::get()->getConfigDir() / "Clicks.zip");
-                        if (!unzip) {
+         std::thread([=] { 
+            web::WebRequest().get("https://github.com/clicksounds/clicks/archive/refs/heads/main.zip").listen([=](auto res) {
+                        if (res->string().unwrapOr("failed") == "failed") {
                             indexzip.Failed = true;
                             indexzip.Finished = true;
                             return;
                         }
-                        std::filesystem::remove_all(Mod::get()->getConfigDir() / "Clicks");
-                        (void) unzip.unwrap().extractAllTo(Mod::get()->getConfigDir() / "Clicks");
+                        if (res->into(Mod::get()->getConfigDir() / "Clicks.zip")) {
+                            auto unzip = file::Unzip::create(Mod::get()->getConfigDir() / "Clicks.zip");
+                            if (!unzip) {
+                                indexzip.Failed = true;
+                                indexzip.Finished = true;
+                                return;
+                            }
+                            std::filesystem::remove_all(Mod::get()->getConfigDir() / "Clicks");
+                            (void) unzip.unwrap().extractAllTo(Mod::get()->getConfigDir() / "Clicks");
+                            indexzip.Finished = true;
+                            ClickJson->loadData();
+                            onsettingsUpdate();
+                        }
+                    },
+                    [](auto prog){},
+                    [=]() {
+                        indexzip.Failed = true;
                         indexzip.Finished = true;
-                        ClickJson->loadData();
-                        onsettingsUpdate();
-                    }
-                } else if (e->isCancelled()) {
-                    indexzip.Failed = true;
-                    indexzip.Finished = true;
-                }
-            });
-            m_listener.setFilter(web::WebRequest().get("https://github.com/clicksounds/clicks/archive/refs/heads/main.zip"));
+                    });
+                 }).detach();
     }
-    bool init() {
+    bool init() { 
         if (!indexzip.StartedDownloading) {
             indexzip.StartedDownloading = true;
-            std::thread([=] { 
-                // on boot set Sound Caches
-                ClickJson->loadData();
-                onsettingsUpdate();
-                this->SendRequestAPI(); 
-            }).detach();
-        }
+            geode::Loader::get()->queueInMainThread([=] {
+                std::thread([=] { 
+                    // on boot set Sound Caches
+                    ClickJson->loadData();
+                    onsettingsUpdate();
+                    this->SendRequestAPI(); 
+                }).detach();
+            });
+         }
         return MenuLayer::init();
     }
 };
