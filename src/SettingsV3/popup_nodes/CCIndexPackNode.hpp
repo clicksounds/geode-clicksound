@@ -19,6 +19,40 @@ float clampf_f(float value, float min, float max) {
     return value;
 }
 
+class AutoScaleCCLabelBMFont : public cocos2d::CCLabelBMFont {
+public:
+    float startsize = .5f;
+
+    static AutoScaleCCLabelBMFont* create(const char* str, const char* fntFile, float width, float height) {
+        AutoScaleCCLabelBMFont* label = new AutoScaleCCLabelBMFont();
+        if (label && label->initWithString(str, fntFile, width, kCCTextAlignmentLeft, cocos2d::CCPointZero)) {
+            label->autorelease();
+            label->maxHeight = height;
+            return label;
+        }
+        CC_SAFE_DELETE(label);
+        return nullptr;
+    }
+
+    virtual void setString(const char* labelText) override {
+        CCLabelBMFont::setString(labelText);
+        float scaleY = maxHeight / this->getContentHeight();
+        if (scaleY < 1) {
+            this->setScale(scaleY * startsize);
+        } else {
+            this->setScale(startsize);
+        }
+
+        scaleY = maxHeight / this->getContentHeight();
+        if (scaleY < 1) {
+            this->setScale(scaleY * startsize);
+        }
+    }
+protected:
+    float maxHeight;
+};
+
+
 #define MEN(class) class = CCMenu::create(); 
 class CCIndexPackNode : public CCLayerColor {
 public:
@@ -94,7 +128,10 @@ public:
             this->setPositionY(207);
             this->setOpacity(100);
             //Text = CCLabelBMFont::create("ITEM NODE", "goldFont.fnt");
-            Text = CCLabelBMFont::create("ITEM NODE", "bigFont.fnt");
+            float boxWidth = 210.f;  
+            float boxHeight = 32.f;
+            float scaleFactor = 0.5f;
+            Text = AutoScaleCCLabelBMFont::create("ITEM NODE", "bigFont.fnt", 150, 50); 
             Text->setID("name-label");
             Text->setLayoutOptions(AxisLayoutOptions::create()->setScalePriority(1));
             if (!Infomation.jsonpath.empty() && std::filesystem::exists(Infomation.jsonpath)) {
@@ -124,7 +161,6 @@ public:
             Author = CCLabelBMFont::create("ITEM NODE", "goldFont.fnt");
             Author->setID("Author-label");
             Author->setLayoutOptions(AxisLayoutOptions::create()->setScalePriority(1));
-            Author->setScale(0.5);
             std::string authorsList = "by ";
             int Number = 0;
             if (!Infomation.jsonpath.empty() && std::filesystem::exists(Infomation.jsonpath)) {
@@ -177,6 +213,7 @@ public:
 
                         Author->setScale(0.5f);
                         Author->setString(authorsList.c_str());
+                        Author->updateLabel();
                         MEN(DEVS)
                         DEVS->setID("developers");
                         DEVS->ignoreAnchorPointForPosition(false);

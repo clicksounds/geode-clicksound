@@ -186,7 +186,7 @@ class $modify(MenuLayer) {
                             return;
                         }
                         std::filesystem::remove_all(Mod::get()->getConfigDir() / "Clicks");
-                        unzip.unwrap().extractAllTo(Mod::get()->getConfigDir() / "Clicks");
+                        (void) unzip.unwrap().extractAllTo(Mod::get()->getConfigDir() / "Clicks");
                         indexzip.Finished = true;
                         ClickJson->loadData();
                         onsettingsUpdate();
@@ -200,6 +200,10 @@ class $modify(MenuLayer) {
     }
     bool init() {
         if (!indexzip.StartedDownloading) {
+            // on boot set Sound Caches
+            ClickJson->loadData();
+            onsettingsUpdate();
+
             indexzip.StartedDownloading = true;
             this->SendRequestAPI();
         }
@@ -210,8 +214,6 @@ class $modify(MenuLayer) {
 
 // on the mod loading
 $execute {
-    // on boot set Sound Caches
-    ClickJson->loadData();
     // Does the release-sound path setting change?
     listenForSettingChanges("selection-release", [](ClicksoundSettingValue releaseSoundFile) {
         onsettingsUpdate();
@@ -220,6 +222,5 @@ $execute {
      listenForSettingChanges("selection-clicks", [](ClicksoundSettingValue PressSoundSoundFile) {
         onsettingsUpdate();
     });
-    onsettingsUpdate();
 }
 
