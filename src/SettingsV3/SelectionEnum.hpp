@@ -194,7 +194,7 @@ protected:
                     file.close();
                     matjson::Value jsonObject = matjson::parse(content).unwrapOrDefault();
 
-                    if (jsonObject.contains("name")) {
+                    if (jsonObject.contains("name") && jsonObject["name"].isString()) {
                         return jsonObject["name"].asString().unwrap();
                     }
                 };

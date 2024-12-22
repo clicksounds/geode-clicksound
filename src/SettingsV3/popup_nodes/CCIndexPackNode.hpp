@@ -137,7 +137,7 @@ public:
                     file.close();
                     matjson::Value jsonObject = matjson::parse(content).unwrapOrDefault();
 
-                    if (jsonObject.contains("name")) {
+                    if (jsonObject.contains("name") && jsonObject["name"].isString()) {
                         std::string name = jsonObject["name"].asString().unwrap();
                         Text->updateAnchoredPosition(Anchor::Top, ccp(0, -10), ccp(.5f, .5f));
                         //limitNodeWidth(Text, this->getContentSize() - CCSize(this->getContentSize().width, 0), .8f, .1f);
