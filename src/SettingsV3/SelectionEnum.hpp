@@ -68,11 +68,11 @@ struct matjson::Serialize<ClicksoundSettingValue> {
 
 
 
-class MyCustomSettingV3 : public SettingBaseValueV3<ClicksoundSettingValue> {
+class ClicksoundSetterV3 : public SettingBaseValueV3<ClicksoundSettingValue> {
 public:
     bool clicksound = false;
     static Result<std::shared_ptr<SettingV3>> parse(std::string const& key, std::string const& modID, matjson::Value const& json) {
-        auto res = std::make_shared<MyCustomSettingV3>();
+        auto res = std::make_shared<ClicksoundSetterV3>();
         auto root = checkJson(json, "selectionclicks");
         res->parseBaseProperties(key, modID, root);
         root.has("clicksound").into(res->clicksound);
@@ -85,10 +85,10 @@ public:
 
 template <>
 struct geode::SettingTypeForValueType<ClicksoundSettingValue> {
-    using SettingType = MyCustomSettingV3;
+    using SettingType = ClicksoundSetterV3;
 };
 
-class MyCustomSettingNodeV3 : public SettingValueNodeV3<MyCustomSettingV3> {
+class ClicksoundSetterNodeV3 : public SettingValueNodeV3<ClicksoundSetterV3> {
 protected:
     std::vector<CCMenuItemToggler*> m_toggles;
     CCMenuItemSpriteExtra* m_folderBtn;
@@ -110,9 +110,10 @@ protected:
         popup->show();
     };
     
-    bool init(std::shared_ptr<MyCustomSettingV3> setting, float width) {
+    bool init(std::shared_ptr<ClicksoundSetterV3> setting, float width) {
         if (!SettingValueNodeV3::init(setting, width))
             return false;
+
         try {
             cs = setting->clicksound || false;
         } catch (const std::exception& e) {
@@ -125,7 +126,7 @@ protected:
         m_folderBtn = CCMenuItemSpriteExtra::create(
             folderSpr,
             this,
-            menu_selector(MyCustomSettingNodeV3::onFolder)
+            menu_selector(ClicksoundSetterNodeV3::onFolder)
         );
         m_nameLabel = CCLabelBMFont::create("", "bigFont.fnt");
         this->removeChild(this->getNameMenu(),false);
@@ -157,7 +158,7 @@ protected:
         auto nobglogobtn = CCMenuItemSpriteExtra::create(
             btnspr,
             this,
-            menu_selector(MyCustomSettingNodeV3::Popup)
+            menu_selector(ClicksoundSetterNodeV3::Popup)
         );
         m_selectionpopup->addChild(nobglogobtn);
         m_selectionpopup->setLayout(RowLayout::create());
@@ -182,7 +183,7 @@ protected:
             offSpr->setOpacity(90);
             auto onSpr = ButtonSprite::create(value.second, 40.f, true, "bigFont.fnt", "GJ_button_01.png", 20.f, 1.0f);
             auto toggle = CCMenuItemToggler::create(
-                offSpr, onSpr, this, menu_selector(MyCustomSettingNodeV3::onToggle)
+                offSpr, onSpr, this, menu_selector(ClicksoundSetterNodeV3::onToggle)
             );
             toggle->m_notClickable = true;
             toggle->setTag(static_cast<int>(value.first));
@@ -311,8 +312,8 @@ protected:
 
 
 public:
-    static MyCustomSettingNodeV3* create(std::shared_ptr<MyCustomSettingV3> setting, float width) {
-        auto ret = new MyCustomSettingNodeV3();
+    static ClicksoundSetterNodeV3* create(std::shared_ptr<ClicksoundSetterV3> setting, float width) {
+        auto ret = new ClicksoundSetterNodeV3();
         if (ret && ret->init(setting, width)) {
             ret->autorelease();
             return ret;
@@ -322,13 +323,13 @@ public:
     }
 };
 
-SettingNodeV3* MyCustomSettingV3::createNode(float width) {
-    return MyCustomSettingNodeV3::create(std::static_pointer_cast<MyCustomSettingV3>(shared_from_this()), width);
+SettingNodeV3* ClicksoundSetterV3::createNode(float width) {
+    return ClicksoundSetterNodeV3::create(std::static_pointer_cast<ClicksoundSetterV3>(shared_from_this()), width);
 }
 
-/*$execute {
-    auto ret = Mod::get()->registerCustomSettingType("selectionclicks", &MyCustomSettingV3::parse);
-    if (!ret) {
-        log::error("Unable to register setting type: {}", ret.unwrapErr());
-    }
-}*/
+$execute {
+        auto ret = Mod::get()->registerCustomSettingType("selectionclicks", &ClicksoundSetterV3::parse);
+        if (!ret) {
+            log::error("Unable to register setting type: {}", ret.unwrapErr());
+        }
+}
