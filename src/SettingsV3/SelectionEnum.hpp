@@ -317,9 +317,9 @@ SettingNodeV3* MyCustomSettingV3::createNode(float width) {
     return MyCustomSettingNodeV3::create(std::static_pointer_cast<MyCustomSettingV3>(shared_from_this()), width);
 }
 
-$execute {
+/*$execute {
     auto ret = Mod::get()->registerCustomSettingType("selectionclicks", &MyCustomSettingV3::parse);
     if (!ret) {
         log::error("Unable to register setting type: {}", ret.unwrapErr());
     }
-}
+}*/
