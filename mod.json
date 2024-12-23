@@ -140,9 +140,9 @@
 		},
 		"sfx-semitone": {
 			"name": "Pitch of the sounds",
-			"description": "Determines the pitch of click/release sounds using semitone. The Default semitones is set 1 (2 semitones = 1 Octave)",
+			"description": "Determines the pitch of click/release sounds using semitone. The Default semitones is set 0 (2 semitones = 1 Octave)",
 			"type": "int",
-			"default": 1,
+			"default": 0,
 			"min": -6,
 			"max": 6,
 			"control": {
