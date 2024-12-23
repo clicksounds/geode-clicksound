@@ -137,6 +137,17 @@
 			"description": "When enabled, a settings button appears in the pause menu.",
 			"type": "bool",
 			"default": true
+		},
+		"sfx-semitone": {
+			"name": "Pitch of the sounds",
+			"description": "Determines the pitch of click/release sounds using semitone. The Default semitones is set 1 (2 semitones = 1 Octave)",
+			"type": "int",
+			"default": 1,
+			"min": -6,
+			"max": 6,
+			"control": {
+				"slider": true
+			}
 		}
 	}
 }
