@@ -66,11 +66,9 @@ public:
         if (semitone < 0) {
             semitone = std::pow(2,semitone); // fix negtive octave
         } else {
-            
             semitone+=1;
         }
         pitchShifterDSP->setParameterFloat(FMOD_DSP_PITCHSHIFT_PITCH, semitone); // semitone is half a octave
-        FMODAudioEngine::sharedEngine()->m_system->update();
     }
 
     ~SoundCache() {
