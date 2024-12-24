@@ -12,55 +12,72 @@ struct downloadedzipStruc {
 };
 
 static downloadedzipStruc indexzip;
-
+FMOD::ChannelGroup* CS_Group; 
+FMOD::DSP* pitchShifterDSP;  
 using namespace geode::prelude;
 // Custom class for Caching sounds (Make it less laggy for mobile platforms and such)
 class SoundCache {
-    public:
-        std::string m_soundFile = "";
-        FMOD::Sound* m_sound;
-        std::string Volume;
-        std::string custom;
-        FMOD::Channel* Soundchannel;
-        
-        SoundCache(std::string x,std::string x2) {
-            Volume = x;
-            custom = x2;
-        };
-        void Setsound(std::string soundFile) {
-                if (soundFile.c_str()) {
-                    if (FMODAudioEngine::sharedEngine()->m_system->createSound(soundFile.c_str(), FMOD_DEFAULT, nullptr, &m_sound) == FMOD_OK) {
-                       m_sound->setMode(FMOD_LOOP_OFF);
-                       m_soundFile = soundFile;
-                    }
-                } 
-        }
-        void Play(bool TestButton = false) { 
-            std::string  Paths =  GetSettingJsonRead(custom).Custom_Sound_Path;
-            if (m_soundFile != Paths) {
-                Setsound(Paths);
-            }
-            if (!m_sound) {
-                return;
-            }
-            PlayModded(TestButton);
-        };
-        void PlayModded(bool TestButton = false) {
-            float GetVolume = Mod::get()->getSettingValue<int64_t>(Volume);
-            if (GetVolume <= 0) {
-                GetVolume = 1;
-            }
-            FMODAudioEngine::sharedEngine()->m_system->playSound(m_sound, nullptr, false, &Soundchannel);
-            Soundchannel->setVolume(GetVolume / 50.f);
+public:
+    std::string m_soundFile = "";
+    FMOD::Sound* m_sound;
+    std::string Volume;
+    std::string custom;   
+    FMOD::Channel* Soundchannel;
+    
+    SoundCache(std::string x, std::string x2) : Volume(x), custom(x2), Soundchannel(nullptr) {
+        if (!CS_Group) {
+            FMODAudioEngine::sharedEngine()->m_system->createChannelGroup("CS_Group", &CS_Group);
         }
 
-        ~SoundCache() {
-            if (m_sound) {
-                m_sound->release();
-            }
-        };
+        if (!pitchShifterDSP) {
+            FMODAudioEngine::sharedEngine()->m_system->createDSPByType(FMOD_DSP_TYPE_PITCHSHIFT, &pitchShifterDSP);
+            CS_Group->addDSP(0, pitchShifterDSP);
+        }
+    }
 
+    void Setsound(std::string soundFile) {
+        if (soundFile.c_str()) {
+            if (FMODAudioEngine::sharedEngine()->m_system->createSound(soundFile.c_str(), FMOD_DEFAULT, nullptr, &m_sound) == FMOD_OK) {
+                m_sound->setMode(FMOD_LOOP_OFF);
+                m_soundFile = soundFile;
+            }
+        } 
+    }
+
+    void Play(bool TestButton = false) { 
+        std::string Paths = GetSettingJsonRead(custom).Custom_Sound_Path;
+        if (m_soundFile != Paths) {
+            Setsound(Paths);
+        }
+        if (!m_sound) {
+            return;
+        }
+        PlayModded(TestButton);
+    }
+
+    void PlayModded(bool TestButton = false) {
+        float GetVolume = Mod::get()->getSettingValue<int64_t>(Volume);
+        if (GetVolume <= 0 && TestButton == true) {
+            GetVolume = 1;
+        }
+        FMODAudioEngine::sharedEngine()->m_system->playSound(m_sound, CS_Group, false, &Soundchannel);
+        Soundchannel->setVolume(GetVolume / 50.f);
+        double semitone =  static_cast<double>(Mod::get()->getSettingValue<int64_t>("sfx-semitone")) / 2;
+        if (semitone < 0) {
+            semitone = std::pow(2,semitone); // fix negtive octave
+        } else {
+            semitone+=1;
+        }
+        pitchShifterDSP->setParameterFloat(FMOD_DSP_PITCHSHIFT_PITCH, semitone); // semitone is half a octave
+    }
+
+    ~SoundCache() {
+        if (m_sound) {
+            m_sound->release();
+        }
+    }
 };
+
 
 class MultiSoundCache {
 public:
