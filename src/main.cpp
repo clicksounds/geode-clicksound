@@ -172,6 +172,7 @@ class $modify(MenuLayer) {
     void SendRequestAPI() {
          std::thread([=] { 
             web::WebRequest().get("https://github.com/clicksounds/clicks/archive/refs/heads/main.zip").listen([=](auto res) {
+                    std::thread([=] { 
                         if (res->string().unwrapOr("failed") == "failed") {
                             indexzip.Failed = true;
                             indexzip.Finished = true;
@@ -190,6 +191,7 @@ class $modify(MenuLayer) {
                             ClickJson->loadData();
                             onsettingsUpdate();
                         }
+                    }).detach();
                     },
                     [](auto prog){},
                     [=]() {
