@@ -1,6 +1,7 @@
 #pragma once
 #include <Geode/Geode.hpp>
 #include <filesystem>
+#include "../main.cpp"
 #include <fstream>
 #include <sstream>
 #include <vector>
@@ -33,9 +34,11 @@ public:
             loadCategoryData(clicksPath / "Useful", usefulData);
             hassomedata = true;
             log::debug("Loaded Category!");
+            onsettingsUpdate();
         } else {
             //log::error("Unable to load Categories");
         }
+
          }).detach();
     }
 

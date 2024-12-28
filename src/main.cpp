@@ -14,7 +14,7 @@
 #include <Geode/loader/Event.hpp>
 using namespace geode::prelude;
 
-void onsettingsUpdate() {
+static void onsettingsUpdate() {
     auto selection_release = GetSettingJsonRead("selection-release");
     ReleaseSound->Setsound(selection_release.Custom_Sound_Path);
 
@@ -170,7 +170,6 @@ public:
 
 class $modify(MenuLayer) {
     void SendRequestAPI() {
-         std::thread([=] { 
             web::WebRequest().get("https://github.com/clicksounds/clicks/archive/refs/heads/main.zip").listen([=](auto res) {
                         if (res->string().unwrapOr("failed") == "failed") {
                             indexzip.Failed = true;
@@ -189,7 +188,6 @@ class $modify(MenuLayer) {
                             (void) unzip.unwrap().extractAllTo(Mod::get()->getConfigDir() / "Clicks");
                             indexzip.Finished = true;
                             ClickJson->loadData();
-                            onsettingsUpdate();
                         }
                     }).detach();
                     },
@@ -198,19 +196,13 @@ class $modify(MenuLayer) {
                         indexzip.Failed = true;
                         indexzip.Finished = true;
                     });
-                 }).detach();
     }
     bool init() { 
         if (!indexzip.StartedDownloading) {
             indexzip.StartedDownloading = true;
-            geode::Loader::get()->queueInMainThread([=] {
-                std::thread([=] { 
-                    // on boot set Sound Caches
-                    ClickJson->loadData();
-                    onsettingsUpdate();
-                    this->SendRequestAPI(); 
-                }).detach();
-            });
+                // on boot set Sound Caches
+                ClickJson->loadData();
+                this->SendRequestAPI(); 
          }
         return MenuLayer::init();
     }
