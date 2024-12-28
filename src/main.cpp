@@ -79,7 +79,7 @@ bool integrityCheck(PlayerObject* object, PlayerButton Pressed) {
      };
     GJBaseGameLayer* LayerCheck = GJBaseGameLayer::get();
      if (!LayerCheck) {
-        return;
+        return false;
      }
      if (object->m_isSecondPlayer && Level->m_twoPlayerMode && LayerCheck->m_player2 == object || LayerCheck->m_player1 == object) {
         return true;
