@@ -172,12 +172,12 @@ class $modify(MenuLayer) {
     void SendRequestAPI() {
          std::thread([=] { 
             web::WebRequest().get("https://github.com/clicksounds/clicks/archive/refs/heads/main.zip").listen([=](auto res) {
-                    std::thread([=] { 
                         if (res->string().unwrapOr("failed") == "failed") {
                             indexzip.Failed = true;
                             indexzip.Finished = true;
                             return;
                         }
+                      std::thread([=] { 
                         if (res->into(Mod::get()->getConfigDir() / "Clicks.zip")) {
                             auto unzip = file::Unzip::create(Mod::get()->getConfigDir() / "Clicks.zip");
                             if (!unzip) {
