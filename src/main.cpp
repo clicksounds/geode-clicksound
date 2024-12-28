@@ -81,7 +81,7 @@ bool integrityCheck(PlayerObject* object, PlayerButton Pressed) {
      if (!LayerCheck) {
         return false;
      }
-     if (object->m_isSecondPlayer && Level->m_twoPlayerMode && LayerCheck->m_player2 == object || LayerCheck->m_player1 == object) {
+     if (Level->m_twoPlayerMode && LayerCheck->m_player2 == object || LayerCheck->m_player1 == object) {
         return true;
      } else {
         return false;
