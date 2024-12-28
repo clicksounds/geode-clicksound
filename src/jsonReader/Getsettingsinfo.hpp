@@ -2,6 +2,7 @@
 #include <Geode/Geode.hpp>
 #include <matjson.hpp>
 #include "../SettingsV3/SelectionEnum.hpp"
+#include "../StaticClasses.hpp"
 using namespace geode::prelude;
 
 static struct ReadingSettings
@@ -12,6 +13,17 @@ static struct ReadingSettings
     std::string Custom_Sound_Path;
     std::string SettingName;
 };
+
+static ReadingSettings GetSettingJsonRead(std::string name) {
+    ClicksoundSettingValue x = Mod::get()->getSettingValue<ClicksoundSettingValue>(name);
+    ReadingSettings Setup;
+    Setup.M_Tab = x.m_tab; 
+    Setup.Current_Sound_Useful = x.m_currentClick;
+    Setup.Current_Sound_Meme = x.m_currentMemeClick;
+    Setup.Custom_Sound_Path = x.CustomSoundPath;
+    Setup.SettingName = name;
+    return Setup;
+}
 
 static void onsettingsUpdate() {
     auto selection_release = GetSettingJsonRead("selection-release");
@@ -52,14 +64,4 @@ static void onsettingsUpdate() {
         }
 
     }
-}
-static ReadingSettings GetSettingJsonRead(std::string name) {
-    ClicksoundSettingValue x = Mod::get()->getSettingValue<ClicksoundSettingValue>(name);
-    ReadingSettings Setup;
-    Setup.M_Tab = x.m_tab; 
-    Setup.Current_Sound_Useful = x.m_currentClick;
-    Setup.Current_Sound_Meme = x.m_currentMemeClick;
-    Setup.Custom_Sound_Path = x.CustomSoundPath;
-    Setup.SettingName = name;
-    return Setup;
 }
