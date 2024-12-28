@@ -14,6 +14,47 @@
 #include <Geode/loader/Event.hpp>
 using namespace geode::prelude;
 
+void onsettingsUpdate() {
+    auto selection_release = GetSettingJsonRead("selection-release");
+    ReleaseSound->Setsound(selection_release.Custom_Sound_Path);
+
+    auto selection_clicks = GetSettingJsonRead("selection-clicks");
+    ClickSound->Setsound(selection_clicks.Custom_Sound_Path);
+    if (ClickJson->hassomedata) {
+
+        Custom_OnClick = selection_clicks.M_Tab == 2;
+        if (selection_clicks.M_Tab == 0) {
+            auto list = ClickJson->GetMemeClicks();
+            auto sound = list.find(selection_clicks.Current_Sound_Meme);
+            if (sound != list.end()) {
+                ClickSoundIndex->SetSounds(sound->second.clicks, "click-volume","selection-clicks");
+            }
+        } else {
+            auto list = ClickJson->GetUsefulClicks();
+            auto sound = list.find(selection_clicks.Current_Sound_Useful);
+            if (sound != list.end()) {
+                ClickSoundIndex->SetSounds(sound->second.clicks, "click-volume","selection-clicks");
+            }
+        }
+
+        Custom_OnLetGo = selection_release.M_Tab == 2;
+         if (selection_release.M_Tab == 0) {
+            auto list = ClickJson->GetMemeReleases();
+            auto sound = list.find(selection_release.Current_Sound_Meme);
+            if (sound != list.end()) {
+                ReleaseSoundIndex->SetSounds(sound->second.releases, "release-volume","selection-release");
+            }
+        } else {
+            auto list = ClickJson->GetUsefulReleases();
+            auto sound = list.find(selection_release.Current_Sound_Useful);
+            if (sound != list.end()) {
+                ReleaseSoundIndex->SetSounds(sound->second.releases, "release-volume","selection-release");
+            }
+        }
+
+    }
+}
+
 // the check to see if you should play the sound or not
 bool integrityCheck(PlayerObject* object, PlayerButton Pressed) {
     // play sounds when "only play on jump" settings is enabled and the player input is a jump, left movement, or right movement.
@@ -146,7 +187,9 @@ class $modify(MenuLayer) {
                             std::filesystem::remove_all(Mod::get()->getConfigDir() / "Clicks");
                             (void) unzip.unwrap().extractAllTo(Mod::get()->getConfigDir() / "Clicks");
                             indexzip.Finished = true;
-                            ClickJson->loadData();
+                            ClickJson->loadData([=](){
+                                onsettingsUpdate();
+                            });
                         }
                     }).detach();
                     },
@@ -160,7 +203,9 @@ class $modify(MenuLayer) {
         if (!indexzip.StartedDownloading) {
             indexzip.StartedDownloading = true;
                 // on boot set Sound Caches
-                ClickJson->loadData();
+                ClickJson->loadData([=](){
+                    onsettingsUpdate();
+                });
                 this->SendRequestAPI(); 
          }
         return MenuLayer::init();
