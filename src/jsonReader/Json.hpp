@@ -1,7 +1,7 @@
 #pragma once
 #include <Geode/Geode.hpp>
 #include <filesystem>
-#include "../main.cpp"
+#include "Getsettingsinfo.hpp"
 #include <fstream>
 #include <sstream>
 #include <vector>
