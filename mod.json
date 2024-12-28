@@ -29,7 +29,8 @@
 	},
 	"links": {
 		"community": "https://discord.gg/tu98bsGA32",
-		"source": "https://github.com/BeatACVR/geode-clicksound"
+		"source": "https://github.com/BeatACVR/geode-clicksound",
+		"homepage": "https://clicksounds.github.io/clicks/"
 	},
 	"tags": [
 		"universal",

@@ -1,6 +1,7 @@
 #pragma once
 #include <Geode/Geode.hpp>
 #include <filesystem>
+#include "Getsettingsinfo.hpp"
 #include <fstream>
 #include <sstream>
 #include <vector>
@@ -24,7 +25,7 @@ public:
     std::map<std::string, CategoryData> usefulData;
     bool hassomedata = false;
 
-    void loadData() {
+    void loadData( std::function<void()> h) {
         std::thread([=] { 
         auto configDir = Mod::get()->getConfigDir();
         auto clicksPath = configDir / "Clicks" / "clicks-main";
@@ -33,9 +34,11 @@ public:
             loadCategoryData(clicksPath / "Useful", usefulData);
             hassomedata = true;
             log::debug("Loaded Category!");
+            if (h) { h(); };
         } else {
             //log::error("Unable to load Categories");
         }
+
          }).detach();
     }
 

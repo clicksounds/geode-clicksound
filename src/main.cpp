@@ -77,7 +77,11 @@ bool integrityCheck(PlayerObject* object, PlayerButton Pressed) {
         }
         Level = Pl->m_level;
      };
-     if (object->m_isSecondPlayer && Level->m_twoPlayerMode || !object->m_isSecondPlayer) {
+    GJBaseGameLayer* LayerCheck = GJBaseGameLayer::get();
+     if (!LayerCheck) {
+        return false;
+     }
+     if (Level->m_twoPlayerMode && LayerCheck->m_player2 == object || LayerCheck->m_player1 == object) {
         return true;
      } else {
         return false;
@@ -170,45 +174,44 @@ public:
 
 class $modify(MenuLayer) {
     void SendRequestAPI() {
-         std::thread([=] { 
             web::WebRequest().get("https://github.com/clicksounds/clicks/archive/refs/heads/main.zip").listen([=](auto res) {
                         if (res->string().unwrapOr("failed") == "failed") {
                             indexzip.Failed = true;
                             indexzip.Finished = true;
                             return;
                         }
+                    auto indexzipPtr = std::make_shared<decltype(indexzip)>(indexzip);
+                      std::thread([=] {
                         if (res->into(Mod::get()->getConfigDir() / "Clicks.zip")) {
                             auto unzip = file::Unzip::create(Mod::get()->getConfigDir() / "Clicks.zip");
                             if (!unzip) {
-                                indexzip.Failed = true;
-                                indexzip.Finished = true;
+                                indexzipPtr->Failed = true;
+                                indexzipPtr->Finished = true;
                                 return;
                             }
                             std::filesystem::remove_all(Mod::get()->getConfigDir() / "Clicks");
                             (void) unzip.unwrap().extractAllTo(Mod::get()->getConfigDir() / "Clicks");
-                            indexzip.Finished = true;
-                            ClickJson->loadData();
-                            onsettingsUpdate();
+                            indexzipPtr->Finished = true;
+                            ClickJson->loadData([=](){
+                                onsettingsUpdate();
+                            });
                         }
+                    }).detach();
                     },
                     [](auto prog){},
                     [=]() {
                         indexzip.Failed = true;
                         indexzip.Finished = true;
                     });
-                 }).detach();
     }
     bool init() { 
         if (!indexzip.StartedDownloading) {
             indexzip.StartedDownloading = true;
-            geode::Loader::get()->queueInMainThread([=] {
-                std::thread([=] { 
-                    // on boot set Sound Caches
-                    ClickJson->loadData();
+                // on boot set Sound Caches
+                ClickJson->loadData([=](){
                     onsettingsUpdate();
-                    this->SendRequestAPI(); 
-                }).detach();
-            });
+                });
+                this->SendRequestAPI(); 
          }
         return MenuLayer::init();
     }
