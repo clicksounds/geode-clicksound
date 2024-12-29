@@ -16,7 +16,7 @@
 		"Weebify",
 		"Uproxide"
 	],
-	"description": "Plays a sound whenever you press a jump button.",
+	"description": "Plays a sound when you press a jump button.",
 	"resources": {
 		"files": [
 			"resources/**/*.ogg",
