@@ -105,7 +105,6 @@ bool parentcheck(CCNode* node) {
             if (auto x = typeinfo_cast<ModSettingsPopup*>(node)) {
                 return GeodeLoader_Theme(x->getChildByType<CCLayer>(0)->getChildByType<ListBorders>(0)->getChildByType<CCSprite>(0));
             }
-            log::debug("node: {}",node);
             node = node->getParent();
         }
         return false;
