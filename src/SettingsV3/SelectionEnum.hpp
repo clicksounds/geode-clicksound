@@ -1,6 +1,7 @@
 #pragma once
 #include <Geode/loader/SettingV3.hpp>
 #include <Geode/loader/Mod.hpp>
+#include <Geode/ui/General.hpp>
 #include "popup.hpp"
 #include "../jsonReader/Json.hpp"
 #include <cctype>
@@ -80,6 +81,35 @@ template <>
 struct geode::SettingTypeForValueType<ClicksoundSettingValue> {
     using SettingType = ClicksoundSetterV3;
 };
+class ModSettingsPopup : public CCNode {};
+
+bool isTextureFromGeodeLoader(CCSprite* sprite) {
+     std::string texturePath = "";
+     if (auto textureProtocol = typeinfo_cast<CCTextureProtocol*>(sprite)) {
+        if (auto texture = textureProtocol->getTexture()) {
+            auto* cachedTextures = CCTextureCache::sharedTextureCache()->m_pTextures;
+            for (auto [key, obj] : CCDictionaryExt<std::string, CCTexture2D*>(cachedTextures)) {
+                if (obj == texture) {
+                    texturePath= key.c_str();
+                    break;
+                }
+            }
+        }
+     }
+    log::debug("path: {}",texturePath);
+    return texturePath.find("geode.loader") != std::string::npos;
+};
+
+bool checkParentType(CCNode* node) {
+    while (node != nullptr) {
+            if (auto x = typeinfo_cast<ModSettingsPopup*>(node)) {
+                return isTextureFromGeodeLoader(x->getChildByType<CCLayer>(0)->getChildByType<ListBorders>(0)->getChildByType<CCSprite>(0));
+            }
+            log::debug("node: {}",node);
+            node = node->getParent();
+        }
+        return false;
+ };
 
 class ClicksoundSetterNodeV3 : public SettingValueNodeV3<ClicksoundSetterV3> {
 protected:
@@ -87,6 +117,7 @@ protected:
     CCMenuItemSpriteExtra* m_folderBtn;
     CCMenu* m_menufolder;
     CCMenu* m_selectionpopup;
+    bool m_ThemeGeode = false;
     CCLabelBMFont* m_nameLabel;
     bool cs = false;
     void Popup(CCObject*) {
@@ -98,7 +129,7 @@ protected:
                     Changes.m_currentClick = modid;
                 }
                 this->setValue(Changes, nullptr);
-        });
+        },m_ThemeGeode);
         popup->m_noElasticity = false;
         popup->show();
     };
@@ -106,6 +137,11 @@ protected:
     bool init(std::shared_ptr<ClicksoundSetterV3> setting, float width) {
         if (!SettingValueNodeV3::init(setting, width))
             return false;
+        
+        queueInMainThread([=] {
+            m_ThemeGeode = checkParentType(this->getNameMenu());
+            //log::debug("{}",checkParentType(this->getNameMenu()));
+        });
 
         cs = setting->clicksound;
         this->setContentSize({ width, 70.f });
@@ -184,7 +220,7 @@ protected:
         
         return true;
     }
-    std::string GetJsonName(auto Infomation) {
+    std::string GetJsonName(CategoryData Infomation) {
         if (!Infomation.jsonpath.empty() && std::filesystem::exists(Infomation.jsonpath)) {
             std::filesystem::path fs = std::filesystem::path(Infomation.jsonpath);
             std::ifstream file(fs, std::ios::in | std::ios::binary);
@@ -225,7 +261,7 @@ protected:
         if (this->getValue().m_tab == 1) {
             // current
             auto Custompa = this->getValue().m_currentClick;
-            if (Custompa.empty() || Custompa == " ") {
+            if (Custompa.empty() || Custompa == " " || !ClickJson->hassomedata || ClickJson->usefulData.find(Custompa) == ClickJson->usefulData.end()) {
                     m_nameLabel->setColor(ccGRAY);
                     m_nameLabel->setOpacity(155);
                     m_nameLabel->setString("");
@@ -238,7 +274,7 @@ protected:
         if (this->getValue().m_tab == 0) {
             // meme
             auto Custompa = this->getValue().m_currentMemeClick;
-            if (Custompa.empty() || Custompa == " ") {
+            if (Custompa.empty() || Custompa == " " || !ClickJson->hassomedata || ClickJson->memeData.find(Custompa) ==  ClickJson->memeData.end()) {
                     m_nameLabel->setColor(ccGRAY);
                     m_nameLabel->setOpacity(155);
                     m_nameLabel->setString("");
