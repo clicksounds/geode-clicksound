@@ -81,9 +81,10 @@ template <>
 struct geode::SettingTypeForValueType<ClicksoundSettingValue> {
     using SettingType = ClicksoundSetterV3;
 };
+
 class ModSettingsPopup : public CCNode {};
 
-bool isTextureFromGeodeLoader(CCSprite* sprite) {
+bool GeodeLoader_Theme(CCSprite* sprite) {
      std::string texturePath = "";
      if (auto textureProtocol = typeinfo_cast<CCTextureProtocol*>(sprite)) {
         if (auto texture = textureProtocol->getTexture()) {
@@ -96,14 +97,13 @@ bool isTextureFromGeodeLoader(CCSprite* sprite) {
             }
         }
      }
-    log::debug("path: {}",texturePath);
     return texturePath.find("geode.loader") != std::string::npos;
 };
 
-bool checkParentType(CCNode* node) {
+bool parentcheck(CCNode* node) {
     while (node != nullptr) {
             if (auto x = typeinfo_cast<ModSettingsPopup*>(node)) {
-                return isTextureFromGeodeLoader(x->getChildByType<CCLayer>(0)->getChildByType<ListBorders>(0)->getChildByType<CCSprite>(0));
+                return GeodeLoader_Theme(x->getChildByType<CCLayer>(0)->getChildByType<ListBorders>(0)->getChildByType<CCSprite>(0));
             }
             log::debug("node: {}",node);
             node = node->getParent();
@@ -139,8 +139,7 @@ protected:
             return false;
         
         queueInMainThread([=] {
-            m_ThemeGeode = checkParentType(this->getNameMenu());
-            //log::debug("{}",checkParentType(this->getNameMenu()));
+            m_ThemeGeode = parentcheck(this->getNameMenu());
         });
 
         cs = setting->clicksound;

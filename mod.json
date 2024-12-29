@@ -43,7 +43,7 @@
         {
             "id": "geode.node-ids",
             "version": ">=v1.8.1",
-            "importance": "suggested"
+            "importance": "required"
         }
 	],
 	"incompatibilities": [
