@@ -11,7 +11,7 @@ using namespace geode::prelude;
 class PopupModSettings : public CCLayer {
 public:
     void ShowPopup(CCObject*) {
-		 geode::openSettingsPopup(Mod::get(), false);
+		 geode::openSettingsPopup(Mod::get(), true);
 	}
 };
 
