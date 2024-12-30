@@ -2,7 +2,7 @@
 #include <Geode/Geode.hpp>
 using namespace geode::prelude;
 namespace SpritePicker {
-    bool secret = Loader::get()->isModLoaded("viper.carrotmodcarrotcarrotcarrotcarrotcarrot"); // carrot sprite flag
+    bool secret = false;
 
     static const char* get(const std::string& Name, bool geode_theme) {   
 

@@ -1,4 +1,5 @@
 #include <Geode/Geode.hpp>
+#include "ButtonSprites/Sprite.hpp"
 #include <Geode/modify/PlayerObject.hpp>
 #include <Geode/modify/PauseLayer.hpp>
 #include <Geode/ui/GeodeUI.hpp>
@@ -228,5 +229,6 @@ $execute {
      listenForSettingChanges("selection-clicks", [](ClicksoundSettingValue PressSoundSoundFile) {
         onsettingsUpdate();
     });
+     SpritePicker::secret = Loader::get()->isModLoaded("viper.carrotmodcarrotcarrotcarrotcarrotcarrot"); // carrot sprite flag
 }
 
