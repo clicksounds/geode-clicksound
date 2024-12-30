@@ -3,6 +3,7 @@
 #include "../jsonReader/Json.hpp"
 #include "popup_nodes/CCIndexPackNode.hpp"
 #include "SelectionEnum.hpp"
+#include "../ButtonSprites/Sprite.hpp"
 using namespace geode::prelude;
 
 class Select : public geode::Popup<> {
@@ -66,18 +67,10 @@ protected:
         return true;
     };
 public:
-    bool fullinit(Select* ret, bool theme) {
-        if (theme) {
-        const char* bg = "geode.loader/GE_square01.png";
-        return ret->initAnchored(420.f, 210.f,bg);
-        } else {
-            return ret->initAnchored(420.f, 210.f);
-        };
-    }
     static Select* create(bool meme = false, bool clicksound = true, std::function<void(std::string)> setting = [](std::string x) {},bool theme = false) {
         auto ret = new Select;
         
-        if (ret && ret->fullinit(ret,theme)) {
+        if (ret && ret->initAnchored(420.f, 210.f,SpritePicker::get("GJ_square01.png",theme))) {
             ret->autorelease();
             ret->closebtntheme(theme);
             ret->CreateWithArgs(meme,clicksound,setting);

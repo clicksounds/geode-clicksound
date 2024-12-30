@@ -11,6 +11,7 @@
 #include <Geode/utils/file.hpp>
 #include "../popup.hpp"
 #include "../../jsonReader/Json.hpp"
+#include "../../ButtonSprites/Sprite.hpp"
 using namespace geode::prelude;
 
 float clampf_f(float value, float min, float max) {
@@ -229,13 +230,7 @@ public:
         this->addChild(gradient);
         this->setOpacity(0); 
             // GJ_button_06
-        ButtonSprite* btnsprite = nullptr;
-        if (theme) {
-            btnsprite = ButtonSprite::create("Set", 40.f, true, "goldFont.fnt", "geode.loader/GE_button_05.png", 20.f, 1.0f);
-        } else {
-            btnsprite = ButtonSprite::create("Set", 40.f, true, "bigFont.fnt", "GJ_button_01.png", 20.f, 1.0f);
-        };
-        auto ConfirmSprite = CCMenuItemSpriteExtra::create(btnsprite, this, menu_selector(CCIndexPackNode::selected));
+        auto ConfirmSprite = CCMenuItemSpriteExtra::create(ButtonSprite::create("Set", 40.f, true, SpritePicker::get("bigFont.fnt",theme),SpritePicker::get("GJ_button_01.png",theme), 20.f, 1.0f), this, menu_selector(CCIndexPackNode::selected));
         ConfirmSprite->m_scaleMultiplier = 0.9;
         MEN(_Apply_Menu)
         _Apply_Menu->setID("apply");
