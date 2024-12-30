@@ -3,6 +3,7 @@
 #include <Geode/loader/Mod.hpp>
 #include <Geode/ui/General.hpp>
 #include "popup.hpp"
+#include "../ButtonSprites/Sprite.hpp"
 #include "../jsonReader/Json.hpp"
 #include <cctype>
 #include <algorithm>
@@ -113,6 +114,7 @@ bool parentcheck(CCNode* node) {
 class ClicksoundSetterNodeV3 : public SettingValueNodeV3<ClicksoundSetterV3> {
 protected:
     std::vector<CCMenuItemToggler*> m_toggles;
+    std::vector<std::pair<CCMenuItemToggler*,const char* >> m_togglerItems;
     CCMenuItemSpriteExtra* m_folderBtn;
     CCMenu* m_menufolder;
     CCMenu* m_selectionpopup;
@@ -139,6 +141,13 @@ protected:
         
         queueInMainThread([=] {
             m_ThemeGeode = parentcheck(this->getNameMenu());
+            if (m_ThemeGeode) {
+            for (auto& value : m_togglerItems) {
+                auto toggle = value.first;
+                toggle->m_onButton->setSprite(ButtonSprite::create(value.second, 40.f, true, SpritePicker::get("bigFont.fnt",m_ThemeGeode), SpritePicker::get("GJ_button_01.png",m_ThemeGeode), 20.f, 1.0f));
+                toggle->m_offButton->setSprite(ButtonSprite::create(value.second, 40.f, true, SpritePicker::get("bigFont.fnt",m_ThemeGeode), SpritePicker::get("GJ_button_04.png",m_ThemeGeode), 20.f, 1.0f));
+            }
+            }
         });
 
         cs = setting->clicksound;
@@ -210,12 +219,12 @@ protected:
             toggle->m_notClickable = true;
             toggle->setTag(static_cast<int>(value.first));
             m_toggles.push_back(toggle);
+            m_togglerItems.emplace_back(toggle, value.second);
             this->getButtonMenu()->addChild(toggle);
         }
         this->getButtonMenu()->setLayout(RowLayout::create());
         this->getButtonMenu()->updateLayout();
         this->updateState(nullptr);
-        
         return true;
     }
     std::string GetJsonName(CategoryData Infomation) {

@@ -3,15 +3,17 @@
 using namespace geode::prelude;
 namespace SpritePicker {
     bool secret = false;
-
     static const char* get(const std::string& Name, bool geode_theme) {   
-
         if (Name == "GJ_square01.png") {
             return secret
                 ? "geode.loader/GE_square03.png" 
                 : (geode_theme ? "geode.loader/GE_square01.png" : "GJ_square01.png"); 
         }
-
+        if (Name == "GJ_button_04.png") {
+             return secret
+                ? "geode.loader/GE_button_03.png" 
+                : (geode_theme ? "geode.loader/GE_button_03.png" : "GJ_button_04.png");
+        }
         if (Name == "bigFont.fnt") {
              return secret
                 ? "goldFont.fnt" 
@@ -25,6 +27,6 @@ namespace SpritePicker {
         };
 
 
-            return ""; // Default return if no match
+        return ""; // Default return if no match
         }
 }
