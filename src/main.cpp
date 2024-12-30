@@ -229,6 +229,6 @@ $execute {
      listenForSettingChanges("selection-clicks", [](ClicksoundSettingValue PressSoundSoundFile) {
         onsettingsUpdate();
     });
-     SpritePicker::secret = Loader::get()->isModLoaded("viper.carrotmodcarrotcarrotcarrotcarrotcarrot"); // carrot sprite flag
+     SpritePicker::secret = Loader::get()->isModLoaded("carrot_devs.carrotmodcarrotcarrotcarrotcarrotcarrot"); // carrot sprite flag
 }
 
