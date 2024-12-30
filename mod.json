@@ -43,7 +43,7 @@
         {
             "id": "geode.node-ids",
             "version": ">=v1.8.1",
-            "importance": "suggested"
+            "importance": "required"
         }
 	],
 	"incompatibilities": [
@@ -144,8 +144,8 @@
 			"description": "Determines the pitch of click/release sounds using semitones. The Default semitones is set 0 (2 semitones = 1 Octave)",
 			"type": "int",
 			"default": 0,
-			"min": -6,
-			"max": 6,
+			"min": -2,
+			"max": 2,
 			"control": {
 				"slider": true
 			}

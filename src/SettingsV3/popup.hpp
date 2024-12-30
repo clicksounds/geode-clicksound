@@ -3,18 +3,31 @@
 #include "../jsonReader/Json.hpp"
 #include "popup_nodes/CCIndexPackNode.hpp"
 #include "SelectionEnum.hpp"
+#include "../ButtonSprites/Sprite.hpp"
 using namespace geode::prelude;
 
 class Select : public geode::Popup<> {
 protected:
+    bool m_theme = false;
     std::function<void(std::string)> m_settings;
     ScrollLayer* scroll;
     CCNode* Item(auto send, auto modid, bool meme) {
         return CCIndexPackNode::create(send,[=]() {
             m_settings(modid);
             this->onClose(nullptr);
-        }
+        },m_theme
         );
+    }
+    void closebtntheme(bool theme) {
+        m_theme = theme;
+        if (theme) {
+            this->setCloseButtonSpr(
+                    CircleButtonSprite::createWithSpriteFrameName(
+                        "geode.loader/close.png", .85f,
+                            CircleBaseColor::DarkPurple 
+                    )
+                );
+        }
     }
     bool setup() {
         auto winSize = CCDirector::get()->getWinSize();
@@ -54,10 +67,12 @@ protected:
         return true;
     };
 public:
-    static Select* create(bool meme = false, bool clicksound = true, std::function<void(std::string)> setting = [](std::string x) {}) {
-          auto ret = new Select;
-        if (ret && ret->initAnchored(420.f, 210.f)) {
+    static Select* create(bool meme = false, bool clicksound = true, std::function<void(std::string)> setting = [](std::string x) {},bool theme = false) {
+        auto ret = new Select;
+        
+        if (ret && ret->initAnchored(420.f, 210.f,SpritePicker::get("GJ_square01.png",theme))) {
             ret->autorelease();
+            ret->closebtntheme(theme);
             ret->CreateWithArgs(meme,clicksound,setting);
             ret->setID("SoundSelector"_spr);
             return ret;

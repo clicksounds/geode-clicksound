@@ -11,6 +11,7 @@
 #include <Geode/utils/file.hpp>
 #include "../popup.hpp"
 #include "../../jsonReader/Json.hpp"
+#include "../../ButtonSprites/Sprite.hpp"
 using namespace geode::prelude;
 
 float clampf_f(float value, float min, float max) {
@@ -112,7 +113,7 @@ public:
                 }
             }
     }
-     bool init(CategoryData x, std::function<void()> Objectt) {
+     bool init(CategoryData x, std::function<void()> Objectt, bool theme) {
             if (!CCLayerColor::init())
                 return false;
             selectionobject = Objectt;
@@ -229,7 +230,7 @@ public:
         this->addChild(gradient);
         this->setOpacity(0); 
             // GJ_button_06
-        auto ConfirmSprite = CCMenuItemSpriteExtra::create(ButtonSprite::create("Set", 40.f, true, "bigFont.fnt", "GJ_button_01.png", 20.f, 1.0f), this, menu_selector(CCIndexPackNode::selected));
+        auto ConfirmSprite = CCMenuItemSpriteExtra::create(ButtonSprite::create("Set", 40.f, true, SpritePicker::get("bigFont.fnt",theme),SpritePicker::get("GJ_button_01.png",theme), 20.f, 1.0f), this, menu_selector(CCIndexPackNode::selected));
         ConfirmSprite->m_scaleMultiplier = 0.9;
         MEN(_Apply_Menu)
         _Apply_Menu->setID("apply");
@@ -247,9 +248,9 @@ public:
         _Apply_Menu->setAnchorPoint({0.5,0.5});
         return true;
      }
-     static CCIndexPackNode* create(CategoryData x, std::function<void()> Objectt) {
+     static CCIndexPackNode* create(CategoryData x, std::function<void()> Objectt, bool theme) {
             CCIndexPackNode* pRet = new CCIndexPackNode();
-            if (pRet && pRet->init(x,Objectt)) {
+            if (pRet && pRet->init(x,Objectt,theme)) {
                 pRet->autorelease();
                 return pRet;
             } else {

@@ -1,7 +1,9 @@
 #pragma once
 #include <Geode/loader/SettingV3.hpp>
 #include <Geode/loader/Mod.hpp>
+#include <Geode/ui/General.hpp>
 #include "popup.hpp"
+#include "../ButtonSprites/Sprite.hpp"
 #include "../jsonReader/Json.hpp"
 #include <cctype>
 #include <algorithm>
@@ -81,12 +83,42 @@ struct geode::SettingTypeForValueType<ClicksoundSettingValue> {
     using SettingType = ClicksoundSetterV3;
 };
 
+class ModSettingsPopup : public CCNode {};
+
+bool GeodeLoader_Theme(CCSprite* sprite) {
+     std::string texturePath = "";
+     if (auto textureProtocol = typeinfo_cast<CCTextureProtocol*>(sprite)) {
+        if (auto texture = textureProtocol->getTexture()) {
+            auto* cachedTextures = CCTextureCache::sharedTextureCache()->m_pTextures;
+            for (auto [key, obj] : CCDictionaryExt<std::string, CCTexture2D*>(cachedTextures)) {
+                if (obj == texture) {
+                    texturePath= key.c_str();
+                    break;
+                }
+            }
+        }
+     }
+    return texturePath.find("geode.loader") != std::string::npos;
+};
+
+bool parentcheck(CCNode* node) {
+    while (node != nullptr) {
+            if (auto x = typeinfo_cast<ModSettingsPopup*>(node)) {
+                return GeodeLoader_Theme(x->getChildByType<CCLayer>(0)->getChildByType<ListBorders>(0)->getChildByType<CCSprite>(0));
+            }
+            node = node->getParent();
+        }
+        return false;
+ };
+
 class ClicksoundSetterNodeV3 : public SettingValueNodeV3<ClicksoundSetterV3> {
 protected:
     std::vector<CCMenuItemToggler*> m_toggles;
+    std::vector<std::pair<CCMenuItemToggler*,const char* >> m_togglerItems;
     CCMenuItemSpriteExtra* m_folderBtn;
     CCMenu* m_menufolder;
     CCMenu* m_selectionpopup;
+    bool m_ThemeGeode = false;
     CCLabelBMFont* m_nameLabel;
     bool cs = false;
     void Popup(CCObject*) {
@@ -98,7 +130,7 @@ protected:
                     Changes.m_currentClick = modid;
                 }
                 this->setValue(Changes, nullptr);
-        });
+        },m_ThemeGeode);
         popup->m_noElasticity = false;
         popup->show();
     };
@@ -106,9 +138,19 @@ protected:
     bool init(std::shared_ptr<ClicksoundSetterV3> setting, float width) {
         if (!SettingValueNodeV3::init(setting, width))
             return false;
+        
+        queueInMainThread([=] {
+            m_ThemeGeode = parentcheck(this->getNameMenu());
+            if (m_ThemeGeode) {
+            for (auto& value : m_togglerItems) {
+                auto toggle = value.first;
+                toggle->m_onButton->setSprite(ButtonSprite::create(value.second, 40.f, true, SpritePicker::get("bigFont.fnt",m_ThemeGeode), SpritePicker::get("GJ_button_01.png",m_ThemeGeode), 20.f, 1.0f));
+                toggle->m_offButton->setSprite(ButtonSprite::create(value.second, 40.f, true, SpritePicker::get("bigFont.fnt",m_ThemeGeode), SpritePicker::get("GJ_button_04.png",m_ThemeGeode), 20.f, 1.0f));
+            }
+            }
+        });
 
         cs = setting->clicksound;
-
         this->setContentSize({ width, 70.f });
         CCSprite* folderSpr = CCSprite::createWithSpriteFrameName("gj_folderBtn_001.png");
         folderSpr->setScale(1.0f);
@@ -177,15 +219,15 @@ protected:
             toggle->m_notClickable = true;
             toggle->setTag(static_cast<int>(value.first));
             m_toggles.push_back(toggle);
+            m_togglerItems.emplace_back(toggle, value.second);
             this->getButtonMenu()->addChild(toggle);
         }
         this->getButtonMenu()->setLayout(RowLayout::create());
         this->getButtonMenu()->updateLayout();
         this->updateState(nullptr);
-        
         return true;
     }
-    std::string GetJsonName(auto Infomation) {
+    std::string GetJsonName(CategoryData Infomation) {
         if (!Infomation.jsonpath.empty() && std::filesystem::exists(Infomation.jsonpath)) {
             std::filesystem::path fs = std::filesystem::path(Infomation.jsonpath);
             std::ifstream file(fs, std::ios::in | std::ios::binary);
@@ -226,7 +268,7 @@ protected:
         if (this->getValue().m_tab == 1) {
             // current
             auto Custompa = this->getValue().m_currentClick;
-            if (Custompa.empty() || Custompa == " ") {
+            if (Custompa.empty() || Custompa == " " || !ClickJson->hassomedata || ClickJson->usefulData.find(Custompa) == ClickJson->usefulData.end()) {
                     m_nameLabel->setColor(ccGRAY);
                     m_nameLabel->setOpacity(155);
                     m_nameLabel->setString("");
@@ -239,7 +281,7 @@ protected:
         if (this->getValue().m_tab == 0) {
             // meme
             auto Custompa = this->getValue().m_currentMemeClick;
-            if (Custompa.empty() || Custompa == " ") {
+            if (Custompa.empty() || Custompa == " " || !ClickJson->hassomedata || ClickJson->memeData.find(Custompa) ==  ClickJson->memeData.end()) {
                     m_nameLabel->setColor(ccGRAY);
                     m_nameLabel->setOpacity(155);
                     m_nameLabel->setString("");
