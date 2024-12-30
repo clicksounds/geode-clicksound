@@ -61,6 +61,7 @@ public:
     CCLabelBMFont* Text;
     CCLabelBMFont* Author;
     CCMenu* _Apply_Menu;
+    std::string m_name = "";
     std::function<void()> selectionobject;
     CCMenu* DEVS;
     std::string authorsListWhole = "";
@@ -71,6 +72,9 @@ public:
             "The Developers for the sound are "+authorsListWhole,  
             "OK",nullptr, 420.f,true,210.f,1.f
             )->show();
+    };
+    std::string getName() {
+        return m_name;
     };
     void selected(CCObject*) {
         if (selectionobject) {
@@ -119,15 +123,12 @@ public:
             selectionobject = Objectt;
             Infomation = x;
             
-            this->setContentSize(ccp(250, 35));
+            this->setContentSize(ccp(390, 35));
             this->setAnchorPoint(ccp(0, 1));
             this->setPositionY(207);
             this->setOpacity(100);
             //Text = CCLabelBMFont::create("ITEM NODE", "goldFont.fnt");
-            float boxWidth = 210.f;  
-            float boxHeight = 32.f;
-            float scaleFactor = 0.5f;
-            Text = AutoScaleCCLabelBMFont::create("ITEM NODE", "bigFont.fnt", 150, 50); 
+            Text = AutoScaleCCLabelBMFont::create("ITEM NODE", "bigFont.fnt", 200, 50); 
             Text->setID("name-label");
             Text->setLayoutOptions(AxisLayoutOptions::create()->setScalePriority(1));
             if (!Infomation.jsonpath.empty() && std::filesystem::exists(Infomation.jsonpath)) {
@@ -140,6 +141,7 @@ public:
 
                     if (jsonObject.contains("name") && jsonObject["name"].isString()) {
                         std::string name = jsonObject["name"].asString().unwrap();
+                        m_name = name;
                         Text->updateAnchoredPosition(Anchor::Top, ccp(0, -10), ccp(.5f, .5f));
                         //limitNodeWidth(Text, this->getContentSize() - CCSize(this->getContentSize().width, 0), .8f, .1f);
                         Text->setScale(0.5f);
@@ -224,7 +226,7 @@ public:
             this->addChildAtPosition(DEVS, Anchor::BottomLeft, ccp(3, 0), ccp(0, 0));
 
         CCLayerGradient* gradient = CCLayerGradient::create(ccc4(0, 0, 0, 100), ccc4(0, 0, 0, 100));
-        gradient->setContentSize(this->getContentSize() + ccp(30,0));
+        gradient->setContentSize(this->getContentSize());
         gradient->setZOrder(-3);
         gradient->setVector(ccp(90, 0));
         this->addChild(gradient);
@@ -242,7 +244,7 @@ public:
             ->setCrossAxisAlignment(AxisAlignment::Start)
         );
         _Apply_Menu->setContentSize(ConfirmSprite->getContentSize());
-        _Apply_Menu->setPosition(ccp(this->getContentSize().width,this->getContentSize().height / 2));
+        _Apply_Menu->setPosition(ccp(this->getContentSize().width -ConfirmSprite->getContentSize().width / 1.5,this->getContentSize().height / 2));
         _Apply_Menu->updateLayout();
         this->addChild(_Apply_Menu);
         _Apply_Menu->setAnchorPoint({0.5,0.5});
