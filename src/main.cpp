@@ -175,7 +175,9 @@ public:
 
 class $modify(MenuLayer) {
     void SendRequestAPI() {
+        Loader::get()->queueInMainThread([=] {
         Notification::create("Downloading Clicksounds...", CCSprite::createWithSpriteFrameName("GJ_timeIcon_001.png"))->show();
+        });
             web::WebRequest().get("https://github.com/clicksounds/clicks/archive/refs/heads/main.zip").listen([=](auto res) {
                         if (res->string().unwrapOr("failed") == "failed") {
                             Notification::create("Failed to download cs sounds", CCSprite::createWithSpriteFrameName("GJ_deleteIcon_001.png"))->show();
@@ -195,12 +197,14 @@ class $modify(MenuLayer) {
                             std::filesystem::remove_all(Mod::get()->getConfigDir() / "Clicks");
                             (void) unzip.unwrap().extractAllTo(Mod::get()->getConfigDir() / "Clicks");
                             indexzipPtr->Finished = true;
-                            Notification::create("Download Successful reading...", CCSprite::createWithSpriteFrameName("GJ_completesIcon_001.png"))->show();
+                            Loader::get()->queueInMainThread([=] {
+                                Notification::create("Download Successful reading...", CCSprite::createWithSpriteFrameName("GJ_completesIcon_001.png"))->show();
+                            });
                             ClickJson->loadData([=](){
                                 onsettingsUpdate();
                             });
                          }).detach();
-                        } else {Notification::create("Failed to download cs sounds", CCSprite::createWithSpriteFrameName("GJ_deleteIcon_001.png"))->show(); }
+                        } else {Loader::get()->queueInMainThread([=] { Notification::create("Failed to download cs sounds", CCSprite::createWithSpriteFrameName("GJ_deleteIcon_001.png"))->show(); }); }
                     },
                     [](auto prog){
                         //log::debug("download");
