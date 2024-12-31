@@ -175,15 +175,17 @@ public:
 
 class $modify(MenuLayer) {
     void SendRequestAPI() {
+        Notification::create("Downloading Clicksounds...", CCSprite::createWithSpriteFrameName("GJ_timeIcon_001.png"))->show();
             web::WebRequest().get("https://github.com/clicksounds/clicks/archive/refs/heads/main.zip").listen([=](auto res) {
                         if (res->string().unwrapOr("failed") == "failed") {
+                            Notification::create("Failed to download cs sounds", CCSprite::createWithSpriteFrameName("GJ_deleteIcon_001.png"))->show();
                             indexzip.Failed = true;
                             indexzip.Finished = true;
                             return;
                         }
-                    auto indexzipPtr = std::make_shared<decltype(indexzip)>(indexzip);
-                      std::thread([=] {
                         if (res->into(Mod::get()->getConfigDir() / "Clicks.zip")) {
+                            auto indexzipPtr = std::make_shared<decltype(indexzip)>(indexzip);
+                            std::thread([=] {  
                             auto unzip = file::Unzip::create(Mod::get()->getConfigDir() / "Clicks.zip");
                             if (!unzip) {
                                 indexzipPtr->Failed = true;
@@ -193,14 +195,19 @@ class $modify(MenuLayer) {
                             std::filesystem::remove_all(Mod::get()->getConfigDir() / "Clicks");
                             (void) unzip.unwrap().extractAllTo(Mod::get()->getConfigDir() / "Clicks");
                             indexzipPtr->Finished = true;
+                            Notification::create("Download Successful reading...", CCSprite::createWithSpriteFrameName("GJ_completesIcon_001.png"))->show();
                             ClickJson->loadData([=](){
                                 onsettingsUpdate();
                             });
-                        }
-                    }).detach();
+                         }).detach();
+                        } else {Notification::create("Failed to download cs sounds", CCSprite::createWithSpriteFrameName("GJ_deleteIcon_001.png"))->show(); }
                     },
-                    [](auto prog){},
+                    [](auto prog){
+                        //log::debug("download");
+                    },
+                    
                     [=]() {
+                        Notification::create("Failed to download cs sounds", CCSprite::createWithSpriteFrameName("GJ_deleteIcon_001.png"))->show();
                         indexzip.Failed = true;
                         indexzip.Finished = true;
                     });
