@@ -211,7 +211,7 @@ class $modify(MenuLayer) {
                     },
                     
                     [=]() {
-                        Notification::create("Failed to download cs sounds", CCSprite::createWithSpriteFrameName("GJ_deleteIcon_001.png"))->show();
+                        Loader::get()->queueInMainThread([=] {Notification::create("Failed to download cs sounds", CCSprite::createWithSpriteFrameName("GJ_deleteIcon_001.png"))->show(); });
                         indexzip.Failed = true;
                         indexzip.Finished = true;
                     });
