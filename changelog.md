@@ -1,13 +1,10 @@
 # Changelog
-## Version **v2.0.0** (SETTINGS UPDATE)
+## Version **v2.0.1** (SETTINGS UPDATE)
 * A WHOLE NEW LOOK AND FEEL FOR SETTINGS!
 * Compatible with GD 2.2074
 * Easier to see what click sound is selected
 * No More Numbers!
-* Added Mouse Click 6 (randomized clicks and releases)
-* Added Pacity's Clicks (randomized clicks and releases)
-* Added Mouse Click 7 (randomized clicks and releases)
-* Added Electro Clicks (randomized clicks and releases)
+* New sounds can be added without a mod update
 ## Version v1.8.0
 * Added Viper's click sounds and release sounds (both randomized)
 * Added Logitech G502 click sounds and release sounds (clicks randomized)
