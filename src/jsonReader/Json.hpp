@@ -30,6 +30,8 @@ public:
         auto configDir = Mod::get()->getConfigDir();
         auto clicksPath = configDir / "Clicks" / "clicks-main";
         if (std::filesystem::exists(clicksPath)) {
+            memeData.clear();
+            usefulData.clear();
             loadCategoryData(clicksPath / "Meme", memeData);
             loadCategoryData(clicksPath / "Useful", usefulData);
             hassomedata = true;
