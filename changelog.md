@@ -1,10 +1,14 @@
 # Changelog
+## Version v2.0.2
+* Fixed a crash on Mac
 ## Version **v2.0.1** (SETTINGS UPDATE)
 * A WHOLE NEW LOOK AND FEEL FOR SETTINGS!
 * Compatible with GD 2.2074
-* Easier to see what click sound is selected
+* Easier to see what click sound is selected.
 * No More Numbers!
 * New sounds can be added without a mod update
+* There is now a website for Click Sounds for submitting sounds
+* Sounds can now be searched
 ## Version v1.8.0
 * Added Viper's click sounds and release sounds (both randomized)
 * Added Logitech G502 click sounds and release sounds (clicks randomized)
