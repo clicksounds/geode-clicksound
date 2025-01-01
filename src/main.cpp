@@ -180,7 +180,9 @@ class $modify(MenuLayer) {
         });
             web::WebRequest().get("https://github.com/clicksounds/clicks/archive/refs/heads/main.zip").listen([=](auto res) {
                         if (res->string().unwrapOr("failed") == "failed") {
-                            Notification::create("Failed to download cs sounds", CCSprite::createWithSpriteFrameName("GJ_deleteIcon_001.png"))->show();
+                             Loader::get()->queueInMainThread([=] {
+                                Notification::create("Failed to download cs sounds", CCSprite::createWithSpriteFrameName("GJ_deleteIcon_001.png"))->show();
+                             });
                             indexzip.Failed = true;
                             indexzip.Finished = true;
                             return;
