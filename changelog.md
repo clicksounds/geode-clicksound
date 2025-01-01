@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.0.3
+* New developer badge icon
 ## Version v2.0.2
 * Fixed a crash on Mac
 ## Version **v2.0.1** (SETTINGS UPDATE)
