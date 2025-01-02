@@ -149,6 +149,13 @@
 			"control": {
 				"slider": true
 			}
+		},
+		"offline-mode": {
+			"name": "Offline Mode",
+			"description": "Skips downloading the Click Sounds index, <cr>if that's what you prefer.</c>\n\n<cr>Only enable this if you know what you're doing.</c>",
+			"type": "bool",
+			"default": false,
+			"requires-restart": true
 		}
 	}
 }
