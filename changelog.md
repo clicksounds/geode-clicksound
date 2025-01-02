@@ -1,6 +1,7 @@
 # Changelog
 ## Version v2.0.4
-* Updated the website button for the new URL
+* Added an offline mode option which stops the Click Sounds Index from updating on startup
+* Updated the website button to the new URL (clicksounds.xyz)
 ## Version v2.0.3
 * New developer badge icon
 ## Version v2.0.2
