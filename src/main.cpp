@@ -175,6 +175,11 @@ public:
 
 class $modify(MenuLayer) {
     void SendRequestAPI() {
+        if (Mod::get(->getSettingValue<bool>("offline-mode"))) {
+            indexzip.Failed = true;
+            indexzip.Finished = true;
+            return;
+        }
         Loader::get()->queueInMainThread([=] {
         Notification::create("Downloading Clicksounds...", CCSprite::createWithSpriteFrameName("GJ_timeIcon_001.png"))->show();
         });
@@ -218,7 +223,7 @@ class $modify(MenuLayer) {
                         indexzip.Finished = true;
                     });
     }
-    bool init() { 
+    bool init() {
         if (!indexzip.StartedDownloading) {
             indexzip.StartedDownloading = true;
                 // on boot set Sound Caches
@@ -226,14 +231,14 @@ class $modify(MenuLayer) {
                     onsettingsUpdate();
                 });
                 this->SendRequestAPI(); 
-         }
+        }
         return MenuLayer::init();
     }
 };
 
 
 // on the mod loading
-$execute {
+$on_mod(Loaded) {
     // Does the release-sound path setting change?
     listenForSettingChanges("selection-release", [](ClicksoundSettingValue releaseSoundFile) {
         onsettingsUpdate();
@@ -242,6 +247,6 @@ $execute {
      listenForSettingChanges("selection-clicks", [](ClicksoundSettingValue PressSoundSoundFile) {
         onsettingsUpdate();
     });
-     SpritePicker::secret = Loader::get()->isModLoaded("carrot_devs.carrotmodcarrotcarrotcarrotcarrotcarrot"); // carrot sprite flag
+    SpritePicker::secret = Loader::get()->isModLoaded("carrot_devs.carrotmodcarrotcarrotcarrotcarrotcarrot"); // carrot sprite flag
 }
 
