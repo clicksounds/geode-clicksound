@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.0.4
+* Updated the website button for the new URL
 ## Version v2.0.3
 * New developer badge icon
 ## Version v2.0.2

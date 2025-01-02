@@ -6,7 +6,7 @@
         "mac": "2.2074",
         "ios": "2.2074"
     	},
-	"version": "v2.0.3",
+	"version": "v2.0.4",
 	"id": "beat.click-sound",
 	"name": "Click Sounds",
 	"developers": [
@@ -30,7 +30,7 @@
 	"links": {
 		"community": "https://discord.gg/tu98bsGA32",
 		"source": "https://github.com/BeatACVR/geode-clicksound",
-		"homepage": "https://clicksounds.github.io/clicks/"
+		"homepage": "https://clicksounds.xyz/"
 	},
 	"tags": [
 		"universal",
