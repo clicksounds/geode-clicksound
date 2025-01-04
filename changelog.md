@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.0.5
+* Fixed semitone problem in the settings! (i failed music - viper)
 ## Version v2.0.4
 * Added an offline mode option which stops the Click Sounds Index from updating on startup
 * Updated the website button to the new URL (clicksounds.xyz)

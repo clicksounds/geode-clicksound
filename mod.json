@@ -6,7 +6,7 @@
         "mac": "2.2074",
         "ios": "2.2074"
     	},
-	"version": "v2.0.4",
+	"version": "v2.0.5",
 	"id": "beat.click-sound",
 	"name": "Click Sounds",
 	"developers": [
@@ -148,11 +148,11 @@
 		},
 		"sfx-semitone": {
 			"name": "Pitch of the sounds",
-			"description": "Determines the pitch of click/release sounds using semitones. The Default semitones is set 0 (2 semitones = 1 Octave)",
+			"description": "Determines the pitch of click/release sounds using semitones. The Default semitones is set 0 (12 semitones = 1 Octave)",
 			"type": "int",
 			"default": 0,
-			"min": -2,
-			"max": 2,
+			"min": -12,
+			"max": 12,
 			"control": {
 				"slider": true
 			}
