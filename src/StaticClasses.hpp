@@ -62,7 +62,7 @@ public:
         }
         FMODAudioEngine::sharedEngine()->m_system->playSound(m_sound, CS_Group, false, &Soundchannel);
         Soundchannel->setVolume(GetVolume / 50.f);
-        double semitone =  static_cast<double>(Mod::get()->getSettingValue<int64_t>("sfx-semitone")) / 2;
+        double semitone =  static_cast<double>(Mod::get()->getSettingValue<int64_t>("sfx-semitone")) / 12;
         if (semitone < 0) {
             semitone = std::pow(2,semitone); // fix negtive octave
         } else {
