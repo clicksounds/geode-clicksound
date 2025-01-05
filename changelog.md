@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.0.6
+* Added AkuLunical as developer
 ## Version v2.0.5
 * Fixed semitone problem in the settings! (i failed music - viper)
 ## Version v2.0.4
