@@ -175,7 +175,7 @@ public:
 
 class $modify(MenuLayer) {
     void SendRequestAPI() {
-        if (Mod::get()->getSettingValue<bool>("offline-mode")) {
+        if (Mod::get()->getSavedValue<bool>("offlineMode")) {
             indexzip.Failed = true;
             indexzip.Finished = true;
             return;
