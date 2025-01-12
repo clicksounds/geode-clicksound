@@ -204,6 +204,7 @@ class $modify(MenuLayer) {
                             std::filesystem::remove_all(Mod::get()->getConfigDir() / "Clicks");
                             (void) unzip.unwrap().extractAllTo(Mod::get()->getConfigDir() / "Clicks");
                             indexzipPtr->Finished = true;
+                            std::filesystem::remove(Mod::get()->getConfigDir() / "Clicks.zip");
                             Loader::get()->queueInMainThread([=] {
                                 Notification::create("Download Successful reading...", CCSprite::createWithSpriteFrameName("GJ_completesIcon_001.png"))->show();
                             });
