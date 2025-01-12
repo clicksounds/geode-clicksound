@@ -203,9 +203,9 @@ class $modify(MenuLayer) {
                             }
                             std::filesystem::remove_all(Mod::get()->getConfigDir() / "Clicks");
                             (void) unzip.unwrap().extractAllTo(Mod::get()->getConfigDir() / "Clicks");
-                            std::filesystem::remove(Mod::get()->getConfigDir() / "Clicks.zip");
                             indexzipPtr->Finished = true;
                             Loader::get()->queueInMainThread([=] {
+                                std::filesystem::remove(Mod::get()->getConfigDir() / "Clicks.zip");
                                 Notification::create("Download Successful reading...", CCSprite::createWithSpriteFrameName("GJ_completesIcon_001.png"))->show();
                             });
                             ClickJson->loadData([=](){
