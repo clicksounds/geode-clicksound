@@ -1,7 +1,5 @@
 #include <Geode/Geode.hpp>
-#include <Geode/modify/PlayerObject.hpp>
 #include <Geode/modify/PauseLayer.hpp>
-#include <Geode/modify/EndLevelLayer.hpp>
 #include <Geode/modify/EditorPauseLayer.hpp>
 #include <Geode/ui/GeodeUI.hpp>
 #include <Geode/loader/SettingV3.hpp>

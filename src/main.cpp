@@ -57,36 +57,39 @@ void onsettingsUpdate() {
 }
 
 // the check to see if you should play the sound or not
-bool integrityCheck(PlayerObject* object, PlayerButton Pressed) {
+bool integrityCheck(PlayerObject* object, PlayerButton button) {
     // play sounds when "only play on jump" settings is enabled and the player input is a jump, left movement, or right movement.
     if (Mod::get()->getSettingValue<bool>("only-on-jump")) {
-        if (Pressed != PlayerButton::Jump) {
+        if (button != PlayerButton::Jump) {
             return false;
         }
     }
-    GJGameLevel* Level;
-     if (!PlayLayer::get()) {
+
+    GJGameLevel* level;
+    if (!PlayLayer::get()) {
         if (!LevelEditorLayer::get()) {
             return false;
         }
-        Level = LevelEditorLayer::get()->m_level;
-     } else {
+        level = LevelEditorLayer::get()->m_level;
+    } else {
         PlayLayer* Pl = PlayLayer::get();
         // Mac fix
         if (Pl->m_isPaused) {
             return false;
         }
-        Level = Pl->m_level;
-     };
+        level = Pl->m_level;
+    };
+
     GJBaseGameLayer* LayerCheck = GJBaseGameLayer::get();
-     if (!LayerCheck) {
+    if (!LayerCheck) {
         return false;
-     }
-     if (Level->m_twoPlayerMode && LayerCheck->m_player2 == object || LayerCheck->m_player1 == object) {
+    }
+
+    if (level->m_twoPlayerMode && layerCheck->m_player2 == object || layerCheck->m_player1 == object) {
         return true;
-     } else {
+    } else {
         return false;
-     }
+    }
 }
 
 class $modify(PlayerObject) {
@@ -180,9 +183,7 @@ class $modify(MenuLayer) {
             indexzip.Finished = true;
             return;
         }
-        Loader::get()->queueInMainThread([=] {
-        Notification::create("Downloading Clicksounds...", CCSprite::createWithSpriteFrameName("GJ_timeIcon_001.png"))->show();
-        });
+        Loader::get()->queueInMainThread([=] { Notification::create("Downloading Clicksounds...", CCSprite::createWithSpriteFrameName("GJ_timeIcon_001.png"))->show(); });
             web::WebRequest().get("https://github.com/clicksounds/clicks/archive/refs/heads/main.zip").listen([=](auto res) {
                         if (res->string().unwrapOr("failed") == "failed") {
                              Loader::get()->queueInMainThread([=] {
