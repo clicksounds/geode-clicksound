@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.0.8
+* Halved the amount of storage used by the Click Sounds Index
 ## Version v2.0.7
 * Fixed a bug that nearly doubled the amount of storage used by Click Sounds
 ## Version v2.0.6
