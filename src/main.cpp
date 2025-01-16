@@ -205,9 +205,17 @@ class $modify(MenuLayer) {
                             (void) unzip.unwrap().extractAllTo(Mod::get()->getConfigDir() / "Clicks");
                             indexzipPtr->Finished = true;
                             Loader::get()->queueInMainThread([=] {
+                                /*std::filesystem::remove(Mod::get()->getConfigDir() / "Clicks.zip");
+                                std::filesystem::remove_all(Mod::get()->getConfigDir() / "Clicks/clicks-main/.images");*/
+                                
                                 // delete unnecessary files to save storage space
+                                std::filesystem::path clicksDir = Mod::get()->getConfigDir() / "Clicks" / "clicks-main";
+                                for (const auto& entry : std::filesystem::directory_iterator(clicksDir)) {
+                                    if (entry.path().filename() != "Meme" && entry.path().filename() != "Useful") {
+                                        std::filesystem::remove_all(entry.path());
+                                    }
+                                }
                                 std::filesystem::remove(Mod::get()->getConfigDir() / "Clicks.zip");
-                                std::filesystem::remove_all(Mod::get()->getConfigDir() / "Clicks/clicks-main/.images");
                                 Notification::create("CS: Download successful!", CCSprite::createWithSpriteFrameName("GJ_completesIcon_001.png"))->show();
                             });
                             ClickJson->loadData([=](){
