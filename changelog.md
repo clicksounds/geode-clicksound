@@ -1,4 +1,7 @@
 # Changelog
+## Version v2.0.9
+* Minor internal changes
+* Geode v4.2.0 is now required
 ## Version v2.0.8
 * Halved the amount of storage used by the Click Sounds Index
 ## Version v2.0.7
