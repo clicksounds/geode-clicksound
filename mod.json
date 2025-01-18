@@ -39,21 +39,18 @@
 		"online",
 		"customization"
 	],
-	"dependencies": [
-        {
-            "geode.node-ids": {
-            	"version": ">=v1.8.1",
-            	"importance": "required"
-			}
-        }
-	],
-	"incompatibilities": [
-		{
-			"id": "beat.click_sounds_lite",
+	"dependencies": {
+        "geode.node-ids": {
+        	"version": ">=v1.8.1",
+         	"importance": "required"
+		}
+    },
+	"incompatibilities": {
+		"beat.click_sounds_lite": {
 			"importance": "conflicting",
 			"version": ">=v1.0.0"
 		}
-	],
+	},
 	"settings": {
 		"clicksounds-section": {
             "name": "Click Sounds",
