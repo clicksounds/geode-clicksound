@@ -175,7 +175,7 @@ public:
 
 class $modify(MenuLayer) {
     void SendRequestAPI() {
-        if (Mod::get()->getSavedValue<bool>("offlineMode") || Loader::get()->isModLoaded("cs.offline-enabler") || Loader::get()->isModLoaded("beat.index-moderator) {
+        if (Mod::get()->getSavedValue<bool>("offlineMode") || Loader::get()->isModLoaded("cs.offline-enabler") || Loader::get()->isModLoaded("beat.index-moderator") {
             indexzip.Failed = true;
             indexzip.Finished = true;
             return;
