@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.1.0
+* Minor internal changes
 ## Version v2.0.9
 * Minor internal changes
 * Geode v4.2.0 is now required
