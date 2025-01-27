@@ -38,7 +38,7 @@ class buttonfunctionthing : public CCLayer {
 	void Developer(CCObject *sender) {
 		FLAlertLayer::create(
 		    "About",
-		    "This is a <cp>Click Sound Developer</c>. They programmed alot of features to Click Sound. ^w^",
+		    "This is a <cp>Click Sound Developer</c>. They programmed a lot of features to Click Sound. ^w^",
 		    "OK")
 		    ->show();
 	}
