@@ -44,17 +44,16 @@ template <>
 struct matjson::Serialize<ClicksoundSettingValue> {
 
     static Result<ClicksoundSettingValue> fromJson(matjson::Value const& v) {
-        log::debug("Unwrapping");
         GEODE_UNWRAP_INTO(std::string x, v.asString());
         if (x == "") {
-           return Ok(ClicksoundSettingValue(0, " ", " ", " ")); 
+           return Ok(ClicksoundSettingValue(1, "beat.default", " ", " ")); 
         }
         auto value = matjson::parse(x).unwrapOrDefault();
             
         return Ok(ClicksoundSettingValue(
-            value["Tab"].asInt().unwrapOr(0), 
-            value["Current_Sound_Useful"].asString().unwrapOr(" "), 
-            value["Current_Sound_Meme"].asString().unwrapOr(" "), 
+            value["Tab"].asInt().unwrapOr(1), 
+            value["Current_Sound_Useful"].asString().unwrapOr("beat.default"), 
+            value["Current_Sound_Meme"].asString().unwrapOr(""), 
             value["Custom_Sound_Path"].asString().unwrapOr(" ")
         ));
     }
