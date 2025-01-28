@@ -1,4 +1,8 @@
 # Changelog
+## Version v2.0.12
+* The default sound is now Default by Beat. It will be updated to include more sounds in the near future.
+* Developer badges are more specific. See it on profiles of staff members like BeatTaco, ViperProtogen, Jaid, and AkuLunical.
+* Some bug fixes
 ## Version v2.0.11
 * Even more internal changes
 ## Version v2.0.10
