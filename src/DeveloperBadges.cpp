@@ -10,16 +10,19 @@ namespace Contributors  {
 		Developer = 2,
 		Contributors = 3,
 		Helper = 4,
+		IndexModerator = 5
 	};
 	inline std::set<std::pair<int,Messages>> List = { 
-			{13873867,Messages::Owner}, 
-			{14284530,Messages::Developer}, 
-			{21207551,Messages::Developer}, 
-			{25397826,Messages::Contributors}, 
-			{6253758,Messages::Contributors}, 
-			{1941705,Messages::Contributors}, 
-			{17389494,Messages::Helper}
-		}; 
+		{13873867,Messages::Owner}, // BeatTaco
+		{14284530,Messages::Developer}, // ViperProtogen
+		{21207551,Messages::Developer}, // coopeeo
+		{25397826,Messages::Contributors}, // Uproxide
+		{6253758,Messages::Contributors}, // FireeDev
+		{1941705,Messages::Contributors}, // RayDeeUx
+		{17389494,Messages::Helper}, // AkuLunical
+		{7669473,Messages::IndexModerator}, // Jaid
+		{26541718,Messages::IndexModerator} // Cuuhie
+	}; 
 };
 
 
@@ -31,28 +34,35 @@ class buttonfunctionthing : public CCLayer {
 	void Owner(CCObject *sender) {
 		FLAlertLayer::create(
 		    "About",
-		    "This is the <cp>Click Sound Owner</c>. They own the mod! ^w^",
+		    "This is the <cp>Click Sounds Owner</c>. They own the mod! ^w^",
 		    "OK")
 		    ->show();
 	}
 	void Developer(CCObject *sender) {
 		FLAlertLayer::create(
 		    "About",
-		    "This is a <cp>Click Sound Developer</c>. They programmed a lot of features to Click Sound. ^w^",
+		    "This is a <cp>Click Sounds Developer</c>. They programmed a lot of features to Click Sounds. ^w^",
 		    "OK")
 		    ->show();
 	}
 	void Contributor(CCObject *sender) {
 		FLAlertLayer::create(
 		    "About",
-		    "This is a <cp>Click Sound Contributor</c>. They have programmed anything that was added to Click Sound. ^w^",
+		    "This is a <cp>Click Sounds Contributor</c>. They have programmed anything that was added to Click Sounds. ^w^",
 		    "OK")
 		    ->show();
 	}
 	void Helper(CCObject *sender) {
 		FLAlertLayer::create(
 		    "About",
-		    "This is a <cp>Click Sound Helper</c>. They have added anything to Click sounds that doesn't require programming! ^w^",
+		    "This is a <cp>Click Sounds Helper</c>. These users are helpful to the Click Sounds community. ^w^",
+		    "OK")
+		    ->show();
+	}
+	void IndexModerator(CCObject *sender) {
+		FLAlertLayer::create(
+		    "About",
+		    "This is a <cp>Click Sounds Index Moderator</c>. They moderate click packs for Click Sounds. ^w^",
 		    "OK")
 		    ->show();
 	}
@@ -92,6 +102,9 @@ class $modify(ProfilePage) {
 				break;
 			case Contributors::Helper:
 				btn->m_pfnSelector = menu_selector(buttonfunctionthing::Helper);
+				break;
+			case Contributors::IndexModerator:
+				btn->m_pfnSelector = menu_selector(buttonfunctionthing::IndexModerator);
 				break;
 			}
 
