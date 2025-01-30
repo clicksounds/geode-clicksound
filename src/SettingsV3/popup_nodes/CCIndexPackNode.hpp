@@ -68,11 +68,10 @@ class CCIndexPackNode : public CCLayerColor {
 	CCMenu *DEVS;
 	std::string authorsListWhole = "";
 	void OnDevelopers(auto sender) {
-		FLAlertLayer::create(
-		    nullptr,
+		MDPopup::create(
 		    "Developers",
 		    "The Developers for the sound are " + authorsListWhole,
-		    "OK", nullptr, 420.f, true, 210.f, 1.f)
+		    "OK", nullptr)
 		    ->show();
 	};
 	std::string getName() {
@@ -106,8 +105,18 @@ class CCIndexPackNode : public CCLayerColor {
 									add_sill = true;
 								}
 							}
-
-							authorsListWhole += author["name"].asString().unwrap();
+							std::string name = author["name"].asString().unwrap();
+							if (author.contains("gdAccountID") && author["gdAccountID"].isNumber()) {
+								authorsListWhole += "[";
+								authorsListWhole += author["name"].asString().unwrap();
+								authorsListWhole += "]";
+								authorsListWhole += "(";
+								authorsListWhole += "user:";
+								authorsListWhole += std::to_string(author["gdAccountID"].asInt().unwrap());
+								authorsListWhole += ")";
+							} else {
+								authorsListWhole += author["name"].asString().unwrap();
+							}
 						}
 					}
 				}
