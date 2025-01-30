@@ -68,11 +68,10 @@ class CCIndexPackNode : public CCLayerColor {
 	CCMenu *DEVS;
 	std::string authorsListWhole = "";
 	void OnDevelopers(auto sender) {
-		FLAlertLayer::create(
-		    nullptr,
+		MDPopup::create(
 		    "Developers",
 		    "The Developers for the sound are " + authorsListWhole,
-		    "OK", nullptr, 420.f, true, 210.f, 1.f)
+		    "OK", nullptr)
 		    ->show();
 	};
 	std::string getName() {
@@ -98,16 +97,25 @@ class CCIndexPackNode : public CCLayerColor {
 					bool add_sill = false;
 					for (const auto &author : jsonObject2["authors"].asArray().unwrap()) {
 						if (author.contains("name") && author["name"].isString()) {
-
-							if (!author["name"].asString().unwrap().empty() && add_sill) {
+							std::string name = author["name"].asString().unwrap();
+							if (!name.empty() && add_sill) {
 								authorsListWhole += ", ";
 							} else {
-								if (!author["name"].asString().unwrap().empty()) {
+								if (!name.empty()) {
 									add_sill = true;
 								}
 							}
-
-							authorsListWhole += author["name"].asString().unwrap();
+							if (author.contains("gdAccountID") && author["gdAccountID"].isNumber()) {
+								authorsListWhole += "[";
+								authorsListWhole += author["name"].asString().unwrap();
+								authorsListWhole += "]";
+								authorsListWhole += "(";
+								authorsListWhole += "user:";
+								authorsListWhole += std::to_string(author["gdAccountID"].asInt().unwrap());
+								authorsListWhole += ")";
+							} else {
+								authorsListWhole += name;
+							}
 						}
 					}
 				}

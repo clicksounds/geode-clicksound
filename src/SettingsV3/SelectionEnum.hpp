@@ -115,6 +115,7 @@ protected:
     std::vector<CCMenuItemToggler*> m_toggles;
     std::vector<std::pair<CCMenuItemToggler*,const char* >> m_togglerItems;
     CCMenuItemSpriteExtra* m_folderBtn;
+    CCMenuItemSpriteExtra* m_popup;
     CCMenu* m_menufolder;
     CCMenu* m_selectionpopup;
     bool m_ThemeGeode = false;
@@ -185,12 +186,12 @@ protected:
         m_selectionpopup = CCMenu::create();
         auto btnspr = CCSprite::create("nobglogo.png"_spr);
         btnspr->setScale(0.4);
-        auto nobglogobtn = CCMenuItemSpriteExtra::create(
+        this->m_popup = CCMenuItemSpriteExtra::create(
             btnspr,
             this,
             menu_selector(ClicksoundSetterNodeV3::Popup)
         );
-        m_selectionpopup->addChild(nobglogobtn);
+        m_selectionpopup->addChild(this->m_popup);
         m_selectionpopup->setLayout(RowLayout::create());
         m_selectionpopup->setPosition(ccp(this->getContentSize().width / 2, this->getContentSize().height / 2));
         m_selectionpopup->setAnchorPoint({0.5,0.5});
@@ -291,6 +292,7 @@ protected:
                 }
         }
         m_folderBtn->setEnabled(shouldEnable);
+        m_popup->setEnabled(shouldEnable);
         if (!shouldEnable) {
            m_nameLabel->setColor(ccGRAY);
         }
