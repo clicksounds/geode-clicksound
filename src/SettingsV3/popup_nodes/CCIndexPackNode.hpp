@@ -97,15 +97,14 @@ class CCIndexPackNode : public CCLayerColor {
 					bool add_sill = false;
 					for (const auto &author : jsonObject2["authors"].asArray().unwrap()) {
 						if (author.contains("name") && author["name"].isString()) {
-
-							if (!author["name"].asString().unwrap().empty() && add_sill) {
+							std::string name = author["name"].asString().unwrap();
+							if (!name.empty() && add_sill) {
 								authorsListWhole += ", ";
 							} else {
-								if (!author["name"].asString().unwrap().empty()) {
+								if (!name.empty()) {
 									add_sill = true;
 								}
 							}
-							std::string name = author["name"].asString().unwrap();
 							if (author.contains("gdAccountID") && author["gdAccountID"].isNumber()) {
 								authorsListWhole += "[";
 								authorsListWhole += author["name"].asString().unwrap();
