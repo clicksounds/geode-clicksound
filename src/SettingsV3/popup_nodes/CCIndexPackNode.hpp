@@ -115,7 +115,7 @@ class CCIndexPackNode : public CCLayerColor {
 								authorsListWhole += std::to_string(author["gdAccountID"].asInt().unwrap());
 								authorsListWhole += ")";
 							} else {
-								authorsListWhole += author["name"].asString().unwrap();
+								authorsListWhole += name;
 							}
 						}
 					}
