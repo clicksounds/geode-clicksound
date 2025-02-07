@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.0.13
+* You can now view the profiles of click pack authors in the Click Sounds Index.
 ## Version v2.0.12
 * The default sound is now Default by Beat. It will be updated to include more sounds in the near future.
 * Developer badges are more specific. See it on profiles of staff members like BeatTaco, ViperProtogen, Jaid, and AkuLunical.
