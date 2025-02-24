@@ -192,7 +192,9 @@ EventListener<web::WebTask> m_listener;
 
 class $modify(MenuLayer) {
 	void SendRequestAPI() {
-		if (Mod::get()->getSavedValue<bool>("offlineMode") || (Mod::get()->getSettingValue<bool>("csim") && Loader::get()->isModLoaded("beat.index-moderator"))) {
+		if (Mod::get()->getSavedValue<bool>("offlineMode") || 
+    		(Mod::get()->getSettingValue<bool>("cspi") && 
+     		(Loader::get()->isModLoaded("beat.index-moderator") || Loader::get()->isModLoaded("beat.pack-installer")))) {
 			indexzip.Failed = true;
 			indexzip.Finished = true;
 			return;
