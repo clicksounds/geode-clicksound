@@ -6,7 +6,7 @@
         "mac": "2.2074",
         "ios": "2.2074"
     	},
-	"version": "v2.0.13",
+	"version": "v2.0.14",
 	"id": "beat.click-sound",
 	"name": "Click Sounds",
 	"developers": [
@@ -153,9 +153,9 @@
 			"type": "title",
 			"description": "Only touch these if you know what you're doing."
 		},
-		"csim": {
-			"name": "CSIM Invalidation",
-			"description": "An option for CS Index moderators. Does nothing for almost all users.",
+		"cspi": {
+			"name": "CSPI Invalidation",
+			"description": "Required for the CSPI or CSIM mod to function.",
 			"type": "bool",
 			"default": true
 		}
