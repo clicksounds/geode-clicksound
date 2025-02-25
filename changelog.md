@@ -1,4 +1,9 @@
 # Changelog
+## Version v2.0.14
+### Discord server boosters can now use custom click packs!
+* Boost the server to gain access to the pack installer!
+* You will keep the pack installer if you ever stop boosting!
+* Packs with up to 10 clicks and 10 releases can be installed!
 ## Version v2.0.13
 * You can now view the profiles of click pack authors in the Click Sounds Index.
 ## Version v2.0.12
