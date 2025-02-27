@@ -67,10 +67,11 @@ class CCIndexPackNode : public CCLayerColor {
 	std::function<void()> selectionobject;
 	CCMenu *DEVS;
 	std::string authorsListWhole = "";
+	std::string packDescription;
 	void OnDevelopers(auto sender) {
 		MDPopup::create(
 		    "Developers",
-		    "The Developers for the sound are " + authorsListWhole,
+		    "The authors of this pack are: " + authorsListWhole + packDescription,
 		    "OK", nullptr)
 		    ->show();
 	};
@@ -118,6 +119,14 @@ class CCIndexPackNode : public CCLayerColor {
 							}
 						}
 					}
+				}
+
+				if (jsonObject2.contains("description") && jsonObject2["description"].isString()) {
+    				std::string description = jsonObject2["description"].asString().unwrap();
+    				if (!description.empty()) {
+        				packDescription += "\n\nPack Description:\n";
+        				packDescription += description;
+    				}
 				}
 			}
 		}
