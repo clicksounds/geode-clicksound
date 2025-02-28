@@ -71,7 +71,7 @@ class CCIndexPackNode : public CCLayerColor {
 	void OnDevelopers(auto sender) {
 		MDPopup::create(
 		    "More Info",
-		    "The authors of this pack are: " + authorsListWhole + packDescription,
+		    "Author(s): " + authorsListWhole + packDescription,
 		    "OK", nullptr)
 		    ->show();
 	};
