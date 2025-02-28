@@ -184,7 +184,7 @@ protected:
         this->addChild(m_menufolder);
 
         m_selectionpopup = CCMenu::create();
-        auto btnspr = CCSprite::create("nobglogo.png"_spr);
+        auto btnspr = CCSprite::create("csindexlogo.png"_spr);
         btnspr->setScale(0.4);
         this->m_popup = CCMenuItemSpriteExtra::create(
             btnspr,
