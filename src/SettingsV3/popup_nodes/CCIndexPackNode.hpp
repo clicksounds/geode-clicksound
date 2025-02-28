@@ -70,7 +70,7 @@ class CCIndexPackNode : public CCLayerColor {
 	std::string packDescription;
 	void OnDevelopers(auto sender) {
 		MDPopup::create(
-		    "Developers",
+		    "More Info",
 		    "The authors of this pack are: " + authorsListWhole + packDescription,
 		    "OK", nullptr)
 		    ->show();

@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.0.15
+* Supported click packs now have descriptions
 ## Version v2.0.14
 ### Discord server boosters can now use custom click packs!
 * Boost the server to gain access to the pack installer!
