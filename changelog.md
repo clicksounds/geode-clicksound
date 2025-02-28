@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.0.16
+* New logo for the Click Sounds Index
 ## Version v2.0.15
 * Supported click packs now have descriptions
 ## Version v2.0.14

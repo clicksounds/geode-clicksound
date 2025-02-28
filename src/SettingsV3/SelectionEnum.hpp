@@ -185,7 +185,7 @@ protected:
 
         m_selectionpopup = CCMenu::create();
         auto btnspr = CCSprite::create("csindexlogo.png"_spr);
-        btnspr->setScale(0.4);
+        btnspr->setScale(0.55);
         this->m_popup = CCMenuItemSpriteExtra::create(
             btnspr,
             this,
