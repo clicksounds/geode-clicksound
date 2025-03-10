@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.0.17
+* Minor tweaks for CSPI
 ## Version v2.0.16
 * New logo for the Click Sounds Index
 ## Version v2.0.15

@@ -12,6 +12,7 @@
 #include <iostream>
 
 using namespace geode::prelude;
+extern void onsettingsUpdate();
 
 static struct ClicksoundSettingValue {
     std::string  m_currentMemeClick;
@@ -47,7 +48,9 @@ struct matjson::Serialize<ClicksoundSettingValue> {
     static Result<ClicksoundSettingValue> fromJson(matjson::Value const& v) {
         GEODE_UNWRAP_INTO(std::string x, v.asString());
         if (x == "") {
-           return Ok(ClicksoundSettingValue(1, "beat.default", " ", " ")); 
+            Loader::get()->queueInMainThread([=] {
+                return Ok(ClicksoundSettingValue(1, "beat.default", " ", " "));
+            });
         }
         auto value = matjson::parse(x).unwrapOrDefault();
             
@@ -59,9 +62,6 @@ struct matjson::Serialize<ClicksoundSettingValue> {
         ));
     }
 };
-
-
-
 
 class ClicksoundSetterV3 : public SettingBaseValueV3<ClicksoundSettingValue> {
 public:
@@ -135,8 +135,6 @@ protected:
         popup->m_noElasticity = false;
         popup->show();
     };
-
-    extern void onsettingsUpdate();
     
     bool init(std::shared_ptr<ClicksoundSetterV3> setting, float width) {
         if (!SettingValueNodeV3::init(setting, width))
@@ -195,7 +193,8 @@ protected:
             menu_selector(ClicksoundSetterNodeV3::Popup)
         );
     
-        auto reloadSpr = ButtonSprite::create("Reload", 40.f, true, SpritePicker::get("bigFont.fnt", m_ThemeGeode), SpritePicker::get("GJ_button_01.png", m_ThemeGeode), 20.f, 1.0f);
+        auto reloadSpr = CCSprite::create("csindexreloadlogo.png"_spr);
+        reloadSpr->setScale(0.5);
         auto reloadBtn = CCMenuItemSpriteExtra::create(
             reloadSpr,
             this,
@@ -204,7 +203,9 @@ protected:
     
         m_selectionpopup->addChild(this->m_popup);
         if (Loader::get()->isModLoaded("beat.pack-installer")) {m_selectionpopup->addChild(reloadBtn);}
-        m_selectionpopup->setLayout(RowLayout::create());
+        auto m_selectionpopuplayout = RowLayout::create();
+        m_selectionpopuplayout->setGap(15.f);
+        m_selectionpopup->setLayout(m_selectionpopuplayout);
         m_selectionpopup->setPosition(ccp(this->getContentSize().width / 2, this->getContentSize().height / 2));
         m_selectionpopup->setAnchorPoint({0.5, 0.5});
         this->addChild(m_selectionpopup);
@@ -243,6 +244,7 @@ protected:
         ClickJson->loadData([=]() {
             onsettingsUpdate();
         });
+        Notification::create("CS: Reload successful!", CCSprite::createWithSpriteFrameName("GJ_completesIcon_001.png"))->show();
     }
 
     std::string GetJsonName(CategoryData Infomation) {
