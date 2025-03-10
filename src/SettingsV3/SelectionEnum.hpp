@@ -2,6 +2,7 @@
 #include <Geode/loader/SettingV3.hpp>
 #include <Geode/loader/Mod.hpp>
 #include <Geode/ui/General.hpp>
+#include <Geode/utils/web.hpp>
 #include "popup.hpp"
 #include "../ButtonSprites/Sprite.hpp"
 #include "../jsonReader/Json.hpp"
@@ -142,14 +143,14 @@ protected:
         queueInMainThread([=] {
             m_ThemeGeode = parentcheck(this->getNameMenu());
             if (m_ThemeGeode) {
-            for (auto& value : m_togglerItems) {
-                auto toggle = value.first;
-                toggle->m_onButton->setSprite(ButtonSprite::create(value.second, 40.f, true, SpritePicker::get("bigFont.fnt",m_ThemeGeode), SpritePicker::get("GJ_button_01.png",m_ThemeGeode), 20.f, 1.0f));
-                toggle->m_offButton->setSprite(ButtonSprite::create(value.second, 40.f, true, SpritePicker::get("bigFont.fnt",m_ThemeGeode), SpritePicker::get("GJ_button_04.png",m_ThemeGeode), 20.f, 1.0f));
-            }
+                for (auto& value : m_togglerItems) {
+                    auto toggle = value.first;
+                    toggle->m_onButton->setSprite(ButtonSprite::create(value.second, 40.f, true, SpritePicker::get("bigFont.fnt", m_ThemeGeode), SpritePicker::get("GJ_button_01.png", m_ThemeGeode), 20.f, 1.0f));
+                    toggle->m_offButton->setSprite(ButtonSprite::create(value.second, 40.f, true, SpritePicker::get("bigFont.fnt", m_ThemeGeode), SpritePicker::get("GJ_button_04.png", m_ThemeGeode), 20.f, 1.0f));
+                }
             }
         });
-
+    
         cs = setting->clicksound;
         this->setContentSize({ width, 70.f });
         CCSprite* folderSpr = CCSprite::createWithSpriteFrameName("gj_folderBtn_001.png");
@@ -160,8 +161,8 @@ protected:
             menu_selector(ClicksoundSetterNodeV3::onFolder)
         );
         m_nameLabel = CCLabelBMFont::create("", "bigFont.fnt");
-        this->removeChild(this->getNameMenu(),false);
-         this->removeChild(this->getButtonMenu(),false);
+        this->removeChild(this->getNameMenu(), false);
+        this->removeChild(this->getButtonMenu(), false);
         this->getNameMenu()->setLayout(
             RowLayout::create()
             ->setAxisAlignment(AxisAlignment::Start)
@@ -171,9 +172,9 @@ protected:
         
         this->addChildAtPosition(this->getNameMenu(), Anchor::TopLeft, ccp(10, 0), ccp(0, 1.0f));
         this->addChildAtPosition(this->getButtonMenu(), Anchor::TopRight, ccp(-10, 0), ccp(1.0f, 1.0f));
-        this->getStatusLabel()->setPosition(this->getNameMenu()->getPosition() - ccp(0,this->getNameMenu()->getContentHeight() + 2));
+        this->getStatusLabel()->setPosition(this->getNameMenu()->getPosition() - ccp(0, this->getNameMenu()->getContentHeight() + 2));
         this->getStatusLabel()->setScale(0.175);
-        this->getStatusLabel()->setAnchorPoint({0,1});
+        this->getStatusLabel()->setAnchorPoint({0, 1});
         this->getButtonMenu()->setScale(1.2);
         this->getNameMenu()->setScale(1.2);
         m_menufolder = CCMenu::create();
@@ -182,7 +183,7 @@ protected:
         m_menufolder->setLayout(RowLayout::create());
         m_menufolder->setPosition(ccp(this->getContentSize().width / 2, this->getContentSize().height / 2));
         this->addChild(m_menufolder);
-
+    
         m_selectionpopup = CCMenu::create();
         auto btnspr = CCSprite::create("csindexlogo.png"_spr);
         btnspr->setScale(0.5);
@@ -191,25 +192,33 @@ protected:
             this,
             menu_selector(ClicksoundSetterNodeV3::Popup)
         );
+    
+        auto reloadSpr = ButtonSprite::create("Reload", 40.f, true, SpritePicker::get("bigFont.fnt", m_ThemeGeode), SpritePicker::get("GJ_button_01.png", m_ThemeGeode), 20.f, 1.0f);
+        auto reloadBtn = CCMenuItemSpriteExtra::create(
+            reloadSpr,
+            this,
+            menu_selector(ClicksoundSetterNodeV3::onReload)
+        );
+    
         m_selectionpopup->addChild(this->m_popup);
+        m_selectionpopup->addChild(reloadBtn);
         m_selectionpopup->setLayout(RowLayout::create());
         m_selectionpopup->setPosition(ccp(this->getContentSize().width / 2, this->getContentSize().height / 2));
-        m_selectionpopup->setAnchorPoint({0.5,0.5});
+        m_selectionpopup->setAnchorPoint({0.5, 0.5});
         this->addChild(m_selectionpopup);
-
-        m_nameLabel->setPosition(m_menufolder->getPosition() - ccp(0,m_menufolder->getContentSize().height));
+    
+        m_nameLabel->setPosition(m_menufolder->getPosition() - ccp(0, m_menufolder->getContentSize().height));
         m_nameLabel->setScale(0.5);
-        m_nameLabel->setAnchorPoint({0.5,0});
+        m_nameLabel->setAnchorPoint({0.5, 0});
         this->addChild(m_nameLabel);
-
-        
+    
         int count = 0;
         for (auto value : {
             std::make_pair(0, "Meme"),
             std::make_pair(1, "Useful"),
             std::make_pair(2, "Custom")
         }) {
-            count+=40;
+            count += 40;
             auto offSpr = ButtonSprite::create(value.second, 40.f, true, "bigFont.fnt", "GJ_button_04.png", 20.f, 1.0f);
             offSpr->setOpacity(90);
             auto onSpr = ButtonSprite::create(value.second, 40.f, true, "bigFont.fnt", "GJ_button_01.png", 20.f, 1.0f);
@@ -227,6 +236,13 @@ protected:
         this->updateState(nullptr);
         return true;
     }
+    
+    void onReload(CCObject* sender) {
+        ClickJson->loadData([=]() {
+            onsettingsUpdate();
+        });
+    }
+
     std::string GetJsonName(CategoryData Infomation) {
         if (!Infomation.jsonpath.empty() && std::filesystem::exists(Infomation.jsonpath)) {
             std::filesystem::path fs = std::filesystem::path(Infomation.jsonpath);
