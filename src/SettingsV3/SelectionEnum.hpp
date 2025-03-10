@@ -201,7 +201,7 @@ protected:
         );
     
         m_selectionpopup->addChild(this->m_popup);
-        m_selectionpopup->addChild(reloadBtn);
+        if (Loader::get()->isModLoaded("beat.pack-installer")) {m_selectionpopup->addChild(reloadBtn);}
         m_selectionpopup->setLayout(RowLayout::create());
         m_selectionpopup->setPosition(ccp(this->getContentSize().width / 2, this->getContentSize().height / 2));
         m_selectionpopup->setAnchorPoint({0.5, 0.5});
