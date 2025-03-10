@@ -135,6 +135,8 @@ protected:
         popup->m_noElasticity = false;
         popup->show();
     };
+
+    extern void onsettingsUpdate();
     
     bool init(std::shared_ptr<ClicksoundSetterV3> setting, float width) {
         if (!SettingValueNodeV3::init(setting, width))
