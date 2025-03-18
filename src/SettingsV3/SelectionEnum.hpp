@@ -139,6 +139,14 @@ protected:
     bool init(std::shared_ptr<ClicksoundSetterV3> setting, float width) {
         if (!SettingValueNodeV3::init(setting, width))
             return false;
+
+        // reload index for pack installer users
+        if (std::filesystem::exists(dirs::getTempDir() / "CSINDEXRELOAD") && Loader::get()->isModLoaded("beat.pack-installer")) {
+            ClickJson->loadData([=]() {
+                onsettingsUpdate();
+            });
+            std::filesystem::remove(dirs::getTempDir() / "CSINDEXRELOAD");
+        }
         
         queueInMainThread([=] {
             m_ThemeGeode = parentcheck(this->getNameMenu());
@@ -193,16 +201,16 @@ protected:
             menu_selector(ClicksoundSetterNodeV3::Popup)
         );
     
-        auto reloadSpr = CCSprite::create("csindexreloadlogo.png"_spr);
+        /*auto reloadSpr = CCSprite::create("csindexreloadlogo.png"_spr);
         reloadSpr->setScale(0.5);
         auto reloadBtn = CCMenuItemSpriteExtra::create(
             reloadSpr,
             this,
             menu_selector(ClicksoundSetterNodeV3::onReload)
-        );
+        );*/
     
         m_selectionpopup->addChild(this->m_popup);
-        if (Loader::get()->isModLoaded("beat.pack-installer")) {m_selectionpopup->addChild(reloadBtn);}
+        // if (Loader::get()->isModLoaded("beat.pack-installer")) {m_selectionpopup->addChild(reloadBtn);}
         auto m_selectionpopuplayout = RowLayout::create();
         m_selectionpopuplayout->setGap(15.f);
         m_selectionpopup->setLayout(m_selectionpopuplayout);
@@ -240,12 +248,12 @@ protected:
         return true;
     }
     
-    void onReload(CCObject* sender) {
+    /*void onReload(CCObject* sender) {
         ClickJson->loadData([=]() {
             onsettingsUpdate();
         });
         Notification::create("CS: Reload successful!", CCSprite::createWithSpriteFrameName("GJ_completesIcon_001.png"))->show();
-    }
+    }*/
 
     std::string GetJsonName(CategoryData Infomation) {
         if (!Infomation.jsonpath.empty() && std::filesystem::exists(Infomation.jsonpath)) {

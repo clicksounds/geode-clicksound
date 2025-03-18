@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.0.18
+* CSPI no longer needs manual reloading
 ## Version v2.0.17
 * Minor tweaks for CSPI
 ## Version v2.0.16
