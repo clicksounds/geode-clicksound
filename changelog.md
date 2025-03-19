@@ -1,6 +1,4 @@
 # Changelog
-## Version v2.0.19
-* Click Sounds Index is no longer possible to open while it is being downloaded
 ## Version v2.0.18
 * CSPI no longer needs manual reloading
 ## Version v2.0.17
