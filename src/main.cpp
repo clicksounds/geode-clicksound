@@ -240,7 +240,6 @@ class $modify(MenuLayer) {
 						if (std::filesystem::exists(Mod::get()->getConfigDir() / "Clicks.zip")) {
 							std::filesystem::remove(Mod::get()->getConfigDir() / "Clicks.zip");
 						}
-
                     });
 
                     ClickJson->loadData([=](){

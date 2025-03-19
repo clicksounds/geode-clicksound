@@ -4,7 +4,6 @@
 #include <Geode/ui/General.hpp>
 #include <Geode/utils/web.hpp>
 #include "popup.hpp"
-#include "../StaticClasses.hpp"
 #include "../ButtonSprites/Sprite.hpp"
 #include "../jsonReader/Json.hpp"
 #include <cctype>
@@ -140,11 +139,6 @@ protected:
     bool init(std::shared_ptr<ClicksoundSetterV3> setting, float width) {
         if (!SettingValueNodeV3::init(setting, width))
             return false;
-
-        if (!indexzip.Finished || std::filesystem::exists(dirs::getTempDir() / "CSINDEXDOWNLOADING")) {
-            FLAlertLayer::create("Click Sounds", "Please wait for the Click Sounds Index to finish downloading.", "OK")->show();
-            return false;
-        }
 
         // reload index for pack installer users
         if (std::filesystem::exists(dirs::getTempDir() / "CSINDEXRELOAD") && Loader::get()->isModLoaded("beat.pack-installer")) {
