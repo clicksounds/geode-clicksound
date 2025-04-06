@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.0.19
+* iOS support up to iOS 18.4 has been added for both unjailbroken and jailbroken iDevices
 ## Version v2.0.18
 * CSPI no longer needs manual reloading
 ## Version v2.0.17
