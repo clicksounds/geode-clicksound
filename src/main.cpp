@@ -134,7 +134,6 @@ class $modify(PlayerObject) {
 	bool pushButton(PlayerButton p0) {
 		bool ret = PlayerObject::pushButton(p0);
 
-		log::debug("CS PUSHED BUTTON");
 		// check if you can and or check if it is correct
 		if (!integrityCheck(this, p0)) {
 			return ret;
