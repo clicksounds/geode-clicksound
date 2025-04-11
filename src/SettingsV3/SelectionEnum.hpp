@@ -1,4 +1,5 @@
 #pragma once
+#include <Geode/Geode.hpp>
 #include <Geode/loader/SettingV3.hpp>
 #include <Geode/loader/Mod.hpp>
 #include <Geode/ui/General.hpp>
@@ -201,16 +202,7 @@ protected:
             menu_selector(ClicksoundSetterNodeV3::Popup)
         );
     
-        /*auto reloadSpr = CCSprite::create("csindexreloadlogo.png"_spr);
-        reloadSpr->setScale(0.5);
-        auto reloadBtn = CCMenuItemSpriteExtra::create(
-            reloadSpr,
-            this,
-            menu_selector(ClicksoundSetterNodeV3::onReload)
-        );*/
-    
         m_selectionpopup->addChild(this->m_popup);
-        // if (Loader::get()->isModLoaded("beat.pack-installer")) {m_selectionpopup->addChild(reloadBtn);}
         auto m_selectionpopuplayout = RowLayout::create();
         m_selectionpopuplayout->setGap(15.f);
         m_selectionpopup->setLayout(m_selectionpopuplayout);

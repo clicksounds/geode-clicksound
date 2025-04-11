@@ -103,8 +103,10 @@ protected:
         auto NodeScroller = scroll->m_contentLayer;
         m_settings = setting;
         int basePosY = 180;
-
+    
         auto json = (meme) ? ClickJson->memeData : ClickJson->usefulData;
+        bool hasPacks = false;
+    
         for (const auto& [filename, data] : json) {
             if (data.clicks.empty() && clicksound) {
                 continue;
@@ -112,22 +114,33 @@ protected:
             if (data.releases.empty() && !clicksound) {
                 continue;
             }
-
+    
+            hasPacks = true;
             auto Object = Item(data, filename, clicksound);
             Object->setPositionY(basePosY);
             NodeScroller->addChild(Object);
         }
+    
+        if (!hasPacks) {
+            std::string message = "No click packs were found. Please\n";
+            if (Loader::get()->isModLoaded("beat.pack-installer")) {
+                message += "redownload the index or install\na custom pack from the icon kit.";
+            } else {
+                message += "restart the game to redownload the index.";
+            }
+            auto noPacksLabel = CCLabelBMFont::create(message.c_str(), "bigFont.fnt");
+            noPacksLabel->setAnchorPoint(ccp(0.5f, 0.5f));
+            noPacksLabel->setScale(0.5f);
+            noPacksLabel->setAlignment(kCCTextAlignmentCenter);
+            noPacksLabel->setPosition(ccp(scroll->getContentSize().width / 2, scroll->getContentSize().height / 1.75));
+            NodeScroller->addChild(noPacksLabel);
+        }
+    
         m_minsize = scroll->getContentSize().height;
         float height = std::max<float>(m_minsize, 40 * NodeScroller->getChildrenCount());
         NodeScroller->setContentSize(ccp(NodeScroller->getContentSize().width, height));
-        CCArrayExt<CCNode*> objects = NodeScroller->getChildren();
-        int i = -1;
-        for (auto* obj : objects) {
-            i++;
-            obj->setPositionY(height - (40 * i));
-        }
         scroll->moveToTop();
-
+    
         return true;
     }
 

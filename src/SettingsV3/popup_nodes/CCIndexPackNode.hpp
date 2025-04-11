@@ -92,41 +92,33 @@ class CCIndexPackNode : public CCLayerColor {
 				std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
 				file.close();
 				matjson::Value jsonObject2 = matjson::parse(content).unwrapOrDefault();
-
+	
 				if (jsonObject2.contains("authors") && jsonObject2["authors"].isArray()) {
-
 					bool add_sill = false;
 					for (const auto &author : jsonObject2["authors"].asArray().unwrap()) {
 						if (author.contains("name") && author["name"].isString()) {
 							std::string name = author["name"].asString().unwrap();
-							if (!name.empty() && add_sill) {
-								authorsListWhole += ", ";
-							} else {
-								if (!name.empty()) {
+							if (!name.empty()) {
+								if (add_sill) {
+									authorsListWhole += ", ";
+								} else {
 									add_sill = true;
 								}
-							}
-							if (author.contains("gdAccountID") && author["gdAccountID"].isNumber()) {
-								authorsListWhole += "[";
-								authorsListWhole += author["name"].asString().unwrap();
-								authorsListWhole += "]";
-								authorsListWhole += "(";
-								authorsListWhole += "user:";
-								authorsListWhole += std::to_string(author["gdAccountID"].asInt().unwrap());
-								authorsListWhole += ")";
-							} else {
-								authorsListWhole += name;
+								if (author.contains("gdAccountID") && author["gdAccountID"].isNumber()) {
+									authorsListWhole += "[" + name + "](user:" + std::to_string(author["gdAccountID"].asInt().unwrap()) + ")";
+								} else {
+									authorsListWhole += name;
+								}
 							}
 						}
 					}
 				}
-
+	
 				if (jsonObject2.contains("description") && jsonObject2["description"].isString()) {
-    				std::string description = jsonObject2["description"].asString().unwrap();
-    				if (!description.empty()) {
-        				packDescription += "\n\nPack Description:\n";
-        				packDescription += description;
-    				}
+					std::string description = jsonObject2["description"].asString().unwrap();
+					if (!description.empty()) {
+						packDescription += "\n\nPack Description:\n" + description;
+					}
 				}
 			}
 		}
