@@ -128,10 +128,25 @@ protected:
             FLAlertLayer::create("Click Sounds Index", "Unable to load while downloading. Please wait until the download completes, then try again.", "Close")->show();
             return;
         } else if (Mod::get()->getSavedValue<bool>("CSINDEXRELOAD")) {
+            Mod::get()->setSavedValue<bool>("CSINDEXRELOAD", false);
             ClickJson->loadData([=]() {
                 onsettingsUpdate();
+                // this is scuffed as shit but without it, the selection menu needs to be opened twice to reload
+                queueInMainThread([=]() {
+                    auto popup = Select::create(static_cast<int>(this->getValue().m_tab) == 0, cs, [=](std::string modid) {
+                        ClicksoundSettingValue Changes = this->getValue();
+                        if (static_cast<int>(this->getValue().m_tab) == 0) {
+                            Changes.m_currentMemeClick = modid;
+                        } else {
+                            Changes.m_currentClick = modid;
+                        }
+                        this->setValue(Changes, nullptr);
+                    }, m_ThemeGeode);
+                    popup->m_noElasticity = false;
+                    popup->show();
+                });
             });
-            Mod::get()->setSavedValue<bool>("CSINDEXRELOAD", false);
+            return;
         }
         auto popup = Select::create(static_cast<int>(this->getValue().m_tab) == 0,cs,[=](std::string modid) {
                 ClicksoundSettingValue Changes = this->getValue();
