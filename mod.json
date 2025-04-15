@@ -49,6 +49,10 @@
 		"beat.click_sounds_lite": {
 			"importance": "conflicting",
 			"version": ">=v1.0.0"
+		},
+		"beat.pack-installer": {
+			"importance": "breaking",
+			"version": "<v2.1.2"
 		}
 	},
 	"settings": {
