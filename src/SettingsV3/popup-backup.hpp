@@ -126,7 +126,7 @@ protected:
             if (Loader::get()->isModLoaded("beat.pack-installer")) {
                 message += "redownload the index or install\na custom pack from the icon kit.";
             } else {
-                message += "restart the game while connected\nto the internet to redownload the index.";
+                message += "restart the game to redownload the index.";
             }
             auto noPacksLabel = CCLabelBMFont::create(message.c_str(), "bigFont.fnt");
             noPacksLabel->setAnchorPoint(ccp(0.5f, 0.5f));
@@ -139,13 +139,11 @@ protected:
         m_minsize = scroll->getContentSize().height;
         float height = std::max<float>(m_minsize, 40 * NodeScroller->getChildrenCount());
         NodeScroller->setContentSize(ccp(NodeScroller->getContentSize().width, height));
-        if (hasPacks) {
-            CCArrayExt<CCNode*> objects = NodeScroller->getChildren();
-            int i = -1;
-            for (auto* obj : objects) {
-                i++;
-                obj->setPositionY(height - (40 * i));
-            }
+        CCArrayExt<CCNode*> objects = NodeScroller->getChildren();
+        int i = -1;
+        for (auto* obj : objects) {
+            i++;
+            obj->setPositionY(height - (40 * i));
         }
         scroll->moveToTop();
     
