@@ -139,6 +139,12 @@ protected:
         m_minsize = scroll->getContentSize().height;
         float height = std::max<float>(m_minsize, 40 * NodeScroller->getChildrenCount());
         NodeScroller->setContentSize(ccp(NodeScroller->getContentSize().width, height));
+        CCArrayExt<CCNode*> objects = NodeScroller->getChildren();
+        int i = -1;
+        for (auto* obj : objects) {
+            i++;
+            obj->setPositionY(height - (40 * i));
+        }
         scroll->moveToTop();
     
         return true;

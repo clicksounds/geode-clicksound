@@ -124,6 +124,15 @@ protected:
     CCLabelBMFont* m_nameLabel;
     bool cs = false;
     void Popup(CCObject*) {
+        if (Mod::get()->getSavedValue<bool>("CSINDEXDOWNLOADING")) {
+            FLAlertLayer::create("Click Sounds Index", "Unable to load while downloading. Please wait until the download completes, then try again.", "Close")->show();
+            return;
+        } else if (Mod::get()->getSavedValue<bool>("CSINDEXRELOAD")) {
+            ClickJson->loadData([=]() {
+                onsettingsUpdate();
+            });
+            Mod::get()->setSavedValue<bool>("CSINDEXRELOAD", false);
+        }
         auto popup = Select::create(static_cast<int>(this->getValue().m_tab) == 0,cs,[=](std::string modid) {
                 ClicksoundSettingValue Changes = this->getValue();
                 if (static_cast<int>(this->getValue().m_tab) == 0) {
@@ -140,14 +149,6 @@ protected:
     bool init(std::shared_ptr<ClicksoundSetterV3> setting, float width) {
         if (!SettingValueNodeV3::init(setting, width))
             return false;
-
-        // reload index for pack installer users
-        if (std::filesystem::exists(dirs::getTempDir() / "CSINDEXRELOAD") && Loader::get()->isModLoaded("beat.pack-installer")) {
-            ClickJson->loadData([=]() {
-                onsettingsUpdate();
-            });
-            std::filesystem::remove(dirs::getTempDir() / "CSINDEXRELOAD");
-        }
         
         queueInMainThread([=] {
             m_ThemeGeode = parentcheck(this->getNameMenu());
@@ -239,13 +240,6 @@ protected:
         this->updateState(nullptr);
         return true;
     }
-    
-    /*void onReload(CCObject* sender) {
-        ClickJson->loadData([=]() {
-            onsettingsUpdate();
-        });
-        Notification::create("CS: Reload successful!", CCSprite::createWithSpriteFrameName("GJ_completesIcon_001.png"))->show();
-    }*/
 
     std::string GetJsonName(CategoryData Infomation) {
         if (!Infomation.jsonpath.empty() && std::filesystem::exists(Infomation.jsonpath)) {

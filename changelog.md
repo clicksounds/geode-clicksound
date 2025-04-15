@@ -1,7 +1,8 @@
 # Changelog
 ## Version v2.0.20
+* Click Sounds Index will now display a message instead of crashing if opened mid-download
 * Added a message for when no click packs are installed
-* Removed log spam, sorry about that, other developers.
+* Removed log spam, sorry about that, other developers
 ## Version v2.0.19
 * iOS support up to iOS 18.4 has been added for both unjailbroken and jailbroken iDevices
 ## Version v2.0.18
