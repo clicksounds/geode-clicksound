@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.0.21
+* Fixed a bug where the index refuses to open despite being finished downloading
 ## Version v2.0.20
 * Click Sounds Index will now display a message instead of crashing if opened mid-download
 * Added a message for when no click packs are installed
