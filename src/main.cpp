@@ -286,6 +286,7 @@ class $modify(MenuLayer) {
 // on the mod loading
 $on_mod(Loaded) {
 	// Does the release-sound path setting change?
+	Mod::get()->setSavedValue<bool>("CSINDEXDOWNLOADING", false);
 	listenForSettingChanges("selection-release", [](ClicksoundSettingValue releaseSoundFile) {
 		onsettingsUpdate();
 	});
