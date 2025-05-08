@@ -131,7 +131,7 @@ protected:
             Mod::get()->setSavedValue<bool>("CSINDEXRELOAD", false);
             ClickJson->loadData([=]() {
                 onsettingsUpdate();
-                // this is scuffed as shit but without it, the selection menu needs to be opened twice to reload
+                // this is scuffed as hell but without it, the selection menu needs to be opened twice to reload
                 queueInMainThread([=]() {
                     auto popup = Select::create(static_cast<int>(this->getValue().m_tab) == 0, cs, [=](std::string modid) {
                         ClicksoundSettingValue Changes = this->getValue();
