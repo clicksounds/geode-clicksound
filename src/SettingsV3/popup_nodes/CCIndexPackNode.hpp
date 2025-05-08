@@ -72,7 +72,8 @@ class CCIndexPackNode : public CCLayerColor {
 		MDPopup::create(
 		    "More Info",
 		    "Author(s): " + authorsListWhole + packDescription,
-		    "OK", nullptr)
+		    "OK", nullptr,
+			[](bool) {})
 		    ->show();
 	};
 	std::string getName() {
