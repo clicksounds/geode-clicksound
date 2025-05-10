@@ -1,4 +1,7 @@
 # Changelog
+## Version v2.0.22
+* Added badges to the profiles of CSPI owners
+* Removed Cuuh's badge
 ## Version v2.0.21
 * Fixed a bug where the index refuses to open despite being finished downloading
 ## Version v2.0.20

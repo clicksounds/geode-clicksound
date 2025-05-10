@@ -1,5 +1,6 @@
 #pragma once
 #include <Geode/Geode.hpp>
+#include <Geode/modify/GJGarageLayer.hpp>
 #include <Geode/loader/SettingV3.hpp>
 #include <Geode/loader/Mod.hpp>
 #include <Geode/ui/General.hpp>
@@ -217,8 +218,17 @@ protected:
             this,
             menu_selector(ClicksoundSetterNodeV3::Popup)
         );
+
+        /*auto cspiSpr = CCSprite::create("cspiicon.png"_spr);
+        cspiSpr->setScale(0.75);
+        auto cspiBtn = CCMenuItemSpriteExtra::create(
+            cspiSpr,
+            this,
+            menu_selector(ClicksoundSetterNodeV3::onCspi)
+        );*/
     
         m_selectionpopup->addChild(this->m_popup);
+        // m_selectionpopup->addChild(cspiBtn);
         auto m_selectionpopuplayout = RowLayout::create();
         m_selectionpopuplayout->setGap(15.f);
         m_selectionpopup->setLayout(m_selectionpopuplayout);
@@ -255,6 +265,15 @@ protected:
         this->updateState(nullptr);
         return true;
     }
+
+    /*void onCspi(CCObject* sender) {
+        if (Loader::get()->getInstalledMod("beat.pack-installer")) {
+            CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5f, GJGarageLayer::scene()));
+            FMODAudioEngine::sharedEngine()->fadeInBackgroundMusic();
+        } else {
+            log::debug("no cspi lol");
+        }
+    };*/
 
     std::string GetJsonName(CategoryData Infomation) {
         if (!Infomation.jsonpath.empty() && std::filesystem::exists(Infomation.jsonpath)) {

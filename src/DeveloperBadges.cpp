@@ -10,7 +10,8 @@ namespace Contributors  {
 		Developer = 2,
 		Contributors = 3,
 		Helper = 4,
-		IndexModerator = 5
+		IndexModerator = 5,
+		CSPIOwner = 6
 	};
 	inline std::set<std::pair<int,Messages>> List = { 
 		{13873867,Messages::Owner}, // BeatTaco
@@ -21,7 +22,20 @@ namespace Contributors  {
 		{1941705,Messages::Contributors}, // RayDeeUx
 		{17389494,Messages::Helper}, // AkuLunical
 		{7669473,Messages::IndexModerator}, // Jaid
-		{26541718,Messages::IndexModerator} // Cuuhie
+		{27823067,Messages::IndexModerator}, // Andarian
+		// CSPI Owners, unknown names
+		{31335670,Messages::CSPIOwner},
+		{29986323,Messages::CSPIOwner},
+		{20341640,Messages::CSPIOwner},
+		{27823067,Messages::CSPIOwner},
+		{24588393,Messages::CSPIOwner},
+		{19604462,Messages::CSPIOwner},
+		{28277352,Messages::CSPIOwner},
+		{23476862,Messages::CSPIOwner},
+		{29372710,Messages::CSPIOwner},
+		{31726624,Messages::CSPIOwner},
+		{32718773,Messages::CSPIOwner},
+		{5899425,Messages::CSPIOwner},
 	}; 
 };
 
@@ -66,6 +80,13 @@ class buttonfunctionthing : public CCLayer {
 		    "OK")
 		    ->show();
 	}
+	void CSPIOwner(CCObject *sender) {
+		FLAlertLayer::create(
+		    "About",
+		    "This is a <cp>Click Sounds Pack Installer early owner</c>. They supported CSPI early on by boosting the discord server. ^w^",
+		    "OK")
+		    ->show();
+	}
 };
 
 class $modify(ProfilePage) {
@@ -105,6 +126,9 @@ class $modify(ProfilePage) {
 				break;
 			case Contributors::IndexModerator:
 				btn->m_pfnSelector = menu_selector(buttonfunctionthing::IndexModerator);
+				break;
+			case Contributors::CSPIOwner:
+				btn->m_pfnSelector = menu_selector(buttonfunctionthing::CSPIOwner);
 				break;
 			}
 
