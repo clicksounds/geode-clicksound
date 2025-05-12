@@ -55,7 +55,7 @@ void onsettingsUpdate() {
 	}
 }
 
-// the check to see if you should play the sound or not
+// the check to see if you should play the sound or not 
 bool integrityCheck(PlayerObject *object, PlayerButton Pressed) {
 	// play sounds when "only play on jump" settings is enabled and the player input is a jump, left movement, or right movement.
 	if (Mod::get()->getSettingValue<bool>("only-on-jump")) {
