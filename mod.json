@@ -6,7 +6,7 @@
         "mac": "2.2074",
         "ios": "2.2074"
     	},
-	"version": "v2.0.22",
+	"version": "v2.0.23",
 	"id": "beat.click-sound",
 	"name": "Click Sounds",
 	"developers": [
@@ -157,11 +157,11 @@
 			"type": "title",
 			"description": "Only touch these if you know what you're doing."
 		},
-		"cspi": {
-			"name": "CSPI Invalidation",
-			"description": "Required for the CSPI or CSIM mod to function.",
+		"downloadOnStartup": {
+			"name": "Download index on startup",
+			"description": "When enabled, the Click Sounds Index will automatically download on startup. This is very data heavy and not recommended for those on cellular data.",
 			"type": "bool",
-			"default": true
+			"default": false
 		}
 	}
 }

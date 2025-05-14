@@ -189,84 +189,85 @@ class $modify(PlayerObject) {
 	}
 };
 
-EventListener<web::WebTask> m_listener;
+void SendRequestAPI(bool forceDownload = false) {
+	if (forceDownload) {
+		// skip all other checks and start the download
+	} else if (!Mod::get()->getSettingValue<bool>("downloadOnStartup")) {
+		indexzip.Failed = true;
+		indexzip.Finished = true;
+		return;
+	}
 
-class $modify(MenuLayer) {
-	void SendRequestAPI() {
-		if (Mod::get()->getSavedValue<bool>("offlineMode") || 
-    		(Mod::get()->getSettingValue<bool>("cspi") && Loader::get()->isModLoaded("beat.pack-installer"))) {
+	Loader::get()->queueInMainThread([=] {
+		Notification::create("CS: Downloading index...", CCSprite::createWithSpriteFrameName("GJ_timeIcon_001.png"))->show();
+		Mod::get()->setSavedValue<bool>("CSINDEXDOWNLOADING", true);
+	});
+	web::WebRequest().get("https://github.com/clicksounds/clicks/archive/refs/heads/main.zip").listen([=](auto res) {
+		if (res->string().unwrapOr("failed") == "failed") {
+			Loader::get()->queueInMainThread([=] {
+				Notification::create("CS: Download failed.", CCSprite::createWithSpriteFrameName("GJ_deleteIcon_001.png"))->show();
+			});
 			indexzip.Failed = true;
 			indexzip.Finished = true;
+			Mod::get()->setSavedValue<bool>("CSINDEXDOWNLOADING", false);
 			return;
 		}
 
-		Loader::get()->queueInMainThread([=] {
-			Notification::create("CS: Downloading index...", CCSprite::createWithSpriteFrameName("GJ_timeIcon_001.png"))->show();
-			Mod::get()->setSavedValue<bool>("CSINDEXDOWNLOADING", true);
-		});
-		web::WebRequest().get("https://github.com/clicksounds/clicks/archive/refs/heads/main.zip").listen([=](auto res) {
-			if (res->string().unwrapOr("failed") == "failed") {
-                Loader::get()->queueInMainThread([=] {
-                    Notification::create("CS: Download failed.", CCSprite::createWithSpriteFrameName("GJ_deleteIcon_001.png"))->show();
-                });
-                indexzip.Failed = true;
-                indexzip.Finished = true;
-				Mod::get()->setSavedValue<bool>("CSINDEXDOWNLOADING", false);
-                return;
-            }
-
-            if (res->into(Mod::get()->getConfigDir() / "Clicks.zip")) {
-                auto indexzipPtr = std::make_shared<decltype(indexzip)>(indexzip);
-                std::thread([=] {
-                    auto unzip = file::Unzip::create(Mod::get()->getConfigDir() / "Clicks.zip");
-                    if (!unzip) {
-                        indexzipPtr->Failed = true;
-                        indexzipPtr->Finished = true;
-						Mod::get()->setSavedValue<bool>("CSINDEXDOWNLOADING", false);
-                        return;
-                    }
-
-                    std::filesystem::remove_all(Mod::get()->getConfigDir() / "Clicks");
-                    (void) unzip.unwrap().extractAllTo(Mod::get()->getConfigDir() / "Clicks");
-                    indexzipPtr->Finished = true;
-
-                    Loader::get()->queueInMainThread([=] {
-                        Notification::create("CS: Download successful!", CCSprite::createWithSpriteFrameName("GJ_completesIcon_001.png"))->show();
-						
-						// delete unnecessary files to save storage space
-						std::filesystem::path clicksDir = Mod::get()->getConfigDir() / "Clicks" / "clicks-main";
-						for (const auto& entry : std::filesystem::directory_iterator(clicksDir)) {
-							if (entry.path().filename() != "Meme" && entry.path().filename() != "Useful") {
-								std::filesystem::remove_all(entry.path());
-							}
-						}
-						if (std::filesystem::exists(Mod::get()->getConfigDir() / "Clicks.zip")) {
-							std::filesystem::remove(Mod::get()->getConfigDir() / "Clicks.zip");
-						}
-                    });
-
+		if (res->into(Mod::get()->getConfigDir() / "Clicks.zip")) {
+			auto indexzipPtr = std::make_shared<decltype(indexzip)>(indexzip);
+			std::thread([=] {
+				auto unzip = file::Unzip::create(Mod::get()->getConfigDir() / "Clicks.zip");
+				if (!unzip) {
+					indexzipPtr->Failed = true;
+					indexzipPtr->Finished = true;
 					Mod::get()->setSavedValue<bool>("CSINDEXDOWNLOADING", false);
+					return;
+				}
 
-                    ClickJson->loadData([=](){
-                        onsettingsUpdate();
-                    }); 
-                }).detach();
-            } else {
-                Loader::get()->queueInMainThread([=] {
-                    Notification::create("CS: Download failed.", CCSprite::createWithSpriteFrameName("GJ_deleteIcon_001.png"))->show();
-                });
-            } }, [](auto prog) {
-			// log::debug("download");
-		},
-        [=]() {
-		Loader::get()->queueInMainThread([=] {
-			Notification::create("CS: Download failed.", CCSprite::createWithSpriteFrameName("GJ_deleteIcon_001.png"))->show();
-		});
-		    indexzip.Failed = true;
-		    indexzip.Finished = true;
-		});
-	}
+				std::filesystem::remove_all(Mod::get()->getConfigDir() / "Clicks");
+				(void) unzip.unwrap().extractAllTo(Mod::get()->getConfigDir() / "Clicks");
+				indexzipPtr->Finished = true;
 
+				Loader::get()->queueInMainThread([=] {
+					Notification::create("CS: Download successful!", CCSprite::createWithSpriteFrameName("GJ_completesIcon_001.png"))->show();
+					
+					// delete unnecessary files to save storage space
+					std::filesystem::path clicksDir = Mod::get()->getConfigDir() / "Clicks" / "clicks-main";
+					for (const auto& entry : std::filesystem::directory_iterator(clicksDir)) {
+						if (entry.path().filename() != "Meme" && entry.path().filename() != "Useful") {
+							std::filesystem::remove_all(entry.path());
+						}
+					}
+					if (std::filesystem::exists(Mod::get()->getConfigDir() / "Clicks.zip")) {
+						std::filesystem::remove(Mod::get()->getConfigDir() / "Clicks.zip");
+					}
+				});
+
+				Mod::get()->setSavedValue<bool>("CSINDEXDOWNLOADING", false);
+
+				ClickJson->loadData([=](){
+					onsettingsUpdate();
+				}); 
+			}).detach();
+		} else {
+			Loader::get()->queueInMainThread([=] {
+				Notification::create("CS: Download failed.", CCSprite::createWithSpriteFrameName("GJ_deleteIcon_001.png"))->show();
+			});
+		} }, [](auto prog) {
+		// log::debug("download");
+	},
+	[=]() {
+	Loader::get()->queueInMainThread([=] {
+		Notification::create("CS: Download failed.", CCSprite::createWithSpriteFrameName("GJ_deleteIcon_001.png"))->show();
+	});
+		indexzip.Failed = true;
+		indexzip.Finished = true;
+	});
+}
+
+EventListener<web::WebTask> m_listener;
+
+class $modify(MenuLayer) {
 	bool init() {
 		if (!indexzip.StartedDownloading) {
 			indexzip.StartedDownloading = true;
@@ -276,7 +277,7 @@ class $modify(MenuLayer) {
 				onsettingsUpdate();
 			});
 
-			this->SendRequestAPI();
+			SendRequestAPI();
 		}
 
 		return MenuLayer::init();

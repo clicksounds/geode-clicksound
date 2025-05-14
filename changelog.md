@@ -1,4 +1,8 @@
 # Changelog
+## Version v2.0.23
+* A manual download button for the Click Sounds Index has been added
+* The Click Sounds Index will no longer download on startup by default
+* CSPI users will need to keep automatic downloading disabled
 ## Version v2.0.22
 * Added badges to the profiles of CSPI owners
 * Removed Cuuh's badge

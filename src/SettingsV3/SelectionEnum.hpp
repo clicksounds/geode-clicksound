@@ -14,7 +14,9 @@
 #include <iostream>
 
 using namespace geode::prelude;
+
 extern void onsettingsUpdate();
+extern void SendRequestAPI(bool forceDownload);
 
 static struct ClicksoundSettingValue {
     std::string  m_currentMemeClick;
@@ -219,16 +221,16 @@ protected:
             menu_selector(ClicksoundSetterNodeV3::Popup)
         );
 
-        /*auto cspiSpr = CCSprite::create("cspiicon.png"_spr);
-        cspiSpr->setScale(0.75);
-        auto cspiBtn = CCMenuItemSpriteExtra::create(
-            cspiSpr,
+        auto downloadSpr = CCSprite::createWithSpriteFrameName("GJ_downloadBtn_001.png");
+        downloadSpr->setScale(0.75);
+        auto downloadBtn = CCMenuItemSpriteExtra::create(
+            downloadSpr,
             this,
-            menu_selector(ClicksoundSetterNodeV3::onCspi)
-        );*/
+            menu_selector(ClicksoundSetterNodeV3::onDownloadBtn)
+        );
     
+        m_selectionpopup->addChild(downloadBtn);
         m_selectionpopup->addChild(this->m_popup);
-        // m_selectionpopup->addChild(cspiBtn);
         auto m_selectionpopuplayout = RowLayout::create();
         m_selectionpopuplayout->setGap(15.f);
         m_selectionpopup->setLayout(m_selectionpopuplayout);
@@ -266,14 +268,17 @@ protected:
         return true;
     }
 
-    /*void onCspi(CCObject* sender) {
-        if (Loader::get()->getInstalledMod("beat.pack-installer")) {
-            CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5f, GJGarageLayer::scene()));
-            FMODAudioEngine::sharedEngine()->fadeInBackgroundMusic();
-        } else {
-            log::debug("no cspi lol");
-        }
-    };*/
+    void onDownloadBtn(CCObject* sender) {
+        geode::createQuickPopup(
+            "Warning",
+            "The Click Sounds Index is over <cj>30mb+</c> in size. Are you sure you want to redownload it?",
+            "Cancel", "Download", 
+            [](auto, bool btn2) {
+                if (btn2) {
+                    SendRequestAPI(true);
+                }
+            });
+    };
 
     std::string GetJsonName(CategoryData Infomation) {
         if (!Infomation.jsonpath.empty() && std::filesystem::exists(Infomation.jsonpath)) {
