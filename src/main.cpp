@@ -224,7 +224,13 @@ void SendRequestAPI(bool forceDownload = false) {
 					return;
 				}
 
-				std::filesystem::remove_all(Mod::get()->getConfigDir() / "Clicks");
+				std::error_code configRemovalFailure;
+				std::filesystem::remove_all(Mod::get()->getConfigDir() / "Clicks", configRemovalFailure);
+				if (configRemovalFailure) {
+					FLAlertLayer::create("Click Sounds Error", "There was an issue preparing the index for extraction. Try uninstalling Click Sounds and all of its data then reinstalling it.", "Ok");
+					return;
+				}
+
 				(void) unzip.unwrap().extractAllTo(Mod::get()->getConfigDir() / "Clicks");
 				indexzipPtr->Finished = true;
 
@@ -233,9 +239,14 @@ void SendRequestAPI(bool forceDownload = false) {
 					
 					// delete unnecessary files to save storage space
 					std::filesystem::path clicksDir = Mod::get()->getConfigDir() / "Clicks" / "clicks-main";
+					std::error_code metadataRemovalFailure;
 					for (const auto& entry : std::filesystem::directory_iterator(clicksDir)) {
 						if (entry.path().filename() != "Meme" && entry.path().filename() != "Useful") {
-							std::filesystem::remove_all(entry.path());
+							std::filesystem::remove_all(entry.path(), metadataRemovalFailure);
+							if (metadataRemovalFailure) {
+								FLAlertLayer::create("Click Sounds Warning", "There was an issue removing unnecessary files. This is not critical, but it may cause issues later on. Try uninstalling Click Sounds and all of its data then reinstalling it if this issue persists.", "Ok");
+								break;
+							}
 						}
 					}
 					if (std::filesystem::exists(Mod::get()->getConfigDir() / "Clicks.zip")) {
