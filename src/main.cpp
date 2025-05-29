@@ -227,7 +227,7 @@ void SendRequestAPI(bool forceDownload = false) {
 				std::error_code configRemovalFailure;
 				std::filesystem::remove_all(Mod::get()->getConfigDir() / "Clicks", configRemovalFailure);
 				if (configRemovalFailure) {
-					FLAlertLayer::create("Click Sounds Error", "There was an issue preparing the index for extraction. Try uninstalling Click Sounds and all of its data then reinstalling it.", "Ok");
+					Notification::create("CS: Extraction failed.", CCSprite::createWithSpriteFrameName("GJ_deleteIcon_001.png"))->show();
 					return;
 				}
 
@@ -244,7 +244,7 @@ void SendRequestAPI(bool forceDownload = false) {
 						if (entry.path().filename() != "Meme" && entry.path().filename() != "Useful") {
 							std::filesystem::remove_all(entry.path(), metadataRemovalFailure);
 							if (metadataRemovalFailure) {
-								FLAlertLayer::create("Click Sounds Warning", "There was an issue removing unnecessary files. This is not critical, but it may cause issues later on. Try uninstalling Click Sounds and all of its data then reinstalling it if this issue persists.", "Ok");
+								Notification::create("CS: Metadata deletion failed.", CCSprite::createWithSpriteFrameName("gj_fbIcon_001.png"))->show();
 								break;
 							}
 						}
