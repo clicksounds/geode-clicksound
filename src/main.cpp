@@ -224,12 +224,14 @@ void SendRequestAPI(bool forceDownload = false) {
 					return;
 				}
 
-				std::error_code configRemovalFailure;
-				std::filesystem::remove_all(Mod::get()->getConfigDir() / "Clicks", configRemovalFailure);
-				if (configRemovalFailure) {
-					Notification::create("CS: Extraction failed.", CCSprite::createWithSpriteFrameName("GJ_deleteIcon_001.png"))->show();
-					return;
-				}
+				Loader::get()->queueInMainThread([=] {
+					std::error_code configRemovalFailure;
+					std::filesystem::remove_all(Mod::get()->getConfigDir() / "Clicks", configRemovalFailure);
+					if (configRemovalFailure) {
+						Notification::create("CS: Extraction failed.", CCSprite::createWithSpriteFrameName("GJ_deleteIcon_001.png"))->show();
+						return;
+					}
+				});
 
 				(void) unzip.unwrap().extractAllTo(Mod::get()->getConfigDir() / "Clicks");
 				indexzipPtr->Finished = true;
