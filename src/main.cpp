@@ -228,8 +228,10 @@ void SendRequestAPI(bool forceDownload = false) {
 					std::error_code configRemovalFailure;
 					std::filesystem::remove_all(Mod::get()->getConfigDir() / "Clicks", configRemovalFailure);
 					if (configRemovalFailure) {
-						Notification::create("CS: Extraction failed.", CCSprite::createWithSpriteFrameName("GJ_deleteIcon_001.png"))->show();
-						return;
+						Loader::get()->queueInMainThread([=] {
+							Notification::create("CS: Extraction failed.", CCSprite::createWithSpriteFrameName("GJ_deleteIcon_001.png"))->show();
+							return;
+						});
 					}
 				});
 
