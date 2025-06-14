@@ -95,6 +95,7 @@ class $modify(PlayerObject) {
 		bool directionUp = false;
 		bool directionRight = false;
 		bool directionLeft = false;
+		bool m_isDead;
 	};
 
 	// For setting bools for setting dir
@@ -135,7 +136,7 @@ class $modify(PlayerObject) {
 		bool ret = PlayerObject::pushButton(p0);
 
 		// check if you can and or check if it is correct
-		if (!integrityCheck(this, p0)) {
+		if (!integrityCheck(this, p0) || m_fields->m_isDead) {
 			return ret;
 		};
 		auto isClickEnabled = Mod::get()->getSettingValue<bool>("enable-clicksounds");
