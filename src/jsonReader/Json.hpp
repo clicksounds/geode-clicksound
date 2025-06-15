@@ -38,10 +38,10 @@ class JsonReader {
 					file.close();
 					auto json = matjson::parse(content).unwrapOrDefault();
 					if (json.contains("Useful")) {
-						loadCategoryDataFromIndex(json["Useful"], usefulData);
+						loadCategoryDataFromIndex(json["Useful"], usefulData, "Useful");
 					}
 					if (json.contains("Meme")) {
-						loadCategoryDataFromIndex(json["Meme"], memeData);
+						loadCategoryDataFromIndex(json["Meme"], memeData, "Meme");
 					}
 					hassomedata = true;
 					log::debug("Loaded Category from index_list.json!");
@@ -57,28 +57,43 @@ class JsonReader {
 		}).detach();
 	}
 
-	void loadCategoryDataFromIndex(const matjson::Value& arr, std::map<std::string, CategoryData>& categoryData) {
+	void loadCategoryDataFromIndex(const matjson::Value& arr, std::map<std::string, CategoryData>& categoryData, const std::string& type) {
 		if (!arr.isArray()) return;
 		int idx = 0;
 		auto arrVecResult = arr.asArray();
 		if (!arrVecResult) return;
 		const auto& arrVec = arrVecResult.unwrap();
+		auto configDir = Mod::get()->getConfigDir();
 		for (size_t i = 0; i < arrVec.size(); ++i) {
 			const auto& entry = arrVec[i];
 			CategoryData cat;
-			cat.Name = "Pack_" + std::to_string(idx);
-			if (entry.contains("folders") && entry["folders"].isArray()) {
-				auto foldersArrResult = entry["folders"].asArray();
-				if (foldersArrResult) {
-					const auto& foldersArr = foldersArrResult.unwrap();
-					for (size_t j = 0; j < foldersArr.size(); ++j) {
-						auto folderName = foldersArr[j].asString().unwrapOr("");
-						if (folderName == "Clicks") cat.clicks.push_back(folderName);
-						if (folderName == "Releases") cat.releases.push_back(folderName);
-					}
+			// Get pack id and name from index_list.json if present
+			std::string packId = "Pack_" + std::to_string(idx);
+			if (entry.contains("id") && entry["id"].isString()) {
+				packId = entry["id"].asString().unwrapOr(packId);
+			}
+			cat.Name = packId;
+			if (entry.contains("name") && entry["name"].isString()) {
+				cat.Name = entry["name"].asString().unwrap();
+			}
+			// Optionally store the id as jsonpath for reference (not a real path)
+			cat.jsonpath = packId;
+			// Find the pack directory
+			auto packDir = configDir / "Clicks" / "clicks-main" / type / packId;
+			// List sound files
+			cat.clicks.clear();
+			cat.releases.clear();
+			if (std::filesystem::exists(packDir / "Clicks")) {
+				for (const auto& Rl : std::filesystem::directory_iterator(packDir / "Clicks")) {
+					cat.clicks.push_back(Rl.path().string());
 				}
 			}
-			categoryData[cat.Name] = cat;
+			if (std::filesystem::exists(packDir / "Releases")) {
+				for (const auto& Rl : std::filesystem::directory_iterator(packDir / "Releases")) {
+					cat.releases.push_back(Rl.path().string());
+				}
+			}
+			categoryData[packId] = cat;
 			idx++;
 		}
 	}
