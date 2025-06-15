@@ -132,7 +132,7 @@ class CCIndexPackNode : public CCLayerColor {
 				}
 
 				if (jsonObject2.contains("version") && jsonObject2["version"].isNumber()) {
-					packVersion = "\nVersion: v" + std::to_string(jsonObject2["version"].asInt());
+					packVersion = "\nVersion: v" + std::to_string(jsonObject2["version"].asInt().unwrap());
 				} else {
 					packVersion = "\nVersion: v1";
 				}
