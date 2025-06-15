@@ -171,7 +171,7 @@ class CCIndexPackNode : public CCLayerColor {
 			}
 		}
 		this->getlistfull();
-		this->addChildAtPosition(Text, Anchor::TopLeft, ccp(3, 0), ccp(0, 1.0f));
+		if (Text) this->addChildAtPosition(Text, Anchor::TopLeft, ccp(3, 0), ccp(0, 1.0f));
 
 		Author = CCLabelBMFont::create("ITEM NODE", "goldFont.fnt");
 		Author->setID("Author-label");
@@ -243,7 +243,10 @@ class CCIndexPackNode : public CCLayerColor {
 				}
 			}
 		}
-		this->addChildAtPosition(DEVS, Anchor::BottomLeft, ccp(3, 0), ccp(0, 0));
+		if (!DEVS) {
+			MEN(DEVS)
+		}
+		if (DEVS) this->addChildAtPosition(DEVS, Anchor::BottomLeft, ccp(3, 0), ccp(0, 0));
 
 		CCLayerGradient *gradient = CCLayerGradient::create(ccc4(0, 0, 0, 100), ccc4(0, 0, 0, 100));
 		gradient->setContentSize(this->getContentSize());
