@@ -258,6 +258,7 @@ class CCIndexPackNode : public CCLayerColor {
 		auto ConfirmSprite = CCMenuItemSpriteExtra::create(ButtonSprite::create("Set", 40.f, true, SpritePicker::get("bigFont.fnt", theme), SpritePicker::get("GJ_button_01.png", theme), 20.f, 1.0f), this, menu_selector(CCIndexPackNode::selected));
 		ConfirmSprite->m_scaleMultiplier = 0.9;
 		// Disable if not downloaded
+		/*
 		{
 			// Try to extract pack id and type
 			std::string packId = "";
@@ -286,6 +287,7 @@ class CCIndexPackNode : public CCLayerColor {
 				}
 			}
 		}
+		*/
 		MEN(_Apply_Menu)
 		_Apply_Menu->setID("apply");
 		_Apply_Menu->ignoreAnchorPointForPosition(false);
