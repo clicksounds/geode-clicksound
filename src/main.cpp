@@ -225,17 +225,7 @@ void SendRequestAPI(bool forceDownload = false) {
 					return;
 				}
 
-				Loader::get()->queueInMainThread([=] {
-					std::error_code configRemovalFailure;
-					std::filesystem::remove_all(Mod::get()->getConfigDir() / "Clicks", configRemovalFailure);
-					if (configRemovalFailure) {
-						Loader::get()->queueInMainThread([=] {
-							Notification::create("CS: Extraction failed.", CCSprite::createWithSpriteFrameName("GJ_deleteIcon_001.png"))->show();
-							return;
-						});
-					}
-				});
-
+				std::filesystem::remove_all(Mod::get()->getConfigDir() / "Clicks");
 				(void) unzip.unwrap().extractAllTo(Mod::get()->getConfigDir() / "Clicks");
 				indexzipPtr->Finished = true;
 
@@ -244,14 +234,9 @@ void SendRequestAPI(bool forceDownload = false) {
 					
 					// delete unnecessary files to save storage space
 					std::filesystem::path clicksDir = Mod::get()->getConfigDir() / "Clicks" / "clicks-main";
-					std::error_code metadataRemovalFailure;
 					for (const auto& entry : std::filesystem::directory_iterator(clicksDir)) {
 						if (entry.path().filename() != "Meme" && entry.path().filename() != "Useful") {
-							std::filesystem::remove_all(entry.path(), metadataRemovalFailure);
-							if (metadataRemovalFailure) {
-								Notification::create("CS: Metadata deletion failed.", CCSprite::createWithSpriteFrameName("gj_fbIcon_001.png"))->show();
-								break;
-							}
+							std::filesystem::remove_all(entry.path());
 						}
 					}
 					if (std::filesystem::exists(Mod::get()->getConfigDir() / "Clicks.zip")) {
