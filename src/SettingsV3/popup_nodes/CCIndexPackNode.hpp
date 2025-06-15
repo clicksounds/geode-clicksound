@@ -127,14 +127,14 @@ class CCIndexPackNode : public CCLayerColor {
 				if (jsonObject2.contains("id") && jsonObject2["id"].isString()) {
 					std::string id = jsonObject2["id"].asString().unwrap();
 					if (!id.empty()) {
-						packID += "\n\n\n\nID: " + id;
+						packID += "\n\nID: " + id;
 					}
 				}
 
 				if (jsonObject2.contains("version") && jsonObject2["version"].isNumber()) {
-					packVersion = "\nVersion: v" + std::to_string(jsonObject2["version"].asInt().unwrap());
+					packVersion = "\n\nVersion: v" + std::to_string(jsonObject2["version"].asInt().unwrap());
 				} else {
-					packVersion = "\nVersion: v1";
+					packVersion = "\n\nVersion: v1 (No version specified)";
 				}
 			}
 		}
