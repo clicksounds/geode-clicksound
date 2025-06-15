@@ -149,7 +149,6 @@ class CCIndexPackNode : public CCLayerColor {
 		this->setAnchorPoint(ccp(0, 1));
 		this->setPositionY(207);
 		this->setOpacity(100);
-		// Text = CCLabelBMFont::create("ITEM NODE", "goldFont.fnt");
 		Text = AutoScaleCCLabelBMFont::create("ITEM NODE", "bigFont.fnt", 200, 50);
 		Text->setID("name-label");
 		Text->setLayoutOptions(AxisLayoutOptions::create()->setScalePriority(1));
@@ -255,6 +254,35 @@ class CCIndexPackNode : public CCLayerColor {
 		// GJ_button_06
 		auto ConfirmSprite = CCMenuItemSpriteExtra::create(ButtonSprite::create("Set", 40.f, true, SpritePicker::get("bigFont.fnt", theme), SpritePicker::get("GJ_button_01.png", theme), 20.f, 1.0f), this, menu_selector(CCIndexPackNode::selected));
 		ConfirmSprite->m_scaleMultiplier = 0.9;
+		// Disable if not downloaded
+		{
+			// Try to extract pack id and type
+			std::string packId = "";
+			std::string packType = "Useful";
+			// Try to get from packID string (set in getlistfull), fallback to m_name
+			if (!packID.empty()) {
+				// packID is like "\n\nID: beat.default" so extract after last ':'
+				size_t pos = packID.rfind(":");
+				if (pos != std::string::npos) packId = packID.substr(pos + 1);
+				// Remove whitespace
+				packId.erase(0, packId.find_first_not_of(" \n\t"));
+				packId.erase(packId.find_last_not_of(" \n\t") + 1);
+			}
+			if (packId.empty() && !m_name.empty()) packId = m_name;
+			// Try to guess type from Infomation (if memeData or usefulData)
+			if (!Infomation.clicks.empty() || !Infomation.releases.empty()) {
+				// If this node is for a meme pack, set type to Meme
+				if (Infomation.Name.find("Meme") != std::string::npos) packType = "Meme";
+			}
+			// Check if directory exists
+			if (!packId.empty()) {
+				auto configDir = Mod::get()->getConfigDir();
+				auto packDir = configDir / "Clicks" / "clicks-main" / packType / packId;
+				if (!std::filesystem::exists(packDir)) {
+					ConfirmSprite->setEnabled(false);
+				}
+			}
+		}
 		MEN(_Apply_Menu)
 		_Apply_Menu->setID("apply");
 		_Apply_Menu->ignoreAnchorPointForPosition(false);

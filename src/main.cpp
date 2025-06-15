@@ -264,6 +264,16 @@ void SendRequestAPI(bool forceDownload = false) {
 		indexzip.Failed = true;
 		indexzip.Finished = true;
 	});
+
+	web::WebRequest().get("https://raw.githubusercontent.com/clicksounds/clicks/refs/heads/main/index_list.json").listen([=](auto res) {
+		if (res->into(Mod::get()->getConfigDir() / "index_list.json")) {
+			Loader::get()->queueInMainThread([=] {
+				Notification::create("CS: List Updated!", CCSprite::createWithSpriteFrameName("GJ_completesIcon_001.png"))->show();
+				return;
+			});
+		}
+	});
+	return;
 }
 
 EventListener<web::WebTask> m_listener;

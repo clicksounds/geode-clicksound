@@ -1,0 +1,1892 @@
+{
+  "Useful": [
+    {
+      "name": "Akko Keyboard",
+      "id": "nywalll.akko-keyboard",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"nywalll","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Akko Ocean Blue switches",
+      "id": "nywall.akko-ocean-blue-switches",
+      "version": 1,
+      "type": "Useful",
+      "description": "Akko Ocean Blue tactile switches (fwoceanblues) click sounds. Clicks recorded by G4b1, cut and hosted by nywall. ",
+      "authors": [{"name":"nywall","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Alloy Fps Pro UpArrow",
+      "id": "unknown.alloy-fps-pro-uparrow",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Andarians G502 Hero",
+      "id": "andarian.andarians-g502-hero",
+      "version": 1,
+      "type": "Useful",
+      "description": "remake and (hopefully) better optimized version of my (old/unreleased/deleted) G502 Hero clickpack! clicks all made by @andarianwx on mobile. ",
+      "authors": [{"name":"Andarian","gdAccountID":27823067,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Andarians Keyboard Enter Key",
+      "id": "andarian.andarians-keyboard-enter-key",
+      "version": 1,
+      "type": "Useful",
+      "description": "The NumEnter key on my keyboard that i used to play GD with it. Switches are the Leobog Graywood V3 which they are extremely budget. Clicks made by Andarian (me) ",
+      "authors": [{"name":"Andarian","gdAccountID":27823067,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Andarians Laptop Spacebar V2",
+      "id": "andarian.andarians-laptop-spacebar-v2",
+      "version": 1,
+      "type": "Useful",
+      "description": "another laptop spacebar clickpack!!! Idk which one was that but i recorded it on a kind of uh... hp laptop like 100 miles away from home. clickpack cut by me, enjoy! ",
+      "authors": [{"name":"Andarian","gdAccountID":27823067,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Andarians Mobile Taps V2",
+      "id": "andarian.andarians-mobile-taps-v2",
+      "version": 1,
+      "type": "Useful",
+      "description": "Mobile Taps (or tablet taps) pack recorded and cut by Andarian. V2 Version now out with more satisfying and louder taps. ",
+      "authors": [{"name":"Andarian","gdAccountID":27823067,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Andarians SayoDevice O3C",
+      "id": "andarian.andarians-sayodevice-o3c",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Andarian","gdAccountID":27823067,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Andarians SayoDevice O3C V2",
+      "id": "andarian.andarians-sayodevice-o3c-v2",
+      "version": 1,
+      "type": "Useful",
+      "description": "The extension/remake/replacement of the \"Andarian's SayoDevice no deskmat\" pack with 100 sounds and 3 hours worth of cutting to make my best click pack ever yet. Clicks recorded and cut by Andarian (me) on mobile. ",
+      "authors": [{"name":"Andarian","gdAccountID":27823067,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Andarians SayoDevice no deskmat",
+      "id": "andarian.andarians-sayodevice-no-deskmat",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Andarian","gdAccountID":27823067,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Andarians Spacebar",
+      "id": "andarian.andarians-spacebar",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Andarian","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Andarians mobile taps",
+      "id": "andarian.andarians-mobile-taps",
+      "version": 1,
+      "type": "Useful",
+      "description": "Clicks recorded by me and cut by nywall. Probably one of my best packs yet. ",
+      "authors": [{"name":"Andarian","gdAccountID":27823067,"type":"Main"},{"name":"nywall","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Anthonys SayoDevice O3C Click",
+      "id": "anthony.anthonys-sayodevice-o3c-click",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Anthony","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Aula F75 Up Arrow",
+      "id": "andarian.aula-f75-up-arrow",
+      "version": 1,
+      "type": "Useful",
+      "description": "up arrow of my new best keyboard (aula f75)!!! it comes with stock reaper switches and they do sounds very gud (thocky lol). ",
+      "authors": [{"name":"Andarian","gdAccountID":27823067,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Average Mouse Click",
+      "id": "whimsyy.average-mouse-click",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Whimsyy","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Balam Rush Hero",
+      "id": "movistar.balam-rush-hero",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Movistar","gdAccountID":30159959,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Bloody Mouse",
+      "id": "aceofspades.bloody",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"aceofspades","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Blueswitch",
+      "id": "nywall.blueswitch",
+      "version": 1,
+      "type": "Useful",
+      "description": "very cheap dexp mechanical keyboard that has very loud blue switches ",
+      "authors": [{"name":"nywall","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Blueswitch V2",
+      "id": "nywall.blueswitch-v2",
+      "version": 1,
+      "type": "Useful",
+      "description": "Clicks recorded and cut by nywall. V2/Remake version of the blueswitch (dexp blazing pro keyboard). ",
+      "authors": [{"name":"nywall","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Bo Clicks",
+      "id": "bobobobobobobo.bo-clicks",
+      "version": 1,
+      "type": "Useful",
+      "description": "BoBoBoBoBoBoBo's mouse, used in his GD videos in the past. ",
+      "authors": [{"name":"BoBoBoBoBoBoBo","gdAccountID":9467426,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Cats Sayodevice",
+      "id": "catkgaming.cats-sayodevice",
+      "version": 1,
+      "type": "Useful",
+      "description": "Sounds I recorded myself using my sayodevice! ",
+      "authors": [{"name":"CatKGaming","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Cats Sayo V2",
+      "id": "catkgaming.cats-sayo-v2",
+      "version": 1,
+      "type": "Useful",
+      "description": "A better version of another pack I made, with more sounds and (hopefully) better audio quality!!! ",
+      "authors": [{"name":"CatKGaming","gdAccountID":26670396,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Cheap logitech mouse",
+      "id": "andarian.cheap-logitech-mouse",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Andarian","gdAccountID":27823067,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "CherryMX Linear Red",
+      "id": "cut1eee.cherrymx-linear-red",
+      "version": 1,
+      "type": "Useful",
+      "description": "CherryMX's Red key. ",
+      "authors": [{"name":"Cut1eee","gdAccountID":29696759,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Click 1",
+      "id": "unknown.click-1",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Click 2",
+      "id": "unknown.click-2",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Click 3",
+      "id": "unknown.click3",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Click Release 1",
+      "id": "unknown.click-release-1",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Click Release 2",
+      "id": "unknown.click-release-2",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Corsair K70 Up Arrow",
+      "id": "therealadbi.corsair-k70-up-arrow",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"adbi","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Creamy Clicks",
+      "id": "lawfuldmcboo.creamy-clicks",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"LawfulDmcBoo","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Cursed Clicks 2023",
+      "id": "cursed.cursed-clicks-2023",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Cursed","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Cursed (Player)",
+      "id": "cursed.clicks",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Cursed","gdAccountID":5603286,"type":"Main"},{"name":"Beat","gdAccountID":13873867,"type":"Provider"},{"name":"sakariya","type":"Requester"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "DEXP Rapier UP",
+      "id": "murzik.dexp-rapier-up",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"MurZik","gdAccountID":16151003,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "DEXP Rapier W",
+      "id": "murzikmrt.dexp-rapier-w",
+      "version": 1,
+      "type": "Useful",
+      "description": "the sound of the \"W\" key, is someone playing it besides me? ",
+      "authors": [{"name":"MurZikMRT","gdAccountID":16151003,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Default",
+      "id": "beat.default",
+      "version": 1,
+      "type": "Useful",
+      "description": "Default sound of the Click Sounds mod. Made with help from zxset. ",
+      "authors": [{"name":"Beat","gdAccountID":13873867,"type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Doggie",
+      "id": "doggie.clicks",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Doggie","gdAccountID":175605,"type":"Main"},{"name":"edgelordplayer","type":"Provider"},{"name":"Morseful","type":"Requester"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Doggie Click Pack",
+      "id": "doggie.doggie-click-pack",
+      "version": 1,
+      "type": "Useful",
+      "description": "The new sounds of Doggie's Wooting 80HE keyboard. Clicks recorded by Doggie (himself), hosted by Beat, cut by Andarian (me) <3 ",
+      "authors": [{"name":"Doggie","gdAccountID":175605,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Doggie G502 Hero",
+      "id": "doggie.doggie-g502-hero",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Doggie","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Electro Mouse",
+      "id": "lofracotestinogd.electro-mouse",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"LofracotestinoGD","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Epomaker RT100 Spacebar",
+      "id": "quiriuz.epomaker-rt100-spacebar",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Quiriuz","gdAccountID":24158035,"type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Exens SayoDevice O3C",
+      "id": "neiro.exens-sayodevice-o3c",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Neiro","gdAccountID":5316754,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Faze Clicks",
+      "id": "swim1x.faze",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"swim1x","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Flushymelons Yunzii x71",
+      "id": "flushymelon.flushymelons-yunzii-x71",
+      "version": 1,
+      "type": "Useful",
+      "description": "the click sounds of my keyboard ",
+      "authors": [{"name":"Flushymelon","gdAccountID":24845607,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "G4b1 Gateron Yellow Switches",
+      "id": "g4b1.g4b1-gateron-yellow-switches",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"G4b1","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "G203",
+      "id": "straybomb.g203",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"straybomb","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "G402",
+      "id": "straybomb.g402",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"straybomb","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "G502",
+      "id": "nywall.fwg502",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"nywall","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "GMMK Pro",
+      "id": "bitah.gmmk-pro",
+      "version": 1,
+      "type": "Useful",
+      "description": "gmmk pro keyboard with hmx latte switches ",
+      "authors": [{"name":"Bitah","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Gateron Yellow switches",
+      "id": "andarian.gateron-yellow-switches",
+      "version": 1,
+      "type": "Useful",
+      "description": "Alpha version of Gateron Yellow switches, before i remake it again. Clicks made by Andarian ",
+      "authors": [{"name":"Andarian","gdAccountID":27823067,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Gazonk",
+      "id": "unknown.gazonk",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Glorious Model O",
+      "id": "platten.glorious-model-o",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Platten","gdAccountID":26668684,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Gran Turismo 7",
+      "id": "sony.gran-turismo-7",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Sony","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "HP EliteBook Laptop Spacebar",
+      "id": "andarian.hp-elitebook-laptop-spacebar",
+      "version": 1,
+      "type": "Useful",
+      "description": "Version 1: Initial release. I added the version info for updates in near future. The pack of my old, but gold laptop that i used to work and play on it in the past years, and i still kept it somehow so i made a laptop spacebar clickpack out of that. Pack will be updated and Version 1 is also avaliable in ZCB. I will extend and update this pack in this weekend or later, and also i made the sounds have stereo channels to avoid bugs. ",
+      "authors": [{"name":"Andarian","gdAccountID":27823067,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Hathor Orange Switches",
+      "id": "vornex.hathor-orange-switches",
+      "version": 1,
+      "type": "Useful",
+      "description": "moderator note: this pack is amazing ",
+      "authors": [{"name":"Vornex","gdAccountID":32054372,"type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Ians Mobile Taps",
+      "id": "ian.ians-mobile-taps",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"ian","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Klick mishi",
+      "id": "ne-znay.klick-mishi",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Ne znay","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Laps Bloody A60",
+      "id": "sushilaps.laps-bloody-a60",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"sushilaps","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Laps Bloody A60 Remake",
+      "id": "sushilaps.laps-bloody-a60-remake",
+      "version": 1,
+      "type": "Useful",
+      "description": "the remake of the legendary Laps A60 clickpack (on ZCB). clicks made and cut by @sushilaps, fixed (increased volume and fixed volume of the sounds being too low). by @andarianwx. ",
+      "authors": [{"name":"sushilaps","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Laps Bloody Mouse V7",
+      "id": "sushilaps.laps-bloody-mouse-v7",
+      "version": 1,
+      "type": "Useful",
+      "description": "First Laps clickpack after two years! Biggest comeback ever in ZCB. ",
+      "authors": [{"name":"sushilaps","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Laps Up Arrow",
+      "id": "sushilaps.laps-up-arrow",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"sushilaps","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Laptop Spacebar",
+      "id": "cuuh.laptop-spacebar",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"cuuh","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Lawfuls Clicks",
+      "id": "lawfuldmcboo.lawfuls-clicks",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"LawfulDmcBoo","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Lenovo Wired Mouse - SM50F76959",
+      "id": "justadude64.lenovo-wired-mouse---sm50f76959",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"JustADude64","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Logitech G413 TKL",
+      "id": "isaac.logitech-g413-tkl",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"isaac","gdAccountID":14716714,"type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Logitech G502 Hero",
+      "id": "unknown.logitech-g502-hero",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Logitech G PRO Keyboard",
+      "id": "ciganxxx.logitech-g-pro",
+      "version": 1,
+      "type": "Useful",
+      "description": "Unknown ",
+      "authors": [{"name":"CiganXXX","gdAccountID":32285568,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Logitech G Pro x Superlight Mouse",
+      "id": "xrze.logitech-g-pro-x-superlight-mouse",
+      "version": 1,
+      "type": "Useful",
+      "description": "this was cut by nywall and recorded by xrze. the pack was also mistakenly called \"andarianlogitech\" by nywall for some reasons. ",
+      "authors": [{"name":"xrze","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Logitech MX Anywhere 2S",
+      "id": "main.logitech-mx-anywhere-2s",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Main","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Logitech - G102",
+      "id": "unknown.logitech---g102",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Lolwut Click Pack",
+      "id": "lolwut.lolwut-click-pack",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"lolwut","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "M4rks Clicks",
+      "id": "m4rk.m4rks-clicks",
+      "version": 1,
+      "type": "Useful",
+      "description": "another popular used a lot for showcasing :3. made by m4rkgd ",
+      "authors": [{"name":"M4rk","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Metronome",
+      "id": "unknown.metronome",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Microsoft Mouse",
+      "id": "notusefulgd.microsoft-mouse",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"NotUsefulGD","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Microsoft Wired Keyboard",
+      "id": "nywall.microsoft-wired-keyboard",
+      "version": 1,
+      "type": "Useful",
+      "description": "microsoft wired keyboard from nywall, the clickpack god himself. ",
+      "authors": [{"name":"nywall","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Mobile Ground Tap",
+      "id": "bbobxd.mobile-ground-tap",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"bbobxD","gdAccountID":31204671,"type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Montys-Clicks",
+      "id": "montypie.montys-clicks",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"MontyPie","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Mouse Click 6",
+      "id": "unknown.mouse-click-6",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Mouse Click 7",
+      "id": "unknown.mouse-click-7",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Msterbran",
+      "id": "nhay.msterbran",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Nhay","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Murzya pack",
+      "id": "murzikmrt.murzya-pack",
+      "version": 1,
+      "type": "Useful",
+      "description": "Made, I think, pleasantly for the ears ",
+      "authors": [{"name":"MurzikMRT","gdAccountID":16151003,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Neiro",
+      "id": "neiro.clicks",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Neiro","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Neiro Click Pack",
+      "id": "neiro.neiro-click-pack",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Neiro","gdAccountID":5316754,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "NexusGD",
+      "id": "nexusgd.nexusgd",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"NexusGD","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "NicNicBoss G502",
+      "id": "nicnicboss.nicnicboss-g502",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"NicNicBoss","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "NicNicBoss SayoDevice",
+      "id": "nicnicboss.nicnicboss-sayo",
+      "version": 1,
+      "type": "Useful",
+      "description": "An unexpectedly large SayoDevice clickpack by NicNicBoss (on ZCB server). 70 sounds in total cut by Andarian (me) on mobile. ",
+      "authors": [{"name":"NicNicBoss","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "NicNicBoss SayoDevice V2",
+      "id": "nicnicboss.nicnicboss-sayodevice-v2",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"NicNicBoss","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "NicNicBoss SayoDevice no deskmat Remake",
+      "id": "nicnicboss.nicnicboss-sayodevice-no-deskmat-remake",
+      "version": 1,
+      "type": "Useful",
+      "description": "remake of the \"NicNicBoss SayoDevice\"! ",
+      "authors": [{"name":"NicNicBoss","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "NicNicBoss SayoDevice no deskmat V3",
+      "id": "nicnicboss.nicnicboss-sayodevice-no-deskmat-v3",
+      "version": 1,
+      "type": "Useful",
+      "description": "v3 version (with zero noise but less sounds) by @nicnicboss on ZCB server. ",
+      "authors": [{"name":"NicNicBoss","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "NicNicBoss Up Arrow Pack",
+      "id": "nicnicboss.nicnicboss-up-arrow-pack",
+      "version": 1,
+      "type": "Useful",
+      "description": "requested and made by NicNicBoss, cut by Andarian (on ZCB server) ",
+      "authors": [{"name":"NicNicBoss","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "NicNicBoss Up Arrow Pack V2",
+      "id": "nicnicboss.nicnicboss-up-arrow-pack-v2",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"NicNicBoss","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Nice Clicks",
+      "id": "nywalll.nice-clicks",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Nywalll","gdAccountID":90575325,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Norfolk's Bloody A70 Click Pack",
+      "id": "norfolk.norfolks-bloody-a70x-clickpack",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Norfolk","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "NormiePack",
+      "id": "exparaigon.normiepack",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Exparaigon","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Old Office Mouse",
+      "id": "lazai.old-office-mouse",
+      "version": 1,
+      "type": "Useful",
+      "description": "Old Office's Mouse click sounds. ",
+      "authors": [{"name":"Lazai","gdAccountID":25147015,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Pacitys",
+      "id": "unknown.pacitys",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Paqoe Keyboard",
+      "id": "paqoe.paqoe-keyboard",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Paqoe","gdAccountID":5870542,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Paqoe New mouse",
+      "id": "paqoe.paqoe-new-mouse",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Paqoe","gdAccountID":5870542,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Piano key",
+      "id": "percatp.piano-key",
+      "version": 1,
+      "type": "Useful",
+      "description": "Make music. Made this just for fun ",
+      "authors": [{"name":"Percatp","gdAccountID":28267065,"type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Questionable Mouse",
+      "id": "nobody.questionable-mouse",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"gigaboy99","gdAccountID":29450530,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "RK61 Up Arrow",
+      "id": "bitah.rk61-up-arrow",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Bitah","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "RaspSayoV2 Enhanced",
+      "id": "rasp.raspsayov2-enhanced",
+      "version": 1,
+      "type": "Useful",
+      "description": "The Rasp's SayoDevice enhanced click pack with the Gateron Jade magnetic switches. It's one of the best clickpacks in ZCB in the past. ",
+      "authors": [{"name":"Rasp","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "RazerMini",
+      "id": "proojw123.razermini",
+      "version": 1,
+      "type": "Useful",
+      "description": "RazerViperMini click, simple and good for use ",
+      "authors": [{"name":"proojw123","gdAccountID":111053,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Razer Basilisk V3",
+      "id": "unknown.razer-basilisk-v3",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Razer Blackwidow Keyboard",
+      "id": "straybomb.razer-blackwidow-keyboard",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"straybomb","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Razer DeathAdder Elite",
+      "id": "zwild.razer-deathadder-elite",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"zWild","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Razer Huntsman Mini",
+      "id": "oli.razer-huntsman-mini",
+      "version": 1,
+      "type": "Useful",
+      "description": "Razer Huntsman Mini keyboard with the Black MX switches. Pack made by oli, cut by oli. ",
+      "authors": [{"name":"oli","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Reddragon Visnu",
+      "id": "wardh.reddragon-visnu",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Wardh","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Redragon Kumara K552-2",
+      "id": "lulildo.redragon-kumara-k552-2",
+      "version": 1,
+      "type": "Useful",
+      "description": "Keyboard sounds from the Redragon Kumara K552-2. ",
+      "authors": [{"name":"lulildo","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Rewarny Up Arrow",
+      "id": "oli.rewarny-up-arrow",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"oli (Rewarny)","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Royal Kludge R75",
+      "id": "m5pon4ik.royal-kludge-r75",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"M5Pon4ik","gdAccountID":32428893,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Royal Kludge R75 Up Arrow",
+      "id": "nywall.royal-kludge-r75-up-arrow",
+      "version": 1,
+      "type": "Useful",
+      "description": "a very nice sound of a royal kludge. ",
+      "authors": [{"name":"nywall","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Samsung AA-MR1D9TB Mouse",
+      "id": "imsgdo.aa-mr1d9tb",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Imsgdo","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "SayoDevice Lekker L45",
+      "id": "sne4ken.sayodevice-lekker-l45",
+      "version": 1,
+      "type": "Useful",
+      "description": "SayoDevice 03C v2 with Lekker L45 switches. ",
+      "authors": [{"name":"sne4ken","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "SayoDevice O3C V2",
+      "id": "bitah.sayodevice-o3c-v2",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"bitah","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Sayodevice Jade Switches",
+      "id": "platten.sayodevice-jade-switches",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Platten","gdAccountID":26668684,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Sayo Device",
+      "id": "unknown.sayo-device",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Screen Tap 1",
+      "id": "unknown.screen-tap-1",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Secants Mouse Click",
+      "id": "secantgd.secants-mouse-click",
+      "version": 1,
+      "type": "Useful",
+      "description": "I used a mouse I had lying around at our home to make this clickpack ",
+      "authors": [{"name":"SecantGD","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Sjunlee Clicks V5",
+      "id": "sjunlee.sjunlee-clicks-v5",
+      "version": 1,
+      "type": "Useful",
+      "description": "sjunleev5 clicks!! from his popular pplllife w/clicks showcase but better btw! ",
+      "authors": [{"name":"sjunlee","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Soft Keyboard",
+      "id": "unknown.soft-keyboard",
+      "version": 1,
+      "type": "Useful",
+      "description": "very softttt ",
+      "authors": [{"name":"Unknown","gdAccountID":30519670,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "SpaceUK",
+      "id": "spaceuk.clicks",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"SpaceUK","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Space Bar 1",
+      "id": "unknown.space-bar-1",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Space Bar 2",
+      "id": "unknown.space-bar-2",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "TV Controller Click",
+      "id": "verdantis.tv-controller-click",
+      "version": 1,
+      "type": "Useful",
+      "description": "A good click made entirely from the back of a TV remote! No release sound because it sounds too quiet. ",
+      "authors": [{"name":"Verdantis","gdAccountID":23742621,"type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Trikehards controller click pack V2",
+      "id": "trikehard.trikehards-controller-click-pack-v2",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"trikehard","gdAccountID":13926343,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "TrusTa (Player)",
+      "id": "trusta.clicks",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"TrusTa","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Unami sayo V2",
+      "id": "unami.unami-sayo-v2",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Unami","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Up Arrow 1",
+      "id": "unknown.up-arrow-1",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Up Arrow 2",
+      "id": "unknown.up-arrow-2",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Up Arrow 3",
+      "id": "unknown.up-arrow-3",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Up Arrow 4",
+      "id": "unknown.up-arrow-4",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Up Arrow 5",
+      "id": "unknown.up-arrow-5",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Used logitech g305 mouse",
+      "id": "fluffynator.used-logitech-g305-mouse",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"fluffynator","gdAccountID":15186557,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "VXE R1 Pro Max",
+      "id": "fluffyzeo.vxe-r1-pro-max",
+      "version": 1,
+      "type": "Useful",
+      "description": "Mouse: VXE (aka VGN) R1 Pro Max (Kailh White Sword switches); use ZCB to get the full pack with 97 sounds; Credit: zeo (fluffyzeo on discord) ",
+      "authors": [{"name":"fluffyzeo","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Viper 8K but Sounds different",
+      "id": "svenwastaken.viper-8k-but-sounds-different",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"SvenWasTaken","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Viper 8k",
+      "id": "yen.viper-8k",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"yen","gdAccountID":27575236,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Viper Mouse",
+      "id": "unknown.viper-mouse",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Viper's Spacebar",
+      "id": "viper.spacebar",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Viper","gdAccountID":14284530,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Vladuwka12 Spacebar",
+      "id": "vladuwka12.spacebar",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Vladuwka","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Vortrox Click Pack",
+      "id": "vortrox.vortrox-click-pack",
+      "version": 1,
+      "type": "Useful",
+      "description": "Vortrox's SayoDevice O3C. Clicks by Vortrox, cut by Doggie. ",
+      "authors": [{"name":"Vortrox","gdAccountID":3541866,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Vortrox Click Pack Lite",
+      "id": "vortrox.voxtrox-click-pack-lite",
+      "version": 1,
+      "type": "Useful",
+      "description": "Vortrox's SayoDevice O3C. Clicks by Vortrox, cut by Doggie. A lighter version of the original pack with only normal clicks. ",
+      "authors": [{"name":"Vortrox","gdAccountID":3541866,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "WPopoff Clicks",
+      "id": "wpopoff.wpopoff-clicks",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"WPopoff","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Wardhs Akko Cream Blue spacebar",
+      "id": "wardh.wardhs-akko-cream-blue-spacebar",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Wardh","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Wardhs G502",
+      "id": "wardh.wardhs-g502",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Wardh","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Wardhs Reddragon Keyboard Blueswitch",
+      "id": "wardh.wardhs-reddragon-keyboard-blueswitch",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Wardh","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Whizkid05 Click Pack",
+      "id": "whizkid05.whizkid05-click-pack",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Whizkid05","gdAccountID":3822295,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Wooting 60HE",
+      "id": "markiethecatlover.wooting-60he",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"markiethecatlover","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Wooting 80HE Spacebar",
+      "id": "unknown.wooting-80he-spacebar",
+      "version": 1,
+      "type": "Useful",
+      "description": "Bricky spacebar of the Wooting 80HE. ",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Wooting 80HE Up Arrow",
+      "id": "unknown.wooting-80he-up-arrow",
+      "version": 1,
+      "type": "Useful",
+      "description": "The up arrow of Wooting 80HE keyboard. Clicks made by a random person on ZCB server then he deleted his account and messages, cut by Andarian (me) ",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Wooting Two HE",
+      "id": "plastic.wooting-two-he",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Plastic","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Wooting UwU",
+      "id": "markiethecatlover.wooting-uwu",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"MarkieTheCatLover","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Xer0s Blackwidow V3 up arrow",
+      "id": "xer0.xer0s-blackwidow-v3-up-arrow",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Xer0","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Zeos Razer Deathadder",
+      "id": "fluffyzeo.zeos-razer-deathadder",
+      "version": 1,
+      "type": "Useful",
+      "description": "Credit: zeo (fluffyzeo on discord); full clickpack available in zcb ",
+      "authors": [{"name":"fluffyzeo","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Zeroniums Keyboard",
+      "id": "zeronium.zeroniums-keyboard",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Zeronium","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Zikos UpArrow",
+      "id": "ziko.zikos-uparrow",
+      "version": 1,
+      "type": "Useful",
+      "description": "Zikos Up Arrow clicks ",
+      "authors": [{"name":"Ziko","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Zoe Keyboard (whatclick)",
+      "id": "nywall.whatclick",
+      "version": 1,
+      "type": "Useful",
+      "description": "whatclick (aka Zoe's or Simon's keyboard). Hosted and cut by nywall, updated by Andarian. ",
+      "authors": [{"name":"nywall","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Zoink",
+      "id": "zoink.clicks",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Zoink","gdAccountID":14273934,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Zoink 2",
+      "id": "zoink.clicks2",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Zoink","gdAccountID":14273934,"type":"Main"},{"name":"zikuugmd","type":"Provider"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Zoink Clicks 2023",
+      "id": "zoink.zoink-clicks-1e",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Zoink","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Zoink Click Pack",
+      "id": "zoink.zoink-click-pack",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Zoink","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Zoink's Wooting 80HE",
+      "id": "zoink.zoinks-wooting-80he",
+      "version": 1,
+      "type": "Useful",
+      "description": "The new May 2025 clickpack of Zoink's new keyboard by the legend himself. Pack made by Zoink, cut by Andarian (me) and uploaded by Zicedcube (GitHub). I fixed the packgen file too. ",
+      "authors": [{"name":"Zoink","gdAccountID":14273934,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "adf-ViperMini",
+      "id": "oli.adf-vipermini",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"oli","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "adf-g203",
+      "id": "oli.adf-g203",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"oli","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "adf-sayo",
+      "id": "oli.adf-sayo",
+      "version": 1,
+      "type": "Useful",
+      "description": "The SayoDevice that oli (adf) is using with the Outemu Pink Magnetic Switches. ",
+      "authors": [{"name":"oli","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "adf-sayo V2",
+      "id": "oli.adf-sayo-v2",
+      "version": 1,
+      "type": "Useful",
+      "description": "new best clickpack in zcb. pack made by adf (oli) ",
+      "authors": [{"name":"oli","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "adf-sayo V4",
+      "id": "oli.adf-sayo-v4",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"oli","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "adf-sayo no deskmat",
+      "id": "oli.adf-sayo-no-deskmat",
+      "version": 1,
+      "type": "Useful",
+      "description": "The SayoDevice that oli (adf) is using but he forgot to put on the deskmat while he was recording the clicks. Clickpack inspired by Andarian (me) especially! ",
+      "authors": [{"name":"oli","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "alexg502",
+      "id": "alex.alexg502",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"alex","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "alices SayoDevice O3C",
+      "id": "alicemiku.alices-sayodevice-o3c",
+      "version": 1,
+      "type": "Useful",
+      "description": "my sayo device sounds :3c ",
+      "authors": [{"name":"alicemiku","gdAccountID":14455791,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "asayo",
+      "id": "oli.asayo",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"oli","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "carbonatedmilk model o v2",
+      "id": "carbonatedmilk.carbonatedmilk-model-o-v2",
+      "version": 1,
+      "type": "Useful",
+      "description": "clickpack by @carbonatedmilk__ on zcb server. ",
+      "authors": [{"name":"carbonatedmilk","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "fredus clicks",
+      "id": "fredus.fredus-clicks",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"Fredus","gdAccountID":31214088,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "iDisagrRee Mouse Pack",
+      "id": "idisagrreee.idisagrree-mouse-pack",
+      "version": 1,
+      "type": "Useful",
+      "description": "10 Different mouse clicks and releases ",
+      "authors": [{"name":"iDisagrReee","gdAccountID":31921978,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "kwoojeks clicks",
+      "id": "kwoojek.kwoojeks-clicks",
+      "version": 1,
+      "type": "Useful",
+      "description": "MY SUPER COOL CLICKS ",
+      "authors": [{"name":"kwoojek","gdAccountID":30472069,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "kyoukiXnywalSayoClickpack",
+      "id": "nywall.kyoukixnywalsayoclickpack",
+      "version": 1,
+      "type": "Useful",
+      "description": "Clickpack recorded by Kyouki, cut and hosted by nywall. Updated by Andarian. ",
+      "authors": [{"name":"nywall","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "m4rks Logitech G502",
+      "id": "m4rk.m4rks-logitech-g502",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"m4rk","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "m4rks Viper 8k",
+      "id": "m4rk.m4rks-viper-8k",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"m4rk","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "npesta",
+      "id": "npesta.clicks",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"npesta","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "nywalls Bloody AL90 Mouse",
+      "id": "nywall.nywalls-bloody-al90-mouse",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"nywall","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "osu! Hit Sound",
+      "id": "peppy.osuhit",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"peppy (Dean Herbert)","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "rattly leobog numpad key",
+      "id": "andarian.rattly-leobog-numpad-key",
+      "version": 1,
+      "type": "Useful",
+      "description": "Rattly numpad key with the Leobog Graywood V3 shaft switch. Clicks made all by Andarian (me). ",
+      "authors": [{"name":"Andarian","gdAccountID":27823067,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "sayodevice idk",
+      "id": "unknown.sayodevice-idk",
+      "version": 1,
+      "type": "Useful",
+      "description": "a very cool sayodevice click sound ",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "sayolol",
+      "id": "somerandomperson.sayolol",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"somerandomperson","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "tobyn rog mouse",
+      "id": "tobyn.tobyn-rog-mouse",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"tobyn","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "zxsetj up arrow pack",
+      "id": "zxsetj.zxsetj-up-arrow-pack",
+      "version": 1,
+      "type": "Useful",
+      "authors": [{"name":"zxsetj","gdAccountID":31335670,"type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    }
+  ],
+  "Meme": [
+    {
+      "name": "Abyss of Darkness dash orb",
+      "id": "shadowbeatz.abyss-of-darkness-dash-orb",
+      "version": 1,
+      "type": "Meme",
+      "description": "The dash orb jumpscare in Abyss of Darkness by Exen. This would be a new jumpscare lmao. Inspired by OneAlphaHelix's Limbo Completion. ",
+      "authors": [{"name":"ShadowBeatz","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Aw dang it",
+      "id": "uproxide.awdangit",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"Uproxide","gdAccountID":25397826,"type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Bad to the Bone",
+      "id": "george-thorogood.bad-to-the-bone",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"George Thorogood","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Baldis Basics Door",
+      "id": "mystman12.baldis-basics-door",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"mystman12","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Bonk",
+      "id": "ballball.bonk",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"Cheems (Balltze/Ball Ball)","type":"Main"},{"name":"snootboopes","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Bwomp",
+      "id": "waterflame.bwomp",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"Waterflame","type":"Main"},{"name":"Beat","gdAccountID":13873867,"type":"Provider"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Car Door Slam",
+      "id": "coop.cardoorslam",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"Cooper","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Congregation",
+      "id": "koraii.congregation",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"Koraii","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Dash",
+      "id": "mdk.dash",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"Morgan David King (MDK)","type":"Main"},{"name":"RobTop","gdAccountID":71,"type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Desk Hit",
+      "id": "coop.deskhit",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"Cooper","gdAccountID":21207551,"type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Discord Ping",
+      "id": "discord.ping",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"Discord","type":"Main"},{"name":"laxiscul","type":"Provider"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Fire in the Hole",
+      "id": "stormwave.fireinthehole",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"Joe","type":"Main"},{"name":"Art (Founder of Stormwave Audio)","type":"Main"},{"name":"Stormwave Audio","type":"Main"},{"name":"Beat","gdAccountID":13873867,"type":"Provider"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "GD Death",
+      "id": "robtop.gd-death",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"RobTop","gdAccountID":71,"type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Gravity Coil",
+      "id": "roblox.gravitycoil",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"Roblox","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "KingSammelot Boing",
+      "id": "kingsammelot.kingsammelot-boing",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"KingSammelot","gdAccountID":7684191,"type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Meow",
+      "id": "unknown.el-gato",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Metal Pipe",
+      "id": "unknown.metalpipe",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "My Spacebar",
+      "id": "alguienengdxd.my-spacebar",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"alguienEnGDxd","gdAccountID":27152006,"type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Plate Breaking",
+      "id": "unknown.plate",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Pluh",
+      "id": "unknown.pluh",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Pukanya",
+      "id": "murzikmrt.pukanya",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"MurZikMRT","gdAccountID":16151003,"type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Riot Swag",
+      "id": "riot.swag",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"Riot","gdAccountID":37415,"type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "RussianGyat",
+      "id": "klyric.russiangyat",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"Klyric","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Soda",
+      "id": "unknown.soda",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Spectre",
+      "id": "alanwalker.spectre",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"Alan Walker","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Starr Drop",
+      "id": "brawl-stars.starr-drop",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"Brawl Stars","gdAccountID":14527112,"type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Taco Bell",
+      "id": "tacobell.bell",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"Taco Bell","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Tiktok",
+      "id": "tiktok.tiktok",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"TikTok","type":"Main"},{"name":"TikTok TTS","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "User Account Control",
+      "id": "microsoft.user-account-control",
+      "version": 1,
+      "type": "Meme",
+      "description": "Windows 7 ",
+      "authors": [{"name":"Microsoft","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "UwU",
+      "id": "therealkeanan00.uwu",
+      "version": 1,
+      "type": "Meme",
+      "description": "Says uwuwuwuwuwuwuwuwuwuwuwuwu ",
+      "authors": [{"name":"therealKeanan00","gdAccountID":30576486,"type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Vine Boom",
+      "id": "vine.boom",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"Vine (RIP)","type":"Main"},{"name":"Beat","gdAccountID":13873867,"type":"Provider"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Water on the Hill",
+      "id": "unknown.wateronthehill",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "Windows 7 Ding",
+      "id": "microsoft.windows-7-ding",
+      "version": 1,
+      "type": "Meme",
+      "description": "Ding! ",
+      "authors": [{"name":"Microsoft","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "Windows USB Sounds",
+      "id": "microsoft.win-usb",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"Microsoft","type":"Main"},{"name":"Cooper","gdAccountID":21207551,"type":"Provider"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "aughhh",
+      "id": "unknown.aughhh",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "goofypack",
+      "id": "fluffyzeo.goofypack",
+      "version": 1,
+      "type": "Meme",
+      "description": "From ZCB's april fools ",
+      "authors": [{"name":"fluffyzeo","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    },
+    {
+      "name": "hambuger",
+      "id": "unknown.hamburger",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "huh",
+      "id": "unknown.huh",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"Unknown","type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "i looove gd cologne",
+      "id": "wulzy.gdcologne",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"Wulzy","gdAccountID":1373926,"type":"Main"},{"name":"Colon","gdAccountID":106255,"type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "oh my god",
+      "id": "npesta.ohmygod",
+      "version": 1,
+      "type": "Meme",
+      "authors": [{"name":"npesta","gdAccountID":1507703,"type":"Main"}],
+      "folders": ["Clicks"]
+    },
+    {
+      "name": "tada",
+      "id": "tada.tada",
+      "version": 1,
+      "type": "Meme",
+      "description": "tada ",
+      "authors": [{"name":"tada","type":"Main"}],
+      "folders": ["Clicks","Releases"]
+    }
+  ]
+}

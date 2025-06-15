@@ -28,49 +28,58 @@ class JsonReader {
 	void loadData(std::function<void()> h) {
 		std::thread([=] {
 			auto configDir = Mod::get()->getConfigDir();
-			auto clicksPath = configDir / "Clicks" / "clicks-main";
-			if (std::filesystem::exists(clicksPath)) {
+			auto indexPath = configDir / "index_list.json";
+			if (std::filesystem::exists(indexPath)) {
 				memeData.clear();
 				usefulData.clear();
-				loadCategoryData(clicksPath / "Meme", memeData);
-				loadCategoryData(clicksPath / "Useful", usefulData);
-				hassomedata = true;
-				log::debug("Loaded Category!");
-				if (h) {
-					h();
-				};
+				std::ifstream file(indexPath);
+				if (file.is_open()) {
+					std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+					file.close();
+					auto json = matjson::parse(content).unwrapOrDefault();
+					if (json.contains("Useful")) {
+						loadCategoryDataFromIndex(json["Useful"], usefulData);
+					}
+					if (json.contains("Meme")) {
+						loadCategoryDataFromIndex(json["Meme"], memeData);
+					}
+					hassomedata = true;
+					log::debug("Loaded Category from index_list.json!");
+					if (h) {
+						h();
+					}
+				} else {
+					log::error("Unable to open index_list.json");
+				}
 			} else {
-				// log::error("Unable to load Categories");
+				log::error("index_list.json does not exist: {}", indexPath.string());
 			}
 		}).detach();
 	}
 
-	void loadCategoryData(const std::filesystem::path &categoryDir, std::map<std::string, CategoryData> &categoryData) {
-		if (!std::filesystem::exists(categoryDir)) {
-			log::error("Category directory does not exist: {}", categoryDir.string());
-			return;
-		}
-
-		for (const auto &entry : std::filesystem::directory_iterator(categoryDir)) {
-			std::filesystem::path fs = std::filesystem::path(entry.path());
-			if (std::filesystem::exists(fs / "pack.json")) {
-				std::string filename = entry.path().filename().string();
-				CategoryData cat;
-				cat.jsonpath = std::filesystem::path(fs / "pack.json").string();
-				if (std::filesystem::exists(fs / "Clicks")) {
-					for (const auto &Rl : std::filesystem::directory_iterator(fs / "Clicks")) {
-						cat.clicks.push_back(Rl.path().string());
+	void loadCategoryDataFromIndex(const matjson::Value& arr, std::map<std::string, CategoryData>& categoryData) {
+		if (!arr.isArray()) return;
+		int idx = 0;
+		auto arrVecResult = arr.asArray();
+		if (!arrVecResult) return;
+		const auto& arrVec = arrVecResult.unwrap();
+		for (size_t i = 0; i < arrVec.size(); ++i) {
+			const auto& entry = arrVec[i];
+			CategoryData cat;
+			cat.Name = "Pack_" + std::to_string(idx);
+			if (entry.contains("folders") && entry["folders"].isArray()) {
+				auto foldersArrResult = entry["folders"].asArray();
+				if (foldersArrResult) {
+					const auto& foldersArr = foldersArrResult.unwrap();
+					for (size_t j = 0; j < foldersArr.size(); ++j) {
+						auto folderName = foldersArr[j].asString().unwrapOr("");
+						if (folderName == "Clicks") cat.clicks.push_back(folderName);
+						if (folderName == "Releases") cat.releases.push_back(folderName);
 					}
 				}
-
-				if (std::filesystem::exists(fs / "Releases")) {
-					for (const auto &Rl : std::filesystem::directory_iterator(fs / "Releases")) {
-						cat.releases.push_back(Rl.path().string());
-					}
-				}
-
-				categoryData[filename] = cat;
 			}
+			categoryData[cat.Name] = cat;
+			idx++;
 		}
 	}
 
