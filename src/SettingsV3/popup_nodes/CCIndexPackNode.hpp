@@ -73,7 +73,7 @@ class CCIndexPackNode : public CCLayerColor {
 	void OnDevelopers(auto sender) {
 		MDPopup::create(
 		    "More Info",
-		    "Author(s): " + authorsListWhole + packDescription + packID + packVersion,
+		    "Author(s): " + authorsListWhole + packID + packVersion + packDescription,
 		    "OK", nullptr,
 			[](bool) {})
 		    ->show();
@@ -131,11 +131,11 @@ class CCIndexPackNode : public CCLayerColor {
 					}
 				}
 
-				/*if (jsonObject2.contains("version") && jsonObject2["version"].isNumber()) {
-					packVersion = "\nVersion: v" + jsonObject2["version"].asString().unwrap();
+				if (jsonObject2.contains("version") && jsonObject2["version"].isNumber()) {
+					packVersion = "\nVersion: v" + std::to_string(jsonObject2["version"].asInt());
 				} else {
 					packVersion = "\nVersion: v1";
-				}*/
+				}
 			}
 		}
 	}
