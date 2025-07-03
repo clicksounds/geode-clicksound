@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.0.25
+* Fix bugs
 ## Version v2.0.23
 * A manual download button for the Click Sounds Index has been added
 * The Click Sounds Index will no longer download on startup by default

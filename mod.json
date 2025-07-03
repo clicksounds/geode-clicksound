@@ -1,12 +1,12 @@
 {
-	"geode": "4.4.0",
+	"geode": "4.6.3",
 	"gd": {
         "win": "2.2074",
         "android": "2.2074",
         "mac": "2.2074",
         "ios": "2.2074"
     	},
-	"version": "v2.0.23",
+	"version": "v2.0.25",
 	"id": "beat.click-sound",
 	"name": "Click Sounds",
 	"developers": [

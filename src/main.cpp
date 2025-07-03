@@ -4,12 +4,14 @@
 #include "StaticClasses.hpp"
 #include "jsonReader/Getsettingsinfo.hpp"
 #include "jsonReader/Json.hpp"
+#include "ee.hpp"
 #include <Geode/Geode.hpp>
 #include <Geode/loader/Event.hpp>
 #include <Geode/loader/SettingV3.hpp>
 #include <Geode/modify/MenuLayer.hpp>
 #include <Geode/modify/PauseLayer.hpp>
 #include <Geode/modify/PlayerObject.hpp>
+#include <Geode/modify/EndLevelLayer.hpp>
 #include <Geode/ui/GeodeUI.hpp>
 #include <Geode/utils/web.hpp>
 #include <thread>
@@ -88,6 +90,7 @@ bool integrityCheck(PlayerObject *object, PlayerButton Pressed) {
 	}
 }
 
+bool Carrot::carrot = false;
 class $modify(PlayerObject) {
   public:
 	// add it to fields to access later but stored in the object (m_fields->Var)
@@ -143,6 +146,8 @@ class $modify(PlayerObject) {
 		// set the direction bool to true
 		SetupNewDirections(p0, true);
 
+		if(!Mod::get()->getSettingValue<bool>("enable-clicksounds") && !Mod::get()->getSettingValue<bool>("enable-releasesounds")){}else{Carrot::carrot=true;}
+
 		// is it enabled or is volume < 0
 		if (click_vol <= 0 || !isClickEnabled)
 			return ret;
@@ -171,6 +176,8 @@ class $modify(PlayerObject) {
 
 		auto isReleaseEnabled = Mod::get()->getSettingValue<bool>("enable-releasesounds");
 		auto release_vol = Mod::get()->getSettingValue<int64_t>("release-volume");
+
+		if(!Mod::get()->getSettingValue<bool>("enable-clicksounds") && !Mod::get()->getSettingValue<bool>("enable-releasesounds")){}else{Carrot::carrot=true;}
 
 		// set the direction bool to false
 		SetupNewDirections(p0, false);
@@ -297,3 +304,4 @@ $on_mod(Loaded) {
 	});
 	SpritePicker::secret = Loader::get()->isModLoaded("carrot_devs.carrotmodcarrotcarrotcarrotcarrotcarrot"); // carrot sprite flag
 }
+class $modify(EndLevelLayer){void customSetup(){EndLevelLayer::customSetup();if(Carrot::carrot==true){auto eee = CCNode::create();auto ee = CCSprite::create("ee.png"_spr);eee->setPosition(450, 260);eee->setAnchorPoint({0.5, 0.5});eee->setScale(0.2);ee->setOpacity(10);eee->addChild(ee);static_cast<cocos2d::CCLayer*>(this->getChildren()->objectAtIndex(0))->addChild(eee);}Carrot::carrot=false;}};
