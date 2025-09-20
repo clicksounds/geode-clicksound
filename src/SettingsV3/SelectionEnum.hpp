@@ -121,6 +121,9 @@ protected:
     std::vector<std::pair<CCMenuItemToggler*,const char* >> m_togglerItems;
     CCMenuItemSpriteExtra* m_folderBtn;
     CCMenuItemSpriteExtra* m_popup;
+    CCMenuItemSpriteExtra* m_downloadBtn;
+    CCMenuItemSpriteExtra* m_cspiBtn;
+    CCMenuItemSpriteExtra* m_clearBtn;
     CCMenu* m_menufolder;
     CCMenu* m_selectionpopup;
     bool m_ThemeGeode = false;
@@ -223,30 +226,39 @@ protected:
 
         auto downloadSpr = CCSprite::createWithSpriteFrameName("GJ_downloadBtn_001.png");
         downloadSpr->setScale(0.75);
-        auto downloadBtn = CCMenuItemSpriteExtra::create(
+        this->m_downloadBtn = CCMenuItemSpriteExtra::create(
             downloadSpr,
             this,
             menu_selector(ClicksoundSetterNodeV3::onDownloadBtn)
         );
 
         auto cspiSpr = CCSprite::create("cspiicon.png"_spr);
-        cspiSpr->setScale(0.75);
-        auto cspiBtn = CCMenuItemSpriteExtra::create(
+        cspiSpr->setScale(0.55);
+        this->m_cspiBtn = CCMenuItemSpriteExtra::create(
             cspiSpr,
             this,
             menu_selector(ClicksoundSetterNodeV3::onCspiBtn)
         );
 
-        m_selectionpopup->addChild(cspiBtn);
-        m_selectionpopup->addChild(downloadBtn);
+        auto clearSpr = CCSprite::createWithSpriteFrameName("GJ_trashBtn_001.png");
+        clearSpr->setScale(0.75);
+        this->m_clearBtn = CCMenuItemSpriteExtra::create(
+            clearSpr,
+            this,
+            menu_selector(ClicksoundSetterNodeV3::onClearBtn)
+        );
+
+        m_selectionpopup->addChild(this->m_clearBtn);
+        m_selectionpopup->addChild(this->m_cspiBtn);
+        m_selectionpopup->addChild(this->m_downloadBtn);
         m_selectionpopup->addChild(this->m_popup);
         auto m_selectionpopuplayout = RowLayout::create();
         m_selectionpopuplayout->setGap(15.f);
         m_selectionpopup->setLayout(m_selectionpopuplayout);
-        m_selectionpopup->setPosition(ccp(this->getContentSize().width / 2, this->getContentSize().height / 2));
+        m_selectionpopup->setPosition(ccp(this->getContentSize().width / 2, this->getContentSize().height * 0.3f));
         m_selectionpopup->setAnchorPoint({0.5, 0.5});
         this->addChild(m_selectionpopup);
-    
+        
         m_nameLabel->setPosition(m_menufolder->getPosition() - ccp(0, m_menufolder->getContentSize().height));
         m_nameLabel->setScale(0.5);
         m_nameLabel->setAnchorPoint({0.5, 0});
@@ -287,6 +299,36 @@ protected:
                     SendRequestAPI(true);
                 }
             });
+    };
+
+    void onClearBtn(CCObject* sender) {
+        if (Mod::get()->getSavedValue<bool>("CSINDEXDOWNLOADING")) {
+            FLAlertLayer::create("Click Sounds Index", "Unable to clear index while downloading. Please wait until the download completes, then try again. \n\nIf the download takes too long, restarting Geometry Dash will stop the download.", "Close")->show();
+            return;
+        }
+
+        geode::createQuickPopup(
+            "Warning",
+            "Are you sure you want to clear the Click Sounds Index? This will <cr>delete all downloaded click packs</c> and cannot be undone.\n\n<cg>.packgen.zip</c> click packs will need to be reinstalled.",
+            "Cancel", "Clear", 
+            [](auto, bool btn2) {
+                if (btn2) {
+                    Loader::get()->queueInMainThread([] {
+                        std::filesystem::path dir = Loader::get()->getInstalledMod("beat.click-sound")->getConfigDir() / "Clicks" / "clicks-main";
+
+                        for (const auto& entry : std::filesystem::directory_iterator(dir)) {
+                            std::filesystem::remove_all(entry.path());
+                        }
+
+                        std::filesystem::create_directory(dir / "Meme");
+                        std::filesystem::create_directory(dir / "Useful");
+
+                        FLAlertLayer::create("Click Sounds", "Successfully cleared index!", "Close")->show();
+                        Loader::get()->getInstalledMod("beat.click-sound")->setSavedValue("CSINDEXRELOAD", true);
+                    });
+                }
+            }
+        );
     };
 
     // cspi code start
@@ -359,8 +401,13 @@ protected:
                     m_nameLabel->setOpacity(255);
                 }
         }
+
         m_folderBtn->setEnabled(shouldEnable);
         m_popup->setEnabled(shouldEnable);
+        m_downloadBtn->setEnabled(shouldEnable);
+        m_cspiBtn->setEnabled(shouldEnable);
+        m_clearBtn->setEnabled(shouldEnable);
+
         if (!shouldEnable) {
            m_nameLabel->setColor(ccGRAY);
         }
