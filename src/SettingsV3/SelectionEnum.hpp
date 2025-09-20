@@ -93,7 +93,7 @@ bool GeodeLoader_Theme(CCSprite* sprite) {
      std::string texturePath = "";
      if (auto textureProtocol = typeinfo_cast<CCTextureProtocol*>(sprite)) {
         if (auto texture = textureProtocol->getTexture()) {
-            auto* cachedTextures = CCTextureCache::sharedTextureCache()->m_pTextures;
+            auto* cachedTextures = CCTextureCache::sharedTextureCache()->mF_pTextures;
             for (auto [key, obj] : CCDictionaryExt<std::string, CCTexture2D*>(cachedTextures)) {
                 if (obj == texture) {
                     texturePath= key.c_str();
@@ -241,7 +241,7 @@ protected:
         );
 
         auto clearSpr = CCSprite::createWithSpriteFrameName("GJ_trashBtn_001.png");
-        clearSpr->setScale(0.75);
+        clearSpr->setScale(0.6);
         this->m_clearBtn = CCMenuItemSpriteExtra::create(
             clearSpr,
             this,
@@ -255,7 +255,7 @@ protected:
         auto m_selectionpopuplayout = RowLayout::create();
         m_selectionpopuplayout->setGap(15.f);
         m_selectionpopup->setLayout(m_selectionpopuplayout);
-        m_selectionpopup->setPosition(ccp(this->getContentSize().width / 2, this->getContentSize().height * 0.3f));
+        m_selectionpopup->setPosition(ccp(this->getContentSize().width / 2, this->getContentSize().height * 0.5f));
         m_selectionpopup->setAnchorPoint({0.5, 0.5});
         this->addChild(m_selectionpopup);
         
