@@ -292,11 +292,7 @@ protected:
     // cspi code start
 
     void onCspiBtn(CCObject* sender) {
-        geode::createQuickPopup(
-            "CSPI Title",
-            "CSPI Text",
-            "Close"
-        );
+        FLAlertLayer::create("CSPI", "CSPI in Click Sounds", "Close")->show();
     };
 
     std::string GetJsonName(CategoryData Infomation) {
