@@ -228,7 +228,16 @@ protected:
             this,
             menu_selector(ClicksoundSetterNodeV3::onDownloadBtn)
         );
-    
+
+        auto cspiSpr = CCSprite::create("cspiicon.png"_spr);
+        cspiSpr->setScale(0.75);
+        auto cspiBtn = CCMenuItemSpriteExtra::create(
+            cspiSpr,
+            this,
+            menu_selector(ClicksoundSetterNodeV3::onCspiBtn)
+        );
+
+        m_selectionpopup->addChild(cspiBtn);
         m_selectionpopup->addChild(downloadBtn);
         m_selectionpopup->addChild(this->m_popup);
         auto m_selectionpopuplayout = RowLayout::create();
@@ -278,6 +287,16 @@ protected:
                     SendRequestAPI(true);
                 }
             });
+    };
+
+    // cspi code start
+
+    void onCspiBtn(CCObject* sender) {
+        geode::createQuickPopup(
+            "CSPI Title",
+            "CSPI Text",
+            "Close"
+        );
     };
 
     std::string GetJsonName(CategoryData Infomation) {
