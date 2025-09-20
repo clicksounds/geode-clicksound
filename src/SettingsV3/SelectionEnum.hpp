@@ -93,7 +93,7 @@ bool GeodeLoader_Theme(CCSprite* sprite) {
      std::string texturePath = "";
      if (auto textureProtocol = typeinfo_cast<CCTextureProtocol*>(sprite)) {
         if (auto texture = textureProtocol->getTexture()) {
-            auto* cachedTextures = CCTextureCache::sharedTextureCache()->mF_pTextures;
+            auto* cachedTextures = CCTextureCache::sharedTextureCache()->m_pTextures;
             for (auto [key, obj] : CCDictionaryExt<std::string, CCTexture2D*>(cachedTextures)) {
                 if (obj == texture) {
                     texturePath= key.c_str();
