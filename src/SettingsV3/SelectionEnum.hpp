@@ -129,6 +129,8 @@ protected:
     bool m_ThemeGeode = false;
     CCLabelBMFont* m_nameLabel;
     bool cs = false;
+    bool m_cspiFilePickerOpen = false;
+
     void Popup(CCObject*) {
         if (Mod::get()->getSavedValue<bool>("CSINDEXDOWNLOADING")) {
             FLAlertLayer::create("Click Sounds Index", "Unable to load while downloading. Please wait until the download completes, then try again.", "Close")->show();
@@ -232,7 +234,7 @@ protected:
             menu_selector(ClicksoundSetterNodeV3::onDownloadBtn)
         );
 
-        auto cspiSpr = CCSprite::create("cspiicon.png"_spr);
+        auto cspiSpr = CCSprite::createWithSpriteFrameName("GJ_plusBtn_001.png");
         cspiSpr->setScale(0.55);
         this->m_cspiBtn = CCMenuItemSpriteExtra::create(
             cspiSpr,
@@ -248,10 +250,10 @@ protected:
             menu_selector(ClicksoundSetterNodeV3::onClearBtn)
         );
 
-        m_selectionpopup->addChild(this->m_clearBtn);
         m_selectionpopup->addChild(this->m_cspiBtn);
         m_selectionpopup->addChild(this->m_downloadBtn);
         m_selectionpopup->addChild(this->m_popup);
+        m_selectionpopup->addChild(this->m_clearBtn);
         auto m_selectionpopuplayout = RowLayout::create();
         m_selectionpopuplayout->setGap(15.f);
         m_selectionpopup->setLayout(m_selectionpopuplayout);
@@ -334,8 +336,115 @@ protected:
     // cspi code start
 
     void onCspiBtn(CCObject* sender) {
-        FLAlertLayer::create("CSPI", "CSPI in Click Sounds", "Close")->show();
+        Mod::get()->getSavedValue<bool>("read-warnings") ? cspiStartPopup(sender) : cspiIntroPopup();
     };
+
+    void cspiStartPopup(CCObject* sender) {
+		geode::createQuickPopup(
+			"Click Sounds",
+			"Select a <cg>.packgen.zip</c> click pack file to add it to your index.\nGo to the Click Sounds website linked on the mod page to learn more.",
+			"Cancel", "Continue",
+			[this, sender](auto, bool btn2) {
+				if (btn2) {
+					cspiFileSelection(sender);
+				}
+			}
+		);
+	}
+
+    void cspiIntroPopup(int i = 0) {
+		static const std::vector<std::pair<std::string, std::string>> msgContent = {
+			{"<cr>Read these instructions carefully, as they will not be repeated.</c>", "Next"},
+			{"To make a pack, use the pack generator on the Click Sounds website.", "Next"},
+			{"Only <cg>.packgen.zip</c> click pack files can be installed. <cr>Packs from ZCB Live are not compatible.</c>", "Next"},
+			{"To convert a <cr>ZCB Live click pack</c> to <cg>.packgen.zip</c>, use the pack generator on the Click Sounds website.", "Next"},
+			{"If the 'Download Index on Startup' setting of Click Sounds is enabled, <cr>custom packs will be removed when the game restarts.</c>", "Next"},
+			{"A guide to installing custom click packs is available on the Click Sounds website.", "Close"}
+		};
+	
+		if (i >= msgContent.size()) {
+			Mod::get()->setSavedValue<bool>("read-warnings", true);
+			return;
+		}
+	
+		geode::createQuickPopup("Click Sounds", msgContent[i].first.c_str(), msgContent[i].second.c_str(), nullptr, [this, i](auto, bool btn1) {
+			if (!btn1) {
+				cspiIntroPopup(i + 1);
+			}
+		});
+	}
+
+    void cspiFileSelection(CCObject* sender) {
+		std::filesystem::path dir = Loader::get()->getInstalledMod("beat.click-sound")->getConfigDir() / "Clicks" / "clicks-main";
+		file::FilePickOptions::Filter textFilter;
+		file::FilePickOptions fileOptions;
+		textFilter.description = "Click Pack";
+		textFilter.files = { "*.packgen.zip" };
+		fileOptions.filters.push_back(textFilter);
+		auto getPersistentDir = Mod::get()->getSavedValue<std::filesystem::path>("cspi-persistent-dir");
+
+		if (m_cspiFilePickerOpen) return;
+		m_cspiFilePickerOpen = true;
+
+		file::pick(file::PickMode::OpenFile, { getPersistentDir, { textFilter } }).listen(
+			[this, sender, dir](Result<std::filesystem::path>* res) {
+				std::filesystem::path path;
+				if (!res || !res->isOk()) return false;
+				if (res->isOk()) {
+					path = res->unwrap();
+					Mod::get()->setSavedValue<std::filesystem::path>("cspi-persistent-dir", path);
+
+					std::filesystem::path tempDir = dirs::getTempDir() / path.stem();
+					std::filesystem::create_directories(tempDir);
+
+					std::filesystem::path tempZipPath = tempDir / path.filename();
+					std::filesystem::copy(path, tempZipPath, std::filesystem::copy_options::overwrite_existing);
+
+					auto unzip = file::Unzip::create(tempZipPath);
+					auto unzipResult = unzip.unwrap().extractAllTo(tempDir);
+					if (!unzipResult) return false;
+
+					std::filesystem::path packJsonPath = tempDir / "pack.json";
+					std::string type = "Useful";
+
+					if (std::filesystem::exists(packJsonPath)) {
+						std::ifstream jsonFile(packJsonPath);
+						if (jsonFile.is_open()) {
+							std::string content((std::istreambuf_iterator<char>(jsonFile)), std::istreambuf_iterator<char>());
+							auto jsonData = matjson::parse(content).unwrapOr(-2);
+							if (jsonData.contains("type")) {
+								auto val = jsonData.get("type").unwrap();
+								if (val == "Meme") type = "Meme";
+							}
+						}
+					}
+
+					std::filesystem::path newDir = dir / type / path.stem();
+					std::filesystem::create_directories(newDir);
+
+					for (auto& p : std::filesystem::recursive_directory_iterator(tempDir)) {
+						if (p.is_directory()) continue;
+						auto rel = std::filesystem::relative(p.path(), tempDir);
+						std::filesystem::create_directories(newDir / rel.parent_path());
+						std::filesystem::copy_file(p.path(), newDir / rel, std::filesystem::copy_options::overwrite_existing);
+					}
+
+					geode::createQuickPopup(
+						"Click Sounds",
+						fmt::format("{} pack installed successfully!", type),
+						"Close", nullptr,
+						[tempZipPath](auto, bool) {
+							std::filesystem::remove(tempZipPath);
+						}
+					);
+
+					Loader::get()->getInstalledMod("beat.click-sound")->setSavedValue("CSINDEXRELOAD", true);
+					return false;
+				}
+				return true;
+			});
+		return;
+	}
 
     std::string GetJsonName(CategoryData Infomation) {
         if (!Infomation.jsonpath.empty() && std::filesystem::exists(Infomation.jsonpath)) {
@@ -382,10 +491,12 @@ protected:
                     m_nameLabel->setColor(ccGRAY);
                     m_nameLabel->setOpacity(155);
                     m_nameLabel->setString("");
+                    m_selectionpopup->setPosition(ccp(this->getContentSize().width / 2, this->getContentSize().height * 0.4f));
                 } else {
                     m_nameLabel->setString(GetJsonName(ClickJson->usefulData.at(Custompa)).c_str());
                     m_nameLabel->setColor(ccWHITE);
                     m_nameLabel->setOpacity(255);
+                    m_selectionpopup->setPosition(ccp(this->getContentSize().width / 2, this->getContentSize().height * 0.5f));
                 }
         }
         if (this->getValue().m_tab == 0) {
@@ -395,10 +506,12 @@ protected:
                     m_nameLabel->setColor(ccGRAY);
                     m_nameLabel->setOpacity(155);
                     m_nameLabel->setString("");
+                    m_selectionpopup->setPosition(ccp(this->getContentSize().width / 2, this->getContentSize().height * 0.4f));
                 } else {
                     m_nameLabel->setString(GetJsonName(ClickJson->memeData.at(Custompa)).c_str());
                     m_nameLabel->setColor(ccWHITE);
                     m_nameLabel->setOpacity(255);
+                    m_selectionpopup->setPosition(ccp(this->getContentSize().width / 2, this->getContentSize().height * 0.5f));
                 }
         }
 
