@@ -1,12 +1,12 @@
 {
-	"geode": "4.6.3",
+	"geode": "4.8.0",
 	"gd": {
         "win": "2.2074",
         "android": "2.2074",
         "mac": "2.2074",
         "ios": "2.2074"
     	},
-	"version": "v2.0.25",
+	"version": "v2.1.0",
 	"id": "beat.click-sound",
 	"name": "Click Sounds",
 	"developers": [
@@ -21,7 +21,8 @@
 		"files": [
 			"resources/**/*.ogg",
 			"resources/**/*.mp3",
-			"resources/**/*.wav"
+			"resources/**/*.wav",
+			"resources/**/beat.default.packgen.zip"
 		],
 		"sprites": [
 			"resources/**/*.png"

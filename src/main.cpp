@@ -303,5 +303,42 @@ $on_mod(Loaded) {
 		onsettingsUpdate();
 	});
 	SpritePicker::secret = Loader::get()->isModLoaded("carrot_devs.carrotmodcarrotcarrotcarrotcarrotcarrot"); // carrot sprite flag
+	// sets the persistent directory to the geode folder if the user hasnt ever chosen a path before
+	if (Mod::get()->getSavedValue<std::filesystem::path>("cspi-persistent-dir").empty() || !std::filesystem::exists(Mod::get()->getSavedValue<std::filesystem::path>("cspi-persistent-dir"))) {
+		Mod::get()->setSavedValue<std::filesystem::path>("cspi-persistent-dir", dirs::getGeodeDir());
+	}
+
+	// INSTALL DEFAULT CLICK PACK ON STARTUP
+	// future update tho
+	/*Loader::get()->queueInMainThread([=] {
+		auto mod = Loader::get()->getInstalledMod("beat.click-sound");
+		std::filesystem::path zip = "beat.default.packgen.zip"_spr;
+		if (zip.string().starts_with("beat.click-sound/")) zip = zip.string().substr(16);
+		std::filesystem::path abs = mod->getResourcesDir() / zip;
+		if (!std::filesystem::exists(abs)) return;
+
+		std::filesystem::path tempDir = dirs::getTempDir() / abs.stem();
+		std::filesystem::create_directories(tempDir);
+		std::filesystem::path tempZip = tempDir / abs.filename();
+		std::filesystem::copy(abs, tempZip, std::filesystem::copy_options::overwrite_existing);
+
+		{
+			auto unzip = file::Unzip::create(tempZip).unwrap();
+			if (!unzip.extractAllTo(tempDir)) return;
+		}
+
+		std::filesystem::path out = mod->getConfigDir() / "Clicks" / "clicks-main" / "Useful" / abs.stem();
+		std::filesystem::create_directories(out);
+
+		for (auto &p : std::filesystem::recursive_directory_iterator(tempDir))
+			if (!p.is_directory()) {
+				auto rel = std::filesystem::relative(p.path(), tempDir);
+				std::filesystem::create_directories(out / rel.parent_path());
+				std::filesystem::copy_file(p.path(), out / rel, std::filesystem::copy_options::overwrite_existing);
+			}
+
+		std::filesystem::remove(tempZip);
+		mod->setSavedValue("CSINDEXRELOAD", true);
+	});*/
 }
 class $modify(EndLevelLayer){void customSetup(){EndLevelLayer::customSetup();if(Carrot::carrot==true){auto eee = CCNode::create();auto ee = CCSprite::create("ee.png"_spr);eee->setPosition(450, 260);eee->setAnchorPoint({0.5, 0.5});eee->setScale(0.2);ee->setOpacity(10);eee->addChild(ee);static_cast<cocos2d::CCLayer*>(this->getChildren()->objectAtIndex(0))->addChild(eee);}Carrot::carrot=false;}};

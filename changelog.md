@@ -1,4 +1,8 @@
 # Changelog
+## Version v2.1.0
+* Click Sounds Pack Installer is now built into Click Sounds
+* Clearing the local index has been added
+* Fixed vertical scaling issues with some UI elements
 ## Version v2.0.25
 * Fix bugs
 ## Version v2.0.23
