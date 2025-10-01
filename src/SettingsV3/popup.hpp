@@ -122,12 +122,7 @@ protected:
         }
     
         if (!hasPacks) {
-            std::string message = "No click packs were found. Please\n";
-            if (Loader::get()->isModLoaded("beat.pack-installer")) {
-                message += "redownload the index or install\na custom pack from the icon kit.";
-            } else {
-                message += "restart the game while connected\nto the internet to redownload the index.";
-            }
+            std::string message = "No click packs were found. \nPlease redownload the index\nor install a .packgen.zip pack.";
             auto noPacksLabel = CCLabelBMFont::create(message.c_str(), "bigFont.fnt");
             noPacksLabel->setAnchorPoint(ccp(0.5f, 0.5f));
             noPacksLabel->setScale(0.5f);
