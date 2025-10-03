@@ -6,6 +6,7 @@
 #include <Geode/ui/General.hpp>
 #include <Geode/utils/web.hpp>
 #include "popup.hpp"
+#include "../StaticClasses.hpp"
 #include "../ButtonSprites/Sprite.hpp"
 #include "../jsonReader/Json.hpp"
 #include <cctype>
@@ -18,7 +19,7 @@ using namespace geode::prelude;
 extern void onsettingsUpdate();
 extern void SendRequestAPI(bool forceDownload);
 
-static struct ClicksoundSettingValue {
+struct ClicksoundSettingValue {
     std::string  m_currentMemeClick;
     std::string  m_currentClick;
     int m_tab = 0;

@@ -4,7 +4,7 @@
 #include <matjson.hpp>
 using namespace geode::prelude;
 
-static struct ReadingSettings {
+struct ReadingSettings {
 	int M_Tab;
 	std::string Current_Sound_Useful;
 	std::string Current_Sound_Meme;
