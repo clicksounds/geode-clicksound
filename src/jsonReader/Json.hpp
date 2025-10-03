@@ -10,7 +10,7 @@
 
 using namespace geode::prelude;
 
-static struct CategoryData {
+struct CategoryData {
 	std::vector<std::string> clicks;
 	std::vector<std::string> releases;
 	std::string jsonpath;

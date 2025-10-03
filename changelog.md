@@ -1,4 +1,7 @@
 # Changelog
+## Version v2.2.0
+* Music will no longer cut off when clicking over 100 times per second
+* Lag when clicking over 500 times per second has been reduced
 ## Version v2.1.0
 * Click Sounds Pack Installer is now built into Click Sounds
 * Clearing the local index has been added
