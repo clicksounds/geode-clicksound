@@ -23,6 +23,7 @@ namespace Contributors  {
 		{17389494,Messages::Helper}, // AkuLunical
 		{7669473,Messages::IndexModerator}, // Jaid
 		{27823067,Messages::IndexModerator}, // Andarian
+		{27334543,Messages::IndexModerator}, // KinobuNine / 6YT
 		// CSPI Owners, unknown names
 		{31335670,Messages::CSPIOwner},
 		{29986323,Messages::CSPIOwner},
@@ -48,42 +49,42 @@ class buttonfunctionthing : public CCLayer {
 	void Owner(CCObject *sender) {
 		FLAlertLayer::create(
 		    "About",
-		    "This is the <cp>Click Sounds Owner</c>. They own the mod! ^w^",
+		    "This is the <cp>Click Sounds Owner</c>, Beat. He created the mod.",
 		    "OK")
 		    ->show();
 	}
 	void Developer(CCObject *sender) {
 		FLAlertLayer::create(
 		    "About",
-		    "This is a <cp>Click Sounds Developer</c>. They programmed a lot of features to Click Sounds. ^w^",
+		    "This is a <cp>Click Sounds Developer</c>. They programmed a lot of features to Click Sounds.",
 		    "OK")
 		    ->show();
 	}
 	void Contributor(CCObject *sender) {
 		FLAlertLayer::create(
 		    "About",
-		    "This is a <cp>Click Sounds Contributor</c>. They have programmed anything that was added to Click Sounds. ^w^",
+		    "This is a <cp>Click Sounds Contributor</c>. They have programmed anything that was added to Click Sounds.",
 		    "OK")
 		    ->show();
 	}
 	void Helper(CCObject *sender) {
 		FLAlertLayer::create(
 		    "About",
-		    "This is a <cp>Click Sounds Helper</c>. These users are helpful to the Click Sounds community. ^w^",
+		    "This is a <cp>Click Sounds Helper</c>. These users are helpful to the Click Sounds community.",
 		    "OK")
 		    ->show();
 	}
 	void IndexModerator(CCObject *sender) {
 		FLAlertLayer::create(
 		    "About",
-		    "This is a <cp>Click Sounds Index Moderator</c>. They moderate click packs for Click Sounds. ^w^",
+		    "This is a <cp>Click Sounds Index Moderator</c>. They moderate click packs for Click Sounds.",
 		    "OK")
 		    ->show();
 	}
 	void CSPIOwner(CCObject *sender) {
 		FLAlertLayer::create(
 		    "About",
-		    "This is a <cp>Click Sounds Pack Installer early owner</c>. They supported CSPI early on by boosting the discord server. ^w^",
+		    "This is a <cp>Click Sounds Pack Installer early owner</c>. They supported CSPI early on by boosting the discord server.",
 		    "OK")
 		    ->show();
 	}
