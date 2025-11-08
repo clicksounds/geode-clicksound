@@ -1,6 +1,9 @@
 # Changelog
-## Version v2.1.1
+## Version v2.2.1
 * Add 6YT's index moderator badge
+## Version v2.2.0
+* This version is unreleased and its changes do not apply to future updates
+* Disregard this update
 ## Version v2.1.0
 * Click Sounds Pack Installer is now built into Click Sounds
 * Clearing the local index has been added
@@ -242,4 +245,5 @@
 ## Version v1.0.0
 * 'Bwomp', 'Fire In The Hole', 'Default', and 'Vine Boom' click sounds added!
 * Initial release of Click Sounds!
+
 
