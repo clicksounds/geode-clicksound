@@ -7,6 +7,8 @@
 #include <regex>
 using namespace geode::prelude;
 
+extern void SendRequestAPI(bool forceDownload);
+
 class Select : public geode::Popup<> {
 protected:
     bool m_theme = false;
@@ -14,6 +16,7 @@ protected:
     std::function<void(std::string)> m_settings;
     ScrollLayer* scroll;
     TextInput* searchBar;
+    
 
     CCIndexPackNode* Item(auto send, auto modid, bool meme) {
         return CCIndexPackNode::create(send, [=]() {
@@ -46,6 +49,7 @@ protected:
         m_mainLayer->addChild(scroll);
 
         addSearchBar();
+        addDownloadBtn();
         return true;
     }
     void addSearchBar() {
@@ -122,7 +126,7 @@ protected:
         }
     
         if (!hasPacks) {
-            std::string message = "No click packs were found. \nPlease redownload the index\nor install a .packgen.zip pack.";
+            std::string message = "No click packs were found. \nPlease download the index\nfrom the upper right corner\nor install a .packgen.zip pack.";
             auto noPacksLabel = CCLabelBMFont::create(message.c_str(), "bigFont.fnt");
             noPacksLabel->setAnchorPoint(ccp(0.5f, 0.5f));
             noPacksLabel->setScale(0.5f);
@@ -146,6 +150,35 @@ protected:
     
         return true;
     }
+
+    void addDownloadBtn() {
+        auto downloadSpr = CCSprite::createWithSpriteFrameName("GJ_downloadBtn_001.png");
+        //downloadSpr->setScale(1);
+        auto downloadBtn = CCMenuItemSpriteExtra::create(
+            downloadSpr,
+            this,
+            menu_selector(Select::onDownloadBtn)
+        );
+        auto downloadMenu = CCMenu::create();
+        downloadMenu->setID("download-index-menu");
+        downloadBtn->setID("download-index-button");
+        //downloadMenu->setPosition(ccp(scroll->getContentSize().width / 2, scroll->getContentSize().height / 3));
+        downloadMenu->setPosition(ccp(m_mainLayer->getContentSize().width, m_mainLayer->getContentSize().height));
+        downloadMenu->addChild(downloadBtn);
+        m_mainLayer->addChild(downloadMenu);
+    }
+
+    void onDownloadBtn(CCObject* sender) {
+        geode::createQuickPopup(
+            "Warning",
+            "The Click Sounds Index is over <cj>50mb+</c> in size. Are you sure you want to redownload it?",
+            "Cancel", "Download", 
+            [](auto, bool btn2) {
+                if (btn2) {
+                    SendRequestAPI(true);
+                }
+            });
+    };
 
 public:
     static Select* create(bool meme = false, bool clicksound = true, std::function<void(std::string)> setting = [](std::string x) {}, bool theme = false) {

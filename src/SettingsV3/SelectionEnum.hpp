@@ -17,7 +17,6 @@
 using namespace geode::prelude;
 
 extern void onsettingsUpdate();
-extern void SendRequestAPI(bool forceDownload);
 
 struct ClicksoundSettingValue {
     std::string  m_currentMemeClick;
@@ -122,7 +121,6 @@ protected:
     std::vector<std::pair<CCMenuItemToggler*,const char* >> m_togglerItems;
     CCMenuItemSpriteExtra* m_folderBtn;
     CCMenuItemSpriteExtra* m_popup;
-    CCMenuItemSpriteExtra* m_downloadBtn;
     CCMenuItemSpriteExtra* m_cspiBtn;
     CCMenuItemSpriteExtra* m_clearBtn;
     CCMenu* m_menufolder;
@@ -227,14 +225,6 @@ protected:
             menu_selector(ClicksoundSetterNodeV3::Popup)
         );
 
-        auto downloadSpr = CCSprite::createWithSpriteFrameName("GJ_downloadBtn_001.png");
-        downloadSpr->setScale(0.75);
-        this->m_downloadBtn = CCMenuItemSpriteExtra::create(
-            downloadSpr,
-            this,
-            menu_selector(ClicksoundSetterNodeV3::onDownloadBtn)
-        );
-
         auto cspiSpr = CCSprite::createWithSpriteFrameName("GJ_plusBtn_001.png");
         cspiSpr->setScale(0.55);
         this->m_cspiBtn = CCMenuItemSpriteExtra::create(
@@ -252,7 +242,6 @@ protected:
         );
 
         m_selectionpopup->addChild(this->m_cspiBtn);
-        m_selectionpopup->addChild(this->m_downloadBtn);
         m_selectionpopup->addChild(this->m_popup);
         m_selectionpopup->addChild(this->m_clearBtn);
         auto m_selectionpopuplayout = RowLayout::create();
@@ -292,18 +281,6 @@ protected:
         return true;
     }
 
-    void onDownloadBtn(CCObject* sender) {
-        geode::createQuickPopup(
-            "Warning",
-            "The Click Sounds Index is over <cj>30mb+</c> in size. Are you sure you want to redownload it?",
-            "Cancel", "Download", 
-            [](auto, bool btn2) {
-                if (btn2) {
-                    SendRequestAPI(true);
-                }
-            });
-    };
-
     void onClearBtn(CCObject* sender) {
         if (Mod::get()->getSavedValue<bool>("CSINDEXDOWNLOADING")) {
             FLAlertLayer::create("Click Sounds Index", "Unable to clear index while downloading. Please wait until the download completes, then try again. \n\nIf the download takes too long, restarting Geometry Dash will stop the download.", "Close")->show();
@@ -341,9 +318,9 @@ protected:
     };
 
     void cspiStartPopup(CCObject* sender) {
-		geode::createQuickPopup(
+		auto cspiPopup = geode::createQuickPopup(
 			"Click Sounds",
-			"Select a <cg>.packgen.zip</c> click pack file to add it to your index.\nGo to the Click Sounds website linked on the mod page to learn more.",
+			"Select a <cg>.packgen.zip</c> click pack file to add it to your index.\n\n\n",
 			"Cancel", "Continue",
 			[this, sender](auto, bool btn2) {
 				if (btn2) {
@@ -351,7 +328,25 @@ protected:
 				}
 			}
 		);
+        auto packgenSpr = CCSprite::create("cspackgenlogo.png"_spr);
+        auto packgenBtn = CCMenuItemSpriteExtra::create(
+            packgenSpr,
+            this,
+            menu_selector(ClicksoundSetterNodeV3::onCspiPackgenBtn)
+        );
+        packgenBtn->setID("packgen-button"_spr);
+        packgenSpr->setScale(0.75f);
+        packgenBtn->setPosition(0.f, cspiPopup->getContentSize().height / 8);
+        log::debug("cspipopup contentsize width: {}", cspiPopup->getContentSize().width);
+        log::debug("cspipopup contentsize width / 2: {}", cspiPopup->getContentSize().width / 2);
+        log::debug("cspipopup contentsize height: {}", cspiPopup->getContentSize().height);
+        log::debug("cspipopup contentsize height / 2: {}", cspiPopup->getContentSize().height / 2);
+        cspiPopup->m_buttonMenu->addChild(packgenBtn);
 	}
+
+    void onCspiPackgenBtn(CCObject* sender) {
+        cocos2d::CCApplication::sharedApplication()->openURL("https://clicksounds.github.io/clicks/packgen.html");
+    }
 
     void cspiIntroPopup(int i = 0) {
 		static const std::vector<std::pair<std::string, std::string>> msgContent = {
@@ -518,7 +513,6 @@ protected:
 
         m_folderBtn->setEnabled(shouldEnable);
         m_popup->setEnabled(shouldEnable);
-        m_downloadBtn->setEnabled(shouldEnable);
         m_cspiBtn->setEnabled(shouldEnable);
         m_clearBtn->setEnabled(shouldEnable);
 
