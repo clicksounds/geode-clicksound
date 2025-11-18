@@ -1,4 +1,7 @@
 # Changelog
+## Version v2.2.2
+* The download button has been moved into the Click Sounds Index list
+* Added a button that opens the pack generator website
 ## Version v2.2.1
 * Add 6YT's index moderator badge
 ## Version v2.2.0
@@ -245,5 +248,6 @@
 ## Version v1.0.0
 * 'Bwomp', 'Fire In The Hole', 'Default', and 'Vine Boom' click sounds added!
 * Initial release of Click Sounds!
+
 
 
