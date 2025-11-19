@@ -2,7 +2,6 @@
 
 #include "../../ButtonSprites/Sprite.hpp"
 #include "../../jsonReader/Json.hpp"
-#include "../../StaticClasses.hpp"
 #include "../popup.hpp"
 #include <Geode/Geode.hpp>
 #include <Geode/loader/Event.hpp>
@@ -86,22 +85,6 @@ class CCIndexPackNode : public CCLayerColor {
 			selectionobject();
 		}
 	}
-	/////////
-	void onPlayPreview(CCObject *) {
-		std::string id = Infomation.Name;
-		if (id.empty()) return;
-
-		auto clicks = ClickJson->GetMemeClicks();
-		auto releases = ClickJson->GetMemeReleases();
-		bool isRelease = releases.count(id);
-
-		if (isRelease) {
-			ReleaseSoundIndex->PlayRandomByID(id);
-		} else {
-			ClickSoundIndex->PlayRandomByID(id);
-		}
-	}
-
 	void getlistfull() {
 		if (!Infomation.jsonpath.empty() && std::filesystem::exists(Infomation.jsonpath)) {
 			std::filesystem::path fs = std::filesystem::path(Infomation.jsonpath);
@@ -151,6 +134,7 @@ class CCIndexPackNode : public CCLayerColor {
 		this->setAnchorPoint(ccp(0, 1));
 		this->setPositionY(207);
 		this->setOpacity(100);
+		// Text = CCLabelBMFont::create("ITEM NODE", "goldFont.fnt");
 		Text = AutoScaleCCLabelBMFont::create("ITEM NODE", "bigFont.fnt", 200, 50);
 		Text->setID("name-label");
 		Text->setLayoutOptions(AxisLayoutOptions::create()->setScalePriority(1));
@@ -166,6 +150,7 @@ class CCIndexPackNode : public CCLayerColor {
 					std::string name = jsonObject["name"].asString().unwrap();
 					m_name = name;
 					Text->updateAnchoredPosition(Anchor::Top, ccp(0, -10), ccp(.5f, .5f));
+					// limitNodeWidth(Text, this->getContentSize() - CCSize(this->getContentSize().width, 0), .8f, .1f);
 					Text->setScale(0.5f);
 					Text->setString(name.c_str());
 				}
@@ -232,6 +217,7 @@ class CCIndexPackNode : public CCLayerColor {
 					MEN(DEVS)
 					DEVS->setID("developers");
 					DEVS->ignoreAnchorPointForPosition(false);
+					// Author->updateAnchoredPosition(Anchor::Bottom, ccp(0, -10), ccp(.5f, .5f));
 					auto developersBtn = CCMenuItemSpriteExtra::create(
 					    Author, this, menu_selector(CCIndexPackNode::OnDevelopers));
 					developersBtn->m_scaleMultiplier = 1.1;
@@ -251,34 +237,18 @@ class CCIndexPackNode : public CCLayerColor {
 		gradient->setVector(ccp(90, 0));
 		this->addChild(gradient);
 		this->setOpacity(0);
-
 		// GJ_button_06
-		///////////
-		auto PlaySprite = CCMenuItemSpriteExtra::create(
-		    ButtonSprite::create("Play", 40.f, true,
-		                         SpritePicker::get("bigFont.fnt", theme),
-		                         SpritePicker::get("GJ_button_02.png", theme),
-		                         20.f, 1.0f),
-		    this,
-		    menu_selector(CCIndexPackNode::onPlayPreview));
-		PlaySprite->m_scaleMultiplier = 0.9;
-
 		auto ConfirmSprite = CCMenuItemSpriteExtra::create(ButtonSprite::create("Set", 40.f, true, SpritePicker::get("bigFont.fnt", theme), SpritePicker::get("GJ_button_01.png", theme), 20.f, 1.0f), this, menu_selector(CCIndexPackNode::selected));
 		ConfirmSprite->m_scaleMultiplier = 0.9;
 		MEN(_Apply_Menu)
 		_Apply_Menu->setID("apply");
 		_Apply_Menu->ignoreAnchorPointForPosition(false);
-		_Apply_Menu->addChild(PlaySprite);
 		_Apply_Menu->addChild(ConfirmSprite);
 		_Apply_Menu->setLayout(RowLayout::create()
 		                           ->setAxisAlignment(AxisAlignment::Start)
 		                           ->setCrossAxisLineAlignment(AxisAlignment::Start)
 		                           ->setCrossAxisAlignment(AxisAlignment::Start));
-
-		_Apply_Menu->setContentSize(CCSize(
-		    PlaySprite->getContentSize().width + ConfirmSprite->getContentSize().width,
-		    ConfirmSprite->getContentSize().height));
-
+		_Apply_Menu->setContentSize(ConfirmSprite->getContentSize());
 		_Apply_Menu->setPosition(ccp(this->getContentSize().width - ConfirmSprite->getContentSize().width / 1.5, this->getContentSize().height / 2));
 		_Apply_Menu->updateLayout();
 		this->addChild(_Apply_Menu);
