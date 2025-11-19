@@ -35,7 +35,7 @@ class MyButtonSettingV3 : public SettingV3 {
 	SettingNodeV3 *createNode(float width) override;
 };
 
-class MyButtonSettingNodeV3 : public SettingNodeV3 {
+class PlaySoundSettingNodeV3 : public SettingNodeV3 {
   protected:
 	CCSprite *m_buttonSprite;
 	CCMenuItemSpriteExtra *m_button;
@@ -48,7 +48,7 @@ class MyButtonSettingNodeV3 : public SettingNodeV3 {
 		m_buttonSprite = CCSprite::createWithSpriteFrameName("GJ_playMusicBtn_001.png");
 		m_buttonSprite->setScale(.68f);
 		m_button = CCMenuItemSpriteExtra::create(
-		    m_buttonSprite, this, menu_selector(MyButtonSettingNodeV3::onButton));
+		    m_buttonSprite, this, menu_selector(PlaySoundSettingNodeV3::onPlaySoundButton));
 		m_setting = setting;
 		this->getButtonMenu()->addChildAtPosition(m_button, Anchor::Center);
 		this->getButtonMenu()->setContentWidth(30);
@@ -69,7 +69,7 @@ class MyButtonSettingNodeV3 : public SettingNodeV3 {
 		m_buttonSprite->setOpacity(shouldEnable ? 255 : 155);
 		m_buttonSprite->setColor(shouldEnable ? ccWHITE : ccGRAY);
 	}
-	void onButton(CCObject *) {
+	void onPlaySoundButton(CCObject *) {
 		if (m_setting->clicksound) {
 			if (Custom_OnClick) {
 				ClickSound->Play();
@@ -89,8 +89,8 @@ class MyButtonSettingNodeV3 : public SettingNodeV3 {
 	void onResetToDefault() override {}
 
   public:
-	static MyButtonSettingNodeV3 *create(std::shared_ptr<MyButtonSettingV3> setting, float width) {
-		auto ret = new MyButtonSettingNodeV3();
+	static PlaySoundSettingNodeV3 *create(std::shared_ptr<MyButtonSettingV3> setting, float width) {
+		auto ret = new PlaySoundSettingNodeV3();
 		if (ret && ret->init(setting, width)) {
 			ret->autorelease();
 			return ret;
@@ -112,7 +112,7 @@ class MyButtonSettingNodeV3 : public SettingNodeV3 {
 };
 
 SettingNodeV3 *MyButtonSettingV3::createNode(float width) {
-	return MyButtonSettingNodeV3::create(
+	return PlaySoundSettingNodeV3::create(
 	    std::static_pointer_cast<MyButtonSettingV3>(shared_from_this()),
 	    width);
 }

@@ -107,6 +107,43 @@ class MultiSoundCache {
 		}
 	}
 
+	void PlayRandomByID(std::string packID) {
+		if (!ClickJson || !ClickJson->hassomedata || m_sounds.empty()) return;
+
+		auto* sc = m_sounds.front();
+		auto st = GetSettingJsonRead(sc->custom);
+
+		bool isMeme = (st.M_Tab == 0);
+		bool isRelease = (sc->Volume == "release-volume");
+
+		std::map<std::string, CategoryData> tbl =
+			isMeme
+				? (isRelease ? ClickJson->GetMemeReleases() : ClickJson->GetMemeClicks())
+				: (isRelease ? ClickJson->GetUsefulReleases() : ClickJson->GetUsefulClicks());
+
+		auto it = tbl.find(packID);
+		if (it == tbl.end()) return;
+
+		const auto& vec = isRelease ? it->second.releases : it->second.clicks;
+		if (vec.empty()) return;
+
+		auto backup = m_sounds;
+		std::vector<SoundCache*> tmp;
+		tmp.reserve(vec.size());
+
+		for (auto& p : vec) {
+			auto* s = new SoundCache(isRelease ? "release-volume" : "click-volume", isRelease ? "selection-release" : "selection-clicks");
+			s->Setsound(p);
+			tmp.push_back(s);
+		}
+
+		m_sounds = tmp;
+		PlayRandom();
+
+		for (auto* s : m_sounds) delete s;
+		m_sounds = backup;
+	}
+
 	~MultiSoundCache() {
 		for (auto &sound : m_sounds) {
 			delete sound;
