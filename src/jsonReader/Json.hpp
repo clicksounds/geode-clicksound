@@ -13,6 +13,7 @@ using namespace geode::prelude;
 struct CategoryData {
 	std::vector<std::string> clicks;
 	std::vector<std::string> releases;
+	std::string noise;
 	std::string jsonpath;
 	std::string Name;
 };
@@ -68,6 +69,8 @@ class JsonReader {
 						cat.releases.push_back(Rl.path().string());
 					}
 				}
+
+				// noise code here
 
 				categoryData[filename] = cat;
 			}
