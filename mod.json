@@ -83,6 +83,8 @@
 			"name": "Click Sounds",
 			"default": "Useful",
 			"clicksound" : true,
+			"releasesound" : false,
+			"noisesound" : false,
 			"enable-if": "setting:enable-clicksounds"
 		},
 		"clicksound-effect": {
@@ -116,6 +118,8 @@
 			"type": "custom:selectionclicks",
 			"name": "Release Sounds",
 			"clicksound" : false,
+			"releasesound" : true,
+			"noisesound" : false,
 			"default": "Useful",
 			"enable-if": "setting:enable-releasesounds"
 		},
@@ -124,6 +128,36 @@
 			"name": "Test Sound",
 			"clicksound" : false,
 			"enable-if": "setting:enable-releasesounds"
+		},
+		"noise-section": {
+            "name": "Noise Sounds",
+            "description": "This category is for settings that are for <cr>Noise Sounds</c>",
+            "type": "title"
+        },
+		"enable-noisesounds": {
+			"name": "Enable Noise Sounds",
+			"type": "bool",
+			"default": false
+		},
+		"noise-volume": {
+			"name": "Noise sound volume (%)",
+			"type": "int",
+			"default": 20,
+			"min": 0,
+			"max": 100,
+			"control": {
+				"slider": true
+			},
+			"enable-if": "setting:enable-noisesounds"
+		},
+		"selection-noise": {
+			"type": "custom:selectionclicks",
+			"name": "Noise Sounds",
+			"default": "Useful",
+			"clicksound" : false,
+			"releasesound" : false,
+			"noisesound" : true,
+			"enable-if": "setting:enable-noisesounds"
 		},
 		"Miscellaneous-section": {
             "name": "Miscellaneous",

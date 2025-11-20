@@ -12,6 +12,7 @@
 #include <Geode/modify/PauseLayer.hpp>
 #include <Geode/modify/PlayerObject.hpp>
 #include <Geode/modify/EndLevelLayer.hpp>
+#include <Geode/modify/GJBaseGameLayer.hpp>
 #include <Geode/ui/GeodeUI.hpp>
 #include <Geode/utils/web.hpp>
 #include <thread>
@@ -195,6 +196,15 @@ class $modify(PlayerObject) {
 		return ret;
 	}
 };
+
+/*class $modify(csGJBGL ,GJBaseGameLayer) {
+	bool init() {
+		if (!GJBaseGameLayer::init()) return false;
+
+
+	} 
+};*/
+// FOR NOISE SOUNDS TO BE IMPLEMENTED LATER
 
 void SendRequestAPI(bool forceDownload = false) {
 	if (forceDownload) {

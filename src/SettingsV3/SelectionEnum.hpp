@@ -70,12 +70,23 @@ struct matjson::Serialize<ClicksoundSettingValue> {
 class ClicksoundSetterV3 : public SettingBaseValueV3<ClicksoundSettingValue> {
 public:
     bool clicksound = false;
-    static Result<std::shared_ptr<SettingV3>> parse(std::string const& key, std::string const& modID, matjson::Value const& json) {
+    bool releasesound = false;
+    bool noisesound = false;
+
+    static Result<std::shared_ptr<SettingV3>> parse(
+        std::string const& key,
+        std::string const& modID,
+        matjson::Value const& json
+    ) {
         auto res = std::make_shared<ClicksoundSetterV3>();
         auto root = checkJson(json, "selectionclicks");
         res->parseBaseProperties(key, modID, root);
+
+        // read all three; missing keys default to false
         root.has("clicksound").into(res->clicksound);
-        root.checkUnknownKeys();
+        root.has("releasesound").into(res->releasesound);
+        root.has("noisesound").into(res->noisesound);
+
         return root.ok(std::static_pointer_cast<SettingV3>(res));
     }
 

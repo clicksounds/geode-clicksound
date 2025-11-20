@@ -107,7 +107,8 @@ class MultiSoundCache {
 		}
 	}
 
-	void PlayRandomByID(std::string packID) {
+	// FUNCTION CURRENTLY UNUSED
+	/*void PlayRandomByID(std::string packID) {
 		if (!ClickJson || !ClickJson->hassomedata || m_sounds.empty()) return;
 
 		auto* sc = m_sounds.front();
@@ -142,7 +143,7 @@ class MultiSoundCache {
 
 		for (auto* s : m_sounds) delete s;
 		m_sounds = backup;
-	}
+	}*/
 
 	~MultiSoundCache() {
 		for (auto &sound : m_sounds) {
