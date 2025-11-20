@@ -19,11 +19,15 @@
 using namespace geode::prelude;
 
 void onsettingsUpdate() {
+	auto selection_clicks = GetSettingJsonRead("selection-clicks");
+	ClickSound->Setsound(selection_clicks.Custom_Sound_Path);
+
 	auto selection_release = GetSettingJsonRead("selection-release");
 	ReleaseSound->Setsound(selection_release.Custom_Sound_Path);
 
-	auto selection_clicks = GetSettingJsonRead("selection-clicks");
-	ClickSound->Setsound(selection_clicks.Custom_Sound_Path);
+	auto selection_noise = GetSettingJsonRead("selection-noise");
+	NoiseSound->Setsound(selection_noise.Custom_Sound_Path);
+	
 	if (ClickJson->hassomedata) {
 
 		Custom_OnClick = selection_clicks.M_Tab == 2;
@@ -147,7 +151,7 @@ class $modify(PlayerObject) {
 		// set the direction bool to true
 		SetupNewDirections(p0, true);
 
-		if(!Mod::get()->getSettingValue<bool>("enable-clicksounds") && !Mod::get()->getSettingValue<bool>("enable-releasesounds")){}else{Carrot::carrot=true;}
+		if(!Mod::get()->getSettingValue<bool>("enable-clicksounds") && !Mod::get()->getSettingValue<bool>("enable-releasesounds") && !Mod::get()->getSettingValue<bool>("enable-noisesounds")){}else{Carrot::carrot=true;}
 
 		// is it enabled or is volume < 0
 		if (click_vol <= 0 || !isClickEnabled)
@@ -178,7 +182,7 @@ class $modify(PlayerObject) {
 		auto isReleaseEnabled = Mod::get()->getSettingValue<bool>("enable-releasesounds");
 		auto release_vol = Mod::get()->getSettingValue<int64_t>("release-volume");
 
-		if(!Mod::get()->getSettingValue<bool>("enable-clicksounds") && !Mod::get()->getSettingValue<bool>("enable-releasesounds")){}else{Carrot::carrot=true;}
+		if(!Mod::get()->getSettingValue<bool>("enable-clicksounds") && !Mod::get()->getSettingValue<bool>("enable-releasesounds") && !Mod::get()->getSettingValue<bool>("enable-noisesounds")){}else{Carrot::carrot=true;}
 
 		// set the direction bool to false
 		SetupNewDirections(p0, false);
@@ -197,14 +201,23 @@ class $modify(PlayerObject) {
 	}
 };
 
-/*class $modify(csGJBGL ,GJBaseGameLayer) {
+// NOISE SOUNDS
+class $modify(csGJBGL, GJBaseGameLayer) {
 	bool init() {
-		if (!GJBaseGameLayer::init()) return false;
+		bool ret = GJBaseGameLayer::init();
 
+		bool isNoiseEnabled = Mod::get()->getSettingValue<bool>("enable-noisesounds");
+		auto noise_vol = Mod::get()->getSettingValue<int64_t>("noise-volume");
 
+		if (noise_vol <= 0 || !isNoiseEnabled)
+			return ret;
+		
+		if(!Mod::get()->getSettingValue<bool>("enable-clicksounds") && !Mod::get()->getSettingValue<bool>("enable-releasesounds") && !Mod::get()->getSettingValue<bool>("enable-noisesounds")){}else{Carrot::carrot=true;}
+		NoiseSound->Play(false, true);
+
+		return ret;
 	} 
-};*/
-// FOR NOISE SOUNDS TO BE IMPLEMENTED LATER
+};
 
 void SendRequestAPI(bool forceDownload = false) {
 	if (forceDownload) {

@@ -270,8 +270,8 @@ protected:
         int count = 0;
         for (auto value : {
             std::make_pair(0, "Meme"),
-            std::make_pair(1, "Useful"),
-            std::make_pair(2, "Custom")
+            std::make_pair(1, "Useful")//,
+            //std::make_pair(2, "Custom")
         }) {
             count += 40;
             auto offSpr = ButtonSprite::create(value.second, 40.f, true, "bigFont.fnt", "GJ_button_04.png", 20.f, 1.0f);
