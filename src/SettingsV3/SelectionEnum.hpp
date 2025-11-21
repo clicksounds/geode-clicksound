@@ -70,23 +70,12 @@ struct matjson::Serialize<ClicksoundSettingValue> {
 class ClicksoundSetterV3 : public SettingBaseValueV3<ClicksoundSettingValue> {
 public:
     bool clicksound = false;
-    bool releasesound = false;
-    bool noisesound = false;
-
-    static Result<std::shared_ptr<SettingV3>> parse(
-        std::string const& key,
-        std::string const& modID,
-        matjson::Value const& json
-    ) {
+    static Result<std::shared_ptr<SettingV3>> parse(std::string const& key, std::string const& modID, matjson::Value const& json) {
         auto res = std::make_shared<ClicksoundSetterV3>();
         auto root = checkJson(json, "selectionclicks");
         res->parseBaseProperties(key, modID, root);
-
-        // read all three; missing keys default to false
         root.has("clicksound").into(res->clicksound);
-        root.has("releasesound").into(res->releasesound);
-        root.has("noisesound").into(res->noisesound);
-
+        root.checkUnknownKeys();
         return root.ok(std::static_pointer_cast<SettingV3>(res));
     }
 
@@ -218,7 +207,7 @@ protected:
         this->getStatusLabel()->setPosition(this->getNameMenu()->getPosition() - ccp(0, this->getNameMenu()->getContentHeight() + 2));
         this->getStatusLabel()->setScale(0.175);
         this->getStatusLabel()->setAnchorPoint({0, 1});
-        this->getButtonMenu()->setScale(1.2);
+        this->getButtonMenu()->setScale(0.9);
         this->getNameMenu()->setScale(1.2);
         m_menufolder = CCMenu::create();
         m_menufolder->addChild(m_folderBtn);
@@ -270,13 +259,13 @@ protected:
         int count = 0;
         for (auto value : {
             std::make_pair(0, "Meme"),
-            std::make_pair(1, "Useful"),
-            std::make_pair(2, "Custom")
+            std::make_pair(1, "Useful")//,
+            //std::make_pair(2, "Custom")
         }) {
             count += 40;
-            auto offSpr = ButtonSprite::create(value.second, 40.f, true, "bigFont.fnt", "GJ_button_04.png", 20.f, 1.0f);
+            auto offSpr = ButtonSprite::create(value.second, 40.f, false, "bigFont.fnt", "GJ_button_04.png", 20.f, 1.0f);
+            auto onSpr = ButtonSprite::create(value.second, 40.f, false, "bigFont.fnt", "GJ_button_01.png", 20.f, 1.0f);
             offSpr->setOpacity(90);
-            auto onSpr = ButtonSprite::create(value.second, 40.f, true, "bigFont.fnt", "GJ_button_01.png", 20.f, 1.0f);
             auto toggle = CCMenuItemToggler::create(
                 offSpr, onSpr, this, menu_selector(ClicksoundSetterNodeV3::onToggle)
             );

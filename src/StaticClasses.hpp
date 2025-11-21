@@ -13,7 +13,6 @@ struct downloadedzipStruc {
 
 static downloadedzipStruc indexzip;
 FMOD::ChannelGroup *CS_Group;
-FMOD::ChannelGroup *NS_Group;
 FMOD::DSP *pitchShifterDSP;
 using namespace geode::prelude;
 // Custom class for Caching sounds (Make it less laggy for mobile platforms and such)
@@ -34,10 +33,6 @@ class SoundCache {
 			FMODAudioEngine::sharedEngine()->m_system->createDSPByType(FMOD_DSP_TYPE_PITCHSHIFT, &pitchShifterDSP);
 			CS_Group->addDSP(0, pitchShifterDSP);
 		}
-
-		if (!NS_Group) {
-			FMODAudioEngine::sharedEngine()->m_system->createChannelGroup("NS_Group", &NS_Group);
-		}
 	}
 
 	void Setsound(std::string soundFile) {
@@ -49,7 +44,7 @@ class SoundCache {
 		}
 	}
 
-	void Play(bool TestButton = false, bool looped = false) {
+	void Play(bool TestButton = false) {
 		std::string Paths = GetSettingJsonRead(custom).Custom_Sound_Path;
 		if (m_soundFile != Paths) {
 			Setsound(Paths);
@@ -57,11 +52,7 @@ class SoundCache {
 		if (!m_sound) {
 			return;
 		}
-		if (looped) {
-			PlayLooped();
-		} else {
-			PlayModded(TestButton);
-		}
+		PlayModded(TestButton);
 	}
 
 	void PlayModded(bool TestButton = false) {
@@ -78,16 +69,6 @@ class SoundCache {
 			semitone += 1;
 		}
 		pitchShifterDSP->setParameterFloat(FMOD_DSP_PITCHSHIFT_PITCH, semitone); // semitone is half a octave
-	}
-
-	void PlayLooped() {
-		float GetVolume = Mod::get()->getSettingValue<int64_t>(Volume);
-		if (GetVolume <= 0) {
-			return;
-		}
-		m_sound->setMode(FMOD_LOOP_NORMAL);
-		Soundchannel->setVolume(GetVolume / 50.f);
-		FMODAudioEngine::sharedEngine()->m_system->playSound(m_sound, NS_Group, false, &Soundchannel);
 	}
 
 	~SoundCache() {
@@ -126,8 +107,7 @@ class MultiSoundCache {
 		}
 	}
 
-	// FUNCTION CURRENTLY UNUSED
-	/*void PlayRandomByID(std::string packID) {
+	void PlayRandomByID(std::string packID) {
 		if (!ClickJson || !ClickJson->hassomedata || m_sounds.empty()) return;
 
 		auto* sc = m_sounds.front();
@@ -162,7 +142,7 @@ class MultiSoundCache {
 
 		for (auto* s : m_sounds) delete s;
 		m_sounds = backup;
-	}*/
+	}
 
 	~MultiSoundCache() {
 		for (auto &sound : m_sounds) {
@@ -177,4 +157,3 @@ static MultiSoundCache *ReleaseSoundIndex = new MultiSoundCache();
 // Create the classes for Caching
 static SoundCache *ClickSound = new SoundCache("click-volume", "selection-clicks");
 static SoundCache *ReleaseSound = new SoundCache("release-volume", "selection-release");
-static SoundCache *NoiseSound = new SoundCache("noise-volume", "selection-noises");
