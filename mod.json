@@ -54,6 +54,10 @@
 		"beat.pack-installer": {
 			"importance": "breaking",
 			"version": "<v2.1.2"
+		},
+		"eclipse.eclipse-menu": {
+			"importance": "superseded",
+			"version": "*"
 		}
 	},
 	"settings": {
