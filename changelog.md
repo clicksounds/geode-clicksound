@@ -1,6 +1,7 @@
 # Changelog
 ## Version v2.2.2
 * The download button has been moved into the Click Sounds Index list
+* The 'custom' sound option has been removed in favor of custom click packs. Custom sounds will continue to function as long as the selected sound is not changed to a click pack.
 * Added a button that opens the pack generator website
 ## Version v2.2.1
 * Add 6YT's index moderator badge
