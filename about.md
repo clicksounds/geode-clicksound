@@ -9,8 +9,8 @@ Open the mod settings to change the click sound.
 ## Credit
 Thank you so much to all of the people listed below for doing whatever they did to help create the mod!
 - [Beat](https://github.com/BeatACVR) - Original developer of Click Sounds
-- [Viper](https://github.com/MuhXd) - Developer, helped me with android support
-- [Cooper](https://github.com/coopeeo) - Developer, helped make coding the mod more efficient
+- [Viper](https://github.com/MuhXd) - Developer, helped rewrite the mod
+- [August](https://github.com/coopeeo) - Developer, helped rewrite the mod
 - [Firee](https://github.com/FireMario211) - Added mac support, thank you so much!
 - [Weebify](https://github.com/Weebifying) - Developer, helped with settings UI in v2.0.0
 - [Uproxide](https://github.com/uproxide) - Developer, helped with the developer badge system!
