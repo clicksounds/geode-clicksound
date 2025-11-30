@@ -11,7 +11,8 @@ namespace Contributors  {
 		Contributors = 3,
 		Helper = 4,
 		IndexModerator = 5,
-		CSPIOwner = 6
+		CSPIOwner = 6,
+		DomainSupporter = 7
 	};
 	inline std::set<std::pair<int,Messages>> List = { 
 		{13873867,Messages::Owner}, // BeatTaco
@@ -37,6 +38,9 @@ namespace Contributors  {
 		{31726624,Messages::CSPIOwner},
 		{32718773,Messages::CSPIOwner},
 		{5899425,Messages::CSPIOwner},
+		// Domain Supporters
+		{21483991,Messages::DomainSupporter}, // ubtertallcats, year of 2026
+		{24802745,Messages::DomainSupporter} // mxgaming01, year of 2026
 	}; 
 };
 
@@ -88,6 +92,13 @@ class buttonfunctionthing : public CCLayer {
 		    "OK")
 		    ->show();
 	}
+	void DomainSupporter(CCObject *sender) {
+		FLAlertLayer::create(
+		    "About",
+		    "This is a <cp>Click Sounds Domain Supporter</c>. They paid for the Click Sounds domain name to support Click Sounds for a year.",
+		    "OK")
+		    ->show();
+	}
 };
 
 class $modify(ProfilePage) {
@@ -130,6 +141,9 @@ class $modify(ProfilePage) {
 				break;
 			case Contributors::CSPIOwner:
 				btn->m_pfnSelector = menu_selector(buttonfunctionthing::CSPIOwner);
+				break;
+			case Contributors::DomainSupporter:
+				btn->m_pfnSelector = menu_selector(buttonfunctionthing::DomainSupporter);
 				break;
 			}
 

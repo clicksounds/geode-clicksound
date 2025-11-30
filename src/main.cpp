@@ -276,6 +276,13 @@ EventListener<web::WebTask> m_listener;
 
 class $modify(MenuLayer) {
 	bool init() {
+		if (!Mod::get()->getSavedValue<bool>("read-thanksies")) {
+			auto popup = FLAlertLayer::create("Click Sounds", "thanks to ubertallcat and mxgaming01 for helping fund the click sounds domain\nok bye bye", "?????");
+			popup->m_scene = this;
+			popup->show();
+			Mod::get()->setSavedValue<bool>("read-thanksies", true);
+		}
+
 		if (!indexzip.StartedDownloading) {
 			indexzip.StartedDownloading = true;
 

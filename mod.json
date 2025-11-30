@@ -6,7 +6,7 @@
         "mac": "2.2074",
         "ios": "2.2074"
     	},
-	"version": "v2.2.2",
+	"version": "v2.2.3",
 	"id": "beat.click-sound",
 	"name": "Click Sounds",
 	"developers": [
@@ -22,7 +22,7 @@
 			"resources/**/*.ogg",
 			"resources/**/*.mp3",
 			"resources/**/*.wav",
-			"resources/**/beat.default.packgen.zip"
+			"resources/**/clicksounds.default.packgen.zip"
 		],
 		"sprites": [
 			"resources/**/*.png"
@@ -31,7 +31,7 @@
 	"links": {
 		"community": "https://discord.gg/tu98bsGA32",
 		"source": "https://github.com/clicksounds/geode-clicksound",
-		"homepage": "https://clicksounds.github.io/clicks"
+		"homepage": "https://clicksounds.xyz"
 	},
 	"tags": [
 		"universal",

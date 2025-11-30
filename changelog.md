@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.2.3
+* I am very thankful this update.
 ## Version v2.2.2
 * The download button has been moved into the Click Sounds Index list
 * The 'custom' sound option has been removed in favor of custom click packs. Custom sounds will continue to function as long as the selected sound is not changed to a click pack.
