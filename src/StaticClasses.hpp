@@ -60,9 +60,6 @@ class SoundCache {
 		if (GetVolume <= 0 && TestButton == true) {
 			GetVolume = 1;
 		}
-		int numPlaying = 0;
-		CS_Group->getNumChannels(&numPlaying);
-		if (numPlaying >= 150 && !TestButton) return;
 		FMODAudioEngine::sharedEngine()->m_system->playSound(m_sound, CS_Group, false, &Soundchannel);
 		Soundchannel->setVolume(GetVolume / 50.f);
 		double semitone = static_cast<double>(Mod::get()->getSettingValue<int64_t>("sfx-semitone")) / 12;
