@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.2.5
+* Renamed Click Sounds to Mega Click Sounds
 ## Version v2.2.4
 * All settings can now be changed regardless of whether click or release sounds are enabled
 * A label has been added to the Click Sounds Index for clarity
