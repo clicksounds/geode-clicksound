@@ -17,6 +17,7 @@
 using namespace geode::prelude;
 
 extern void onsettingsUpdate();
+extern void SendRequestAPI(bool forceDownload);
 
 struct ClicksoundSettingValue {
     std::string  m_currentMemeClick;
@@ -121,6 +122,7 @@ protected:
     std::vector<std::pair<CCMenuItemToggler*,const char* >> m_togglerItems;
     CCMenuItemSpriteExtra* m_folderBtn;
     CCMenuItemSpriteExtra* m_popup;
+    CCMenuItemSpriteExtra* m_downloadBtn;
     CCMenuItemSpriteExtra* m_cspiBtn;
     CCMenuItemSpriteExtra* m_clearBtn;
     CCMenu* m_menufolder;
@@ -225,6 +227,14 @@ protected:
             menu_selector(ClicksoundSetterNodeV3::Popup)
         );
 
+        auto downloadSpr = CCSprite::createWithSpriteFrameName("GJ_downloadBtn_001.png");
+        downloadSpr->setScale(0.75);
+        this->m_downloadBtn = CCMenuItemSpriteExtra::create(
+            downloadSpr,
+            this,
+            menu_selector(ClicksoundSetterNodeV3::onDownloadBtn)
+        );
+
         auto cspiSpr = CCSprite::createWithSpriteFrameName("GJ_plusBtn_001.png");
         cspiSpr->setScale(0.55);
         this->m_cspiBtn = CCMenuItemSpriteExtra::create(
@@ -242,6 +252,7 @@ protected:
         );
 
         m_selectionpopup->addChild(this->m_cspiBtn);
+        m_selectionpopup->addChild(this->m_downloadBtn);
         m_selectionpopup->addChild(this->m_popup);
         m_selectionpopup->addChild(this->m_clearBtn);
         auto m_selectionpopuplayout = RowLayout::create();
@@ -281,6 +292,19 @@ protected:
         return true;
     }
 
+    void onDownloadBtn(CCObject* sender) {
+        geode::createQuickPopup(
+            "Warning",
+            "The Click Sounds Index is over <cj>50mb+</c> in size. Are you sure you want to redownload it?",
+            "Cancel", "Download", 
+            [](auto, bool btn2) {
+                if (btn2) {
+                    SendRequestAPI(true);
+                }
+            }
+        );
+    };
+
     void onClearBtn(CCObject* sender) {
         if (Mod::get()->getSavedValue<bool>("CSINDEXDOWNLOADING")) {
             FLAlertLayer::create("Click Sounds Index", "Unable to clear index while downloading. Please wait until the download completes, then try again. \n\nIf the download takes too long, restarting Geometry Dash will stop the download.", "Close")->show();
@@ -313,22 +337,22 @@ protected:
 
     // cspi code start
 
-    void onCspiBtn(CCObject* sender) {
-        Mod::get()->getSavedValue<bool>("read-warnings") ? cspiStartPopup(sender) : cspiIntroPopup();
+    void onCspiBtn() {
+        Mod::get()->getSavedValue<bool>("read-warnings") ? cspiStartPopup() : cspiIntroPopup();
     };
 
-    void cspiStartPopup(CCObject* sender) {
+    void cspiStartPopup() {
 		auto cspiPopup = geode::createQuickPopup(
 			"Click Sounds",
-			"Select a <cg>.packgen.zip</c> click pack file to add it to your index.\n\n\n",
+			"Press <cl>Continue</c> and select a <cg>.packgen.zip</c> click pack file to install it.\n\n\n",
 			"Cancel", "Continue",
-			[this, sender](auto, bool btn2) {
+			[this](auto, bool btn2) {
 				if (btn2) {
-					cspiFileSelection(sender);
+					cspiFileSelection();
 				}
 			}
 		);
-        auto packgenSpr = CCSprite::create("cspackgenlogo.png"_spr);
+        auto packgenSpr = ButtonSprite::create("Create Click Pack");
         auto packgenBtn = CCMenuItemSpriteExtra::create(
             packgenSpr,
             this,
@@ -337,10 +361,6 @@ protected:
         packgenBtn->setID("packgen-button"_spr);
         packgenSpr->setScale(0.75f);
         packgenBtn->setPosition(0.f, cspiPopup->getContentSize().height / 8);
-        log::debug("cspipopup contentsize width: {}", cspiPopup->getContentSize().width);
-        log::debug("cspipopup contentsize width / 2: {}", cspiPopup->getContentSize().width / 2);
-        log::debug("cspipopup contentsize height: {}", cspiPopup->getContentSize().height);
-        log::debug("cspipopup contentsize height / 2: {}", cspiPopup->getContentSize().height / 2);
         cspiPopup->m_buttonMenu->addChild(packgenBtn);
 	}
 
@@ -354,12 +374,12 @@ protected:
 			{"To make a pack, use the pack generator on the Click Sounds website.", "Next"},
 			{"Only <cg>.packgen.zip</c> click pack files can be installed. <cr>Packs from ZCB Live are not compatible.</c>", "Next"},
 			{"To convert a <cr>ZCB Live click pack</c> to <cg>.packgen.zip</c>, use the pack generator on the Click Sounds website.", "Next"},
-			{"If the 'Download Index on Startup' setting of Click Sounds is enabled, <cr>custom packs will be removed when the game restarts.</c>", "Next"},
 			{"A guide to installing custom click packs is available on the Click Sounds website.", "Close"}
 		};
 	
 		if (i >= msgContent.size()) {
 			Mod::get()->setSavedValue<bool>("read-warnings", true);
+            cspiStartPopup();
 			return;
 		}
 	
@@ -370,7 +390,7 @@ protected:
 		});
 	}
 
-    void cspiFileSelection(CCObject* sender) {
+    void cspiFileSelection() {
 		std::filesystem::path dir = Loader::get()->getInstalledMod("beat.click-sound")->getConfigDir() / "Clicks" / "clicks-main";
 		file::FilePickOptions::Filter textFilter;
 		file::FilePickOptions fileOptions;
@@ -383,7 +403,7 @@ protected:
 		m_cspiFilePickerOpen = true;
 
 		file::pick(file::PickMode::OpenFile, { getPersistentDir, { textFilter } }).listen(
-			[this, sender, dir](Result<std::filesystem::path>* res) {
+			[this, dir](Result<std::filesystem::path>* res) {
 				std::filesystem::path path;
 				if (!res || !res->isOk()) return false;
 				if (res->isOk()) {
@@ -513,6 +533,7 @@ protected:
 
         m_folderBtn->setEnabled(shouldEnable);
         m_popup->setEnabled(shouldEnable);
+        m_downloadBtn->setEnabled(shouldEnable);
         m_cspiBtn->setEnabled(shouldEnable);
         m_clearBtn->setEnabled(shouldEnable);
 

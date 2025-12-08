@@ -6,7 +6,7 @@
         "mac": "2.2074",
         "ios": "2.2074"
     	},
-	"version": "v2.2.3",
+	"version": "v2.2.4",
 	"id": "beat.click-sound",
 	"name": "Click Sounds",
 	"developers": [
@@ -75,21 +75,18 @@
 			"max": 100,
 			"control": {
 				"slider": true
-			},
-			"enable-if": "setting:enable-clicksounds"
+			}
 		},
 		"selection-clicks": {
 			"type": "custom:selectionclicks",
 			"name": "Click Sounds",
 			"default": "Useful",
-			"clicksound" : true,
-			"enable-if": "setting:enable-clicksounds"
+			"clicksound" : true
 		},
 		"clicksound-effect": {
 			"type": "custom:clicksoundeffect",
 			"name": "Test Sound",
-			"clicksound" : true,
-			"enable-if": "setting:enable-clicksounds"
+			"clicksound" : true
 		},
 		"release-section": {
             "name": "Release Sounds",
@@ -109,21 +106,18 @@
 			"max": 100,
 			"control": {
 				"slider": true
-			},
-			"enable-if": "setting:enable-releasesounds"
+			}
 		},
 		"selection-release": {
 			"type": "custom:selectionclicks",
 			"name": "Release Sounds",
 			"clicksound" : false,
-			"default": "Useful",
-			"enable-if": "setting:enable-releasesounds"
+			"default": "Useful"
 		},
 		"releasesound-effect": {
 			"type": "custom:clicksoundeffect",
 			"name": "Test Sound",
-			"clicksound" : false,
-			"enable-if": "setting:enable-releasesounds"
+			"clicksound" : false
 		},
 		"Miscellaneous-section": {
             "name": "Miscellaneous",

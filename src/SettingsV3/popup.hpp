@@ -75,6 +75,14 @@ protected:
         divider->setAnchorPoint(ccp(0, 1));
         divider->setPosition(ccp(15, winSize.height - 50));
         m_mainLayer->addChild(divider);
+
+        auto indexLabel = CCLabelBMFont::create("Index", "bigFont.fnt");
+        indexLabel->setAnchorPoint(ccp(0.5f, 1));
+        indexLabel->setPosition(ccp(winSize.width / 7, winSize.height - 20));
+        indexLabel->setScale(0.7f);
+        indexLabel->setID("index-label"_spr);
+        m_mainLayer->addChild(indexLabel);
+
     }
 
     void filterItems(const std::string& query) {

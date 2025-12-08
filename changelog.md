@@ -1,4 +1,10 @@
 # Changelog
+## Version v2.2.4
+* All settings can now be changed regardless of whether click or release sounds are enabled
+* A label has been added to the Click Sounds Index for clarity
+* The CSPI tutorial has been rewritten for clarity
+* The Packgen button has been visually changed for clarity
+* The download button has been added back into the settings menu for clarity
 ## Version v2.2.3
 * I am very thankful this update.
 ## Version v2.2.2
