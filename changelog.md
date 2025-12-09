@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.2.7
+* Actually fixed a bug introduced in v2.2.4 where sounds would eventually stop playing
 ## Version v2.2.6
 * Reverted the Mega Click Sounds name change because Ery didn't like it
 * Fixed a bug introduced in v2.2.4 where sounds would eventually stop playing
