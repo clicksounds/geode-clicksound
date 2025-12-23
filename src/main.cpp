@@ -272,16 +272,29 @@ void SendRequestAPI(bool forceDownload = false) {
 	});
 }
 
+void extractDefaultClickPack() {
+    auto mod = Mod::get();
+	std::filesystem::path configPath = mod->getConfigDir();
+
+    std::filesystem::create_directories(configPath / "Clicks" / "clicks-main" / "Useful");
+
+    std::filesystem::path destinationPath = configPath / "Clicks" / "clicks-main" / "Useful" / "clicksounds.default";
+    std::filesystem::path resourcePath = mod->getResourcesDir() / "clicksounds.default.packgen.zip";
+
+    if (std::filesystem::is_directory(destinationPath) && std::filesystem::exists(destinationPath)) return;
+
+    auto unzip = file::Unzip::create(resourcePath);
+    if (!unzip) return;
+    (void) unzip.unwrap().extractAllTo(destinationPath);
+	mod->setSavedValue("CSINDEXRELOAD", true);
+}
+
 EventListener<web::WebTask> m_listener;
 
 class $modify(MenuLayer) {
 	bool init() {
-		if (!Mod::get()->getSavedValue<bool>("read-thanksies")) {
-			auto popup = FLAlertLayer::create("Click Sounds", "thanks to ubertallcat and mxgaming01 for helping fund the click sounds domain\nok bye bye", "?????");
-			popup->m_scene = this;
-			popup->show();
-			Mod::get()->setSavedValue<bool>("read-thanksies", true);
-		}
+		// make sure default click pack exists because little kids love bitching
+		extractDefaultClickPack();
 
 		if (!indexzip.StartedDownloading) {
 			indexzip.StartedDownloading = true;
@@ -314,38 +327,5 @@ $on_mod(Loaded) {
 	if (Mod::get()->getSavedValue<std::filesystem::path>("cspi-persistent-dir").empty() || !std::filesystem::exists(Mod::get()->getSavedValue<std::filesystem::path>("cspi-persistent-dir"))) {
 		Mod::get()->setSavedValue<std::filesystem::path>("cspi-persistent-dir", dirs::getGeodeDir());
 	}
-
-	// INSTALL DEFAULT CLICK PACK ON STARTUP
-	// future update tho
-	/*Loader::get()->queueInMainThread([=] {
-		auto mod = Loader::get()->getInstalledMod("beat.click-sound");
-		std::filesystem::path zip = "beat.default.packgen.zip"_spr;
-		if (zip.string().starts_with("beat.click-sound/")) zip = zip.string().substr(16);
-		std::filesystem::path abs = mod->getResourcesDir() / zip;
-		if (!std::filesystem::exists(abs)) return;
-
-		std::filesystem::path tempDir = dirs::getTempDir() / abs.stem();
-		std::filesystem::create_directories(tempDir);
-		std::filesystem::path tempZip = tempDir / abs.filename();
-		std::filesystem::copy(abs, tempZip, std::filesystem::copy_options::overwrite_existing);
-
-		{
-			auto unzip = file::Unzip::create(tempZip).unwrap();
-			if (!unzip.extractAllTo(tempDir)) return;
-		}
-
-		std::filesystem::path out = mod->getConfigDir() / "Clicks" / "clicks-main" / "Useful" / abs.stem();
-		std::filesystem::create_directories(out);
-
-		for (auto &p : std::filesystem::recursive_directory_iterator(tempDir))
-			if (!p.is_directory()) {
-				auto rel = std::filesystem::relative(p.path(), tempDir);
-				std::filesystem::create_directories(out / rel.parent_path());
-				std::filesystem::copy_file(p.path(), out / rel, std::filesystem::copy_options::overwrite_existing);
-			}
-
-		std::filesystem::remove(tempZip);
-		mod->setSavedValue("CSINDEXRELOAD", true);
-	});*/
 }
 class $modify(EndLevelLayer){void customSetup(){EndLevelLayer::customSetup();if(Carrot::carrot==true){auto eee = CCNode::create();auto ee = CCSprite::create("ee.png"_spr);eee->setPosition(450, 260);eee->setAnchorPoint({0.5, 0.5});eee->setScale(0.2);ee->setOpacity(10);eee->addChild(ee);static_cast<cocos2d::CCLayer*>(this->getChildren()->objectAtIndex(0))->addChild(eee);}Carrot::carrot=false;}};

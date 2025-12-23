@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.2.8
+* The default click pack now automatically installs itself. It is not optional.
 ## Version v2.2.7
 * Actually fixed a bug introduced in v2.2.4 where sounds would eventually stop playing
 ## Version v2.2.6

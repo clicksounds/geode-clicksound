@@ -6,7 +6,7 @@
         "mac": "2.2074",
         "ios": "2.2074"
     	},
-	"version": "v2.2.7",
+	"version": "v2.2.8",
 	"id": "beat.click-sound",
 	"name": "Click Sounds",
 	"developers": [
@@ -79,7 +79,7 @@
 		},
 		"selection-clicks": {
 			"type": "custom:selectionclicks",
-			"name": "Click Sounds",
+			"name": "Select Your Click Sounds",
 			"default": "Useful",
 			"clicksound" : true
 		},
@@ -110,7 +110,7 @@
 		},
 		"selection-release": {
 			"type": "custom:selectionclicks",
-			"name": "Release Sounds",
+			"name": "Select Your Release Sounds",
 			"clicksound" : false,
 			"default": "Useful"
 		},
