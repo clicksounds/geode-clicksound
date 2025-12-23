@@ -1,59 +1,60 @@
 # Changelog
 ## Version v2.2.8
 * The default click pack now automatically installs itself. It is not optional.
+* I am no longer thankful.
 ## Version v2.2.7
-* Actually fixed a bug introduced in v2.2.4 where sounds would eventually stop playing
+* Actually fixed a bug introduced in v2.2.4 where sounds would eventually stop playing.
 ## Version v2.2.6
-* Reverted the Mega Click Sounds name change because Ery didn't like it
-* Fixed a bug introduced in v2.2.4 where sounds would eventually stop playing
+* Reverted the Mega Click Sounds name change because Ery didn't like it.
+* Fixed a bug introduced in v2.2.4 where sounds would eventually stop playing.
 ## Version v2.2.5
-* Renamed Click Sounds to Mega Click Sounds
+* Renamed Click Sounds to Mega Click Sounds.
 ## Version v2.2.4
-* All settings can now be changed regardless of whether click or release sounds are enabled
-* A label has been added to the Click Sounds Index for clarity
-* The CSPI tutorial has been rewritten for clarity
-* The Packgen button has been visually changed for clarity
-* The download button has been added back into the settings menu for clarity
+* All settings can now be changed regardless of whether click or release sounds are enabled.
+* A label has been added to the Click Sounds Index for clarity.
+* The CSPI tutorial has been rewritten for clarity.
+* The Packgen button has been visually changed for clarity.
+* The download button has been added back into the settings menu for clarity.
 ## Version v2.2.3
 * I am very thankful this update.
 ## Version v2.2.2
-* The download button has been moved into the Click Sounds Index list
+* The download button has been moved into the Click Sounds Index list.
 * The 'custom' sound option has been removed in favor of custom click packs. Custom sounds will continue to function as long as the selected sound is not changed to a click pack.
-* Added a button that opens the pack generator website
+* Added a button that opens the pack generator website.
 ## Version v2.2.1
-* Add 6YT's index moderator badge
+* Add 6YT's index moderator badge.
 ## Version v2.2.0
-* This version is unreleased and its changes do not apply to future updates
-* Disregard this update
+* This version is unreleased and its changes do not apply to future updates.
+* Disregard this update.
 ## Version v2.1.0
-* Click Sounds Pack Installer is now built into Click Sounds
-* Clearing the local index has been added
-* Fixed vertical scaling issues with some UI elements
+* Click Sounds Pack Installer is now built into Click Sounds.
+* Clearing the local index has been added.
+* Fixed vertical scaling issues with some UI elements.
 ## Version v2.0.25
-* Fix bugs
+* Fix bugs.
 ## Version v2.0.23
-* A manual download button for the Click Sounds Index has been added
-* The Click Sounds Index will no longer download on startup by default
-* CSPI users will need to keep automatic downloading disabled
+* A manual download button for the Click Sounds Index has been added.
+* The Click Sounds Index will no longer download on startup by default.
+* CSPI users will need to keep automatic downloading disabled.
 ## Version v2.0.22
-* Added badges to the profiles of CSPI owners
-* Removed Cuuh's badge
+* Added badges to the profiles of CSPI owners.
+* Removed Cuuh's badge.
 ## Version v2.0.21
-* Fixed a bug where the index refuses to open despite being finished downloading
+* Fixed a bug where the index refuses to open despite being finished downloading.
 ## Version v2.0.20
-* Click Sounds Index will now display a message instead of crashing if opened mid-download
-* Added a message for when no click packs are installed
-* Removed log spam, sorry about that, other developers
+* Click Sounds Index will now display a message instead of crashing if opened mid-download.
+* Added a message for when no click packs are installed.
+* Removed log spam, sorry about that, other developers.
 ## Version v2.0.19
-* iOS support up to iOS 18.4 has been added for both unjailbroken and jailbroken iDevices
+* iOS support up to iOS 18.4 has been added for both unjailbroken and jailbroken iDevices.
 ## Version v2.0.18
-* CSPI no longer needs manual reloading
+* CSPI no longer needs manual reloading.
 ## Version v2.0.17
-* Minor tweaks for CSPI
+* Minor tweaks for CSPI.
 ## Version v2.0.16
-* New logo for the Click Sounds Index
+* New logo for the Click Sounds Index.
 ## Version v2.0.15
-* Supported click packs now have descriptions
+* Supported click packs now have descriptions.
 ## Version v2.0.14
 ### Discord server boosters can now use custom click packs!
 * Boost the server to gain access to the pack installer!
@@ -64,96 +65,96 @@
 ## Version v2.0.12
 * The default sound is now Default by Beat. It will be updated to include more sounds in the near future.
 * Developer badges are more specific. See it on profiles of staff members like BeatTaco, ViperProtogen, Jaid, and AkuLunical.
-* Some bug fixes
+* Some bug fixes.
 ## Version v2.0.11
-* Even more internal changes
+* Even more internal changes.
 ## Version v2.0.10
-* Minor internal changes
+* Minor internal changes.
 ## Version v2.0.9
-* Minor internal changes
-* Geode v4.2.0 is now required
+* Minor internal changes.
+* Geode v4.2.0 is now required.
 ## Version v2.0.8
-* Halved the amount of storage used by the Click Sounds Index
+* Halved the amount of storage used by the Click Sounds Index.
 ## Version v2.0.7
-* Fixed a bug that nearly doubled the amount of storage used by Click Sounds
+* Fixed a bug that nearly doubled the amount of storage used by Click Sounds.
 ## Version v2.0.6
-* Added AkuLunical as developer
+* Added AkuLunical as developer.
 ## Version v2.0.5
-* Fixed semitone problem in the settings! (i failed music - viper)
+* Fixed semitone problem in the settings! (i failed music - viper).
 ## Version v2.0.4
-* Added an offline mode option which stops the Click Sounds Index from updating on startup
-* Updated the website button to the new URL (clicksounds.xyz)
+* Added an offline mode option which stops the Click Sounds Index from updating on startup.
+* Updated the website button to the new URL (clicksounds.xyz).
 ## Version v2.0.3
-* New developer badge icon
+* New developer badge icon.
 ## Version v2.0.2
-* Fixed a crash on Mac
+* Fixed a crash on Mac.
 ## Version **v2.0.1** (SETTINGS UPDATE)
 * A WHOLE NEW LOOK AND FEEL FOR SETTINGS!
-* Compatible with GD 2.2074
+* Compatible with GD 2.2074.
 * Easier to see what click sound is selected.
 * No More Numbers!
-* New sounds can be added without a mod update
-* There is now a website for Click Sounds for submitting sounds
-* Sounds can now be searched
+* New sounds can be added without a mod update.
+* There is now a website for Click Sounds for submitting sounds.
+* Sounds can now be searched.
 ## Version v1.8.0
-* Added Viper's click sounds and release sounds (both randomized)
-* Added Logitech G502 click sounds and release sounds (clicks randomized)
-* Added Up Arrow 4 click sounds and release sounds (both randomized)
-* Added Click Sounds settings button in the editor
-* 2 player click support (can't do different clicks)
-* Dual mode support in editor
+* Added Viper's click sounds and release sounds (both randomized).
+* Added Logitech G502 click sounds and release sounds (clicks randomized).
+* Added Up Arrow 4 click sounds and release sounds (both randomized).
+* Added Click Sounds settings button in the editor.
+* 2 player click support (can't do different clicks).
+* Dual mode support in editor.
 ## Version v1.7.1
-* Fixed a bug where sounds don't play in editor testplaying
-* Fixed a bug with sound -12 not playing
-* Lowered the minimum Geode version to beta.20
+* Fixed a bug where sounds don't play in editor testplaying.
+* Fixed a bug with sound -12 not playing.
+* Lowered the minimum Geode version to beta.20.
 ## Version v1.7.0
-* Volume is now seperate from SFX! (thank you weebify, very cool :thumbs_up:)
-* Previewing sounds now works while in the pause menu (thank you weebify, very cool :thumbs_up:)
-* Sounds will no longer play twice in dual mode (thank you weebify, very cool :thumbs_up:)
+* Volume is now seperate from SFX! (thank you weebify, very cool :thumbs_up:).
+* Previewing sounds now works while in the pause menu (thank you weebify, very cool :thumbs_up:).
+* Sounds will no longer play twice in dual mode (thank you weebify, very cool :thumbs_up:).
 ## Version v1.6.0
-* A new logo has been added! (ty rue!)
+* A new logo has been added! (ty rue!).
 ## Version v1.5.3
-* 'Sayo Device' useful randomized click/release sound added! (ty slxyer!)
-* Sayo Device includes 8 clicks and 8 releases (tats alot!! >w<)
+* 'Sayo Device' useful randomized click/release sound added! (ty slxyer!).
+* Sayo Device includes 8 clicks and 8 releases (tats alot!!).
 * Release sounds and custom sounds are now twice as loud.
 ## Version v1.5.2
-* Added headings in the settings menu! (ty coop and viper :3)
+* Added headings in the settings menu! (ty coop and viper).
 ## Version v1.5.1
-* Added tags for the Geode downloads page
+* Added tags for the Geode downloads page.
 ## Version v1.5.0
-* You can now preview sounds in mod settings! (tysm coop i luv u! :3)
-* Credited Jouca and Firee
-* Internal changes
-* Optimized 'Geometry Dash Death' click sound
+* You can now preview sounds in mod settings! (tysm coop i luv u!).
+* Credited Jouca and Firee.
+* Internal changes.
+* Optimized 'Geometry Dash Death' click sound.
 ## Version v1.4.11
 * 'Trusta' useful click sound added!
-* 'Gazonk' useful click sound added! (ty gazonkgd! =w=)
+* 'Gazonk' useful click sound added! (ty gazonkgd!)
 * 'Gravity Coil' meme click sound added!
 * New sound for 'Water On The Hill' meme click sound!
 ## Version v1.4.10 (minor)
-* TodoReturn has been removed -w-
-* Is this better, Alk? :3
+* TodoReturn has been removed.
+* Is this better, Alk?
 ## Version v1.4.9
 * 'Doggie' useful click sound added!
 * 'Neiro' useful click/release sound added!
 ## Version v1.4.8
-* It is now much more clear that you need to install Node-IDs
+* It is now much more clear that you need to install Node-IDs.
 * (somehow it was confusing before?)
 ## Version v1.4.7
 * 'Plate' useful click sound added!
 * 'Riot Quack' meme click sound added!
 * 'FUCK' meme click sound added!
-* Credited Weebify for developing :3 (i luv u weebify <3)
+* Credited Weebify for developing (i luv u weebify <3)
 ## Version v1.4.6
-* Requirements: Geode v2.0.0-beta.19 / Node-IDs v1.5.1
-* Volume of click sounds has increased! (0.5 -> 2) :3
+* Requirements: Geode v2.0.0-beta.19 / Node-IDs v1.5.1.
+* Volume of click sounds has increased! (0.5 -> 2)
 * 'Zoink' useful release sound added!
 * 'Zoink' useful click sound fixed!
 ## Version v1.4.5
 * Requirements: Geode v2.0.0-beta.19 / Node-IDs v1.4.0
 * Fix sizing of the settings button and developer badges.
 * 'Zoink' useful click sound added!
-* 'Screen Tap 1' useful click sound added!
+* 'Screen Tap 1' useful click sound added!.
 ## Version v1.4.4
 * New Requirements: Geode v2.0.0-beta.19 / Node-IDs v1.4.0
 * 'Water on the hill' meme click sound added!
@@ -163,7 +164,7 @@
 * Requirements: Geode v2.0.0-beta.17 / Node-IDs v1.3.0
 * 'Click Sound' is now 'Click Sounds'
 * .flac audio support added! (.ogg is still the best audio format to use for custom sounds.)
-* 'Joe Biden Soda' meme click sound added! :3
+* 'Joe Biden Soda' meme click sound added!
 ## Version v1.4.2
 * Requirements: Geode v2.0.0-beta.17 / Node-IDs v1.3.0
 * .m4a audio support added! (.ogg is still the best audio format to use for custom sounds.)
