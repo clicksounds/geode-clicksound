@@ -293,6 +293,13 @@ EventListener<web::WebTask> m_listener;
 
 class $modify(MenuLayer) {
 	bool init() {
+		if (!Mod::get()->getSavedValue<bool>("amv-read") && GJAccountManager::get()->m_accountID == 4470386) {
+			auto popup = FLAlertLayer::create("Click Sounds", "it only took you so long to download click sounds lmao", "why beat");
+			popup->m_scene = this;
+			popup->show();
+			Mod::get()->setSavedValue<bool>("amv-read", true);
+		}
+
 		// make sure default click pack exists because little kids love bitching
 		extractDefaultClickPack();
 
