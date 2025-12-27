@@ -88,8 +88,7 @@ class CCIndexPackNode : public CCLayerColor {
 	void getlistfull() {
 		if (!Infomation.jsonpath.empty() && std::filesystem::exists(Infomation.jsonpath)) {
 			std::filesystem::path fs = std::filesystem::path(Infomation.jsonpath);
-			// std::ifstream file(fs, std::ios::in | std::ios::binary);
-			auto file = utils::file::readJson(fs).unwrap(); // experimenting rn
+			std::ifstream file(fs, std::ios::in | std::ios::binary);
 			if (file.is_open()) {
 				std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
 				file.close();
@@ -141,8 +140,7 @@ class CCIndexPackNode : public CCLayerColor {
 		Text->setLayoutOptions(AxisLayoutOptions::create()->setScalePriority(1));
 		if (!Infomation.jsonpath.empty() && std::filesystem::exists(Infomation.jsonpath)) {
 			std::filesystem::path fs = std::filesystem::path(Infomation.jsonpath);
-			// std::ifstream file(fs, std::ios::in | std::ios::binary);
-			auto file = utils::file::readJson(fs).unwrap(); // experimenting rn
+			std::ifstream file(fs, std::ios::in | std::ios::binary);
 			if (file.is_open()) {
 				std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
 				file.close();
@@ -168,8 +166,7 @@ class CCIndexPackNode : public CCLayerColor {
 		int Number = 0;
 		if (!Infomation.jsonpath.empty() && std::filesystem::exists(Infomation.jsonpath)) {
 			std::filesystem::path fs = std::filesystem::path(Infomation.jsonpath);
-			// std::ifstream file(fs, std::ios::in | std::ios::binary);
-			auto file = utils::file::readJson(fs).unwrap(); // experimenting rn
+			std::ifstream file(fs, std::ios::in | std::ios::binary);
 			if (file.is_open()) {
 				std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
 				file.close();
