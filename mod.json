@@ -54,6 +54,10 @@
 		"beat.pack-installer": {
 			"importance": "breaking",
 			"version": "<v2.1.2"
+		},
+		"thesillydoggo.qolmod": {
+			"importance": "breaking",
+			"version": "v2.0.0-v2.1.0"
 		}
 	},
 	"settings": {

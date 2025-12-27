@@ -170,7 +170,6 @@ protected:
         auto downloadMenu = CCMenu::create();
         downloadMenu->setID("download-index-menu");
         downloadBtn->setID("download-index-button");
-        //downloadMenu->setPosition(ccp(scroll->getContentSize().width / 2, scroll->getContentSize().height / 3));
         downloadMenu->setPosition(ccp(m_mainLayer->getContentSize().width, m_mainLayer->getContentSize().height));
         downloadMenu->addChild(downloadBtn);
         m_mainLayer->addChild(downloadMenu);

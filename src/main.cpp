@@ -23,6 +23,7 @@ void onsettingsUpdate() {
 
 	auto selection_clicks = GetSettingJsonRead("selection-clicks");
 	ClickSound->Setsound(selection_clicks.Custom_Sound_Path);
+	
 	if (ClickJson->hassomedata) {
 
 		Custom_OnClick = selection_clicks.M_Tab == 2;

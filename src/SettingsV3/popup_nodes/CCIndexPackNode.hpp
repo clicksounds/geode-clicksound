@@ -88,7 +88,8 @@ class CCIndexPackNode : public CCLayerColor {
 	void getlistfull() {
 		if (!Infomation.jsonpath.empty() && std::filesystem::exists(Infomation.jsonpath)) {
 			std::filesystem::path fs = std::filesystem::path(Infomation.jsonpath);
-			std::ifstream file(fs, std::ios::in | std::ios::binary);
+			// std::ifstream file(fs, std::ios::in | std::ios::binary);
+			auto file = utils::file::readJson(fs).unwrap(); // experimenting rn
 			if (file.is_open()) {
 				std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
 				file.close();
@@ -140,7 +141,8 @@ class CCIndexPackNode : public CCLayerColor {
 		Text->setLayoutOptions(AxisLayoutOptions::create()->setScalePriority(1));
 		if (!Infomation.jsonpath.empty() && std::filesystem::exists(Infomation.jsonpath)) {
 			std::filesystem::path fs = std::filesystem::path(Infomation.jsonpath);
-			std::ifstream file(fs, std::ios::in | std::ios::binary);
+			// std::ifstream file(fs, std::ios::in | std::ios::binary);
+			auto file = utils::file::readJson(fs).unwrap(); // experimenting rn
 			if (file.is_open()) {
 				std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
 				file.close();
@@ -166,7 +168,8 @@ class CCIndexPackNode : public CCLayerColor {
 		int Number = 0;
 		if (!Infomation.jsonpath.empty() && std::filesystem::exists(Infomation.jsonpath)) {
 			std::filesystem::path fs = std::filesystem::path(Infomation.jsonpath);
-			std::ifstream file(fs, std::ios::in | std::ios::binary);
+			// std::ifstream file(fs, std::ios::in | std::ios::binary);
+			auto file = utils::file::readJson(fs).unwrap(); // experimenting rn
 			if (file.is_open()) {
 				std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
 				file.close();
@@ -214,7 +217,7 @@ class CCIndexPackNode : public CCLayerColor {
 					Author->setScale(0.5f);
 					Author->setString(authorsList.c_str());
 					Author->updateLabel();
-					MEN(DEVS)
+					DEVS = CCMenu::create(); // MEN(DEVS)
 					DEVS->setID("developers");
 					DEVS->ignoreAnchorPointForPosition(false);
 					// Author->updateAnchoredPosition(Anchor::Bottom, ccp(0, -10), ccp(.5f, .5f));
@@ -240,7 +243,7 @@ class CCIndexPackNode : public CCLayerColor {
 		// GJ_button_06
 		auto ConfirmSprite = CCMenuItemSpriteExtra::create(ButtonSprite::create("Set", 40.f, true, SpritePicker::get("bigFont.fnt", theme), SpritePicker::get("GJ_button_01.png", theme), 20.f, 1.0f), this, menu_selector(CCIndexPackNode::selected));
 		ConfirmSprite->m_scaleMultiplier = 0.9;
-		MEN(_Apply_Menu)
+		_Apply_Menu = CCMenu::create(); // MEN(_Apply_Menu)
 		_Apply_Menu->setID("apply");
 		_Apply_Menu->ignoreAnchorPointForPosition(false);
 		_Apply_Menu->addChild(ConfirmSprite);
