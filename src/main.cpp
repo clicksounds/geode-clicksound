@@ -294,11 +294,35 @@ EventListener<web::WebTask> m_listener;
 
 class $modify(MenuLayer) {
 	bool init() {
+		// annoying ass message for amv that will be removed eventually
 		if (!Mod::get()->getSavedValue<bool>("amv-read") && GJAccountManager::get()->m_accountID == 4470386) {
 			auto popup = FLAlertLayer::create("Click Sounds", "it only took you so long to download click sounds lmao", "why beat");
 			popup->m_scene = this;
 			popup->show();
 			Mod::get()->setSavedValue<bool>("amv-read", true);
+		}
+		
+		// incompatibility check for qolmod versions v2.0.0 and v2.1.0
+		if (geode::Mod *mod = Loader::get()->getLoadedMod("thesillydoggo.qolmod")) {
+			std::string version = mod->getVersion().toVString();
+			if ((version == "v2.0.0" || version == "v2.1.0") && !Mod::get()->getSavedValue<bool>("qolmod-update-notified")) {
+				auto popup = createQuickPopup(
+					"Click Sounds", 
+					"Click Sounds is incompatible with QOLMod v2.0.0-v2.1.0. Please update QOLMod to v2.2.0.",
+					"Close", "Update",
+					[this, mod](auto, bool btn2) {
+						if (btn2) {
+							geode::openInfoPopup("thesillydoggo.qolmod");
+						} else {
+							Mod::get()->setSavedValue<bool>("qolmod-update-notified", true);
+						}
+					},
+					false
+				);
+				popup->m_scene = this;
+				popup->show();
+				log::error("Incompatible version of QOL Mod detected. Please update QOL Mod to v2.2.0 or higher to prevent crashes.");
+			}
 		}
 
 		// make sure default click pack exists because little kids love bitching

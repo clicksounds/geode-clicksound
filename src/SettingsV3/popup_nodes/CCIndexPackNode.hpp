@@ -85,6 +85,9 @@ class CCIndexPackNode : public CCLayerColor {
 			selectionobject();
 		}
 	}
+	void favorited(CCObject *) {
+		FLAlertLayer::create("Click Sounds", "Implementing now", "Close")->show();
+	}
 	void getlistfull() {
 		if (!Infomation.jsonpath.empty() && std::filesystem::exists(Infomation.jsonpath)) {
 			std::filesystem::path fs = std::filesystem::path(Infomation.jsonpath);
