@@ -294,14 +294,6 @@ EventListener<web::WebTask> m_listener;
 
 class $modify(MenuLayer) {
 	bool init() {
-		// annoying ass message for amv that will be removed eventually
-		if (!Mod::get()->getSavedValue<bool>("amv-read") && GJAccountManager::get()->m_accountID == 4470386) {
-			auto popup = FLAlertLayer::create("Click Sounds", "it only took you so long to download click sounds lmao", "why beat");
-			popup->m_scene = this;
-			popup->show();
-			Mod::get()->setSavedValue<bool>("amv-read", true);
-		}
-		
 		// incompatibility check for qolmod versions v2.0.0 and v2.1.0
 		if (geode::Mod *mod = Loader::get()->getLoadedMod("thesillydoggo.qolmod")) {
 			std::string version = mod->getVersion().toVString();
