@@ -6,7 +6,7 @@
         "mac": "2.2074",
         "ios": "2.2074"
     	},
-	"version": "v2.2.9",
+	"version": "v2.2.10",
 	"id": "beat.click-sound",
 	"name": "Click Sounds",
 	"developers": [
@@ -96,7 +96,7 @@
 		"enable-releasesounds": {
 			"name": "Enable Release Sounds",
 			"type": "bool",
-			"default": false
+			"default": true
 		},
 		"release-volume": {
 			"name": "Release sounds volume (%)",

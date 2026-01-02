@@ -1,4 +1,8 @@
 # Changelog
+## Version v2.2.10
+* The default click pack for January to March 2026 has been set by supporter UberTallCats to 'CherryMX Linear Red' by Cut1eee.
+* Release sounds are now enabled by default.
+* An incompatibility check for QOLMod v2.0.0-v2.1.0 has been added.
 ## Version v2.2.8
 * The default click pack now automatically installs itself. It is not optional.
 * I am no longer thankful.
