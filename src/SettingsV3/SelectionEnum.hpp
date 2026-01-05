@@ -150,6 +150,7 @@ protected:
                             Changes.m_currentClick = modid;
                         }
                         this->setValue(Changes, nullptr);
+                        this->onCommit();
                     }, m_ThemeGeode);
                     popup->m_noElasticity = false;
                     popup->show();
@@ -165,6 +166,7 @@ protected:
                     Changes.m_currentClick = modid;
                 }
                 this->setValue(Changes, nullptr);
+                this->onCommit();
         },m_ThemeGeode);
         popup->m_noElasticity = false;
         popup->show();
@@ -559,6 +561,7 @@ protected:
         ClicksoundSettingValue Changes = this->getValue();
         Changes.m_tab = sender->getTag();
         this->setValue(Changes, static_cast<CCNode*>(sender));
+        this->onCommit();
     }
      void onFolder(CCObject* sender) {
         file::FilePickOptions::Filter textFilter;
