@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.2.11
+* Click packs now automatically apply after being set.
 ## Version v2.2.10
 * The default click pack for January to March 2026 has been set by supporter UberTallCats to 'CherryMX Linear Red' by Cut1eee.
 * Release sounds are now enabled by default.
