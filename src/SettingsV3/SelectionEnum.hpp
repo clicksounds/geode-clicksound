@@ -410,6 +410,13 @@ protected:
 				if (!res || !res->isOk()) return false;
 				if (res->isOk()) {
 					path = res->unwrap();
+
+                    if (path.extension() != ".zip") {
+                        FLAlertLayer::create("Click Sounds", "Invalid click pack: Not in .packgen.zip format!", "Close")->show();
+                        m_cspiFilePickerOpen = false;
+                        return false;
+                    }
+
 					Mod::get()->setSavedValue<std::filesystem::path>("cspi-persistent-dir", path);
 
 					std::filesystem::path tempDir = dirs::getTempDir() / path.stem();
@@ -435,7 +442,11 @@ protected:
 								if (val == "Meme") type = "Meme";
 							}
 						}
-					}
+					} else {
+                        FLAlertLayer::create("Click Sounds", "Invalid click pack: Not in .packgen.zip format!", "Close")->show();
+                        m_cspiFilePickerOpen = false;
+                        return false;
+                    }
 
 					std::filesystem::path newDir = dir / type / path.stem();
 					std::filesystem::create_directories(newDir);
@@ -451,14 +462,16 @@ protected:
 						"Click Sounds",
 						fmt::format("{} pack installed successfully!", type),
 						"Close", nullptr,
-						[tempZipPath](auto, bool) {
+						[tempZipPath, this](auto, bool) {
 							std::filesystem::remove(tempZipPath);
+                            m_cspiFilePickerOpen = false;
 						}
 					);
 
 					Loader::get()->getInstalledMod("beat.click-sound")->setSavedValue("CSINDEXRELOAD", true);
 					return false;
 				}
+                m_cspiFilePickerOpen = false;
 				return true;
 			});
 		return;
