@@ -6,8 +6,6 @@
 #include <Geode/ui/General.hpp>
 #include <Geode/utils/web.hpp>
 #include "popup.hpp"
-#include "PlaySoundV2.hpp"
-#include "../StaticClasses.hpp"
 #include "../ButtonSprites/Sprite.hpp"
 #include "../jsonReader/Json.hpp"
 #include <cctype>
@@ -125,7 +123,6 @@ protected:
     CCMenuItemSpriteExtra* m_popup;
     CCMenuItemSpriteExtra* m_downloadBtn;
     CCMenuItemSpriteExtra* m_cspiBtn;
-    CCMenuItemSpriteExtra* m_testSoundBtn;
     CCMenuItemSpriteExtra* m_clearBtn;
     CCMenu* m_menufolder;
     CCMenu* m_selectionpopup;
@@ -247,14 +244,6 @@ protected:
             menu_selector(ClicksoundSetterNodeV3::onCspiBtn)
         );
 
-        auto testSoundSpr = CCSprite::createWithSpriteFrameName("GJ_playMusicBtn_001.png");
-        testSoundSpr->setScale(0.6);
-        this->m_testSoundBtn = CCMenuItemSpriteExtra::create(
-            testSoundSpr,
-            this,
-            menu_selector(ClicksoundSetterNodeV3::onTestSoundBtn)
-        );
-
         auto clearSpr = CCSprite::createWithSpriteFrameName("GJ_trashBtn_001.png");
         clearSpr->setScale(0.6);
         this->m_clearBtn = CCMenuItemSpriteExtra::create(
@@ -266,7 +255,6 @@ protected:
         m_selectionpopup->addChild(this->m_cspiBtn);
         m_selectionpopup->addChild(this->m_downloadBtn);
         m_selectionpopup->addChild(this->m_popup);
-        m_selectionpopup->addChild(this->m_testSoundBtn);
         m_selectionpopup->addChild(this->m_clearBtn);
         auto m_selectionpopuplayout = RowLayout::create();
         m_selectionpopuplayout->setGap(15.f);
@@ -316,10 +304,6 @@ protected:
                 }
             }
         );
-    };
-
-    onTestSoundBtn(CCObject* sender) {
-        testSound(cs);
     };
 
     void onClearBtn(CCObject* sender) {
@@ -565,7 +549,6 @@ protected:
         m_popup->setEnabled(shouldEnable);
         m_downloadBtn->setEnabled(shouldEnable);
         m_cspiBtn->setEnabled(shouldEnable);
-        m_testSoundBtn->setEnabled(shouldEnable);
         m_clearBtn->setEnabled(shouldEnable);
 
         if (!shouldEnable) {

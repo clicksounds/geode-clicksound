@@ -12,6 +12,7 @@
 #include <Geode/modify/PauseLayer.hpp>
 #include <Geode/modify/PlayerObject.hpp>
 #include <Geode/modify/EndLevelLayer.hpp>
+#include <Geode/modify/CCEGLView.hpp>
 #include <Geode/ui/GeodeUI.hpp>
 #include <Geode/utils/web.hpp>
 #include <thread>
@@ -61,6 +62,8 @@ void onsettingsUpdate() {
 // the check to see if you should play the sound or not 
 bool integrityCheck(PlayerObject *object, PlayerButton Pressed) {
 	// play sounds when "only play on jump" settings is enabled and the player input is a jump, left movement, or right movement.
+	if (Mod::get()->getSettingValue<bool>("sounds-everywhere")) return false;
+	
 	if (Mod::get()->getSettingValue<bool>("only-on-jump")) {
 		if (Pressed != PlayerButton::Jump) {
 			return false;
@@ -137,17 +140,18 @@ class $modify(PlayerObject) {
 	// click sounds
 	bool pushButton(PlayerButton p0) {
 		bool ret = PlayerObject::pushButton(p0);
+		Mod* csMod = Mod::get();
 
 		// check if you can and or check if it is correct
 		if (!integrityCheck(this, p0)) {
 			return ret;
 		};
-		auto isClickEnabled = Mod::get()->getSettingValue<bool>("enable-clicksounds");
-		auto click_vol = Mod::get()->getSettingValue<int64_t>("click-volume");
+		auto isClickEnabled = csMod->getSettingValue<bool>("enable-clicksounds");
+		auto click_vol = csMod->getSettingValue<int64_t>("click-volume");
 		// set the direction bool to true
 		SetupNewDirections(p0, true);
 
-		if(!Mod::get()->getSettingValue<bool>("enable-clicksounds") && !Mod::get()->getSettingValue<bool>("enable-releasesounds")){}else{Carrot::carrot=true;}
+		if(!csMod->getSettingValue<bool>("enable-clicksounds") && !csMod->getSettingValue<bool>("enable-releasesounds")){}else{Carrot::carrot=true;}
 
 		// is it enabled or is volume < 0
 		if (click_vol <= 0 || !isClickEnabled)
@@ -166,6 +170,8 @@ class $modify(PlayerObject) {
 	// release sounds
 	bool releaseButton(PlayerButton p0) {
 		bool ret = PlayerObject::releaseButton(p0);
+		Mod* csMod = Mod::get();
+
 		// Did you click? check
 		if (!GetNewDirections(p0)) {
 			return ret;
@@ -175,10 +181,10 @@ class $modify(PlayerObject) {
 			return ret;
 		};
 
-		auto isReleaseEnabled = Mod::get()->getSettingValue<bool>("enable-releasesounds");
-		auto release_vol = Mod::get()->getSettingValue<int64_t>("release-volume");
+		auto isReleaseEnabled = csMod->getSettingValue<bool>("enable-releasesounds");
+		auto release_vol = csMod->getSettingValue<int64_t>("release-volume");
 
-		if(!Mod::get()->getSettingValue<bool>("enable-clicksounds") && !Mod::get()->getSettingValue<bool>("enable-releasesounds")){}else{Carrot::carrot=true;}
+		if(!csMod->getSettingValue<bool>("enable-clicksounds") && !csMod->getSettingValue<bool>("enable-releasesounds")){}else{Carrot::carrot=true;}
 
 		// set the direction bool to false
 		SetupNewDirections(p0, false);
@@ -194,6 +200,53 @@ class $modify(PlayerObject) {
 		}
 
 		return ret;
+	}
+};
+
+class $modify(csEGLView, CCEGLView) {
+	// keyboard presses
+	void onGLFWKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+		CCEGLView::onGLFWKeyCallback(window, key, scancode, action, mods);
+		
+		Mod* csMod = Mod::get();
+		if(!csMod->getSettingValue<bool>("sounds-everywhere")) return;
+		if(!csMod->getSettingValue<bool>("enable-clicksounds") && !csMod->getSettingValue<bool>("enable-releasesounds")){}else{Carrot::carrot=true;}
+
+		auto isReleaseEnabled = csMod->getSettingValue<bool>("enable-releasesounds");
+		auto release_vol = csMod->getSettingValue<int64_t>("release-volume");
+		auto isClickEnabled = csMod->getSettingValue<bool>("enable-clicksounds");
+		auto click_vol = csMod->getSettingValue<int64_t>("click-volume");
+		switch (action) {
+			case 0:
+				// release
+				if (release_vol <= 0 || !release_vol)
+					return;
+
+				if (Custom_OnLetGo) {
+					ReleaseSound->Play();
+				} else {
+					ReleaseSoundIndex->PlayRandom();
+				}
+				break;
+			case 1:
+				// click
+				if (click_vol <= 0 || !isClickEnabled)
+					return;
+
+				if (Custom_OnClick) {
+					ClickSound->Play();
+				} else {
+					ClickSoundIndex->PlayRandom();
+				}
+			break;
+		}
+		return;
+	}
+	// mouse presses
+	void onGLFWMouseCallBack(GLFWwindow* window, int button, int action, int mods) {
+		CCEGLView::onGLFWMouseCallBack(window, button, action, mods);
+
+
 	}
 };
 

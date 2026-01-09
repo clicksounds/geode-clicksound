@@ -2,8 +2,8 @@
 #include "jsonReader/Getsettingsinfo.hpp"
 #include <Geode/Geode.hpp>
 
-static bool Custom_OnClick = false;
-static bool Custom_OnLetGo = false;
+bool Custom_OnClick = false;
+bool Custom_OnLetGo = false;
 
 struct downloadedzipStruc {
 	bool Finished = false;
@@ -151,9 +151,9 @@ class MultiSoundCache {
 	}
 };
 
-static MultiSoundCache *ClickSoundIndex = new MultiSoundCache();
-static MultiSoundCache *ReleaseSoundIndex = new MultiSoundCache();
+MultiSoundCache *ClickSoundIndex = new MultiSoundCache();
+MultiSoundCache *ReleaseSoundIndex = new MultiSoundCache();
 
 // Create the classes for Caching
-static SoundCache *ClickSound = new SoundCache("click-volume", "selection-clicks");
-static SoundCache *ReleaseSound = new SoundCache("release-volume", "selection-release");
+SoundCache *ClickSound = new SoundCache("click-volume", "selection-clicks");
+SoundCache *ReleaseSound = new SoundCache("release-volume", "selection-release");
