@@ -252,6 +252,7 @@ class $modify(csEGLView, CCEGLView) {
 		Mod* csMod = Mod::get();
 		if(!csMod->getSettingValue<bool>("sounds-everywhere")) return;
 		if(!csMod->getSettingValue<bool>("enable-clicksounds") && !csMod->getSettingValue<bool>("enable-releasesounds")){}else{Carrot::carrot=true;}
+		if(button != 0) return; // left clicks only.
 
 		auto isReleaseEnabled = csMod->getSettingValue<bool>("enable-releasesounds");
 		auto release_vol = csMod->getSettingValue<int64_t>("release-volume");
