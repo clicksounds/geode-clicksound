@@ -6,7 +6,7 @@
         "mac": "2.2074",
         "ios": "2.2074"
     	},
-	"version": "v2.3.0-beta.2",
+	"version": "v2.3.0-beta.3",
 	"id": "beat.click-sound",
 	"name": "Click Sounds",
 	"developers": [
@@ -124,6 +124,12 @@
             "description": "This category is for settings that are <cr>Miscellaneous</c> and are extra features",
             "type": "title"
         },
+		"sounds-everywhere": {
+			"name": "Sounds Everywhere (beta)",
+			"type": "bool",
+			"description": "Sounds will play everywhere instead of just in levels. This will break all botting tools. (Experimental)",
+			"default": false
+		},
 		"only-on-jump": {
 			"name": "Only play on jump",
 			"description": "Doesn't play sound on movement of platformer keys. Ignored by the 'Sounds Everywhere' option.",
@@ -151,12 +157,6 @@
 			"name": "Advanced Options",
 			"type": "title",
 			"description": "Only touch these if you know what you're doing."
-		},
-		"sounds-everywhere": {
-			"name": "Sounds Everywhere (beta)",
-			"type": "bool",
-			"description": "Sounds will play everywhere instead of just in levels. This will break all botting tools. (Experimental)",
-			"default": false
 		},
 		"downloadOnStartup": {
 			"name": "Download index on startup",

@@ -1,6 +1,6 @@
 # Changelog
 ## Version v2.3.0
-* Added an experimental 'sounds everywhere' option for Windows that continues playing click sounds outside of gameplay.
+* Added an experimental 'sounds everywhere' option that continues playing click sounds outside of gameplay.
 * Botters should avoid using this as it is incompatible with every macro bot.
 ## Version v2.2.12
 * Installing an invalid click pack now shows an error instead of crashing the game.
