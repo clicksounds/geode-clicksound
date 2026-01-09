@@ -156,8 +156,7 @@
 			"name": "Sounds Everywhere (beta)",
 			"type": "bool",
 			"description": "Sounds will play everywhere instead of just in levels. This will break all botting tools. (Experimental)",
-			"default": false,
-			"platforms": ["win", "mobile"]
+			"default": false
 		},
 		"downloadOnStartup": {
 			"name": "Download index on startup",
