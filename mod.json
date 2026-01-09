@@ -157,7 +157,7 @@
 			"type": "bool",
 			"description": "Sounds will play everywhere instead of just in levels. This will break all botting tools. (Experimental)",
 			"default": false,
-			"platforms": ["win"]
+			"platforms": ["win", "mobile"]
 		},
 		"downloadOnStartup": {
 			"name": "Download index on startup",
