@@ -12,6 +12,7 @@
 #include <Geode/modify/PauseLayer.hpp>
 #include <Geode/modify/PlayerObject.hpp>
 #include <Geode/modify/EndLevelLayer.hpp>
+#include <Geode/modify/CCTouchDispatcher.hpp>
 #include <Geode/modify/CCEGLView.hpp>
 #include <Geode/ui/GeodeUI.hpp>
 #include <Geode/utils/web.hpp>
@@ -203,7 +204,7 @@ class $modify(PlayerObject) {
 	}
 };
 
-// 'sounds everywhere' setting. only works on windows because cceglview.
+// 'sounds everywhere' setting. windows
 #ifdef GEODE_IS_WINDOWS
 class $modify(csEGLView, CCEGLView) {
 	// keyboard presses
@@ -286,6 +287,54 @@ class $modify(csEGLView, CCEGLView) {
 	}
 };
 #endif
+// 'sounds everywhere' setting (mobile)
+//#ifdef GEODE_IS_MOBILE
+class $modify(csTouchDispatcher, CCTouchDispatcher) {
+	virtual void touchesBegan(CCSet* touches, CCEvent* pEvent) override {
+		CCTouchDispatcher::touchesBegan(touches, pEvent);
+
+		Mod* csMod = Mod::get();
+		bool soundsEverywhere = csMod->getSettingValue<bool>("sounds-everywhere");
+		bool isClickEnabled = csMod->getSettingValue<bool>("enable-clicksounds");
+		bool isReleaseEnabled = csMod->getSettingValue<bool>("enable-releasesounds");
+		int64_t clickVolume = csMod->getSettingValue<int64_t>("click-volume");
+
+		if(!soundsEverywhere) return;
+		if(!isClickEnabled && !isReleaseEnabled){}else{Carrot::carrot=true;}
+
+		if (clickVolume <= 0 || !isClickEnabled)
+			return;
+
+		if (Custom_OnClick) {
+			ClickSound->Play();
+		} else {
+			ClickSoundIndex->PlayRandom();
+		}
+	}
+
+	/*virtual void touchesEnded(CCSet* touches, CCEvent* pEvent) override {
+		CCTouchDispatcher::touchesEnded(touches, pEvent);
+
+		Mod* csMod = Mod::get();
+		bool soundsEverywhere = csMod->getSettingValue<bool>("sounds-everywhere");
+		bool isClickEnabled = csMod->getSettingValue<bool>("enable-clicksounds");
+		bool isReleaseEnabled = csMod->getSettingValue<bool>("enable-releasesounds");
+		int64_t releaseVolume = csMod->getSettingValue<int64_t>("release-volume");
+
+		if(!soundsEverywhere) return;
+		if(!isClickEnabled && !isReleaseEnabled){}else{Carrot::carrot=true;}
+
+		if (releaseVolume <= 0 || !isReleaseEnabled)
+			return;
+
+		if (Custom_OnLetGo) {
+			ReleaseSound->Play();
+		} else {
+			ReleaseSoundIndex->PlayRandom();
+		}
+	}*/
+};
+//#endif
 
 void SendRequestAPI(bool forceDownload = false) {
 	if (forceDownload) {
