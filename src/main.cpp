@@ -203,6 +203,8 @@ class $modify(PlayerObject) {
 	}
 };
 
+// 'sounds everywhere' setting. only works on windows because cceglview.
+#ifdef GEODE_IS_WINDOWS
 class $modify(csEGLView, CCEGLView) {
 	// keyboard presses
 	void onGLFWKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
@@ -242,13 +244,47 @@ class $modify(csEGLView, CCEGLView) {
 		}
 		return;
 	}
+	
 	// mouse presses
 	void onGLFWMouseCallBack(GLFWwindow* window, int button, int action, int mods) {
 		CCEGLView::onGLFWMouseCallBack(window, button, action, mods);
 
+		Mod* csMod = Mod::get();
+		if(!csMod->getSettingValue<bool>("sounds-everywhere")) return;
+		if(!csMod->getSettingValue<bool>("enable-clicksounds") && !csMod->getSettingValue<bool>("enable-releasesounds")){}else{Carrot::carrot=true;}
 
+		auto isReleaseEnabled = csMod->getSettingValue<bool>("enable-releasesounds");
+		auto release_vol = csMod->getSettingValue<int64_t>("release-volume");
+		auto isClickEnabled = csMod->getSettingValue<bool>("enable-clicksounds");
+		auto click_vol = csMod->getSettingValue<int64_t>("click-volume");
+		switch (action) {
+			case 0:
+				// release
+				if (release_vol <= 0 || !release_vol)
+					return;
+
+				if (Custom_OnLetGo) {
+					ReleaseSound->Play();
+				} else {
+					ReleaseSoundIndex->PlayRandom();
+				}
+				break;
+			case 1:
+				// click
+				if (click_vol <= 0 || !isClickEnabled)
+					return;
+
+				if (Custom_OnClick) {
+					ClickSound->Play();
+				} else {
+					ClickSoundIndex->PlayRandom();
+				}
+			break;
+		}
+		return;
 	}
 };
+#endif
 
 void SendRequestAPI(bool forceDownload = false) {
 	if (forceDownload) {
