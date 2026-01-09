@@ -64,7 +64,9 @@ void onsettingsUpdate() {
 // the check to see if you should play the sound or not 
 bool integrityCheck(PlayerObject *object, PlayerButton Pressed) {
 	// play sounds when "only play on jump" settings is enabled and the player input is a jump, left movement, or right movement.
-	if (Mod::get()->getSettingValue<bool>("sounds-everywhere")) return false;
+	#ifndef GEODE_IS_MAC
+		if (Mod::get()->getSettingValue<bool>("sounds-everywhere")) return false;
+	#endif
 	
 	if (Mod::get()->getSettingValue<bool>("only-on-jump")) {
 		if (Pressed != PlayerButton::Jump) {
@@ -295,6 +297,10 @@ class $modify(csTouchDispatcher, CCTouchDispatcher) {
 		CCTouchDispatcher::touches(pTouches, pEvent, uIndex);
 
 		if (uIndex != 0 && uIndex != 2) return;
+
+		#ifdef GEODE_IS_MAC
+			if (PlayLayer::get()) return;
+		#endif
 
 		Mod* csMod = Mod::get();
 		bool soundsEverywhere = csMod->getSettingValue<bool>("sounds-everywhere");
