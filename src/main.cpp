@@ -294,6 +294,8 @@ class $modify(csTouchDispatcher, CCTouchDispatcher) {
 	void touches(CCSet* pTouches, CCEvent* pEvent, unsigned int uIndex) {
 		CCTouchDispatcher::touches(pTouches, pEvent, uIndex);
 
+		if (uIndex != 0 && uIndex != 2) return;
+
 		Mod* csMod = Mod::get();
 		bool soundsEverywhere = csMod->getSettingValue<bool>("sounds-everywhere");
 		bool isClickEnabled = csMod->getSettingValue<bool>("enable-clicksounds");
