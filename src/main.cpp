@@ -290,8 +290,9 @@ class $modify(csEGLView, CCEGLView) {
 // 'sounds everywhere' setting (mobile)
 #ifdef GEODE_IS_MOBILE
 class $modify(csTouchDispatcher, CCTouchDispatcher) {
-	virtual void touchesBegan(CCSet* touches, CCEvent* pEvent) override {
+	void touchesBegan(CCSet* touches, CCEvent* pEvent) {
 		CCTouchDispatcher::touchesBegan(touches, pEvent);
+		log::debug("ive been touched!");
 
 		Mod* csMod = Mod::get();
 		bool soundsEverywhere = csMod->getSettingValue<bool>("sounds-everywhere");
@@ -309,10 +310,11 @@ class $modify(csTouchDispatcher, CCTouchDispatcher) {
 			ClickSound->Play();
 		} else {
 			ClickSoundIndex->PlayRandom();
+			log::debug("sound!");
 		}
 	}
 
-	virtual void touchesEnded(CCSet* touches, CCEvent* pEvent) override {
+	void touchesEnded(CCSet* touches, CCEvent* pEvent) {
 		CCTouchDispatcher::touchesEnded(touches, pEvent);
 
 		Mod* csMod = Mod::get();
