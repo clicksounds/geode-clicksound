@@ -289,7 +289,7 @@ class $modify(csEGLView, CCEGLView) {
 };
 #endif
 // 'sounds everywhere' setting (mobile)
-#ifdef GEODE_IS_MOBILE
+#ifndef GEODE_IS_WINDOWS
 class $modify(csTouchDispatcher, CCTouchDispatcher) {
 	void touches(CCSet* pTouches, CCEvent* pEvent, unsigned int uIndex) {
 		CCTouchDispatcher::touches(pTouches, pEvent, uIndex);
