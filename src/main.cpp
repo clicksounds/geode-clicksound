@@ -288,7 +288,7 @@ class $modify(csEGLView, CCEGLView) {
 };
 #endif
 // 'sounds everywhere' setting (mobile)
-//#ifdef GEODE_IS_MOBILE
+#ifdef GEODE_IS_MOBILE
 class $modify(csTouchDispatcher, CCTouchDispatcher) {
 	virtual void touchesBegan(CCSet* touches, CCEvent* pEvent) override {
 		CCTouchDispatcher::touchesBegan(touches, pEvent);
@@ -312,7 +312,7 @@ class $modify(csTouchDispatcher, CCTouchDispatcher) {
 		}
 	}
 
-	/*virtual void touchesEnded(CCSet* touches, CCEvent* pEvent) override {
+	virtual void touchesEnded(CCSet* touches, CCEvent* pEvent) override {
 		CCTouchDispatcher::touchesEnded(touches, pEvent);
 
 		Mod* csMod = Mod::get();
@@ -332,9 +332,9 @@ class $modify(csTouchDispatcher, CCTouchDispatcher) {
 		} else {
 			ReleaseSoundIndex->PlayRandom();
 		}
-	}*/
+	}
 };
-//#endif
+#endif
 
 void SendRequestAPI(bool forceDownload = false) {
 	if (forceDownload) {
