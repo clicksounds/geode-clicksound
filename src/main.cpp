@@ -17,6 +17,7 @@
 #include <Geode/ui/GeodeUI.hpp>
 #include <Geode/utils/web.hpp>
 #include <thread>
+#include <cstdint>
 using namespace geode::prelude;
 
 void onsettingsUpdate() {
@@ -290,49 +291,45 @@ class $modify(csEGLView, CCEGLView) {
 // 'sounds everywhere' setting (mobile)
 #ifdef GEODE_IS_MOBILE
 class $modify(csTouchDispatcher, CCTouchDispatcher) {
-	void touchesBegan(CCSet* touches, CCEvent* pEvent) {
-		CCTouchDispatcher::touchesBegan(touches, pEvent);
-		log::debug("ive been touched!");
+	void touches(CCSet* pTouches, CCEvent* pEvent, unsigned int uIndex) {
+		CCTouchDispatcher::touches(pTouches, pEvent, uIndex);
 
 		Mod* csMod = Mod::get();
 		bool soundsEverywhere = csMod->getSettingValue<bool>("sounds-everywhere");
 		bool isClickEnabled = csMod->getSettingValue<bool>("enable-clicksounds");
 		bool isReleaseEnabled = csMod->getSettingValue<bool>("enable-releasesounds");
-		int64_t clickVolume = csMod->getSettingValue<int64_t>("click-volume");
 
-		if(!soundsEverywhere) return;
-		if(!isClickEnabled && !isReleaseEnabled){}else{Carrot::carrot=true;}
+		if (!soundsEverywhere) return;
 
-		if (clickVolume <= 0 || !isClickEnabled)
-			return;
+		if (!isClickEnabled && !isReleaseEnabled){}else{Carrot::carrot=true;}
 
-		if (Custom_OnClick) {
-			ClickSound->Play();
-		} else {
-			ClickSoundIndex->PlayRandom();
-			log::debug("sound!");
+		// touch start
+		if (uIndex == 0) {
+			int64_t clickVolume = csMod->getSettingValue<int64_t>("click-volume");
+
+			if (clickVolume <= 0 || !isClickEnabled)
+				return;
+
+			if (Custom_OnClick) {
+				ClickSound->Play();
+			} else {
+				ClickSoundIndex->PlayRandom();
+				log::debug("sound!");
+			}
 		}
-	}
 
-	void touchesEnded(CCSet* touches, CCEvent* pEvent) {
-		CCTouchDispatcher::touchesEnded(touches, pEvent);
+		// touch end
+		if (uIndex == 2) {
+			int64_t releaseVolume = csMod->getSettingValue<int64_t>("release-volume");
 
-		Mod* csMod = Mod::get();
-		bool soundsEverywhere = csMod->getSettingValue<bool>("sounds-everywhere");
-		bool isClickEnabled = csMod->getSettingValue<bool>("enable-clicksounds");
-		bool isReleaseEnabled = csMod->getSettingValue<bool>("enable-releasesounds");
-		int64_t releaseVolume = csMod->getSettingValue<int64_t>("release-volume");
+			if (releaseVolume <= 0 || !isReleaseEnabled)
+				return;
 
-		if(!soundsEverywhere) return;
-		if(!isClickEnabled && !isReleaseEnabled){}else{Carrot::carrot=true;}
-
-		if (releaseVolume <= 0 || !isReleaseEnabled)
-			return;
-
-		if (Custom_OnLetGo) {
-			ReleaseSound->Play();
-		} else {
-			ReleaseSoundIndex->PlayRandom();
+			if (Custom_OnLetGo) {
+				ReleaseSound->Play();
+			} else {
+				ReleaseSoundIndex->PlayRandom();
+			}
 		}
 	}
 };
