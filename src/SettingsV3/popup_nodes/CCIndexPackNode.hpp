@@ -68,6 +68,7 @@ class CCIndexPackNode : public CCLayerColor {
 	CCMenu *DEVS;
 	std::string authorsListWhole = "";
 	std::string packDescription;
+	bool isFeatured;
 	void OnDevelopers(auto sender) {
 		MDPopup::create(
 		    "More Info",
@@ -157,6 +158,27 @@ class CCIndexPackNode : public CCLayerColor {
 					Text->setScale(0.5f);
 					Text->setString(name.c_str());
 				}
+
+				// check if featured
+				if (jsonObject.contains("id") && jsonObject["id"].isString()) {
+					std::string id = jsonObject["id"].asString().unwrap();
+					auto featuredPath = Mod::get()->getConfigDir() / "Clicks" / "clicks-main" / "featured_list.json";
+					if (std::filesystem::exists(featuredPath)) {
+						auto featuredJsonData = utils::file::readJson(featuredPath).unwrapOr(-2);
+						if (featuredJsonData == -2) log::debug("couldnt unwrap featured_list.json");
+						if (featuredJsonData.isArray()) {
+							auto& array = featuredJsonData.asArray().unwrap();
+							for (size_t i = 0; i < array.size(); i++) {
+								const auto& jsonElement = array[i];
+								if (jsonElement.isString() && jsonElement.asString().unwrap() == id) {
+									isFeatured = true;
+									break;
+								}
+							}
+						}
+
+					}
+				}
 			}
 		}
 		this->getlistfull();
@@ -234,25 +256,45 @@ class CCIndexPackNode : public CCLayerColor {
 		}
 		this->addChildAtPosition(DEVS, Anchor::BottomLeft, ccp(3, 0), ccp(0, 0));
 
+		// gradient
 		CCLayerGradient *gradient = CCLayerGradient::create(ccc4(0, 0, 0, 100), ccc4(0, 0, 0, 100));
 		gradient->setContentSize(this->getContentSize());
 		gradient->setZOrder(-3);
 		gradient->setVector(ccp(90, 0));
 		this->addChild(gradient);
 		this->setOpacity(0);
-		// GJ_button_06
+
+		// featured glow
+		CCScale9Sprite *FeaturedGlow = CCScale9Sprite::create("featuredglow.png"_spr);
+		FeaturedGlow->setPreferredSize(CCSize(this->getContentSize().width, this->getContentSize().height + 5.f));
+		FeaturedGlow->setID("FeaturedGlow");
+		FeaturedGlow->setZOrder(-1);
+		FeaturedGlow->setAnchorPoint(CCPoint(0.f, 0.1f));
+		FeaturedGlow->setOpacity(155);
+
+		if (isFeatured) this->addChild(FeaturedGlow);
+
+		// 'set' button
 		auto ConfirmSprite = CCMenuItemSpriteExtra::create(ButtonSprite::create("Set", 40.f, true, SpritePicker::get("bigFont.fnt", theme), SpritePicker::get("GJ_button_01.png", theme), 20.f, 1.0f), this, menu_selector(CCIndexPackNode::selected));
 		ConfirmSprite->m_scaleMultiplier = 0.9;
 		_Apply_Menu = CCMenu::create(); // MEN(_Apply_Menu)
 		_Apply_Menu->setID("apply");
 		_Apply_Menu->ignoreAnchorPointForPosition(false);
-		_Apply_Menu->addChild(ConfirmSprite);
 		_Apply_Menu->setLayout(RowLayout::create()
 		                           ->setAxisAlignment(AxisAlignment::Start)
 		                           ->setCrossAxisLineAlignment(AxisAlignment::Start)
 		                           ->setCrossAxisAlignment(AxisAlignment::Start));
 		_Apply_Menu->setContentSize(ConfirmSprite->getContentSize());
 		_Apply_Menu->setPosition(ccp(this->getContentSize().width - ConfirmSprite->getContentSize().width / 1.5, this->getContentSize().height / 2));
+		if (isFeatured) {
+			CCSprite* featuredSpr = CCSprite::createWithSpriteFrameName("GJ_starsIcon_001.png");
+			featuredSpr->setScale(0.75f);
+			featuredSpr->setID("featured-star");
+			//_Apply_Menu->setPosition(CCPoint(_Apply_Menu->getPosition().x - 10.f, _Apply_Menu->getPosition().y));
+			featuredSpr->setPosition(CCPoint(_Apply_Menu->getPosition().x - 45.f, _Apply_Menu->getPosition().y));
+			this->addChild(featuredSpr);
+		}
+		_Apply_Menu->addChild(ConfirmSprite);	
 		_Apply_Menu->updateLayout();
 		this->addChild(_Apply_Menu);
 		_Apply_Menu->setAnchorPoint({0.5, 0.5});

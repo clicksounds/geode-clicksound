@@ -388,7 +388,8 @@ void SendRequestAPI(bool forceDownload = false) {
 					// delete unnecessary files to save storage space
 					std::filesystem::path clicksDir = Mod::get()->getConfigDir() / "Clicks" / "clicks-main";
 					for (const auto& entry : std::filesystem::directory_iterator(clicksDir)) {
-						if (entry.path().filename() != "Meme" && entry.path().filename() != "Useful") {
+						static const std::unordered_set<std::string> skipList = {"Meme", "Useful", "featured_list.json"};
+						if (!skipList.contains(entry.path().filename().string())) {
 							std::filesystem::remove_all(entry.path());
 						}
 					}
