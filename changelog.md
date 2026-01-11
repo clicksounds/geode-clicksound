@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.3.1
+* Fixed a bug where the featured click packs no longer appear after clearing the Click Sounds Index.
 ## Version v2.3.0
 * Added a 'sounds everywhere' option that continues playing click sounds outside of gameplay. Botters should avoid using this as it is incompatible with every macro bot.
 * The best click packs can now be featured on the pack list by index moderators.
