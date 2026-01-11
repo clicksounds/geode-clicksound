@@ -17,6 +17,7 @@ using namespace geode::prelude;
 
 extern void onsettingsUpdate();
 extern void SendRequestAPI(bool forceDownload);
+extern void extractDefaultClickPack();
 
 struct ClicksoundSettingValue {
     std::string  m_currentMemeClick;
@@ -328,6 +329,8 @@ protected:
 
                         std::filesystem::create_directory(dir / "Meme");
                         std::filesystem::create_directory(dir / "Useful");
+
+                        extractDefaultClickPack();
 
                         FLAlertLayer::create("Click Sounds", "Successfully cleared index!", "Close")->show();
                         Loader::get()->getInstalledMod("beat.click-sound")->setSavedValue("CSINDEXRELOAD", true);

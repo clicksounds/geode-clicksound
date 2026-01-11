@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.3.2
+* The default click pack will now continue to be installed after clearing the Click Sounds Index.
 ## Version v2.3.1
 * Fixed a bug where the featured click packs no longer appear after clearing the Click Sounds Index.
 ## Version v2.3.0
