@@ -324,7 +324,7 @@ protected:
                         if (std::filesystem::exists(dir / "Meme"));
                             std::filesystem::remove_all(dir / "Meme");
                         if (std::filesystem::exists(dir / "Useful"));
-                            std::filesystem::remove_all(dir / "Useful")
+                            std::filesystem::remove_all(dir / "Useful");
 
                         std::filesystem::create_directory(dir / "Meme");
                         std::filesystem::create_directory(dir / "Useful");
