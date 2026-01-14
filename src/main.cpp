@@ -265,7 +265,7 @@ class $modify(csEGLView, CCEGLView) {
 		switch (action) {
 			case 0:
 				// release
-				if (release_vol <= 0 || !release_vol)
+				if (release_vol <= 0 || !isReleaseEnabled)
 					return;
 
 				if (Custom_OnLetGo) {
