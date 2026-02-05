@@ -2,14 +2,11 @@
 
 #include "../../ButtonSprites/Sprite.hpp"
 #include "../../jsonReader/Json.hpp"
-#include "../popup.hpp"
 #include <Geode/Geode.hpp>
 #include <Geode/loader/Event.hpp>
 #include <Geode/ui/TextInput.hpp>
 #include <Geode/utils/file.hpp>
 #include <Geode/utils/web.hpp>
-#include <algorithm>
-#include <cctype>
 #include <fstream>
 #include <iostream>
 using namespace geode::prelude;

@@ -1,10 +1,7 @@
 #pragma once
-#include "Getsettingsinfo.hpp"
 #include <Geode/Geode.hpp>
 #include <filesystem>
-#include <fstream>
 #include <map>
-#include <sstream>
 #include <string>
 #include <vector>
 
