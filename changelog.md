@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.4.0
+* Added support for Geode v5.0.0 / GD 2.2081.
 ## Version v2.3.3
 * Fixed a bug on windows where release sounds will continue playing while disabled if the 'sounds everywhere' setting is enabled.
 ## Version v2.3.2
