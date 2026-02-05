@@ -410,71 +410,77 @@ protected:
 
         async::spawn(
             file::pick(file::PickMode::OpenFile, { getPersistentDir, { textFilter } }),
-            [this, dir](Result<std::filesystem::path> res) {
-                std::filesystem::path path;
+            [this, dir](Result<std::optional<std::filesystem::path>> res) {
                 if (!res || !res.isOk()) return false;
                 if (res.isOk()) {
-                    path = res.unwrap();
-
-                    if (path.extension() != ".zip") {
-                        FLAlertLayer::create("Click Sounds", "Invalid click pack: Not in .packgen.zip format!", "Close")->show();
-                        m_cspiFilePickerOpen = false;
-                        return false;
-                    }
-
-                    Mod::get()->setSavedValue<std::filesystem::path>("cspi-persistent-dir", path);
-
-                    std::filesystem::path tempDir = dirs::getTempDir() / path.stem();
-                    std::filesystem::create_directories(tempDir);
-
-                    std::filesystem::path tempZipPath = tempDir / path.filename();
-                    std::filesystem::copy(path, tempZipPath, std::filesystem::copy_options::overwrite_existing);
-
-                    auto unzip = file::Unzip::create(tempZipPath);
-                    auto unzipResult = unzip.unwrap().extractAllTo(tempDir);
-                    if (!unzipResult) return false;
-
-                    std::filesystem::path packJsonPath = tempDir / "pack.json";
-                    std::string type = "Useful";
-
-                    if (std::filesystem::exists(packJsonPath)) {
-                        std::ifstream jsonFile(packJsonPath);
-                        if (jsonFile.is_open()) {
-                            std::string content((std::istreambuf_iterator<char>(jsonFile)), std::istreambuf_iterator<char>());
-                            auto jsonData = matjson::parse(content).unwrapOr(-2);
-                            if (jsonData.contains("type")) {
-                                auto val = jsonData.get("type").unwrap();
-                                if (val == "Meme") type = "Meme";
-                            }
-                        }
-                    } else {
-                        FLAlertLayer::create("Click Sounds", "Invalid click pack: Not in .packgen.zip format!", "Close")->show();
-                        m_cspiFilePickerOpen = false;
-                        return false;
-                    }
-
-                    std::filesystem::path newDir = dir / type / path.stem();
-                    std::filesystem::create_directories(newDir);
-
-                    for (auto& p : std::filesystem::recursive_directory_iterator(tempDir)) {
-                        if (p.is_directory()) continue;
-                        auto rel = std::filesystem::relative(p.path(), tempDir);
-                        std::filesystem::create_directories(newDir / rel.parent_path());
-                        std::filesystem::copy_file(p.path(), newDir / rel, std::filesystem::copy_options::overwrite_existing);
-                    }
-
-                    geode::createQuickPopup(
-                        "Click Sounds",
-                        fmt::format("{} pack installed successfully!", type),
-                        "Close", nullptr,
-                        [tempZipPath, this](auto, bool) {
-                            std::filesystem::remove(tempZipPath);
+                    auto opt = res.unwrap();
+                    if (opt) {
+                        auto path = opt.value();
+                        if (path.extension() != ".zip") {
+                            FLAlertLayer::create("Click Sounds", "Invalid click pack: Not in .packgen.zip format!", "Close")->show();
                             m_cspiFilePickerOpen = false;
+                            return false;
                         }
-                    );
 
-                    Loader::get()->getInstalledMod("beat.click-sound")->setSavedValue("CSINDEXRELOAD", true);
-                    return false;
+                        Mod::get()->setSavedValue<std::filesystem::path>("cspi-persistent-dir", path);
+
+                        std::filesystem::path tempDir = dirs::getTempDir() / path.stem();
+                        std::filesystem::create_directories(tempDir);
+
+                        std::filesystem::path tempZipPath = tempDir / path.filename();
+                        std::filesystem::copy(path, tempZipPath, std::filesystem::copy_options::overwrite_existing);
+
+                        auto unzip = file::Unzip::create(tempZipPath);
+                        auto unzipResult = unzip.unwrap().extractAllTo(tempDir);
+                        if (!unzipResult) return false;
+
+                        std::filesystem::path packJsonPath = tempDir / "pack.json";
+                        std::string type = "Useful";
+
+                        if (std::filesystem::exists(packJsonPath)) {
+                            std::ifstream jsonFile(packJsonPath);
+                            if (jsonFile.is_open()) {
+                                std::string content((std::istreambuf_iterator<char>(jsonFile)), std::istreambuf_iterator<char>());
+                                auto jsonData = matjson::parse(content).unwrapOr(-2);
+                                if (jsonData.contains("type")) {
+                                    auto val = jsonData.get("type").unwrap();
+                                    if (val == "Meme") type = "Meme";
+                                }
+                            }
+                        } else {
+                            FLAlertLayer::create("Click Sounds", "Invalid click pack: Not in .packgen.zip format!", "Close")->show();
+                            m_cspiFilePickerOpen = false;
+                            return false;
+                        }
+
+                        std::filesystem::path newDir = dir / type / path.stem();
+                        std::filesystem::create_directories(newDir);
+
+                        for (auto& p : std::filesystem::recursive_directory_iterator(tempDir)) {
+                            if (p.is_directory()) continue;
+                            auto rel = std::filesystem::relative(p.path(), tempDir);
+                            std::filesystem::create_directories(newDir / rel.parent_path());
+                            std::filesystem::copy_file(p.path(), newDir / rel, std::filesystem::copy_options::overwrite_existing);
+                        }
+
+                        geode::createQuickPopup(
+                            "Click Sounds",
+                            fmt::format("{} pack installed successfully!", type),
+                            "Close", nullptr,
+                            [tempZipPath, this](auto, bool) {
+                                std::filesystem::remove(tempZipPath);
+                                m_cspiFilePickerOpen = false;
+                            }
+                        );
+
+                        Loader::get()->getInstalledMod("beat.click-sound")->setSavedValue("CSINDEXRELOAD", true);
+                        return false;
+                    } else {
+                        m_cspiFilePickerOpen = false;
+                        return false;
+                    }
+
+                    
                 }
                 m_cspiFilePickerOpen = false;
                 return true;
@@ -590,11 +596,11 @@ protected:
 
         async::spawn(
             file::pick(file::PickMode::OpenFile, { Mod::get()->getResourcesDir(), { textFilter } }), 
-            [this,sender](Result<std::filesystem::path> res) {
+            [this,sender](Result<std::optional<std::filesystem::path>> res) {
                 if (res.isOk()) {
-                    std::filesystem::path path = res.unwrap();
+                    auto path = res.unwrap();
                     ClicksoundSettingValue Changes = this->getValue();
-                    Changes.CustomSoundPath = path.string().c_str();
+                    Changes.CustomSoundPath = path->string().c_str();
                     this->setValue(Changes, static_cast<CCNode*>(sender));
                 }
             }
