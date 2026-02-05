@@ -239,7 +239,6 @@ class $modify(csTouchDispatcher, CCTouchDispatcher) {
 				ClickSound->Play();
 			} else {
 				ClickSoundIndex->PlayRandom();
-				log::debug("sound!");
 			}
 		}
 
