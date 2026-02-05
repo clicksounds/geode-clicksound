@@ -9,14 +9,13 @@ using namespace geode::prelude;
 
 extern void SendRequestAPI(bool forceDownload);
 
-class Select : public geode::Popup<> {
+class Select : public geode::Popup {
 protected:
     bool m_theme = false;
-    double m_minsize;
+    double m_minsize = 0.0;
     std::function<void(std::string)> m_settings;
-    ScrollLayer* scroll;
-    TextInput* searchBar;
-    
+    ScrollLayer* scroll = nullptr;
+    TextInput* searchBar = nullptr;
 
     CCIndexPackNode* Item(auto send, auto modid, bool meme) {
         return CCIndexPackNode::create(send, [=]() {
@@ -26,20 +25,40 @@ protected:
     }
 
     void closebtntheme(bool theme) {
+        if (!theme) return;
+        setCloseButtonSpr(
+            CircleButtonSprite::createWithSpriteFrameName(
+                "geode.loader/close.png",
+                .85f,
+                CircleBaseColor::DarkPurple
+            )
+        );
+    }
+
+    bool init(
+        bool meme,
+        bool clicksound,
+        std::function<void(std::string)> setting,
+        bool theme
+    ) {
         m_theme = theme;
-        if (theme) {
-            this->setCloseButtonSpr(
-                CircleButtonSprite::createWithSpriteFrameName(
-                    "geode.loader/close.png", .85f,
-                    CircleBaseColor::DarkPurple
-                )
-            );
-        }
+        m_settings = setting;
+
+        if (!Popup::init(
+                420.f,
+                270.f,
+                SpritePicker::get("GJ_square01.png", theme)
+            ))
+            return false;
+
+        closebtntheme(theme);
+        setup();
+        CreateWithArgs(meme, clicksound, setting);
+        setID("SoundSelector"_spr);
+        return true;
     }
 
     bool setup() {
-        auto winSize = CCDirector::get()->getWinSize();
-
         scroll = ScrollLayer::create(ccp(
             m_mainLayer->getContentSize().width - 30,
             m_mainLayer->getContentSize().height - 70
@@ -52,6 +71,7 @@ protected:
         addDownloadBtn();
         return true;
     }
+
     void addSearchBar() {
         auto winSize = m_mainLayer->getContentSize();
 
@@ -59,11 +79,14 @@ protected:
         searchBarBg->setAnchorPoint(ccp(0.5f, 1));
         searchBarBg->setPosition(ccp(winSize.width / 2, winSize.height - 50));
         m_mainLayer->addChild(searchBarBg, -1);
+
         searchBar = TextInput::create(
-            winSize.width / 2, "Search...", "bigFont.fnt"
+            winSize.width / 2,
+            "Search...",
+            "bigFont.fnt"
         );
 
-        searchBar->setCallback([=](std::string input){
+        searchBar->setCallback([=](std::string input) {
             filterItems(input);
         });
 
@@ -71,7 +94,11 @@ protected:
         searchBar->setPosition(ccp(winSize.width / 2, winSize.height - 15));
         m_mainLayer->addChild(searchBar);
 
-        auto divider = CCLayerColor::create(ccc4(200, 200, 200, 100), winSize.width - 30, 2);
+        auto divider = CCLayerColor::create(
+            ccc4(200, 200, 200, 100),
+            winSize.width - 30,
+            2
+        );
         divider->setAnchorPoint(ccp(0, 1));
         divider->setPosition(ccp(15, winSize.height - 50));
         m_mainLayer->addChild(divider);
@@ -82,123 +109,145 @@ protected:
         indexLabel->setScale(0.7f);
         indexLabel->setID("index-label"_spr);
         m_mainLayer->addChild(indexLabel);
-
     }
 
     void filterItems(const std::string& query) {
         auto NodeScroller = scroll->m_contentLayer;
         CCArrayExt<CCNode*> objects = NodeScroller->getChildren();
-        double maxcount =0 ;
+
+        double visibleCount = 0;
+        std::regex pattern(query, std::regex::icase);
+
         for (auto* obj : objects) {
-            if (CCIndexPackNode* Cell = typeinfo_cast<CCIndexPackNode*>(obj)) {
-                std::regex pattern(query, std::regex::icase);
-                bool matches =  std::regex_search(Cell->getName(), pattern);
+            if (auto* cell = typeinfo_cast<CCIndexPackNode*>(obj)) {
+                bool matches = std::regex_search(cell->getName(), pattern);
                 obj->setVisible(matches);
             }
-             if (obj->isVisible()) maxcount+=1 ;
+            if (obj->isVisible()) visibleCount++;
         }
-        int basePosY = 180;
+
+        float height = std::max<float>(m_minsize, 40.f * visibleCount);
+
         int i = -1;
-        float height = std::max<float>(m_minsize, 40 * maxcount);
         for (auto* obj : objects) {
             if (obj->isVisible()) {
                 i++;
-                obj->setPositionY(height - (40 * i));
-            } else {obj->setPositionY(-10000);}
+                obj->setPositionY(height - (40.f * i));
+            } else {
+                obj->setPositionY(-10000.f);
+            }
         }
-        NodeScroller->setContentSize(ccp(NodeScroller->getContentSize().width, height));
+
+        NodeScroller->setContentSize(
+            ccp(NodeScroller->getContentSize().width, height)
+        );
         scroll->moveToTop();
     }
 
-
-    bool CreateWithArgs(bool meme, bool clicksound, std::function<void(std::string)> setting) {
+    bool CreateWithArgs(
+        bool meme,
+        bool clicksound,
+        std::function<void(std::string)> setting
+    ) {
         auto NodeScroller = scroll->m_contentLayer;
-        m_settings = setting;
-        int basePosY = 180;
-    
-        auto json = (meme) ? ClickJson->memeData : ClickJson->usefulData;
+
+        auto json = meme
+            ? ClickJson->memeData
+            : ClickJson->usefulData;
+
         bool hasPacks = false;
-    
+
         for (const auto& [filename, data] : json) {
-            if (data.clicks.empty() && clicksound) {
-                continue;
-            }
-            if (data.releases.empty() && !clicksound) {
-                continue;
-            }
-    
+            if (data.clicks.empty() && clicksound) continue;
+            if (data.releases.empty() && !clicksound) continue;
+
             hasPacks = true;
-            auto Object = Item(data, filename, clicksound);
-            Object->setPositionY(basePosY);
-            NodeScroller->addChild(Object);
+            auto obj = Item(data, filename, clicksound);
+            NodeScroller->addChild(obj);
         }
-    
+
         if (!hasPacks) {
-            std::string message = "No click packs were found. \nPlease download the index\nfrom the upper right corner\nor install a .packgen.zip pack.";
-            auto noPacksLabel = CCLabelBMFont::create(message.c_str(), "bigFont.fnt");
-            noPacksLabel->setAnchorPoint(ccp(0.5f, 0.5f));
-            noPacksLabel->setScale(0.5f);
-            noPacksLabel->setAlignment(kCCTextAlignmentCenter);
-            noPacksLabel->setPosition(ccp(scroll->getContentSize().width / 2, scroll->getContentSize().height / 1.75));
-            NodeScroller->addChild(noPacksLabel);
+            auto label = CCLabelBMFont::create(
+                "No click packs were found.\n"
+                "Please download the index\n"
+                "from the upper right corner\n"
+                "or install a .packgen.zip pack.",
+                "bigFont.fnt"
+            );
+            label->setScale(0.5f);
+            label->setAlignment(kCCTextAlignmentCenter);
+            label->setPosition(ccp(
+                scroll->getContentSize().width / 2,
+                scroll->getContentSize().height / 1.75f
+            ));
+            NodeScroller->addChild(label);
         }
-    
+
         m_minsize = scroll->getContentSize().height;
-        float height = std::max<float>(m_minsize, 40 * NodeScroller->getChildrenCount());
-        NodeScroller->setContentSize(ccp(NodeScroller->getContentSize().width, height));
+        float height = std::max<float>(
+            m_minsize,
+            40.f * NodeScroller->getChildrenCount()
+        );
+
+        NodeScroller->setContentSize(
+            ccp(NodeScroller->getContentSize().width, height)
+        );
+
         if (hasPacks) {
             CCArrayExt<CCNode*> objects = NodeScroller->getChildren();
             int i = -1;
             for (auto* obj : objects) {
                 i++;
-                obj->setPositionY(height - (40 * i));
+                obj->setPositionY(height - (40.f * i));
             }
         }
+
         scroll->moveToTop();
-    
         return true;
     }
 
     void addDownloadBtn() {
-        auto downloadSpr = CCSprite::createWithSpriteFrameName("GJ_downloadBtn_001.png");
-        //downloadSpr->setScale(1);
-        auto downloadBtn = CCMenuItemSpriteExtra::create(
-            downloadSpr,
+        auto spr = CCSprite::createWithSpriteFrameName("GJ_downloadBtn_001.png");
+        auto btn = CCMenuItemSpriteExtra::create(
+            spr,
             this,
             menu_selector(Select::onDownloadBtn)
         );
-        auto downloadMenu = CCMenu::create();
-        downloadMenu->setID("download-index-menu");
-        downloadBtn->setID("download-index-button");
-        downloadMenu->setPosition(ccp(m_mainLayer->getContentSize().width, m_mainLayer->getContentSize().height));
-        downloadMenu->addChild(downloadBtn);
-        m_mainLayer->addChild(downloadMenu);
+
+        auto menu = CCMenu::create();
+        menu->setPosition(ccp(
+            m_mainLayer->getContentSize().width,
+            m_mainLayer->getContentSize().height
+        ));
+        menu->addChild(btn);
+        m_mainLayer->addChild(menu);
     }
 
-    void onDownloadBtn(CCObject* sender) {
+    void onDownloadBtn(CCObject*) {
         geode::createQuickPopup(
             "Warning",
-            "The Click Sounds Index is over <cj>50mb+</c> in size. Are you sure you want to redownload it?",
-            "Cancel", "Download", 
-            [](auto, bool btn2) {
-                if (btn2) {
-                    SendRequestAPI(true);
-                }
-            });
-    };
+            "The Click Sounds Index is over <cj>50mb+</c> in size. "
+            "Are you sure you want to redownload it?",
+            "Cancel",
+            "Download",
+            [](auto, bool yes) {
+                if (yes) SendRequestAPI(true);
+            }
+        );
+    }
 
 public:
-    static Select* create(bool meme = false, bool clicksound = true, std::function<void(std::string)> setting = [](std::string x) {}, bool theme = false) {
+    static Select* create(
+        bool meme = false,
+        bool clicksound = true,
+        std::function<void(std::string)> setting = [](std::string) {},
+        bool theme = false
+    ) {
         auto ret = new Select;
-
-        if (ret && ret->initAnchored(420.f, 270.f, SpritePicker::get("GJ_square01.png", theme))) {
+        if (ret && ret->init(meme, clicksound, setting, theme)) {
             ret->autorelease();
-            ret->closebtntheme(theme);
-            ret->CreateWithArgs(meme, clicksound, setting);
-            ret->setID("SoundSelector"_spr);
             return ret;
         }
-
         CC_SAFE_DELETE(ret);
         return nullptr;
     }
