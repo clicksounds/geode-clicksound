@@ -16,6 +16,7 @@ protected:
     std::function<void(std::string)> m_settings;
     ScrollLayer* scroll = nullptr;
     TextInput* searchBar = nullptr;
+    bool m_featuredOnlyToggled = false;
 
     CCIndexPackNode* Item(auto send, auto modid, bool meme) {
         return CCIndexPackNode::create(send, [=]() {
@@ -69,6 +70,7 @@ protected:
 
         addSearchBar();
         addDownloadBtn();
+        addFeatureFilterBtn();
         return true;
     }
 
@@ -86,7 +88,10 @@ protected:
             "bigFont.fnt"
         );
 
-        searchBar->setCallback([=](std::string input) {
+        searchBar->setCallback([this](std::string input) {
+            m_featuredOnlyToggled = false;
+            auto btn = static_cast<CCMenuItemSpriteExtra*>(m_mainLayer->getChildByID("feature-filter-menu"_spr)->getChildByID("feature-filter-btn"_spr));
+            btn->setOpacity(90);
             filterItems(input);
         });
 
@@ -234,6 +239,69 @@ protected:
                 if (yes) SendRequestAPI(true);
             }
         );
+    }
+
+    void addFeatureFilterBtn() {
+        auto spr = CCSprite::createWithSpriteFrameName("GJ_starsIcon_001.png");
+        auto btn = CCMenuItemSpriteExtra::create(
+            spr,
+            this,
+            menu_selector(Select::onFeatureFilterBtn)
+        );
+        btn->setOpacity(90);
+        btn->setID("feature-filter-btn"_spr);
+
+        auto menu = CCMenu::create();
+        menu->setPosition(ccp(
+            m_mainLayer->getContentSize().width - 55,
+            m_mainLayer->getContentSize().height - 30
+        ));
+        menu->addChild(btn);
+        menu->setID("feature-filter-menu"_spr);
+        m_mainLayer->addChild(menu);
+    }
+
+    void onFeatureFilterBtn(CCObject*) {
+        auto btn = static_cast<CCMenuItemSpriteExtra*>(m_mainLayer->getChildByID("feature-filter-menu"_spr)->getChildByID("feature-filter-btn"_spr));
+        m_featuredOnlyToggled = !m_featuredOnlyToggled;
+        searchBar->setString("");
+
+        if (!m_featuredOnlyToggled) {
+            filterItems(searchBar->getString());
+            btn->setOpacity(90);
+            return;
+        } else {
+            btn->setOpacity(255);
+            auto NodeScroller = scroll->m_contentLayer;
+            CCArrayExt<CCNode*> objects = NodeScroller->getChildren();
+
+            double visibleCount = 0;
+
+            for (auto* obj : objects) {
+                if (auto* cell = typeinfo_cast<CCIndexPackNode*>(obj)) {
+                    bool isFeatured = cell->isFeaturedPack();
+                    obj->setVisible(isFeatured);
+                }
+                if (obj->isVisible()) visibleCount++;
+            }
+
+            float height = std::max<float>(m_minsize, 40.f * visibleCount);
+
+            int i = -1;
+            for (auto* obj : objects) {
+                if (obj->isVisible()) {
+                    i++;
+                    obj->setPositionY(height - (40.f * i));
+                } else {
+                    obj->setPositionY(-10000.f);
+                }
+            }
+
+            NodeScroller->setContentSize(
+                ccp(NodeScroller->getContentSize().width, height)
+            );
+            scroll->moveToTop();
+        }
     }
 
 public:

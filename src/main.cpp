@@ -151,12 +151,12 @@ class $modify(PlayerObject) {
 		if (!integrityCheck(this, p0)) {
 			return ret;
 		};
-		auto isClickEnabled = csMod->getSettingValue<bool>("enable-clicksounds");
+		auto isClickEnabled = csMod->getSettingValue<bool>("enable-clicksounds") && csMod->getSettingValue<bool>("enable-master");
 		auto click_vol = csMod->getSettingValue<int64_t>("click-volume");
 		// set the direction bool to true
 		SetupNewDirections(p0, true);
 
-		if(!csMod->getSettingValue<bool>("enable-clicksounds") && !csMod->getSettingValue<bool>("enable-releasesounds")){}else{Carrot::carrot=true;}
+		if((!csMod->getSettingValue<bool>("enable-clicksounds") && !csMod->getSettingValue<bool>("enable-releasesounds")) || !csMod->getSettingValue<bool>("enable-master")){}else{Carrot::carrot=true;}
 
 		// is it enabled or is volume < 0
 		if (click_vol <= 0 || !isClickEnabled)
@@ -186,10 +186,10 @@ class $modify(PlayerObject) {
 			return ret;
 		};
 
-		auto isReleaseEnabled = csMod->getSettingValue<bool>("enable-releasesounds");
+		auto isReleaseEnabled = csMod->getSettingValue<bool>("enable-releasesounds") && csMod->getSettingValue<bool>("enable-master");
 		auto release_vol = csMod->getSettingValue<int64_t>("release-volume");
 
-		if(!csMod->getSettingValue<bool>("enable-clicksounds") && !csMod->getSettingValue<bool>("enable-releasesounds")){}else{Carrot::carrot=true;}
+		if((!csMod->getSettingValue<bool>("enable-clicksounds") && !csMod->getSettingValue<bool>("enable-releasesounds")) || !csMod->getSettingValue<bool>("enable-master")){}else{Carrot::carrot=true;}
 
 		// set the direction bool to false
 		SetupNewDirections(p0, false);
@@ -221,18 +221,19 @@ class $modify(csTouchDispatcher, CCTouchDispatcher) {
 
 		Mod* csMod = Mod::get();
 		bool soundsEverywhere = csMod->getSettingValue<bool>("sounds-everywhere");
+		bool isMasterEnabled = csMod->getSettingValue<bool>("enable-master");
 		bool isClickEnabled = csMod->getSettingValue<bool>("enable-clicksounds");
 		bool isReleaseEnabled = csMod->getSettingValue<bool>("enable-releasesounds");
 
 		if (!soundsEverywhere) return;
 
-		if (!isClickEnabled && !isReleaseEnabled){}else{Carrot::carrot=true;}
+		if ((!isClickEnabled && !isReleaseEnabled) || !isMasterEnabled){}else{Carrot::carrot=true;}
 
 		// touch start
 		if (uIndex == 0) {
 			int64_t clickVolume = csMod->getSettingValue<int64_t>("click-volume");
 
-			if (clickVolume <= 0 || !isClickEnabled)
+			if (clickVolume <= 0 || !isClickEnabled || !isMasterEnabled)
 				return;
 
 			if (Custom_OnClick) {
@@ -246,7 +247,7 @@ class $modify(csTouchDispatcher, CCTouchDispatcher) {
 		if (uIndex == 2) {
 			int64_t releaseVolume = csMod->getSettingValue<int64_t>("release-volume");
 
-			if (releaseVolume <= 0 || !isReleaseEnabled)
+			if (releaseVolume <= 0 || !isReleaseEnabled || !isMasterEnabled)
 				return;
 
 			if (Custom_OnLetGo) {

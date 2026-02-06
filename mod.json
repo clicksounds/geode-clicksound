@@ -57,6 +57,28 @@
 		}
 	},
 	"settings": {
+		"master-section": {
+			"name": "Master",
+			"description": "This category controls both click and release sounds.",
+			"type": "title"
+		},
+		"enable-master": {
+			"name": "Master Enable",
+			"description": "If disabled, no click or release sounds will play.",
+			"type": "bool",
+			"default": true
+		},
+		"master-volume": {
+			"name": "Master Volume (%)",
+			"description": "Controls the overall volume of both click and release sounds.",
+			"type": "int",
+			"default": 100,
+			"min": 0,
+			"max": 100,
+			"control": {
+				"slider": true
+			}
+		},
 		"clicksounds-section": {
             "name": "Click Sounds",
             "description": "This category is for settings that are for <cr>Click Sounds</c>",
@@ -125,7 +147,7 @@
             "type": "title"
         },
 		"sounds-everywhere": {
-			"name": "Sounds Everywhere (beta)",
+			"name": "Sounds Everywhere (buggy)",
 			"type": "bool",
 			"description": "Sounds will play everywhere instead of just in levels. This will break all botting tools. (Experimental)",
 			"default": false

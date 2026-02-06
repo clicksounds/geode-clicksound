@@ -56,10 +56,15 @@ class SoundCache {
 	}
 
 	void PlayModded(bool TestButton = false) {
-		float GetVolume = Mod::get()->getSettingValue<int64_t>(Volume);
+		Mod* mod = Mod::get();
+		float GetVolume = mod->getSettingValue<int64_t>(Volume);
+		float GetMasterVolume = mod->getSettingValue<int64_t>("master-volume");
+		bool isSoundsEverywhere = mod->getSettingValue<bool>("sounds-everywhere");
 		if (GetVolume <= 0 && TestButton == true) {
 			GetVolume = 1;
 		}
+		if (TestButton == true && isSoundsEverywhere) return;
+		GetVolume = (GetVolume * GetMasterVolume) / 100;
 		FMODAudioEngine::sharedEngine()->m_system->playSound(m_sound, CS_Group, false, &Soundchannel);
 		Soundchannel->setVolume(GetVolume / 50.f);
 		double semitone = static_cast<double>(Mod::get()->getSettingValue<int64_t>("sfx-semitone")) / 12;

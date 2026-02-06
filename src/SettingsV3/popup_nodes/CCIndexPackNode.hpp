@@ -64,12 +64,13 @@ class CCIndexPackNode : public CCLayerColor {
 	std::function<void()> selectionobject;
 	CCMenu *DEVS;
 	std::string authorsListWhole = "";
-	std::string packDescription;
+	std::string packID = "";
+	std::string packDescription = "";
 	bool isFeatured;
 	void OnDevelopers(auto sender) {
 		MDPopup::create(
 		    "More Info",
-		    "Author(s): " + authorsListWhole + packDescription,
+		    "Author(s): " + authorsListWhole + packID + packDescription,
 		    "OK", nullptr,
 			[](bool) {})
 		    ->show();
@@ -77,6 +78,9 @@ class CCIndexPackNode : public CCLayerColor {
 	std::string getName() {
 		return m_name;
 	};
+	bool isFeaturedPack() {
+		return isFeatured;
+	}
 	void selected(CCObject *) {
 		if (selectionobject) {
 			// todo update setting
@@ -113,6 +117,13 @@ class CCIndexPackNode : public CCLayerColor {
 								}
 							}
 						}
+					}
+				}
+
+				if (jsonObject2.contains("id") && jsonObject2["id"].isString()) {
+					std::string id = jsonObject2["id"].asString().unwrap();
+					if (!id.empty()) {
+						packID += "\n\nPack ID: " + id;
 					}
 				}
 	
