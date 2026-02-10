@@ -1,5 +1,5 @@
 {
-	"geode": "5.0.0-alpha.1",
+	"geode": "5.0.0-alpha.2",
 	"gd": {
         "win": "2.2081",
         "android": "2.2081",
@@ -42,17 +42,17 @@
 	],
 	"dependencies": {
         "geode.node-ids": {
-        	"version": ">=v1.22.0-beta.1",
-         	"importance": "required"
+        	"version": ">=v1.22.0-beta.2",
+         	"required": true
 		}
     },
 	"incompatibilities": {
 		"beat.click_sounds_lite": {
-			"importance": "conflicting",
+			"breaking": false,
 			"version": ">=v1.0.0"
 		},
 		"beat.pack-installer": {
-			"importance": "breaking",
+			"breaking": true,
 			"version": "<v2.1.2"
 		}
 	},
