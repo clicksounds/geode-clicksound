@@ -22,9 +22,9 @@ class SoundCache {
 	FMOD::Sound *m_sound;
 	std::string Volume;
 	std::string custom;
-	FMOD::Channel *Soundchannel;
+	FMOD::Channel *soundChannel;
 
-	SoundCache(std::string x, std::string x2) : Volume(x), custom(x2), Soundchannel(nullptr) {
+	SoundCache(std::string x, std::string x2) : Volume(x), custom(x2), soundChannel(nullptr) {
 		if (!CS_Group) {
 			FMODAudioEngine::sharedEngine()->m_system->createChannelGroup("CS_Group", &CS_Group);
 		}
@@ -57,16 +57,16 @@ class SoundCache {
 
 	void PlayModded(bool TestButton = false) {
 		Mod* mod = Mod::get();
-		float GetVolume = mod->getSettingValue<int64_t>(Volume);
-		float GetMasterVolume = mod->getSettingValue<int64_t>("master-volume");
+		float getVolume = mod->getSettingValue<int64_t>(Volume);
+		float getMasterVolume = mod->getSettingValue<int64_t>("master-volume");
 		bool isSoundsEverywhere = mod->getSettingValue<bool>("sounds-everywhere");
-		if (GetVolume <= 0 && TestButton == true) {
-			GetVolume = 1;
+		if (getVolume <= 0 && TestButton == true) {
+			getVolume = 1;
 		}
 		if (TestButton == true && isSoundsEverywhere) return;
-		GetVolume = (GetVolume * GetMasterVolume) / 100;
-		FMODAudioEngine::sharedEngine()->m_system->playSound(m_sound, CS_Group, false, &Soundchannel);
-		Soundchannel->setVolume(GetVolume / 50.f);
+		getVolume = (getVolume * getMasterVolume) / 100;
+		FMODAudioEngine::sharedEngine()->m_system->playSound(m_sound, CS_Group, false, &soundChannel);
+		soundChannel->setVolume(getVolume / 50.f);
 		double semitone = static_cast<double>(Mod::get()->getSettingValue<int64_t>("sfx-semitone")) / 12;
 		if (semitone < 0) {
 			semitone = std::pow(2, semitone); // fix negtive octave
@@ -110,43 +110,6 @@ class MultiSoundCache {
 			int randomIndex = std::rand() % m_sounds.size();
 			m_sounds[randomIndex]->PlayModded();
 		}
-	}
-
-	void PlayRandomByID(std::string packID) {
-		if (!ClickJson || !ClickJson->hassomedata || m_sounds.empty()) return;
-
-		auto* sc = m_sounds.front();
-		auto st = GetSettingJsonRead(sc->custom);
-
-		bool isMeme = (st.M_Tab == 0);
-		bool isRelease = (sc->Volume == "release-volume");
-
-		std::map<std::string, CategoryData> tbl =
-			isMeme
-				? (isRelease ? ClickJson->GetMemeReleases() : ClickJson->GetMemeClicks())
-				: (isRelease ? ClickJson->GetUsefulReleases() : ClickJson->GetUsefulClicks());
-
-		auto it = tbl.find(packID);
-		if (it == tbl.end()) return;
-
-		const auto& vec = isRelease ? it->second.releases : it->second.clicks;
-		if (vec.empty()) return;
-
-		auto backup = m_sounds;
-		std::vector<SoundCache*> tmp;
-		tmp.reserve(vec.size());
-
-		for (auto& p : vec) {
-			auto* s = new SoundCache(isRelease ? "release-volume" : "click-volume", isRelease ? "selection-release" : "selection-clicks");
-			s->Setsound(p);
-			tmp.push_back(s);
-		}
-
-		m_sounds = tmp;
-		PlayRandom();
-
-		for (auto* s : m_sounds) delete s;
-		m_sounds = backup;
 	}
 
 	~MultiSoundCache() {
