@@ -1,7 +1,7 @@
 #pragma once
 #include <Geode/Geode.hpp>
 #include "../jsonReader/Json.hpp"
-#include "popup_nodes/CCIndexPackNode.hpp"
+#include "popup_nodes/CSIndexPackNode.hpp"
 #include "SelectionEnum.hpp"
 #include "../ButtonSprites/Sprite.hpp"
 #include <regex>
@@ -18,8 +18,8 @@ protected:
     TextInput* searchBar = nullptr;
     bool m_featuredOnlyToggled = false;
 
-    CCIndexPackNode* Item(auto send, auto modid, bool meme) {
-        return CCIndexPackNode::create(send, [=]() {
+    CSIndexPackNode* Item(auto send, auto modid, bool meme) {
+        return CSIndexPackNode::create(send, [=]() {
             m_settings(modid);
             this->onClose(nullptr);
         }, m_theme);
@@ -124,7 +124,7 @@ protected:
         std::regex pattern(query, std::regex::icase);
 
         for (auto* obj : objects) {
-            if (auto* cell = typeinfo_cast<CCIndexPackNode*>(obj)) {
+            if (auto* cell = typeinfo_cast<CSIndexPackNode*>(obj)) {
                 bool matches = std::regex_search(cell->getName(), pattern);
                 obj->setVisible(matches);
             }
@@ -278,7 +278,7 @@ protected:
             double visibleCount = 0;
 
             for (auto* obj : objects) {
-                if (auto* cell = typeinfo_cast<CCIndexPackNode*>(obj)) {
+                if (auto* cell = typeinfo_cast<CSIndexPackNode*>(obj)) {
                     bool isFeatured = cell->isFeaturedPack();
                     obj->setVisible(isFeatured);
                 }

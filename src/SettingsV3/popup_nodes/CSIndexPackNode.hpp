@@ -54,7 +54,7 @@ class AutoScaleCCLabelBMFont : public cocos2d::CCLabelBMFont {
 };
 
 #define MEN(class) class = CCMenu::create();
-class CCIndexPackNode : public CCLayerColor {
+class CSIndexPackNode : public CCLayerColor {
   public:
 	CategoryData Infomation;
 	CCLabelBMFont *Text;
@@ -252,7 +252,7 @@ class CCIndexPackNode : public CCLayerColor {
 					DEVS->ignoreAnchorPointForPosition(false);
 					// Author->updateAnchoredPosition(Anchor::Bottom, ccp(0, -10), ccp(.5f, .5f));
 					auto developersBtn = CCMenuItemSpriteExtra::create(
-					    Author, this, menu_selector(CCIndexPackNode::OnDevelopers));
+					    Author, this, menu_selector(CSIndexPackNode::OnDevelopers));
 					developersBtn->m_scaleMultiplier = 1.1;
 					developersBtn->setID("developers-button");
 					developersBtn->setAnchorPoint({0, 0});
@@ -283,7 +283,7 @@ class CCIndexPackNode : public CCLayerColor {
 		if (isFeatured) this->addChild(FeaturedGlow);
 
 		// 'set' button
-		auto ConfirmSprite = CCMenuItemSpriteExtra::create(ButtonSprite::create("Set", 40.f, true, SpritePicker::get("bigFont.fnt", theme), SpritePicker::get("GJ_button_01.png", theme), 20.f, 1.0f), this, menu_selector(CCIndexPackNode::selected));
+		auto ConfirmSprite = CCMenuItemSpriteExtra::create(ButtonSprite::create("Set", 40.f, true, SpritePicker::get("bigFont.fnt", theme), SpritePicker::get("GJ_button_01.png", theme), 20.f, 1.0f), this, menu_selector(CSIndexPackNode::selected));
 		ConfirmSprite->m_scaleMultiplier = 0.9;
 		_Apply_Menu = CCMenu::create(); // MEN(_Apply_Menu)
 		_Apply_Menu->setID("apply");
@@ -308,8 +308,8 @@ class CCIndexPackNode : public CCLayerColor {
 		_Apply_Menu->setAnchorPoint({0.5, 0.5});
 		return true;
 	}
-	static CCIndexPackNode *create(CategoryData x, std::function<void()> Objectt, bool theme) {
-		CCIndexPackNode *pRet = new CCIndexPackNode();
+	static CSIndexPackNode *create(CategoryData x, std::function<void()> Objectt, bool theme) {
+		CSIndexPackNode *pRet = new CSIndexPackNode();
 		if (pRet && pRet->init(x, Objectt, theme)) {
 			pRet->autorelease();
 			return pRet;
