@@ -23,7 +23,7 @@ class JsonReader {
 	bool hassomedata = false;
 
 	void loadData(std::function<void()> h) {
-		std::thread([=] {
+		std::thread([=, this] {
 			auto configDir = Mod::get()->getConfigDir();
 			auto clicksPath = configDir / "Clicks" / "clicks-main";
 			if (std::filesystem::exists(clicksPath)) {

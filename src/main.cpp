@@ -263,8 +263,6 @@ async::TaskHolder<web::WebResponse> m_downloadTask;
 
 void SendRequestAPI(bool forceDownload = false) {
     if (!forceDownload && !Mod::get()->getSettingValue<bool>("downloadOnStartup")) {
-        indexzip.Failed = true;
-        indexzip.Finished = true;
         return;
     }
 
@@ -291,8 +289,6 @@ void SendRequestAPI(bool forceDownload = false) {
                         CCSprite::createWithSpriteFrameName("GJ_deleteIcon_001.png")
                     )->show();
                 });
-                indexzip.Failed = true;
-                indexzip.Finished = true;
                 Mod::get()->setSavedValue<bool>("CSINDEXDOWNLOADING", false);
                 return;
             }
@@ -305,8 +301,6 @@ void SendRequestAPI(bool forceDownload = false) {
                         CCSprite::createWithSpriteFrameName("GJ_deleteIcon_001.png")
                     )->show();
                 });
-                indexzip.Failed = true;
-                indexzip.Finished = true;
                 Mod::get()->setSavedValue<bool>("CSINDEXDOWNLOADING", false);
                 return;
             }
@@ -316,17 +310,13 @@ void SendRequestAPI(bool forceDownload = false) {
             std::thread([=] {
                 auto unzip = file::Unzip::create(zipPath);
                 if (!unzip) {
-                    indexzipPtr->Failed = true;
-                    indexzipPtr->Finished = true;
                     Mod::get()->setSavedValue<bool>("CSINDEXDOWNLOADING", false);
                     return;
                 }
 
                 auto clicksRoot = Mod::get()->getConfigDir() / "Clicks";
                 std::filesystem::remove_all(clicksRoot);
-                unzip.unwrap().extractAllTo(clicksRoot);
-
-                indexzipPtr->Finished = true;
+                (void) unzip.unwrap().extractAllTo(clicksRoot);
 
                 Loader::get()->queueInMainThread([=] {
                     Notification::create(
@@ -380,8 +370,6 @@ void extractDefaultClickPack() {
     (void) unzip.unwrap().extractAllTo(destinationPath);
 	mod->setSavedValue("CSINDEXRELOAD", true);
 }
-// this is never used, do we need this???
-// EventListener<web::WebTask> m_listener;
 
 class $modify(MenuLayer) {
 	bool init() {

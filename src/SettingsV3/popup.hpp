@@ -19,7 +19,7 @@ protected:
     bool m_featuredOnlyToggled = false;
 
     CSIndexPackNode* Item(auto send, auto modid, bool meme) {
-        return CSIndexPackNode::create(send, [=]() {
+        return CSIndexPackNode::create(send, [=, this]() {
             m_settings(modid);
             this->onClose(nullptr);
         }, m_theme);

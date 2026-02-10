@@ -2,18 +2,16 @@
 #include "jsonReader/Getsettingsinfo.hpp"
 #include <Geode/Geode.hpp>
 
-bool Custom_OnClick = false;
-bool Custom_OnLetGo = false;
+inline bool Custom_OnClick = false;
+inline bool Custom_OnLetGo = false;
 
 struct downloadedzipStruc {
-	bool Finished = false;
-	bool Failed = false;
 	bool StartedDownloading = false;
 };
 
 static downloadedzipStruc indexzip;
-FMOD::ChannelGroup *CS_Group;
-FMOD::DSP *pitchShifterDSP;
+inline FMOD::ChannelGroup *CS_Group;
+inline FMOD::DSP *pitchShifterDSP;
 using namespace geode::prelude;
 // Custom class for Caching sounds (Make it less laggy for mobile platforms and such)
 class SoundCache {
@@ -119,9 +117,9 @@ class MultiSoundCache {
 	}
 };
 
-MultiSoundCache *ClickSoundIndex = new MultiSoundCache();
-MultiSoundCache *ReleaseSoundIndex = new MultiSoundCache();
+inline MultiSoundCache *ClickSoundIndex = new MultiSoundCache();
+inline MultiSoundCache *ReleaseSoundIndex = new MultiSoundCache();
 
 // Create the classes for Caching
-SoundCache *ClickSound = new SoundCache("click-volume", "selection-clicks");
-SoundCache *ReleaseSound = new SoundCache("release-volume", "selection-release");
+inline SoundCache *ClickSound = new SoundCache("click-volume", "selection-clicks");
+inline SoundCache *ReleaseSound = new SoundCache("release-volume", "selection-release");

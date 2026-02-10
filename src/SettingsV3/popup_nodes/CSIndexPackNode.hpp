@@ -11,7 +11,7 @@
 #include <iostream>
 using namespace geode::prelude;
 
-float clampf_f(float value, float min, float max) {
+inline float clampf_f(float value, float min, float max) {
 	if (value < min)
 		return min;
 	if (value > max)

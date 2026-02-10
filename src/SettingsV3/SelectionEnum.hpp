@@ -9,8 +9,6 @@
 #include "popup.hpp"
 #include "../ButtonSprites/Sprite.hpp"
 #include "../jsonReader/Json.hpp"
-#include <cctype>
-#include <algorithm>
 #include <fstream>
 #include <iostream>
 
@@ -91,7 +89,7 @@ struct geode::SettingTypeForValueType<ClicksoundSettingValue> {
 
 class ModSettingsPopup : public CCNode {};
 
-bool GeodeLoader_Theme(CCSprite* sprite) {
+inline bool GeodeLoader_Theme(CCSprite* sprite) {
      std::string texturePath = "";
      if (auto textureProtocol = typeinfo_cast<CCTextureProtocol*>(sprite)) {
         if (auto texture = textureProtocol->getTexture()) {
@@ -107,7 +105,7 @@ bool GeodeLoader_Theme(CCSprite* sprite) {
     return texturePath.find("geode.loader") != std::string::npos;
 };
 
-bool parentcheck(CCNode* node) {
+inline bool parentcheck(CCNode* node) {
     while (node != nullptr) {
             if (auto x = typeinfo_cast<ModSettingsPopup*>(node)) {
                 return GeodeLoader_Theme(x->getChildByType<CCLayer>(0)->getChildByType<ListBorders>(0)->getChildByType<CCSprite>(0));
@@ -139,11 +137,11 @@ protected:
             return;
         } else if (Mod::get()->getSavedValue<bool>("CSINDEXRELOAD")) {
             Mod::get()->setSavedValue<bool>("CSINDEXRELOAD", false);
-            ClickJson->loadData([=]() {
+            ClickJson->loadData([=, this]() {
                 onsettingsUpdate();
                 // this is scuffed as hell but without it, the selection menu needs to be opened twice to reload
-                queueInMainThread([=]() {
-                    auto popup = Select::create(static_cast<int>(this->getValue().m_tab) == 0, cs, [=](std::string modid) {
+                queueInMainThread([=, this]() {
+                    auto popup = Select::create(static_cast<int>(this->getValue().m_tab) == 0, cs, [=, this](std::string modid) {
                         ClicksoundSettingValue Changes = this->getValue();
                         if (static_cast<int>(this->getValue().m_tab) == 0) {
                             Changes.m_currentMemeClick = modid;
@@ -159,7 +157,7 @@ protected:
             });
             return;
         }
-        auto popup = Select::create(static_cast<int>(this->getValue().m_tab) == 0,cs,[=](std::string modid) {
+        auto popup = Select::create(static_cast<int>(this->getValue().m_tab) == 0,cs,[=, this](std::string modid) {
                 ClicksoundSettingValue Changes = this->getValue();
                 if (static_cast<int>(this->getValue().m_tab) == 0) {
                     Changes.m_currentMemeClick = modid;
@@ -177,7 +175,7 @@ protected:
         if (!SettingValueNodeV3::init(setting, width))
             return false;
         
-        queueInMainThread([=] {
+        queueInMainThread([=, this] {
             m_ThemeGeode = parentcheck(this->getNameMenu());
             if (m_ThemeGeode) {
                 for (auto& value : m_togglerItems) {
@@ -298,7 +296,7 @@ protected:
     void onDownloadBtn(CCObject* sender) {
         geode::createQuickPopup(
             "Warning",
-            "The Click Sounds Index is over <cj>50mb+</c> in size. Are you sure you want to redownload it?",
+            "The Click Sounds Index is over <cj>50mb+</c> in size. Are you sure you want to redownload it?\n<cr>All existing click packs will be deleted and replaced with the downloaded index.</c>",
             "Cancel", "Download", 
             [](auto, bool btn2) {
                 if (btn2) {
@@ -320,12 +318,12 @@ protected:
             "Cancel", "Clear", 
             [](auto, bool btn2) {
                 if (btn2) {
-                    Loader::get()->queueInMainThread([] {
+                    std::thread([] {
                         std::filesystem::path dir = Loader::get()->getInstalledMod("beat.click-sound")->getConfigDir() / "Clicks" / "clicks-main";
 
-                        if (std::filesystem::exists(dir / "Meme"));
+                        if (std::filesystem::exists(dir / "Meme"))
                             std::filesystem::remove_all(dir / "Meme");
-                        if (std::filesystem::exists(dir / "Useful"));
+                        if (std::filesystem::exists(dir / "Useful"))
                             std::filesystem::remove_all(dir / "Useful");
 
                         std::filesystem::create_directory(dir / "Meme");
@@ -333,9 +331,11 @@ protected:
 
                         extractDefaultClickPack();
 
-                        FLAlertLayer::create("Click Sounds", "Successfully cleared index!", "Close")->show();
-                        Loader::get()->getInstalledMod("beat.click-sound")->setSavedValue("CSINDEXRELOAD", true);
-                    });
+                        Loader::get()->queueInMainThread([] {
+                            FLAlertLayer::create("Click Sounds", "Successfully cleared index!", "Close")->show();
+                            Loader::get()->getInstalledMod("beat.click-sound")->setSavedValue("CSINDEXRELOAD", true);
+                        });
+                    }).detach();
                 }
             }
         );
@@ -621,7 +621,7 @@ public:
     }
 };
 
-SettingNodeV3* ClicksoundSetterV3::createNode(float width) {
+inline SettingNodeV3* ClicksoundSetterV3::createNode(float width) {
     return ClicksoundSetterNodeV3::create(std::static_pointer_cast<ClicksoundSetterV3>(shared_from_this()), width);
 }
 
