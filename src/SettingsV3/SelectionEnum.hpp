@@ -132,27 +132,31 @@ protected:
     bool m_cspiFilePickerOpen = false;
 
     void Popup(CCObject*) {
-        if (Mod::get()->getSavedValue<bool>("CSINDEXDOWNLOADING")) {
+        Mod* mod = Mod::get();
+        if (mod->getSavedValue<bool>("CSINDEXDOWNLOADING")) {
             FLAlertLayer::create("Click Sounds Index", "Unable to load while downloading. Please wait until the download completes, then try again.", "Close")->show();
             return;
-        } else if (Mod::get()->getSavedValue<bool>("CSINDEXRELOAD")) {
-            Mod::get()->setSavedValue<bool>("CSINDEXRELOAD", false);
+        } else if (mod->getSavedValue<bool>("CSINDEXCLEARING")) {
+            FLAlertLayer::create("Click Sounds Index", "Unable to load while clearing. Please wait a few seconds for the index to finish clearing, then try again.", "Close")->show();
+            return;
+        } else if (mod->getSavedValue<bool>("CSINDEXRELOAD")) {
+            mod->setSavedValue<bool>("CSINDEXRELOAD", false);
             ClickJson->loadData([=, this]() {
-                onsettingsUpdate();
-                // this is scuffed as hell but without it, the selection menu needs to be opened twice to reload
                 queueInMainThread([=, this]() {
-                    auto popup = Select::create(static_cast<int>(this->getValue().m_tab) == 0, cs, [=, this](std::string modid) {
-                        ClicksoundSettingValue Changes = this->getValue();
-                        if (static_cast<int>(this->getValue().m_tab) == 0) {
-                            Changes.m_currentMemeClick = modid;
-                        } else {
-                            Changes.m_currentClick = modid;
-                        }
-                        this->setValue(Changes, nullptr);
-                        this->onCommit();
-                    }, m_ThemeGeode);
-                    popup->m_noElasticity = false;
-                    popup->show();
+                    onsettingsUpdate();
+                    // this is scuffed as hell but without it, the selection menu needs to be opened twice to reload
+                        auto popup = Select::create(static_cast<int>(this->getValue().m_tab) == 0, cs, [=, this](std::string modid) {
+                            ClicksoundSettingValue Changes = this->getValue();
+                            if (static_cast<int>(this->getValue().m_tab) == 0) {
+                                Changes.m_currentMemeClick = modid;
+                            } else {
+                                Changes.m_currentClick = modid;
+                            }
+                            this->setValue(Changes, nullptr);
+                            this->onCommit();
+                        }, m_ThemeGeode);
+                        popup->m_noElasticity = false;
+                        popup->show();
                 });
             });
             return;
@@ -306,7 +310,7 @@ protected:
         );
     };
 
-    void onClearBtn(CCObject* sender) {
+    void onClearBtn(CCObject* sender) {   
         if (Mod::get()->getSavedValue<bool>("CSINDEXDOWNLOADING")) {
             FLAlertLayer::create("Click Sounds Index", "Unable to clear index while downloading. Please wait until the download completes, then try again. \n\nIf the download takes too long, restarting Geometry Dash will stop the download.", "Close")->show();
             return;
@@ -319,7 +323,9 @@ protected:
             [](auto, bool btn2) {
                 if (btn2) {
                     std::thread([] {
-                        std::filesystem::path dir = Loader::get()->getInstalledMod("beat.click-sound")->getConfigDir() / "Clicks" / "clicks-main";
+                        Mod* mod = Mod::get();
+                        mod->setSavedValue<bool>("CSINDEXCLEARING", true);
+                        std::filesystem::path dir = mod->getConfigDir() / "Clicks" / "clicks-main";
 
                         if (std::filesystem::exists(dir / "Meme"))
                             std::filesystem::remove_all(dir / "Meme");
@@ -331,9 +337,10 @@ protected:
 
                         extractDefaultClickPack();
 
-                        Loader::get()->queueInMainThread([] {
+                        Loader::get()->queueInMainThread([mod] {
                             FLAlertLayer::create("Click Sounds", "Successfully cleared index!", "Close")->show();
-                            Loader::get()->getInstalledMod("beat.click-sound")->setSavedValue("CSINDEXRELOAD", true);
+                            mod->setSavedValue<bool>("CSINDEXRELOAD", true);
+                            mod->setSavedValue<bool>("CSINDEXCLEARING", false);
                         });
                     }).detach();
                 }
