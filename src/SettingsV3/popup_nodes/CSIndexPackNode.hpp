@@ -56,7 +56,7 @@ class AutoScaleCCLabelBMFont : public cocos2d::CCLabelBMFont {
 #define MEN(class) class = CCMenu::create();
 class CSIndexPackNode : public CCLayerColor {
   public:
-	CategoryData Infomation;
+	CategoryData Information;
 	CCLabelBMFont *Text;
 	CCLabelBMFont *Author;
 	CCMenu *_Apply_Menu;
@@ -91,8 +91,8 @@ class CSIndexPackNode : public CCLayerColor {
 		FLAlertLayer::create("Click Sounds", "Implementing now", "Close")->show();
 	}
 	void getlistfull() {
-		if (!Infomation.jsonpath.empty() && std::filesystem::exists(Infomation.jsonpath)) {
-			std::filesystem::path fs = std::filesystem::path(Infomation.jsonpath);
+		if (!Information.jsonpath.empty() && std::filesystem::exists(Information.jsonpath)) {
+			std::filesystem::path fs = std::filesystem::path(Information.jsonpath);
 			std::ifstream file(fs, std::ios::in | std::ios::binary);
 			if (file.is_open()) {
 				std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
@@ -140,7 +140,7 @@ class CSIndexPackNode : public CCLayerColor {
 		if (!CCLayerColor::init())
 			return false;
 		selectionobject = Objectt;
-		Infomation = x;
+		Information = x;
 
 		this->setContentSize(ccp(390, 35));
 		this->setAnchorPoint(ccp(0, 1));
@@ -150,8 +150,8 @@ class CSIndexPackNode : public CCLayerColor {
 		Text = AutoScaleCCLabelBMFont::create("ITEM NODE", "bigFont.fnt", 200, 50);
 		Text->setID("name-label");
 		Text->setLayoutOptions(AxisLayoutOptions::create()->setScalePriority(1));
-		if (!Infomation.jsonpath.empty() && std::filesystem::exists(Infomation.jsonpath)) {
-			std::filesystem::path fs = std::filesystem::path(Infomation.jsonpath);
+		if (!Information.jsonpath.empty() && std::filesystem::exists(Information.jsonpath)) {
+			std::filesystem::path fs = std::filesystem::path(Information.jsonpath);
 			std::ifstream file(fs, std::ios::in | std::ios::binary);
 			if (file.is_open()) {
 				std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
@@ -197,8 +197,8 @@ class CSIndexPackNode : public CCLayerColor {
 		Author->setLayoutOptions(AxisLayoutOptions::create()->setScalePriority(1));
 		std::string authorsList = "by ";
 		int Number = 0;
-		if (!Infomation.jsonpath.empty() && std::filesystem::exists(Infomation.jsonpath)) {
-			std::filesystem::path fs = std::filesystem::path(Infomation.jsonpath);
+		if (!Information.jsonpath.empty() && std::filesystem::exists(Information.jsonpath)) {
+			std::filesystem::path fs = std::filesystem::path(Information.jsonpath);
 			std::ifstream file(fs, std::ios::in | std::ios::binary);
 			if (file.is_open()) {
 				std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());

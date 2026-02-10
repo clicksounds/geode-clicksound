@@ -488,9 +488,9 @@ protected:
         );
 	}
 
-    std::string GetJsonName(CategoryData Infomation) {
-        if (!Infomation.jsonpath.empty() && std::filesystem::exists(Infomation.jsonpath)) {
-            std::filesystem::path fs = std::filesystem::path(Infomation.jsonpath);
+    std::string GetJsonName(CategoryData Information) {
+        if (!Information.jsonpath.empty() && std::filesystem::exists(Information.jsonpath)) {
+            std::filesystem::path fs = std::filesystem::path(Information.jsonpath);
             std::ifstream file(fs, std::ios::in | std::ios::binary);
                 if (file.is_open()) {
                     std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
