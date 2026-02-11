@@ -7,7 +7,7 @@ If you want a new built-in click sound or feature to be added, join the [discord
 Thank you so much to all of the people listed below!
 Developers:
 - [Beat](https://github.com/BeatACVR) - This is me! I made the mod.
-- [Viper](https://github.com/MuhXd) - Developer, helped rewrite the mod
+- [Cosmella](https://github.com/MuhXd) - Developer, helped rewrite the mod
 - [August](https://github.com/coopeeo) - Developer, helped rewrite the mod
 - [Firee](https://github.com/FireMario211) - Added mac support, thank you so much!
 - [Weebify](https://github.com/Weebifying) - Developer, helped with settings UI in v2.0.0
