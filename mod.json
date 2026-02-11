@@ -10,11 +10,7 @@
 	"id": "beat.click-sound",
 	"name": "Click Sounds",
 	"developers": [
-		"Beat",
-		"August",
-		"Viper",
-		"Weebify",
-		"Uproxide"
+		"Beat"
 	],
 	"description": "Plays a sound when you press a jump button.",
 	"resources": {
