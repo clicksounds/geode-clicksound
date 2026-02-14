@@ -89,7 +89,7 @@ class JsonReader {
 		}
 		return List;
 	}
-	// usefull
+	// useful
 
 	std::map<std::string, CategoryData> GetUsefulReleases() {
 		std::map<std::string, CategoryData> List;
