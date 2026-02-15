@@ -4,7 +4,7 @@
 * Added master enable and master volume.
 * Added filtering by featured click packs.
 * The ID of a click pack is now shown in its more info page.
-* Clearing the Clck Sounds Index is now more stable.
+* Clearing the Click Sounds Index is now more stable.
 ## Version v2.3.3
 * Fixed a bug on windows where release sounds will continue playing while disabled if the 'sounds everywhere' setting is enabled.
 ## Version v2.3.2
