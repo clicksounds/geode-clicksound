@@ -373,29 +373,6 @@ void extractDefaultClickPack() {
 
 class $modify(MenuLayer) {
 	bool init() {
-		// incompatibility check for qolmod versions v2.0.0 and v2.1.0
-		if (geode::Mod *mod = Loader::get()->getLoadedMod("thesillydoggo.qolmod")) {
-			std::string version = mod->getVersion().toVString();
-			if ((version == "v2.0.0" || version == "v2.1.0") && !Mod::get()->getSavedValue<bool>("qolmod-update-notified")) {
-				auto popup = createQuickPopup(
-					"Click Sounds", 
-					"Click Sounds is incompatible with QOLMod v2.0.0-v2.1.0. Please update QOLMod to v2.2.0.",
-					"Close", "Update",
-					[this, mod](auto, bool btn2) {
-						if (btn2) {
-							geode::openInfoPopup("thesillydoggo.qolmod");
-						} else {
-							Mod::get()->setSavedValue<bool>("qolmod-update-notified", true);
-						}
-					},
-					false
-				);
-				popup->m_scene = this;
-				popup->show();
-				log::error("Incompatible version of QOL Mod detected. Please update QOL Mod to v2.2.0 or higher to prevent crashes.");
-			}
-		}
-
 		// make sure default click pack exists because little kids love bitching
 		extractDefaultClickPack();
 
