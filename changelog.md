@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.4.0 - Beta 3
+* Fixed a critical bug on all platforms where changing any settings crashes the game. (It was my fault.)
 ## Version v2.4.0 - Beta 2
 * Fixed a critical bug on Android where opening the Click Sounds Index crashes the game. (It was Geode's fault.)
 ## Version v2.4.0 - Beta 1
