@@ -124,7 +124,6 @@ protected:
     CCMenuItemSpriteExtra* m_downloadBtn;
     CCMenuItemSpriteExtra* m_cspiBtn;
     CCMenuItemSpriteExtra* m_clearBtn;
-    CCMenu* m_menufolder;
     CCMenu* m_selectionpopup;
     bool m_ThemeGeode = false;
     CCLabelBMFont* m_nameLabel;
@@ -191,7 +190,7 @@ protected:
         });
     
         cs = setting->clicksound;
-        this->setContentSize({ width, 70.f });
+        this->setContentSize({ width, 90.f });
         CCSprite* folderSpr = CCSprite::createWithSpriteFrameName("gj_folderBtn_001.png");
         folderSpr->setScale(1.0f);
         m_folderBtn = CCMenuItemSpriteExtra::create(
@@ -216,12 +215,6 @@ protected:
         this->getStatusLabel()->setAnchorPoint({0, 1});
         this->getButtonMenu()->setScale(0.9);
         this->getNameMenu()->setScale(1.2);
-        m_menufolder = CCMenu::create();
-        m_menufolder->addChild(m_folderBtn);
-        m_menufolder->setScale(1);
-        m_menufolder->setLayout(RowLayout::create());
-        m_menufolder->setPosition(ccp(this->getContentSize().width / 2, this->getContentSize().height / 2));
-        this->addChild(m_menufolder);
     
         m_selectionpopup = CCMenu::create();
         auto btnspr = CCSprite::create("csindexlogo.png"_spr);
@@ -263,11 +256,11 @@ protected:
         auto m_selectionpopuplayout = RowLayout::create();
         m_selectionpopuplayout->setGap(15.f);
         m_selectionpopup->setLayout(m_selectionpopuplayout);
-        m_selectionpopup->setPosition(ccp(this->getContentSize().width / 2, this->getContentSize().height * 0.5f));
-        m_selectionpopup->setAnchorPoint({0.5, 0.5});
+        m_selectionpopup->setPosition(ccp(this->getContentSize().width / 2, this->getContentSize().height / 2));
+        m_selectionpopup->setAnchorPoint({0.5, 0.25});
         this->addChild(m_selectionpopup);
         
-        m_nameLabel->setPosition(m_menufolder->getPosition() - ccp(0, m_menufolder->getContentSize().height));
+        m_nameLabel->setPosition(m_selectionpopup->getPosition() - ccp(0, m_selectionpopup->getContentSize().height));
         m_nameLabel->setScale(0.5);
         m_nameLabel->setAnchorPoint({0.5, 0});
         this->addChild(m_nameLabel);
@@ -517,7 +510,6 @@ protected:
         SettingValueNodeV3::updateState(invoker);
         float shouldEnable = this->getSetting()->shouldEnable();
         
-        m_menufolder->setVisible(static_cast<int>(this->getValue().m_tab) == 2);
         m_selectionpopup->setVisible(static_cast<int>(this->getValue().m_tab) != 2);
         if (this->getValue().m_tab == 2) {
             std::error_code ec;

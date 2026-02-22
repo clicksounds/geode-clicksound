@@ -1,10 +1,13 @@
 # Changelog
-## Version v2.4.0
+## Version v2.4.0 - Beta 2
+* Fixed a critical bug on Android where opening the Click Sounds Index crashes the game. (It was Geode's fault.)
+## Version v2.4.0 - Beta 1
 * Added support for Geode v5.0.0 / GD 2.2081.
 * Added master enable and master volume.
 * Added filtering by featured click packs.
 * The ID of a click pack is now shown in its more info page.
 * Clearing the Click Sounds Index is now more stable.
+* Pitch shifting has been removed. It may return in a future update.
 ## Version v2.3.3
 * Fixed a bug on windows where release sounds will continue playing while disabled if the 'sounds everywhere' setting is enabled.
 ## Version v2.3.2
