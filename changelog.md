@@ -1,6 +1,7 @@
 # Changelog
 ## Version v2.4.0 - Beta 3
 * Fixed a critical bug on all platforms where changing any settings crashes the game. (It was my fault.)
+* There is a bug where the click pack set does not load after a restart and it has to be set again. It will be fixed in a future update.
 ## Version v2.4.0 - Beta 2
 * Fixed a critical bug on Android where opening the Click Sounds Index crashes the game. (It was Geode's fault.)
 ## Version v2.4.0 - Beta 1

@@ -396,10 +396,12 @@ $on_mod(Loaded) {
 	// Does the release-sound path setting change?
 	Mod::get()->setSavedValue<bool>("CSINDEXDOWNLOADING", false);
 	listenForSettingChanges<ClicksoundSettingValue>("selection-release", [](ClicksoundSettingValue releaseSoundFile) {
+		log::debug("selection-release setting changed");	
 		onsettingsUpdate();
 	});
 	// Does the click-sound path setting change?
 	listenForSettingChanges<ClicksoundSettingValue>("selection-clicks", [](ClicksoundSettingValue PressSoundSoundFile) {
+		log::debug("selection-clicks setting changed");	
 		onsettingsUpdate();
 	});
 	SpritePicker::secret = Loader::get()->isModLoaded("carrot_devs.carrotmodcarrotcarrotcarrotcarrotcarrot"); // carrot sprite flag
