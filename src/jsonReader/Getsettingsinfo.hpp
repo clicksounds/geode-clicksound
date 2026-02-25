@@ -13,7 +13,8 @@ struct ReadingSettings {
 };
 
 static ReadingSettings GetSettingJsonRead(std::string name) {
-	ClicksoundSettingValue x = Mod::get()->getSettingValue<ClicksoundSettingValue>(name);
+	// settings are BROKEN in geode v5.0.1 and v5.0.2 so change this back to 'getSettingValue' once fixed
+	ClicksoundSettingValue x = Mod::get()->getSavedValue<ClicksoundSettingValue>(name);
 	ReadingSettings Setup;
 	Setup.M_Tab = x.m_tab;
 	Setup.Current_Sound_Useful = x.m_currentClick;
