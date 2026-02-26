@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.4.0 - Beta 6
+* Removed the workaround added in v2.4.0 Beta 4 as Geode v5.1.0 now loads custom settings.
 ## Version v2.4.0 - Beta 5
 * Pitch shifting has returned.
 * Re-added the message that appears when no click packs are installed (besides the default pack).
