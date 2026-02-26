@@ -11,6 +11,7 @@ struct downloadedzipStruc {
 
 static downloadedzipStruc indexzip;
 inline FMOD::ChannelGroup *CS_Group;
+inline FMOD::DSP *pitchShifterDSP;
 using namespace geode::prelude;
 // Custom class for Caching sounds (Make it less laggy for mobile platforms and such)
 class SoundCache {
@@ -24,6 +25,11 @@ class SoundCache {
 	SoundCache(std::string x, std::string x2) : Volume(x), custom(x2), soundChannel(nullptr) {
 		if (!CS_Group) {
 			FMODAudioEngine::sharedEngine()->m_system->createChannelGroup("CS_Group", &CS_Group);
+		}
+
+		if (!pitchShifterDSP) {
+			FMODAudioEngine::sharedEngine()->m_system->createDSPByType(FMOD_DSP_TYPE_PITCHSHIFT, &pitchShifterDSP);
+			CS_Group->addDSP(0, pitchShifterDSP);
 		}
 	}
 
@@ -59,6 +65,13 @@ class SoundCache {
 		getVolume = (getVolume * getMasterVolume) / 100;
 		FMODAudioEngine::sharedEngine()->m_system->playSound(m_sound, CS_Group, false, &soundChannel);
 		soundChannel->setVolume(getVolume / 50.f);
+		double semitone = static_cast<double>(Mod::get()->getSettingValue<int64_t>("sfx-semitone")) / 12;
+		if (semitone < 0) {
+			semitone = std::pow(2, semitone); // fix negtive octave
+		} else {
+			semitone += 1;
+		}
+		pitchShifterDSP->setParameterFloat(FMOD_DSP_PITCHSHIFT_PITCH, semitone); // semitone is half a octave
 	}
 
 	~SoundCache() {

@@ -1,4 +1,8 @@
 # Changelog
+## Version v2.4.0 - Beta 5
+* Pitch shifting has returned.
+* Re-added the message that appears when no click packs are installed (besides the default pack).
+* The Click Sounds Index now closes after pressing the download button.
 ## Version v2.4.0 - Beta 4
 * Fixed a bug where click packs would not save on restart. (This is Geode's fault, but a workaround is temporarily being used until it is fixed.)
 ## Version v2.4.0 - Beta 3

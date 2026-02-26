@@ -160,31 +160,32 @@ protected:
             ? ClickJson->memeData
             : ClickJson->usefulData;
 
-        bool hasPacks = false;
+        int numPacks = 0;
 
         for (const auto& [filename, data] : json) {
             if (data.clicks.empty() && clicksound) continue;
             if (data.releases.empty() && !clicksound) continue;
 
-            hasPacks = true;
+            numPacks++;
             auto obj = Item(data, filename, clicksound);
             NodeScroller->addChild(obj);
         }
 
-        if (!hasPacks) {
+        if (numPacks <= 1) {
             auto label = CCLabelBMFont::create(
-                "No click packs were found.\n"
-                "Please download the index\n"
-                "from the upper right corner\n"
-                "or install a .packgen.zip pack.",
+                "No other click packs were found.\n"
+                "Please download the index from\n"
+                "the upper right corner or\n"
+                "install a .packgen.zip pack.",
                 "bigFont.fnt"
             );
             label->setScale(0.5f);
             label->setAlignment(kCCTextAlignmentCenter);
             label->setPosition(ccp(
                 scroll->getContentSize().width / 2,
-                scroll->getContentSize().height / 1.75f
+                scroll->getContentSize().height / 2
             ));
+            label->setAnchorPoint(ccp(0.5f, 1.f));
             NodeScroller->addChild(label);
         }
 
@@ -198,7 +199,7 @@ protected:
             ccp(NodeScroller->getContentSize().width, height)
         );
 
-        if (hasPacks) {
+        if (numPacks > 0) {
             CCArrayExt<CCNode*> objects = NodeScroller->getChildren();
             int i = -1;
             for (auto* obj : objects) {
@@ -235,8 +236,11 @@ protected:
             "Are you sure you want to redownload it?",
             "Cancel",
             "Download",
-            [](auto, bool yes) {
-                if (yes) SendRequestAPI(true);
+            [this](auto, bool yes) {
+                if (yes) {
+                    SendRequestAPI(true);
+                    this->onClose(nullptr);
+                }
             }
         );
     }
