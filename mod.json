@@ -38,7 +38,7 @@
 	],
 	"dependencies": {
         "geode.node-ids": {
-        	"version": ">=v1.22.0-beta.2",
+        	"version": ">=v1.23.0",
          	"required": true
 		}
     },
