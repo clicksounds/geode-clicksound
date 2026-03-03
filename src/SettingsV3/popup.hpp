@@ -246,7 +246,8 @@ protected:
     }
 
     void addFeatureFilterBtn() {
-        auto spr = CCSprite::createWithSpriteFrameName("GJ_starsIcon_001.png");
+        auto spr = CCSprite::createWithSpriteFrameName("GJ_bigStar_noShadow_001.png");
+        spr->setScale(0.6f);
         auto btn = CCMenuItemSpriteExtra::create(
             spr,
             this,

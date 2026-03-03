@@ -295,8 +295,8 @@ class CSIndexPackNode : public CCLayerColor {
 		_Apply_Menu->setContentSize(ConfirmSprite->getContentSize());
 		_Apply_Menu->setPosition(ccp(this->getContentSize().width - ConfirmSprite->getContentSize().width / 1.5, this->getContentSize().height / 2));
 		if (isFeatured) {
-			CCSprite* featuredSpr = CCSprite::createWithSpriteFrameName("GJ_starsIcon_001.png");
-			featuredSpr->setScale(0.75f);
+			CCSprite* featuredSpr = CCSprite::createWithSpriteFrameName("GJ_bigStar_noShadow_001.png");
+			featuredSpr->setScale(0.5f);
 			featuredSpr->setID("featured-star");
 			//_Apply_Menu->setPosition(CCPoint(_Apply_Menu->getPosition().x - 10.f, _Apply_Menu->getPosition().y));
 			featuredSpr->setPosition(CCPoint(_Apply_Menu->getPosition().x - 45.f, _Apply_Menu->getPosition().y));

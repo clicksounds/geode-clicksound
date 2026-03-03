@@ -1,18 +1,27 @@
 # Changelog
-## Version v2.4.0 - Beta 6
+## Version v2.4.0
+* Added support for Geode v5 / GD 2.2081.
+* Added master enable and master volume.
+* Added filtering by featured click packs.
+* The ID of a click pack is now shown in its more info page.
+* Clearing the Click Sounds Index is now more stable.
+* Re-added the message that appears when no click packs are installed (besides the default pack).
+* The Click Sounds Index now closes after pressing the download button.
+* Changed the texture of the featured star to a better one.
+### Version v2.4.0 - Beta 6
 * Removed the workaround added in v2.4.0 Beta 4 as Geode v5.1.0 now loads custom settings.
-## Version v2.4.0 - Beta 5
+### Version v2.4.0 - Beta 5
 * Pitch shifting has returned.
 * Re-added the message that appears when no click packs are installed (besides the default pack).
 * The Click Sounds Index now closes after pressing the download button.
-## Version v2.4.0 - Beta 4
+### Version v2.4.0 - Beta 4
 * Fixed a bug where click packs would not save on restart. (This is Geode's fault, but a workaround is temporarily being used until it is fixed.)
-## Version v2.4.0 - Beta 3
+### Version v2.4.0 - Beta 3
 * Fixed a critical bug on all platforms where changing any settings crashes the game. (It was my fault.)
 * There is a bug where the click pack set does not load after a restart and it has to be set again. It will be fixed in a future update.
-## Version v2.4.0 - Beta 2
+### Version v2.4.0 - Beta 2
 * Fixed a critical bug on Android where opening the Click Sounds Index crashes the game. (It was Geode's fault.)
-## Version v2.4.0 - Beta 1
+### Version v2.4.0 - Beta 1
 * Added support for Geode v5.0.0 / GD 2.2081.
 * Added master enable and master volume.
 * Added filtering by featured click packs.
