@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.4.1
+* Added a scrollbar to the Click Sounds Index.
 ## Version v2.4.0
 * Added support for Geode v5 / GD 2.2081.
 * Added master enable and master volume.

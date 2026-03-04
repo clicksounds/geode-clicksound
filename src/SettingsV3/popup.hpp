@@ -69,6 +69,7 @@ protected:
         m_mainLayer->addChild(scroll);
 
         addSearchBar();
+        addScrollbar();
         addDownloadBtn();
         addFeatureFilterBtn();
         return true;
@@ -114,6 +115,16 @@ protected:
         indexLabel->setScale(0.7f);
         indexLabel->setID("index-label"_spr);
         m_mainLayer->addChild(indexLabel);
+    }
+
+    void addScrollbar() {
+        auto scrollbar = Scrollbar::create(scroll);
+        scrollbar->setPosition(ccp(
+            m_mainLayer->getContentSize().width - 10,
+            (scroll->getContentSize().height / 1.75)
+        ));
+        scrollbar->setID("scrollbar"_spr);
+        m_mainLayer->addChild(scrollbar);
     }
 
     void filterItems(const std::string& query) {
