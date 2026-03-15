@@ -22,3 +22,7 @@ Others:
 - aceofspadesss - Provided a ton of unique click sounds for the mod!
 - AkuLunical - twitter  
 (If you think I forgot to credit you, DM @coopeeo on Discord. Credit is not given for requesting a feature or submitting a click pack.)
+
+## Build Instructions
+Follow Section 1 of the [Geode Docs](https://docs.geode-sdk.org) to learn how to build mods.
+Clang is recommended for Click Sounds.
