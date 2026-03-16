@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.4.2
+* Renamed the mod to Click Sounds Full to prevent confusion.
 ## Version v2.4.1
 * Added a scrollbar to the Click Sounds Index.
 ## Version v2.4.0
