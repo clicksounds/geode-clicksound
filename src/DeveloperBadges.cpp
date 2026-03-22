@@ -25,6 +25,7 @@ namespace Contributors  {
 		{7669473,Messages::IndexModerator}, // Jaid
 		{27823067,Messages::IndexModerator}, // Andarian
 		{27334543,Messages::IndexModerator}, // KinobuNine / 6YT
+		{19229865,Messages::IndexModerator}
 		// CSPI Owners, unknown names
 		{31335670,Messages::CSPIOwner},
 		{29986323,Messages::CSPIOwner},
