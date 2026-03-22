@@ -1,5 +1,5 @@
 # Changelog
-## Version v2.4.2
+## Version v2.4.3
 * Added index moderator badge for whiteisgrey.
 ## Version v2.4.2
 * Renamed the mod to Click Sounds Full to prevent confusion.
