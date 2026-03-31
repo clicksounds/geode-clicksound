@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.4.5
+* Changed the mod name to more accurately reflect the purpose of the mod.
 ## Version v2.4.4
 * Added a keybind for quickly toggling the 'Enable Master' setting (Ctrl+Shift+F6 by default).
 * Replaced the default click pack with alices SayoDevice O3C by alicemiku, which was suggested by Click Sounds supporter MXGaming01.
