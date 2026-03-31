@@ -1,4 +1,4 @@
-# Click Sounds Full
+# Click Sounds Mega Neo Full Ultra S26 Deluxe Game of the Year Edition + Click Sounds Index: Now with support for keybinds!
 
 Plays a click sound whenever you press a jump button, or (optionally) a release sound whenever you release a jump button.
 If you want a new built-in click sound or feature to be added, join the [discord server](https://discord.gg/RwbRP8ADdc). <3

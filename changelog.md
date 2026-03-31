@@ -1,4 +1,7 @@
 # Changelog
+## Version v2.4.4
+* Added a keybind for quickly toggling the 'Enable Master' setting (Ctrl+Shift+F6 by default).
+* Replaced the default click pack with alices SayoDevice O3C by alicemiku, which was suggested by Click Sounds supporter MXGaming01.
 ## Version v2.4.3
 * Added index moderator badge for whiteisgrey.
 ## Version v2.4.2

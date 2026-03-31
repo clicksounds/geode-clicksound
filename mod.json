@@ -6,9 +6,9 @@
         "mac": "2.2081",
         "ios": "2.2081"
     	},
-	"version": "v2.4.3",
+	"version": "v2.4.4",
 	"id": "beat.click-sound",
-	"name": "Click Sounds Full",
+	"name": "Click Sounds Mega Neo Full Ultra S26 Deluxe Game of the Year Edition + Click Sounds Index: Now with support for keybinds!",
 	"developers": [
 		"Beat"
 	],
@@ -175,6 +175,12 @@
 			"name": "Advanced Options",
 			"type": "title",
 			"description": "Only touch these if you know what you're doing."
+		},
+		"master-toggle-keybind": {
+			"name": "Master toggle keybind",
+			"description": "The keybind to toggle all sounds on and off.",
+			"type": "keybind",
+			"default": "Ctrl+Shift+F6"
 		},
 		"downloadOnStartup": {
 			"name": "Download index on startup",
