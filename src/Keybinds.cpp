@@ -2,23 +2,25 @@
 
 using namespace geode::prelude;
 
-$on_mod(Loaded) {
-    listenForKeybindSettingPresses("master-toggle-keybind", [](Keybind const& keybind, bool down, bool repeat, double timestamp) {
+static void registerToggleKeybind(std::string keybindId, std::string settingKey, std::string displayName) {
+    listenForKeybindSettingPresses(keybindId, [settingKey, displayName](Keybind const& keybind, bool down, bool repeat, double timestamp) {
         static geode::Ref<Notification> notification;
         if (down && !repeat) {
-            if (notification) {
-                notification->cancel();
-            }
-            Mod::get()->setSettingValue<bool>("enable-master", !Mod::get()->getSettingValue<bool>("enable-master"));
+            if (notification) notification->cancel();
+
+            auto newVal = !Mod::get()->getSettingValue<bool>(settingKey);
+            Mod::get()->setSettingValue<bool>(settingKey, newVal);
+
             notification = Notification::create(
-                fmt::format("CS: Master has been {}", 
-                    Mod::get()->getSettingValue<bool>("enable-master") ? "enabled" : "disabled"
-                ), 
-                CCSprite::createWithSpriteFrameName(
-                    Mod::get()->getSettingValue<bool>("enable-master") ? "GJ_completesIcon_001.png" : "GJ_deleteIcon_001.png"
-                )
+                fmt::format("CS: {} has been {}", displayName, newVal ? "enabled" : "disabled"),
+                CCSprite::createWithSpriteFrameName(newVal ? "GJ_completesIcon_001.png" : "GJ_deleteIcon_001.png")
             );
             notification->show();
         }
     });
+}
+
+$on_mod(Loaded) {
+    registerToggleKeybind("master-toggle-keybind", "enable-master", "Master");
+    registerToggleKeybind("sounds-everywhere-keybind", "sounds-everywhere", "Sounds everywhere");
 };

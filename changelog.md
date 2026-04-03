@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.4.6
+* Added a keybind for quickly toggling the 'Sounds Everywhere' setting (unbound by default).
 ## Version v2.4.5
 * Changed the mod name to more accurately reflect the purpose of the mod.
 ## Version v2.4.4
