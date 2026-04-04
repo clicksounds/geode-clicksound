@@ -1,4 +1,8 @@
 # Changelog
+## Version v2.4.7
+* Added a keybind for quickly toggling the 'Enable Click Sounds' setting (unbound by default).
+* Added a keybind for quickly toggling the 'Enable Release Sounds' setting (unbound by default).
+* Changed the 'set' button in the Click Sounds Index to be the 'use' button.
 ## Version v2.4.6
 * Added a keybind for quickly toggling the 'Sounds Everywhere' setting (unbound by default).
 ## Version v2.4.5

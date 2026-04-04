@@ -22,5 +22,7 @@ static void registerToggleKeybind(std::string keybindId, std::string settingKey,
 
 $on_mod(Loaded) {
     registerToggleKeybind("master-toggle-keybind", "enable-master", "Master");
-    registerToggleKeybind("sounds-everywhere-keybind", "sounds-everywhere", "Sounds everywhere");
+    registerToggleKeybind("sounds-everywhere-toggle-keybind", "sounds-everywhere", "Sounds everywhere");
+    registerToggleKeybind("clicks-toggle-keybind", "enable-clicksounds", "Click sounds");
+    registerToggleKeybind("releases-toggle-keybind", "enable-releasesounds", "Release sounds");
 };
