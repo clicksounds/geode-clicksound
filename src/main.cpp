@@ -13,7 +13,6 @@
 #include <Geode/modify/PlayerObject.hpp>
 #include <Geode/modify/EndLevelLayer.hpp>
 #include <Geode/modify/CCTouchDispatcher.hpp>
-#include <Geode/modify/CCEGLView.hpp>
 #include <Geode/ui/GeodeUI.hpp>
 #include <Geode/utils/web.hpp>
 #include <Geode/utils/async.hpp>

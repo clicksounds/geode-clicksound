@@ -283,8 +283,10 @@ class CSIndexPackNode : public CCLayerColor {
 		if (isFeatured) this->addChild(FeaturedGlow);
 
 		// 'set' button
-		auto ConfirmSprite = CCMenuItemSpriteExtra::create(ButtonSprite::create("Set", 40.f, true, SpritePicker::get("bigFont.fnt", theme), SpritePicker::get("GJ_button_01.png", theme), 20.f, 1.0f), this, menu_selector(CSIndexPackNode::selected));
-		ConfirmSprite->m_scaleMultiplier = 0.9;
+		auto ConfirmSpr = CCSprite::createWithSpriteFrameName("GJ_selectSongBtn_001.png");
+		ConfirmSpr->setScale(0.75f);
+		auto ConfirmBtn = CCMenuItemSpriteExtra::create(ConfirmSpr, this, menu_selector(CSIndexPackNode::selected));
+		ConfirmBtn->m_scaleMultiplier = 0.9;
 		_Apply_Menu = CCMenu::create(); // MEN(_Apply_Menu)
 		_Apply_Menu->setID("apply");
 		_Apply_Menu->ignoreAnchorPointForPosition(false);
@@ -292,17 +294,17 @@ class CSIndexPackNode : public CCLayerColor {
 		                           ->setAxisAlignment(AxisAlignment::Start)
 		                           ->setCrossAxisLineAlignment(AxisAlignment::Start)
 		                           ->setCrossAxisAlignment(AxisAlignment::Start));
-		_Apply_Menu->setContentSize(ConfirmSprite->getContentSize());
-		_Apply_Menu->setPosition(ccp(this->getContentSize().width - ConfirmSprite->getContentSize().width / 1.5, this->getContentSize().height / 2));
+		_Apply_Menu->setContentSize(ConfirmBtn->getContentSize());
+		_Apply_Menu->setPosition(ccp(this->getContentSize().width - ConfirmBtn->getContentSize().width / 1.5, this->getContentSize().height / 2));
 		if (isFeatured) {
 			CCSprite* featuredSpr = CCSprite::createWithSpriteFrameName("GJ_bigStar_noShadow_001.png");
 			featuredSpr->setScale(0.5f);
 			featuredSpr->setID("featured-star");
 			//_Apply_Menu->setPosition(CCPoint(_Apply_Menu->getPosition().x - 10.f, _Apply_Menu->getPosition().y));
-			featuredSpr->setPosition(CCPoint(_Apply_Menu->getPosition().x - 45.f, _Apply_Menu->getPosition().y));
+			featuredSpr->setPosition(CCPoint(_Apply_Menu->getPosition().x - 30.f, _Apply_Menu->getPosition().y));
 			this->addChild(featuredSpr);
 		}
-		_Apply_Menu->addChild(ConfirmSprite);	
+		_Apply_Menu->addChild(ConfirmBtn);	
 		_Apply_Menu->updateLayout();
 		this->addChild(_Apply_Menu);
 		_Apply_Menu->setAnchorPoint({0.5, 0.5});
