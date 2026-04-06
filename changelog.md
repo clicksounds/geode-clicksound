@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.4.8
+* Removed harassment.
 ## Version v2.4.7
 * Added a keybind for quickly toggling the 'Enable Click Sounds' setting (unbound by default).
 * Added a keybind for quickly toggling the 'Enable Release Sounds' setting (unbound by default).
