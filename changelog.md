@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.4.9
+* Renamed mod back to Click Sounds Full after the first half of April.
 ## Version v2.4.8
 * Removed harassment.
 ## Version v2.4.7

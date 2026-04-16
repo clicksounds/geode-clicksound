@@ -1,4 +1,4 @@
-# Click Sounds Mega Neo Full Ultra S26 Deluxe Game of the Year Edition + Click Sounds Index: Now with support for keybinds! Change your click and release sounds in the settings menu, which can be accessed from the pause menu or from its Geode page. The Click Sounds Index is also now available, which allows you to easily download and use custom click sound packs from the community. The sounds everywhere option is still just as buggy as before, and I have no idea how to fix it nor do I have plans to fix it! Thank you MXGaming01 for supporting Click Sounds and thank you alicemiku for creating the default click pack that will be present from March to June. If you want to support Click Sounds, consider giving me money! It's completely free and I absolutely love money! Now with over one thousand copyrighted sounds!
+# Click Sounds Full
 
 Plays a click sound whenever you press a jump button, or (optionally) a release sound whenever you release a jump button.
 If you want a new built-in click sound or feature to be added, join the [discord server](https://discord.gg/RwbRP8ADdc). <3
