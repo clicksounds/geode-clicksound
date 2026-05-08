@@ -260,11 +260,82 @@ class $modify(csTouchDispatcher, CCTouchDispatcher) {
 
 async::TaskHolder<web::WebResponse> m_downloadTask;
 
+void ProcessIndexZip(std::filesystem::path zipPath) {
+    auto indexzipPtr = std::make_shared<decltype(indexzip)>(indexzip);
+    std::thread([=] {
+        auto unzip = file::Unzip::create(zipPath);
+        if (!unzip) {
+            Mod::get()->setSavedValue<bool>("CSINDEXDOWNLOADING", false);
+            return;
+        }
+        auto clicksRoot = Mod::get()->getConfigDir() / "Clicks";
+        std::filesystem::remove_all(clicksRoot);
+        (void) unzip.unwrap().extractAllTo(clicksRoot);
+        Loader::get()->queueInMainThread([=] {
+            Notification::create(
+                "CS: Index updated successfully!",
+                CCSprite::createWithSpriteFrameName("GJ_completesIcon_001.png")
+            )->show();
+            std::filesystem::path clicksDir = clicksRoot / "clicks-main";
+            static const std::unordered_set<std::string> skipList = {
+                "Meme",
+                "Useful",
+                "featured_list.json"
+            };
+            for (auto const& entry : std::filesystem::directory_iterator(clicksDir)) {
+                if (!skipList.contains(entry.path().filename().string())) {
+                    std::filesystem::remove_all(entry.path());
+                }
+            }
+            if (std::filesystem::exists(zipPath)) {
+                std::filesystem::remove(zipPath);
+            }
+        });
+        Mod::get()->setSavedValue<bool>("CSINDEXDOWNLOADING", false);
+        ClickJson->loadData([] {
+            onsettingsUpdate();
+        });
+    }).detach();
+}
+
+void InstallIndexLocallyByZip(std::filesystem::path zipPath) {
+    if (!std::filesystem::exists(zipPath)) {
+        Loader::get()->queueInMainThread([] {
+            Notification::create(
+                "CS: File not found.",
+                CCSprite::createWithSpriteFrameName("GJ_deleteIcon_001.png")
+            )->show();
+        });
+        return;
+    }
+    Loader::get()->queueInMainThread([] {
+        Notification::create(
+            "CS: Installing index from file...",
+            CCSprite::createWithSpriteFrameName("GJ_timeIcon_001.png")
+        )->show();
+        Mod::get()->setSavedValue<bool>("CSINDEXDOWNLOADING", true);
+    });
+    // Copy file to expected zip path so ProcessIndexZip can clean it up normally
+    auto targetPath = Mod::get()->getConfigDir() / "Clicks.zip";
+    std::error_code ec;
+    std::filesystem::copy_file(zipPath, targetPath, std::filesystem::copy_options::overwrite_existing, ec);
+    if (ec) {
+        Loader::get()->queueInMainThread([] {
+            Notification::create(
+                "CS: Failed to read file.",
+                CCSprite::createWithSpriteFrameName("GJ_deleteIcon_001.png")
+            )->show();
+        });
+        Mod::get()->setSavedValue<bool>("CSINDEXDOWNLOADING", false);
+        return;
+    }
+    ProcessIndexZip(targetPath);
+}
+
 void SendRequestAPI(bool forceDownload = false) {
     if (!forceDownload && !Mod::get()->getSettingValue<bool>("downloadOnStartup")) {
         return;
     }
-
     Loader::get()->queueInMainThread([] {
         Notification::create(
             "CS: Downloading index...",
@@ -272,12 +343,8 @@ void SendRequestAPI(bool forceDownload = false) {
         )->show();
         Mod::get()->setSavedValue<bool>("CSINDEXDOWNLOADING", true);
     });
-
     web::WebRequest req;
-    req.onProgress([](web::WebProgress const& p) {
-        // log::debug("progress: {}", p.downloadProgress().value_or(0.f));
-    });
-
+    req.onProgress([](web::WebProgress const& p) {});
     m_downloadTask.spawn(
         req.get("https://github.com/clicksounds/clicks/archive/refs/heads/main.zip"),
         [=](web::WebResponse res) {
@@ -291,7 +358,6 @@ void SendRequestAPI(bool forceDownload = false) {
                 Mod::get()->setSavedValue<bool>("CSINDEXDOWNLOADING", false);
                 return;
             }
-
             auto zipPath = Mod::get()->getConfigDir() / "Clicks.zip";
             if (!res.into(zipPath)) {
                 Loader::get()->queueInMainThread([] {
@@ -303,52 +369,7 @@ void SendRequestAPI(bool forceDownload = false) {
                 Mod::get()->setSavedValue<bool>("CSINDEXDOWNLOADING", false);
                 return;
             }
-
-            auto indexzipPtr = std::make_shared<decltype(indexzip)>(indexzip);
-
-            std::thread([=] {
-                auto unzip = file::Unzip::create(zipPath);
-                if (!unzip) {
-                    Mod::get()->setSavedValue<bool>("CSINDEXDOWNLOADING", false);
-                    return;
-                }
-
-                auto clicksRoot = Mod::get()->getConfigDir() / "Clicks";
-                std::filesystem::remove_all(clicksRoot);
-                (void) unzip.unwrap().extractAllTo(clicksRoot);
-
-                Loader::get()->queueInMainThread([=] {
-                    Notification::create(
-                        "CS: Download successful!",
-                        CCSprite::createWithSpriteFrameName("GJ_completesIcon_001.png")
-                    )->show();
-
-                    std::filesystem::path clicksDir =
-                        clicksRoot / "clicks-main";
-
-                    static const std::unordered_set<std::string> skipList = {
-                        "Meme",
-                        "Useful",
-                        "featured_list.json"
-                    };
-
-                    for (auto const& entry : std::filesystem::directory_iterator(clicksDir)) {
-                        if (!skipList.contains(entry.path().filename().string())) {
-                            std::filesystem::remove_all(entry.path());
-                        }
-                    }
-
-                    if (std::filesystem::exists(zipPath)) {
-                        std::filesystem::remove(zipPath);
-                    }
-                });
-
-                Mod::get()->setSavedValue<bool>("CSINDEXDOWNLOADING", false);
-
-                ClickJson->loadData([] {
-                    onsettingsUpdate();
-                });
-            }).detach();
+            ProcessIndexZip(zipPath);
         }
     );
 }

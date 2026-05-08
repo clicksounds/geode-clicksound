@@ -16,6 +16,7 @@ using namespace geode::prelude;
 
 extern void onsettingsUpdate();
 extern void SendRequestAPI(bool forceDownload);
+extern void InstallIndexLocallyByZip(std::filesystem::path zipPath);
 extern void extractDefaultClickPack();
 
 struct ClicksoundSettingValue {
@@ -299,7 +300,7 @@ protected:
     }
 
     void onDownloadBtn(CCObject* sender) {
-        geode::createQuickPopup(
+        auto downloadPopup = geode::createQuickPopup(
             "Warning",
             "The Click Sounds Index is over <cj>50mb+</c> in size. Are you sure you want to redownload it?\n<cr>All existing click packs will be deleted and replaced with the downloaded index.</c>",
             "Cancel", "Download", 
@@ -309,7 +310,65 @@ protected:
                 }
             }
         );
+        downloadPopup->setID("download-popup"_spr);
+        auto importSpr = CCSprite::createWithSpriteFrameName("GJ_myServerBtn_001.png");
+        auto importBtn = CCMenuItemSpriteExtra::create(
+            importSpr,
+            this,
+            menu_selector(ClicksoundSetterNodeV3::onDownloadImportBtn)
+        );
+        importBtn->setID("import-button"_spr);
+        //importSpr->setScale(0.75f);
+        importBtn->setPosition(downloadPopup->getContentSize().width * 0.28, downloadPopup->getContentSize().height * 0.42);
+        downloadPopup->m_buttonMenu->addChild(importBtn);
     };
+
+    void onDownloadImportBtn(CCObject* sender) {
+        file::FilePickOptions::Filter zipFilter;
+        zipFilter.description = "Index ZIP";
+        zipFilter.files = { "*.zip" };
+
+        auto getPersistentDir = Mod::get()->getSavedValue<std::filesystem::path>("cspi-persistent-dir");
+
+        if (m_cspiFilePickerOpen) return;
+        m_cspiFilePickerOpen = true;
+
+        async::spawn(
+            file::pick(file::PickMode::OpenFile, { getPersistentDir, { zipFilter } }),
+            [this](Result<std::optional<std::filesystem::path>> res) {
+                if (!res || !res.isOk()) {
+                    m_cspiFilePickerOpen = false;
+                    return false;
+                }
+                auto opt = res.unwrap();
+                if (!opt) {
+                    m_cspiFilePickerOpen = false;
+                    return false;
+                }
+                auto path = opt.value();
+                auto stem = path.stem().string();
+                if (path.extension() != ".zip" || stem != "clicks-main" && !stem.starts_with("clicks-main (")) {
+                    FLAlertLayer::create("Click Sounds", "Invalid file: please select the clicks-main.zip downloaded from GitHub!", "Close")->show();
+                    auto cspiPopup = geode::createQuickPopup(
+                        "Click Sounds",
+                        "Invalid file: please select the clicks-main.zip downloaded from GitHub!",
+                        "Close", "Open GitHub",
+                        [this](auto, bool btn2) {
+                            if (btn2) {
+                                cocos2d::CCApplication::sharedApplication()->openURL("https://github.com/clicksounds/clicks/archive/refs/heads/main.zip");
+                            }
+                        }
+                    );
+                    m_cspiFilePickerOpen = false;
+                    return false;
+                }
+                Mod::get()->setSavedValue<std::filesystem::path>("cspi-persistent-dir", path);
+                InstallIndexLocallyByZip(path);
+                m_cspiFilePickerOpen = false;
+                return false;
+            }
+        );
+    }
 
     void onClearBtn(CCObject* sender) {   
         if (Mod::get()->getSavedValue<bool>("CSINDEXDOWNLOADING")) {

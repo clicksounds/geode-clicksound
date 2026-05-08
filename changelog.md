@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.4.10
+* Added a way to import the index from a .zip file in the download button menu.
 ## Version v2.4.9
 * Renamed mod back to Click Sounds Full after the first half of April.
 ## Version v2.4.8
