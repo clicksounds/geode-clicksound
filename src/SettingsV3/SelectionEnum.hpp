@@ -135,7 +135,7 @@ protected:
     void Popup(CCObject*) {
         Mod* mod = Mod::get();
         if (mod->getSavedValue<bool>("CSINDEXDOWNLOADING")) {
-            FLAlertLayer::create("Click Sounds Index", "Unable to load while downloading. Please wait until the download completes, then try again.", "Close")->show();
+            FLAlertLayer::create("Click Sounds Index", "Unable to load while the index is preparing. Please wait until the download completes, then try again.", "Close")->show();
             return;
         } else if (mod->getSavedValue<bool>("CSINDEXCLEARING")) {
             FLAlertLayer::create("Click Sounds Index", "Unable to load while clearing. Please wait a few seconds for the index to finish clearing, then try again.", "Close")->show();
@@ -318,7 +318,6 @@ protected:
             menu_selector(ClicksoundSetterNodeV3::onDownloadImportBtn)
         );
         importBtn->setID("import-button"_spr);
-        //importSpr->setScale(0.75f);
         importBtn->setPosition(downloadPopup->getContentSize().width * 0.28, downloadPopup->getContentSize().height * 0.42);
         downloadPopup->m_buttonMenu->addChild(importBtn);
     };
@@ -336,6 +335,7 @@ protected:
         async::spawn(
             file::pick(file::PickMode::OpenFile, { getPersistentDir, { zipFilter } }),
             [this](Result<std::optional<std::filesystem::path>> res) {
+                auto scene = CCDirector::sharedDirector()->getRunningScene();
                 if (!res || !res.isOk()) {
                     m_cspiFilePickerOpen = false;
                     return false;
@@ -347,8 +347,13 @@ protected:
                 }
                 auto path = opt.value();
                 auto stem = path.stem().string();
+                
                 if (path.extension() != ".zip" || stem != "clicks-main" && !stem.starts_with("clicks-main (")) {
-                    FLAlertLayer::create("Click Sounds", "Invalid file: please select the clicks-main.zip downloaded from GitHub!", "Close")->show();
+                    if (scene) {
+                        if (auto* downloadPopup = scene->getChildByID("download-popup"_spr)) {
+                            downloadPopup->removeFromParent();
+                        }
+                    }
                     auto cspiPopup = geode::createQuickPopup(
                         "Click Sounds",
                         "Invalid file: please select the clicks-main.zip downloaded from GitHub!",
@@ -363,6 +368,11 @@ protected:
                     return false;
                 }
                 Mod::get()->setSavedValue<std::filesystem::path>("cspi-persistent-dir", path);
+                if (scene) {
+                    if (auto* downloadPopup = scene->getChildByID("download-popup"_spr)) {
+                        downloadPopup->removeFromParent();
+                    }
+                }
                 InstallIndexLocallyByZip(path);
                 m_cspiFilePickerOpen = false;
                 return false;
@@ -372,7 +382,7 @@ protected:
 
     void onClearBtn(CCObject* sender) {   
         if (Mod::get()->getSavedValue<bool>("CSINDEXDOWNLOADING")) {
-            FLAlertLayer::create("Click Sounds Index", "Unable to clear index while downloading. Please wait until the download completes, then try again. \n\nIf the download takes too long, restarting Geometry Dash will stop the download.", "Close")->show();
+            FLAlertLayer::create("Click Sounds Index", "Unable to clear index while it is being prepared. Please wait until the download completes, then try again. \n\nIf the download takes too long, restarting Geometry Dash will stop the download.", "Close")->show();
             return;
         }
 
