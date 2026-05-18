@@ -9,9 +9,11 @@ struct downloadedzipStruc {
 	bool StartedDownloading = false;
 };
 
+static constexpr int CS_MAX_SOUNDS = 10;
 static downloadedzipStruc indexzip;
 inline FMOD::ChannelGroup *CS_Group;
 inline FMOD::DSP *pitchShifterDSP;
+inline std::deque<FMOD::Channel*> CS_ActiveChannels;
 using namespace geode::prelude;
 // Custom class for Caching sounds (Make it less laggy for mobile platforms and such)
 class SoundCache {
@@ -63,8 +65,30 @@ class SoundCache {
 		}
 		if (TestButton == true && isSoundsEverywhere) return;
 		getVolume = (getVolume * getMasterVolume) / 100;
-		FMODAudioEngine::sharedEngine()->m_system->playSound(m_sound, CS_Group, false, &soundChannel);
-		soundChannel->setVolume(getVolume / 50.f);
+
+		if (mod->getSettingValue<bool>("optimize-sounds")) {
+			CS_ActiveChannels.erase(
+				std::remove_if(CS_ActiveChannels.begin(), CS_ActiveChannels.end(), [](FMOD::Channel* ch) {
+					bool playing = false;
+					if (!ch || ch->isPlaying(&playing) != FMOD_OK) return true;
+					return !playing;
+				}),
+				CS_ActiveChannels.end()
+			);
+			if (static_cast<int>(CS_ActiveChannels.size()) >= CS_MAX_SOUNDS) {
+				FMOD::Channel* oldestChannel = CS_ActiveChannels.front();
+				CS_ActiveChannels.pop_front();
+				if (oldestChannel) oldestChannel->stop();
+			}
+		}
+		
+		FMOD::Channel* newChannel = nullptr;
+		FMODAudioEngine::sharedEngine()->m_system->playSound(m_sound, CS_Group, false, &newChannel);
+		soundChannel = newChannel;
+		if (newChannel) {
+			CS_ActiveChannels.push_back(newChannel);
+			newChannel->setVolume(getVolume / 50.f);
+		}
 		double semitone = static_cast<double>(Mod::get()->getSettingValue<int64_t>("sfx-semitone")) / 12;
 		if (semitone < 0) {
 			semitone = std::pow(2, semitone); // fix negtive octave

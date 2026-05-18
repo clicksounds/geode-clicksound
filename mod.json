@@ -6,7 +6,7 @@
         "mac": "2.2081",
         "ios": "2.2081"
     	},
-	"version": "v2.4.10",
+	"version": "v2.4.11-beta.1",
 	"id": "beat.click-sound",
 	"name": "Click Sounds Full",
 	"developers": [
@@ -204,6 +204,12 @@
 			"name": "Advanced Options",
 			"type": "title",
 			"description": "Only touch these if you know what you're doing."
+		},
+		"optimize-sounds": {
+			"name": "Optimize sounds (experimental)",
+			"description": "When enabled, Click Sounds will stop the oldest playing sound if there are too many. This is useful for macro bots.",
+			"type": "bool",
+			"default": true
 		},
 		"downloadOnStartup": {
 			"name": "Download index on startup",
