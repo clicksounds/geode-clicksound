@@ -1,6 +1,6 @@
 # Changelog
-## Version v2.4.11
-* Added an option to optimize sounds which will prevent music from fading out while spam clicking.
+## Version v2.5.0
+* Added an option to optimize sounds, which will prevent music from fading out while spam clicking.
 ## Version v2.4.10
 * Added a way to import the index from a .zip file in the download button menu.
 ## Version v2.4.9
