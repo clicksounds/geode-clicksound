@@ -9,7 +9,7 @@ struct downloadedzipStruc {
 	bool StartedDownloading = false;
 };
 
-static constexpr int CS_MAX_SOUNDS = 10;
+static constexpr int CS_MAX_SOUNDS = 12;
 static downloadedzipStruc indexzip;
 inline FMOD::ChannelGroup *CS_Group;
 inline FMOD::DSP *pitchShifterDSP;
