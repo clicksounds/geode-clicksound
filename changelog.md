@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.5.1
+* Slightly increased the highest tolerable rate of clicks per second.
 ## Version v2.5.0
 * Added an option to optimize sounds, which will prevent music from fading out while spam clicking.
 ## Version v2.4.10
