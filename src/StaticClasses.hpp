@@ -9,9 +9,11 @@ struct downloadedzipStruc {
 	bool StartedDownloading = false;
 };
 
+static constexpr int CS_MAX_SOUNDS = 10;
 static downloadedzipStruc indexzip;
 inline FMOD::ChannelGroup *CS_Group;
 inline FMOD::DSP *pitchShifterDSP;
+inline std::deque<FMOD::Channel*> CS_ActiveChannels;
 using namespace geode::prelude;
 // Custom class for Caching sounds (Make it less laggy for mobile platforms and such)
 class SoundCache {
@@ -63,8 +65,30 @@ class SoundCache {
 		}
 		if (TestButton == true && isSoundsEverywhere) return;
 		getVolume = (getVolume * getMasterVolume) / 100;
-		FMODAudioEngine::sharedEngine()->m_system->playSound(m_sound, CS_Group, false, &soundChannel);
-		soundChannel->setVolume(getVolume / 50.f);
+
+		if (mod->getSettingValue<bool>("optimize-sounds")) {
+			CS_ActiveChannels.erase(
+				std::remove_if(CS_ActiveChannels.begin(), CS_ActiveChannels.end(), [](FMOD::Channel* ch) {
+					bool playing = false;
+					if (!ch || ch->isPlaying(&playing) != FMOD_OK) return true;
+					return !playing;
+				}),
+				CS_ActiveChannels.end()
+			);
+			if (static_cast<int>(CS_ActiveChannels.size()) >= CS_MAX_SOUNDS) {
+				FMOD::Channel* oldestChannel = CS_ActiveChannels.front();
+				CS_ActiveChannels.pop_front();
+				if (oldestChannel) oldestChannel->stop();
+			}
+		}
+		
+		FMOD::Channel* newChannel = nullptr;
+		FMODAudioEngine::sharedEngine()->m_system->playSound(m_sound, CS_Group, false, &newChannel);
+		soundChannel = newChannel;
+		if (newChannel) {
+			CS_ActiveChannels.push_back(newChannel);
+			newChannel->setVolume(getVolume / 50.f);
+		}
 		double semitone = static_cast<double>(Mod::get()->getSettingValue<int64_t>("sfx-semitone")) / 12;
 		if (semitone < 0) {
 			semitone = std::pow(2, semitone); // fix negtive octave
@@ -84,18 +108,21 @@ class SoundCache {
 class MultiSoundCache {
   public:
 	std::vector<SoundCache *> m_sounds;
+	std::vector<SoundCache *> m_hardSounds;
+	std::vector<SoundCache *> m_softSounds;
 
 	MultiSoundCache() {
 		std::srand(static_cast<unsigned>(std::time(nullptr)));
 	}
 
 	void SetSounds(const std::vector<std::string> &soundFiles, const std::string &volume, const std::string &custom) {
-		std::vector<SoundCache *> memsafe = m_sounds;
-		m_sounds.clear();
-		for (auto &sound : memsafe) {
-			delete sound;
-		}
-		memsafe.clear();
+		auto clearAndDelete = [](std::vector<SoundCache*>& memsafe) {
+			for (auto& sound : memsafe) delete sound;
+			memsafe.clear();
+		};
+		clearAndDelete(m_sounds);
+		clearAndDelete(m_hardSounds);
+		clearAndDelete(m_softSounds);
 		for (const auto &soundFile : soundFiles) {
 			SoundCache *sound = new SoundCache(volume, custom);
 			sound->Setsound(soundFile);
@@ -103,17 +130,61 @@ class MultiSoundCache {
 		}
 	}
 
-	void PlayRandom() {
-		if (!m_sounds.empty()) {
-			int randomIndex = std::rand() % m_sounds.size();
-			m_sounds[randomIndex]->PlayModded();
+	void SetSoundsExtended(
+		const std::vector<std::string> &soundFiles,
+		const std::vector<std::string> &hardFiles,
+		const std::vector<std::string> &softFiles,
+		const std::string &volume,
+		const std::string &custom
+	) {
+		auto clearAndDelete = [](std::vector<SoundCache*>& vec) {
+			for (auto& s : vec) delete s;
+			vec.clear();
+		};
+		clearAndDelete(m_sounds);
+		clearAndDelete(m_hardSounds);
+		clearAndDelete(m_softSounds);
+
+		auto populate = [&](const std::vector<std::string>& files, std::vector<SoundCache*>& dest) {
+			for (const auto& f : files) {
+				SoundCache* s = new SoundCache(volume, custom);
+				s->Setsound(f);
+				dest.push_back(s);
+			}
+		};
+		populate(soundFiles, m_sounds);
+		populate(hardFiles,  m_hardSounds);
+		populate(softFiles,  m_softSounds);
+	}
+
+	void PlayRandomFrom(std::vector<SoundCache*>& primary, std::vector<SoundCache*>& fallback1, std::vector<SoundCache*>& fallback2) {
+		if (!primary.empty()) {
+			primary[std::rand() % primary.size()]->PlayModded();
+		} else if (!fallback1.empty()) {
+			fallback1[std::rand() % fallback1.size()]->PlayModded();
+		} else if (!fallback2.empty()) {
+			fallback2[std::rand() % fallback2.size()]->PlayModded();
 		}
 	}
 
+	void PlayRandom() {
+		PlayRandomFrom(m_sounds, m_sounds, m_sounds);
+	}
+
+	// hard -> regular -> soft fallback
+	void PlayHard() {
+		PlayRandomFrom(m_hardSounds, m_sounds, m_softSounds);
+	}
+
+	// soft -> regular -> hard fallback
+	void PlaySoft() {
+		PlayRandomFrom(m_softSounds, m_sounds, m_hardSounds);
+	}
+
 	~MultiSoundCache() {
-		for (auto &sound : m_sounds) {
-			delete sound;
-		}
+		for (auto &sound : m_sounds) delete sound;
+		for (auto &sound : m_hardSounds) delete sound;
+		for (auto &sound : m_softSounds) delete sound;
 	}
 };
 

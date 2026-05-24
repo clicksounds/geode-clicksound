@@ -6,7 +6,7 @@
         "mac": "2.2081",
         "ios": "2.2081"
     	},
-	"version": "v2.4.10",
+	"version": "v3.0.0-alpha.1",
 	"id": "beat.click-sound",
 	"name": "Click Sounds Full",
 	"developers": [
@@ -137,6 +137,41 @@
 			"name": "Test Sound",
 			"clicksound" : false
 		},
+		"hard-soft-section": {
+			"name": "Hard & Soft Sounds",
+			"description": "This category is for settings that are related to <cr>soft/hard click and release sounds</cr>.",
+			"type": "title"
+		},
+		"enable-hard-soft-clicks": {
+			"name": "Hard & Soft Sounds",
+			"description": "When enabled, Click Sounds will play click and release sounds from the HardClicks/, HardReleases/, SoftClicks/, SoftReleases/ subfolders inside your selected click pack (if they exist), based on how quickly you click. If a hard or soft sound is not found, it falls back to the regular sound.",
+			"type": "bool",
+			"default": false
+		},
+		"hard-sound-threshold": {
+			"name": "Hard sounds threshold (ms)",
+			"description": "If the time since your last click on the same button exceeds this value, a hard click sound is played if available.",
+			"type": "int",
+			"default": 2000,
+			"min": 100,
+			"max": 10000,
+			"control": {
+				"slider": true
+			},
+			"enable-if": "enable-hard-soft-clicks"
+		},
+		"soft-sound-threshold": {
+			"name": "Soft sounds threshold (ms)",
+			"description": "If the time since your last click/release on the same button is below this value, a soft click/release sound is played if available.",
+			"type": "int",
+			"default": 150,
+			"min": 10,
+			"max": 1000,
+			"control": {
+				"slider": true
+			},
+			"enable-if": "enable-hard-soft-clicks"
+		},
 		"Miscellaneous-section": {
             "name": "Miscellaneous",
             "description": "This category is for settings that are <cr>Miscellaneous</c> and are extra features",
@@ -204,6 +239,12 @@
 			"name": "Advanced Options",
 			"type": "title",
 			"description": "Only touch these if you know what you're doing."
+		},
+		"optimize-sounds": {
+			"name": "Optimize sounds (experimental)",
+			"description": "When enabled, Click Sounds will stop the oldest playing sound if there are too many. This is useful for macro bots.",
+			"type": "bool",
+			"default": true
 		},
 		"downloadOnStartup": {
 			"name": "Download index on startup",

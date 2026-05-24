@@ -34,13 +34,23 @@ void onsettingsUpdate() {
 			auto list = ClickJson->GetMemeClicks();
 			auto sound = list.find(selection_clicks.Current_Sound_Meme);
 			if (sound != list.end()) {
-				ClickSoundIndex->SetSounds(sound->second.clicks, "click-volume", "selection-clicks");
+				ClickSoundIndex->SetSoundsExtended(
+					sound->second.clicks,
+					sound->second.hardClicks,
+					sound->second.softClicks,
+					"click-volume", "selection-clicks"
+				);
 			}
 		} else {
 			auto list = ClickJson->GetUsefulClicks();
 			auto sound = list.find(selection_clicks.Current_Sound_Useful);
 			if (sound != list.end()) {
-				ClickSoundIndex->SetSounds(sound->second.clicks, "click-volume", "selection-clicks");
+				ClickSoundIndex->SetSoundsExtended(
+					sound->second.clicks,
+					sound->second.hardClicks,
+					sound->second.softClicks,
+					"click-volume", "selection-clicks"
+				);
 			}
 		}
 
@@ -49,13 +59,23 @@ void onsettingsUpdate() {
 			auto list = ClickJson->GetMemeReleases();
 			auto sound = list.find(selection_release.Current_Sound_Meme);
 			if (sound != list.end()) {
-				ReleaseSoundIndex->SetSounds(sound->second.releases, "release-volume", "selection-release");
+				ReleaseSoundIndex->SetSoundsExtended(
+					sound->second.releases,
+					sound->second.hardReleases,
+					sound->second.softReleases,
+					"release-volume", "selection-release"
+				);
 			}
 		} else {
 			auto list = ClickJson->GetUsefulReleases();
 			auto sound = list.find(selection_release.Current_Sound_Useful);
 			if (sound != list.end()) {
-				ReleaseSoundIndex->SetSounds(sound->second.releases, "release-volume", "selection-release");
+				ReleaseSoundIndex->SetSoundsExtended(
+					sound->second.releases,
+					sound->second.hardReleases,
+					sound->second.softReleases,
+					"release-volume", "selection-release"
+				);
 			}
 		}
 	}
@@ -106,6 +126,20 @@ class $modify(PlayerObject) {
 		bool directionUp = false;
 		bool directionRight = false;
 		bool directionLeft = false;
+
+		std::chrono::steady_clock::time_point lastPressUp;
+		std::chrono::steady_clock::time_point lastPressRight;
+		std::chrono::steady_clock::time_point lastPressLeft;
+		bool hasPressedUp    = false;
+		bool hasPressedRight = false;
+		bool hasPressedLeft  = false;
+
+		bool pressWasSoftUp    = false;
+		bool pressWasSoftRight = false;
+		bool pressWasSoftLeft  = false;
+		bool pressWasHardUp    = false;
+		bool pressWasHardRight = false;
+		bool pressWasHardLeft  = false;
 	};
 
 	// For setting bools for setting dir
@@ -141,6 +175,98 @@ class $modify(PlayerObject) {
 		}
 		return false;
 	}
+
+	double getTimeSinceLastPress(PlayerButton p0) {
+		bool has = false;
+		std::chrono::steady_clock::time_point last;
+		switch (p0) {
+		case PlayerButton::Jump:
+			has = m_fields->hasPressedUp;
+			last = m_fields->lastPressUp;
+			break;
+		case PlayerButton::Right:
+			has = m_fields->hasPressedRight;
+			last = m_fields->lastPressRight;
+			break;
+		case PlayerButton::Left:
+			has = m_fields->hasPressedLeft;
+			last = m_fields->lastPressLeft;
+			break;
+		default:
+			break;
+		}
+		if (!has) return -1.0;
+		auto now = std::chrono::steady_clock::now();
+		return std::chrono::duration<double>(now - last).count();
+	}
+
+	void recordPress(PlayerButton p0) {
+		auto now = std::chrono::steady_clock::now();
+		switch (p0) {
+		case PlayerButton::Jump:
+			m_fields->lastPressUp = now;
+			m_fields->hasPressedUp = true;
+			break;
+		case PlayerButton::Right:
+			m_fields->lastPressRight = now;
+			m_fields->hasPressedRight = true;
+			break;
+		case PlayerButton::Left:
+			m_fields->lastPressLeft = now;
+			m_fields->hasPressedLeft = true;
+			break;
+		default:
+			break;
+		}
+	}
+
+	void setPressWasSoft(PlayerButton p0, bool soft, bool hard) {
+		switch (p0) {
+		case PlayerButton::Jump:
+			m_fields->pressWasSoftUp = soft;
+			m_fields->pressWasHardUp = hard;
+			break;
+		case PlayerButton::Right:
+			m_fields->pressWasSoftRight = soft;
+			m_fields->pressWasHardRight = hard;
+			break;
+		case PlayerButton::Left:
+			m_fields->pressWasSoftLeft = soft;
+			m_fields->pressWasHardLeft = hard;
+			break;
+		default:
+			break;
+		}
+	}
+
+	bool getPressWasSoft(PlayerButton p0) {
+		switch (p0) {
+		case PlayerButton::Jump:  return m_fields->pressWasSoftUp;
+		case PlayerButton::Right: return m_fields->pressWasSoftRight;
+		case PlayerButton::Left:  return m_fields->pressWasSoftLeft;
+		default: return false;
+		}
+	}
+
+	bool getPressWasHard(PlayerButton p0) {
+		switch (p0) {
+		case PlayerButton::Jump:  return m_fields->pressWasHardUp;
+		case PlayerButton::Right: return m_fields->pressWasHardRight;
+		case PlayerButton::Left:  return m_fields->pressWasHardLeft;
+		default: return false;
+		}
+	}
+
+	int getClickTier(double elapsed) {
+		if (!Mod::get()->getSettingValue<bool>("enable-hard-soft-clicks")) return 0;
+		double hardThreshold = static_cast<double>(Mod::get()->getSettingValue<int64_t>("hard-sound-threshold")) / 1000.0;
+		double softThreshold = static_cast<double>(Mod::get()->getSettingValue<int64_t>("soft-sound-threshold")) / 1000.0;
+		if (elapsed < 0) return 0; // never pressed before → regular
+		if (elapsed > hardThreshold) return 1;  // hard
+		if (elapsed > softThreshold) return 0;  // regular
+		return -1; // soft
+	}
+
 	// click sounds
 	bool pushButton(PlayerButton p0) {
 		bool ret = PlayerObject::pushButton(p0);
@@ -152,6 +278,13 @@ class $modify(PlayerObject) {
 		};
 		auto isClickEnabled = csMod->getSettingValue<bool>("enable-clicksounds") && csMod->getSettingValue<bool>("enable-master");
 		auto click_vol = csMod->getSettingValue<int64_t>("click-volume");
+		
+		double elapsed = getTimeSinceLastPress(p0);
+		int tier = getClickTier(elapsed);
+
+		recordPress(p0);
+		setPressWasSoft(p0, tier == -1, tier == 1);
+
 		// set the direction bool to true
 		SetupNewDirections(p0, true);
 
@@ -165,7 +298,13 @@ class $modify(PlayerObject) {
 		if (Custom_OnClick) {
 			ClickSound->Play();
 		} else {
-			ClickSoundIndex->PlayRandom();
+			if (tier == 1) {
+				ClickSoundIndex->PlayHard();
+			} else if (tier == -1) {
+				ClickSoundIndex->PlaySoft();
+			} else {
+				ClickSoundIndex->PlayRandom();
+			}
 		}
 
 		return ret;
@@ -190,6 +329,10 @@ class $modify(PlayerObject) {
 
 		if((!csMod->getSettingValue<bool>("enable-clicksounds") && !csMod->getSettingValue<bool>("enable-releasesounds")) || !csMod->getSettingValue<bool>("enable-master")){}else{Carrot::carrot=true;}
 
+		bool wasHard = getPressWasHard(p0);
+		bool wasSoft = getPressWasSoft(p0);
+		int tier = wasHard ? 1 : (wasSoft ? -1 : 0);
+
 		// set the direction bool to false
 		SetupNewDirections(p0, false);
 		// is it enabled or is volume < 0
@@ -200,7 +343,13 @@ class $modify(PlayerObject) {
 		if (Custom_OnLetGo) {
 			ReleaseSound->Play();
 		} else {
-			ReleaseSoundIndex->PlayRandom();
+			if (tier == 1) {
+				ReleaseSoundIndex->PlayHard();
+			} else if (tier == -1) {
+				ReleaseSoundIndex->PlaySoft();
+			} else {
+				ReleaseSoundIndex->PlayRandom();
+			}
 		}
 
 		return ret;

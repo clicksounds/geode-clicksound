@@ -10,6 +10,10 @@ using namespace geode::prelude;
 struct CategoryData {
 	std::vector<std::string> clicks;
 	std::vector<std::string> releases;
+	std::vector<std::string> hardClicks;
+	std::vector<std::string> hardReleases;
+	std::vector<std::string> softClicks;
+	std::vector<std::string> softReleases;
 	std::string jsonpath;
 	std::string Name;
 };
@@ -54,17 +58,21 @@ class JsonReader {
 				std::string filename = entry.path().filename().string();
 				CategoryData cat;
 				cat.jsonpath = std::filesystem::path(fs / "pack.json").string();
-				if (std::filesystem::exists(fs / "Clicks")) {
-					for (const auto &Rl : std::filesystem::directory_iterator(fs / "Clicks")) {
-						cat.clicks.push_back(Rl.path().string());
-					}
-				}
 
-				if (std::filesystem::exists(fs / "Releases")) {
-					for (const auto &Rl : std::filesystem::directory_iterator(fs / "Releases")) {
-						cat.releases.push_back(Rl.path().string());
+				auto loadSoundsFromDir = [](const std::filesystem::path& dir, std::vector<std::string>& vec) {
+					if (std::filesystem::exists(dir)) {
+						for (const auto& entry : std::filesystem::directory_iterator(dir)) {
+							vec.push_back(entry.path().string());
+						}
 					}
-				}
+				};
+
+				loadSoundsFromDir(fs / "Clicks",      cat.clicks);
+				loadSoundsFromDir(fs / "Releases",    cat.releases);
+				loadSoundsFromDir(fs / "HardClicks",  cat.hardClicks);
+				loadSoundsFromDir(fs / "HardReleases",cat.hardReleases);
+				loadSoundsFromDir(fs / "SoftClicks",  cat.softClicks);
+				loadSoundsFromDir(fs / "SoftReleases",cat.softReleases);
 
 				categoryData[filename] = cat;
 			}
