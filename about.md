@@ -1,7 +1,8 @@
 # Click Sounds Full
+## A multi-platform clickbot
 
 Plays a click sound whenever you press a jump button, or (optionally) a release sound whenever you release a jump button.
-If you want a new built-in click sound or feature to be added, join the [discord server](https://discord.gg/RwbRP8ADdc). <3
+If you want to submit a click pack to the Click Sounds Index or request a feature, join the [discord server](https://discord.gg/RwbRP8ADdc). <3
 
 ### Requires Node-IDs.
 Open the mod settings to change the click sound. 
