@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.5.2
+* Added index moderator badge for yesimapotato.
 ## Version v2.5.1
 * Slightly increased the highest tolerable rate of clicks per second.
 ## Version v2.5.0
