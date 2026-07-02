@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.5.3
+* New default click pack - 'yesimapotato's sayo pink switches' by yesimapotato
 ## Version v2.5.2
 * Added index moderator badge for yesimapotato.
 ## Version v2.5.1
