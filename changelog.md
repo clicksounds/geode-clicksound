@@ -1,6 +1,8 @@
 # Changelog
+## Version v2.5.4
+* Changed the label 'Warning' to 'Notice' when downloading the Click Sounds Index.
 ## Version v2.5.3
-* New default click pack - 'yesimapotato's sayo pink switches' by yesimapotato
+* New default click pack - 'yesimapotato's sayo pink switches' by yesimapotato.
 ## Version v2.5.2
 * Added index moderator badge for yesimapotato.
 ## Version v2.5.1
