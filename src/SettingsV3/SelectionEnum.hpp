@@ -301,7 +301,7 @@ protected:
 
     void onDownloadBtn(CCObject* sender) {
         auto downloadPopup = geode::createQuickPopup(
-            "Warning",
+            "Notice",
             "The Click Sounds Index is over <cj>50mb+</c> in size. Are you sure you want to redownload it?\n<cr>All existing click packs will be deleted and replaced with the downloaded index.</c>",
             "Cancel", "Download", 
             [](auto, bool btn2) {
