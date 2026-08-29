@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.5.6
+* Removed workaround added in Click Sounds Full v2.5.5, as Geode v5.10.1 has fixed the click pack reset bug.
 ## Version v2.5.5
 * Fixed a bug where click packs would not save on restart. (This is Geode's fault, but a workaround is temporarily being used until it is fixed.)
 ## Version v2.5.4

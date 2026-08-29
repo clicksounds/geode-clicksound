@@ -66,11 +66,6 @@ struct matjson::Serialize<ClicksoundSettingValue> {
             value["Custom_Sound_Path"].asString().unwrapOr(" ")
         ));
     }
-
-    // TEMPORARY WORKAROUND FOR GEODE V5.10.0 BUG - Remove once fixed
-    static matjson::Value toJson(ClicksoundSettingValue const& value) {
-        return matjson::Value(std::string(value));
-    }
 };
 
 class ClicksoundSetterV3 : public SettingBaseValueV3<ClicksoundSettingValue> {
@@ -160,8 +155,6 @@ protected:
                             }
                             this->setValue(Changes, nullptr);
                             this->onCommit();
-                            // TEMPORARY WORKAROUND FOR GEODE V5.10.0 BUG - Remove once fixed
-                            onsettingsUpdate();
                         }, m_ThemeGeode);
                         popup->m_noElasticity = false;
                         popup->show();
@@ -178,8 +171,6 @@ protected:
                 }
                 this->setValue(Changes, nullptr);
                 this->onCommit();
-                // TEMPORARY WORKAROUND FOR GEODE V5.10.0 BUG - Remove once fixed
-                onsettingsUpdate();
         },m_ThemeGeode);
         popup->m_noElasticity = false;
         popup->show();
@@ -303,12 +294,6 @@ protected:
         }
         this->getButtonMenu()->setLayout(RowLayout::create());
         this->getButtonMenu()->updateLayout();
-
-        // TEMPORARY WORKAROUND FOR GEODE V5.10.0 BUG - Remove once fixed
-        auto savedValue = Mod::get()->getSavedValue<ClicksoundSettingValue>(setting->getKey());
-        this->setValue(savedValue, nullptr);
-        this->onCommit();
-        // END OF WORKAROUND
 
         this->updateState(nullptr);
         return true;
@@ -700,17 +685,6 @@ protected:
         );
 
     }
-
-    // TEMPORARY WORKAROUND FOR GEODE V5.10.0 BUG - Remove once fixed
-    void onCommit() override {
-        // Workaround for Geode v5.10.0 bug where custom setting values reset on game restart
-        // Save directly to saved values instead of relying on setting values
-        SettingValueNodeV3::onCommit();
-        
-        Mod::get()->setSavedValue<ClicksoundSettingValue>(this->getSetting()->getKey(), this->getValue());
-        onsettingsUpdate();
-    }
-    // END OF WORKAROUND
 
 public:
     static ClicksoundSetterNodeV3* create(std::shared_ptr<ClicksoundSetterV3> setting, float width) {
