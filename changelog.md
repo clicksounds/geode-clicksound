@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.5.5
+* Fixed a bug where click packs would not save on restart. (This is Geode's fault, but a workaround is temporarily being used until it is fixed.)
 ## Version v2.5.4
 * Changed the label 'Warning' to 'Notice' when downloading the Click Sounds Index.
 ## Version v2.5.3
