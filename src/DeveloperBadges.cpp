@@ -90,7 +90,7 @@ class buttonfunctionthing : public CCLayer {
 	void CSPIOwner(CCObject *sender) {
 		FLAlertLayer::create(
 		    "About",
-		    "This is a <cp>Click Sounds Pack Installer early owner</c>. They supported CSPI early on by boosting the discord server.",
+		    "This person was an early owner of <cp>Click Sounds Pack Installer</c>. They supported Click Sounds Full early on.",
 		    "OK")
 		    ->show();
 	}
