@@ -65,7 +65,12 @@ void onsettingsUpdate() {
 bool integrityCheck(PlayerObject *object, PlayerButton Pressed) {
 	// play sounds when "only play on jump" settings is enabled and the player input is a jump, left movement, or right movement.
 	#ifndef GEODE_IS_MAC
-		if (Mod::get()->getSettingValue<bool>("sounds-everywhere")) return false;
+		if (Mod::get()->getSettingValue<bool>("sounds-everywhere")) {
+			PlayLayer *pl = PlayLayer::get();
+			if (!(pl && !pl->m_isPaused)) {
+				return false;
+			}
+		}
 	#endif
 	
 	if (Mod::get()->getSettingValue<bool>("only-on-jump")) {

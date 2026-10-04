@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.6.2
+* 'Sounds Everywhere' is now compatible with most replay bots.
 ## Version v2.6.1
 * Fixed loading error from v2.6.0.
 ## Version v2.6.0
