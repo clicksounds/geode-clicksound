@@ -1,7 +1,7 @@
 # Changelog
 ## Version v2.6.0
 * Added variable pitch.
-* Renamed 'Pitch of the sounds' to 'Base Pitch'
+* Renamed 'Pitch of the sounds' to 'Base Pitch'.
 ## Version v2.5.6
 * Removed workaround added in Click Sounds Full v2.5.5, as Geode v5.10.1 has fixed the click pack reset bug.
 ## Version v2.5.5
