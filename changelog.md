@@ -1,4 +1,6 @@
 # Changelog
+## Version v2.6.1
+* Fixed loading error from v2.6.0.
 ## Version v2.6.0
 * Added variable pitch.
 * Renamed 'Pitch of the sounds' to 'Base Pitch'.
