@@ -10,6 +10,7 @@ struct downloadedzipStruc {
 };
 
 static constexpr int CS_MAX_SOUNDS = 12;
+static constexpr float CS_MAX_PITCH_VARIATION_SEMITONES = 1.5f;
 static downloadedzipStruc indexzip;
 inline FMOD::ChannelGroup *CS_Group;
 inline FMOD::DSP *pitchShifterDSP;
@@ -60,6 +61,7 @@ class SoundCache {
 		float getVolume = mod->getSettingValue<int64_t>(Volume);
 		float getMasterVolume = mod->getSettingValue<int64_t>("master-volume");
 		bool isSoundsEverywhere = mod->getSettingValue<bool>("sounds-everywhere");
+		int64_t pitchVariation = std::clamp<int64_t>(mod->getSettingValue<int64_t>("pitch-variation"), 0, 10);
 		if (getVolume <= 0 && TestButton == true) {
 			getVolume = 1;
 		}
@@ -81,13 +83,19 @@ class SoundCache {
 				if (oldestChannel) oldestChannel->stop();
 			}
 		}
-		
+
 		FMOD::Channel* newChannel = nullptr;
 		FMODAudioEngine::sharedEngine()->m_system->playSound(m_sound, CS_Group, false, &newChannel);
 		soundChannel = newChannel;
 		if (newChannel) {
 			CS_ActiveChannels.push_back(newChannel);
 			newChannel->setVolume(getVolume / 50.f);
+			if (pitchVariation > 0) {
+				float rng = (static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX)) * 2.f - 1.f;
+				float variationSemitones = rng * (static_cast<float>(pitchVariation) / 10.f) * CS_MAX_PITCH_VARIATION_SEMITONES;
+				float pitchFactor = std::pow(2.f, variationSemitones / 12.f);
+				newChannel->setPitch(pitchFactor);
+			}
 		}
 		double semitone = static_cast<double>(Mod::get()->getSettingValue<int64_t>("sfx-semitone")) / 12;
 		if (semitone < 0) {
