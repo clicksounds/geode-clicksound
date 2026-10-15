@@ -40,6 +40,10 @@
         "geode.node-ids": {
         	"version": ">=v1.23.0",
          	"required": true
+		},
+		"uproxide.happy_textures": {
+			"version": ">=2.1.14",
+			"required": false
 		}
     },
 	"incompatibilities": {
