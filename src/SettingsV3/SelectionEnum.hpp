@@ -395,15 +395,33 @@ protected:
                     std::thread([] {
                         Mod* mod = Mod::get();
                         mod->setSavedValue<bool>("CSINDEXCLEARING", true);
-                        std::filesystem::path dir = mod->getConfigDir() / "Clicks" / "clicks-main";
+                        asp::fs::Path dir = mod->getConfigDir() / "Clicks" / "clicks-main";
 
-                        if (std::filesystem::exists(dir / "Meme"))
-                            std::filesystem::remove_all(dir / "Meme");
-                        if (std::filesystem::exists(dir / "Useful"))
-                            std::filesystem::remove_all(dir / "Useful");
+                        if (asp::fs::Path(dir / "Meme").exists()) {
+                            auto result = asp::fs::removeDirAll(dir / "Meme");
+                            if (!result) {
+                                log::warn("Failed to remove Meme directory: {}", result.unwrapErr());
+                                return;
+                            }
+                        }
+                        if (asp::fs::Path(dir / "Useful").exists()) {
+                            auto result = asp::fs::removeDirAll(dir / "Useful");
+                            if (!result) {
+                                log::warn("Failed to remove Useful directory: {}", result.unwrapErr());
+                                return;
+                            }
+                        }
 
-                        std::filesystem::create_directory(dir / "Meme");
-                        std::filesystem::create_directory(dir / "Useful");
+                        auto createUsefulDirResult = asp::fs::createDirAll(dir / "Useful");
+                        auto createMemeDirResult = asp::fs::createDirAll(dir / "Meme");
+                        if (!createUsefulDirResult) {
+                            log::warn("Failed to create Useful directory: {}", createUsefulDirResult.unwrapErr());
+                            return;
+                        }
+                        if (!createMemeDirResult) {
+                            log::warn("Failed to create Meme directory: {}", createMemeDirResult.unwrapErr());
+                            return;
+                        }
 
                         extractDefaultClickPack();
 
