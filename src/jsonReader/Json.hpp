@@ -26,7 +26,7 @@ class JsonReader {
 		std::thread([=, this] {
 			auto configDir = Mod::get()->getConfigDir();
 			auto clicksPath = configDir / "Clicks" / "clicks-main";
-			if (std::filesystem::exists(clicksPath)) {
+			if (clicksPath.exists()) {
 				memeData.clear();
 				usefulData.clear();
 				loadCategoryData(clicksPath / "Meme", memeData);
@@ -42,25 +42,31 @@ class JsonReader {
 		}).detach();
 	}
 
-	void loadCategoryData(const std::filesystem::path &categoryDir, std::map<std::string, CategoryData> &categoryData) {
-		if (!std::filesystem::exists(categoryDir)) {
+	void loadCategoryData(const asp::fs::Path &categoryDir, std::map<std::string, CategoryData> &categoryData) {
+		if (!categoryDir.exists()) {
 			log::error("Category directory does not exist: {}", categoryDir.string());
 			return;
 		}
 
-		for (const auto &entry : std::filesystem::directory_iterator(categoryDir)) {
-			std::filesystem::path fs = std::filesystem::path(entry.path());
-			if (std::filesystem::exists(fs / "pack.json")) {
+		auto categoryIter = asp::fs::iterDir(categoryDir.value());
+		if (!categoryIter) return;
+
+		for (auto result : categoryIter.unwrap()) {
+			if (!result) return;
+			auto &entry = result.unwrap();
+
+			asp::fs::Path fs = asp::fs::Path(entry.path());
+			if ((fs / "pack.json").exists()) {
 				std::string filename = entry.path().filename().string();
 				CategoryData cat;
 				cat.jsonpath = std::filesystem::path(fs / "pack.json").string();
-				if (std::filesystem::exists(fs / "Clicks")) {
+				if ((fs / "Clicks").exists()) {
 					for (const auto &Rl : std::filesystem::directory_iterator(fs / "Clicks")) {
 						cat.clicks.push_back(Rl.path().string());
 					}
 				}
 
-				if (std::filesystem::exists(fs / "Releases")) {
+				if ((fs / "Releases").exists()) {
 					for (const auto &Rl : std::filesystem::directory_iterator(fs / "Releases")) {
 						cat.releases.push_back(Rl.path().string());
 					}
