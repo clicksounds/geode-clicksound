@@ -492,20 +492,20 @@ protected:
 	}
 
     void cspiFileSelection() {
-		std::filesystem::path dir = Loader::get()->getInstalledMod("beat.click-sound")->getConfigDir() / "Clicks" / "clicks-main";
+		asp::fs::Path dir = Loader::get()->getInstalledMod("beat.click-sound")->getConfigDir() / "Clicks" / "clicks-main";
 		file::FilePickOptions::Filter textFilter;
 		file::FilePickOptions fileOptions;
 		textFilter.description = "Click Pack";
 		textFilter.files = { "*.packgen.zip" };
 		fileOptions.filters.push_back(textFilter);
-		auto getPersistentDir = Mod::get()->getSavedValue<std::filesystem::path>("cspi-persistent-dir");
+		auto getPersistentDir = Mod::get()->getSavedValue<asp::fs::Path>("cspi-persistent-dir");
 
 		if (m_cspiFilePickerOpen) return;
 		m_cspiFilePickerOpen = true;
 
         async::spawn(
             file::pick(file::PickMode::OpenFile, { getPersistentDir, { textFilter } }),
-            [this, dir](Result<std::optional<std::filesystem::path>> res) {
+            [this, dir](Result<std::optional<asp::fs::Path>> res) {
                 if (!res || !res.isOk()) return false;
                 if (res.isOk()) {
                     auto opt = res.unwrap();
@@ -517,22 +517,30 @@ protected:
                             return false;
                         }
 
-                        Mod::get()->setSavedValue<std::filesystem::path>("cspi-persistent-dir", path);
+                        Mod::get()->setSavedValue<asp::fs::Path>("cspi-persistent-dir", path);
 
-                        std::filesystem::path tempDir = dirs::getTempDir() / path.stem();
-                        std::filesystem::create_directories(tempDir);
+                        asp::fs::Path tempDir = dirs::getTempDir() / path.stem();
+                        auto tempDirCreateResult = asp::fs::createDirAll(tempDir);
+                        if (!tempDirCreateResult) {
+                            log::warn("Failed to create temporary directory: {}", tempDirCreateResult.unwrapErr());
+                            return false;
+                        }
 
-                        std::filesystem::path tempZipPath = tempDir / path.filename();
-                        std::filesystem::copy(path, tempZipPath, std::filesystem::copy_options::overwrite_existing);
+                        asp::fs::Path tempZipPath = tempDir / path.filename();
+                        auto copyResult = asp::fs::copy(path, tempZipPath);
+                        if (!copyResult) {
+                            log::warn("Failed to copy temporary zip file: {}", copyResult.unwrapErr());
+                            return false;
+                        }
 
                         auto unzip = file::Unzip::create(tempZipPath);
                         auto unzipResult = unzip.unwrap().extractAllTo(tempDir);
                         if (!unzipResult) return false;
 
-                        std::filesystem::path packJsonPath = tempDir / "pack.json";
+                        asp::fs::Path packJsonPath = tempDir / "pack.json";
                         std::string type = "Useful";
 
-                        if (std::filesystem::exists(packJsonPath)) {
+                        if (asp::fs::Path(packJsonPath).exists()) {
                             std::ifstream jsonFile(packJsonPath);
                             if (jsonFile.is_open()) {
                                 std::string content((std::istreambuf_iterator<char>(jsonFile)), std::istreambuf_iterator<char>());
@@ -548,14 +556,33 @@ protected:
                             return false;
                         }
 
-                        std::filesystem::path newDir = dir / type / path.stem();
-                        std::filesystem::create_directories(newDir);
+                        asp::fs::Path newDir = dir / type / path.stem();
+                        auto newDirCreateResult = asp::fs::createDirAll(newDir);
+                        if (!newDirCreateResult) {
+                            log::warn("Failed to create new directory: {}", newDirCreateResult.unwrapErr());
+                            return false;
+                        }
+                        auto tempDirRecursiveIter = asp::fs::iterDirRecursive(tempDir);
+                        if (!tempDirRecursiveIter) {
+                            log::warn("Failed to iterate over temporary directory: {}", tempDirRecursiveIter.unwrapErr());
+                            return false;
+                        }
+                        for (auto p : tempDirRecursiveIter.unwrap()) {
+                            auto entry = p.unwrap();
+                            if (p.unwrap().isDir()) continue;
+                            auto rel = p.unwrap().path.lexicallyRelative(tempDir);
 
-                        for (auto& p : std::filesystem::recursive_directory_iterator(tempDir)) {
-                            if (p.is_directory()) continue;
-                            auto rel = std::filesystem::relative(p.path(), tempDir);
-                            std::filesystem::create_directories(newDir / rel.parent_path());
-                            std::filesystem::copy_file(p.path(), newDir / rel, std::filesystem::copy_options::overwrite_existing);
+                            auto createNewDirResult = asp::fs::createDirAll(newDir / rel->parent()->toPath());
+                            if (!createNewDirResult) {
+                                log::warn("Failed to create new directory: {}", createNewDirResult.unwrapErr());
+                                return false;
+                            }
+                            
+                            auto copyResult = asp::fs::copy(entry.path, newDir / rel);
+                            if (!copyResult) {
+                                log::warn("Failed to copy file: {}", copyResult.unwrapErr());
+                                return false;
+                            }
                         }
 
                         geode::createQuickPopup(
@@ -563,8 +590,12 @@ protected:
                             fmt::format("{} pack installed successfully!", type),
                             "Close", nullptr,
                             [tempZipPath, this](auto, bool) {
-                                std::filesystem::remove(tempZipPath);
+                                auto tempZipRemoveResult = asp::fs::remove(tempZipPath);
                                 m_cspiFilePickerOpen = false;
+                                if (!tempZipRemoveResult) {
+                                    log::warn("Failed to remove temporary zip file: {}", tempZipRemoveResult.unwrapErr());
+                                    return;
+                                }
                             }
                         );
 
