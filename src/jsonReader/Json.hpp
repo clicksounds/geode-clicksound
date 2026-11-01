@@ -2,6 +2,7 @@
 #include <Geode/Geode.hpp>
 #include <filesystem>
 #include <map>
+#include <asp/fs/fs.hpp>
 #include <string>
 #include <vector>
 
@@ -48,27 +49,33 @@ class JsonReader {
 			return;
 		}
 
-		auto categoryIter = asp::fs::iterDir(categoryDir.value());
+		auto categoryIter = asp::fs::iterDir(categoryDir);
 		if (!categoryIter) return;
 
 		for (auto result : categoryIter.unwrap()) {
 			if (!result) return;
 			auto &entry = result.unwrap();
 
-			asp::fs::Path fs = asp::fs::Path(entry.path());
+			asp::fs::Path fs = asp::fs::Path(entry.path);
 			if ((fs / "pack.json").exists()) {
-				std::string filename = entry.path().filename().string();
+				std::string filename = entry.path.filename()->string();
 				CategoryData cat;
-				cat.jsonpath = std::filesystem::path(fs / "pack.json").string();
+				cat.jsonpath = asp::fs::Path(fs / "pack.json").string();
 				if ((fs / "Clicks").exists()) {
-					for (const auto &Rl : std::filesystem::directory_iterator(fs / "Clicks")) {
-						cat.clicks.push_back(Rl.path().string());
+					auto clicksIter = asp::fs::iterDir(fs / "Clicks");
+					if (!clicksIter) return;
+
+					for (const auto &Rl : clicksIter.unwrap()) {
+						cat.clicks.push_back(Rl.unwrap().path.string());
 					}
 				}
 
 				if ((fs / "Releases").exists()) {
-					for (const auto &Rl : std::filesystem::directory_iterator(fs / "Releases")) {
-						cat.releases.push_back(Rl.path().string());
+					auto releasesIter = asp::fs::iterDir(fs / "Releases");
+					if (!releasesIter) return;
+
+					for (const auto &Rl : releasesIter.unwrap()) {
+						cat.releases.push_back(Rl.unwrap().path.string());
 					}
 				}
 
