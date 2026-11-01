@@ -381,14 +381,18 @@ void SendRequestAPI(bool forceDownload = false) {
 
 void extractDefaultClickPack() {
     auto mod = Mod::get();
-	std::filesystem::path configPath = mod->getConfigDir();
+	asp::fs::Path configPath = mod->getConfigDir();
 
-    std::filesystem::create_directories(configPath / "Clicks" / "clicks-main" / "Useful");
+	auto createUsefulDirResult = asp::fs::createDirAll(configPath / "Clicks" / "clicks-main" / "Useful");
+    if (!createUsefulDirResult) {
+        log::warn("Failed to create Useful directory during default click pack installation: {}", createUsefulDirResult.unwrapErr());
+        return;
+    }
 
-    std::filesystem::path destinationPath = configPath / "Clicks" / "clicks-main" / "Useful" / "clicksounds.default";
-    std::filesystem::path resourcePath = mod->getResourcesDir() / "clicksounds.default.packgen.zip";
+    asp::fs::Path destinationPath = configPath / "Clicks" / "clicks-main" / "Useful" / "clicksounds.default";
+    asp::fs::Path resourcePath = mod->getResourcesDir() / "clicksounds.default.packgen.zip";
 
-    if (std::filesystem::is_directory(destinationPath) && std::filesystem::exists(destinationPath)) return;
+    if (asp::fs::Path(destinationPath).isDir() && asp::fs::Path(destinationPath).exists()) return;
 
     auto unzip = file::Unzip::create(resourcePath);
     if (!unzip) return;
@@ -431,8 +435,8 @@ $on_mod(Loaded) {
 	});
 	SpritePicker::secret = Loader::get()->isModLoaded("carrot_devs.carrotmodcarrotcarrotcarrotcarrotcarrot"); // carrot sprite flag
 	// sets the persistent directory to the geode folder if the user hasnt ever chosen a path before
-	if (Mod::get()->getSavedValue<std::filesystem::path>("cspi-persistent-dir").empty() || !std::filesystem::exists(Mod::get()->getSavedValue<std::filesystem::path>("cspi-persistent-dir"))) {
-		Mod::get()->setSavedValue<std::filesystem::path>("cspi-persistent-dir", dirs::getGeodeDir());
+	if (Mod::get()->getSavedValue<asp::fs::Path>("cspi-persistent-dir").empty() || !Mod::get()->getSavedValue<asp::fs::Path>("cspi-persistent-dir").exists()) {
+		Mod::get()->setSavedValue<asp::fs::Path>("cspi-persistent-dir", dirs::getGeodeDir());
 	}
 }
 class $modify(EndLevelLayer){void customSetup(){EndLevelLayer::customSetup();if(Carrot::carrot==true){auto eee = CCNode::create();auto ee = CCSprite::create("ee.png"_spr);eee->setPosition(450, 260);eee->setAnchorPoint({0.5, 0.5});eee->setScale(0.2);ee->setOpacity(10);eee->addChild(ee);static_cast<cocos2d::CCLayer*>(this->getChildren()->objectAtIndex(0))->addChild(eee);}Carrot::carrot=false;}};
