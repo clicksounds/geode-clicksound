@@ -319,8 +319,8 @@ void ProcessIndexZip(asp::fs::Path zipPath) {
     }).detach();
 }
 
-void InstallIndexLocallyByZip(std::filesystem::path zipPath) {
-    if (!std::filesystem::exists(zipPath)) {
+void InstallIndexLocallyByZip(asp::fs::Path zipPath) {
+    if (!asp::fs::Path(zipPath).exists()) {
         Loader::get()->queueInMainThread([] {
             Notification::create(
                 "CS: File not found.",
@@ -338,9 +338,8 @@ void InstallIndexLocallyByZip(std::filesystem::path zipPath) {
     });
     // Copy file to expected zip path so ProcessIndexZip can clean it up normally
     auto targetPath = Mod::get()->getConfigDir() / "Clicks.zip";
-    std::error_code ec;
-    std::filesystem::copy_file(zipPath, targetPath, std::filesystem::copy_options::overwrite_existing, ec);
-    if (ec) {
+	auto copyResult = asp::fs::copy(zipPath, targetPath);
+    if (!copyResult) {
         Loader::get()->queueInMainThread([] {
             Notification::create(
                 "CS: Failed to read file.",
