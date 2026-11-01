@@ -265,7 +265,7 @@ class $modify(csTouchDispatcher, CCTouchDispatcher) {
 
 async::TaskHolder<web::WebResponse> m_downloadTask;
 
-void ProcessIndexZip(std::filesystem::path zipPath) {
+void ProcessIndexZip(asp::fs::Path zipPath) {
     auto indexzipPtr = std::make_shared<decltype(indexzip)>(indexzip);
     std::thread([=] {
         auto unzip = file::Unzip::create(zipPath);
@@ -274,26 +274,42 @@ void ProcessIndexZip(std::filesystem::path zipPath) {
             return;
         }
         auto clicksRoot = Mod::get()->getConfigDir() / "Clicks";
-        std::filesystem::remove_all(clicksRoot);
+        auto clicksRootRemoveResult = asp::fs::removeDirAll(clicksRoot);
+		if (!clicksRootRemoveResult) {
+			log::warn("Failed to remove Clicks directory: {}", clicksRootRemoveResult.unwrapErr());
+			return;
+		}
         (void) unzip.unwrap().extractAllTo(clicksRoot);
         Loader::get()->queueInMainThread([=] {
             Notification::create(
                 "CS: Index updated successfully!",
                 CCSprite::createWithSpriteFrameName("GJ_completesIcon_001.png")
             )->show();
-            std::filesystem::path clicksDir = clicksRoot / "clicks-main";
+            asp::fs::Path clicksDir = clicksRoot / "clicks-main";
             static const std::unordered_set<std::string> skipList = {
                 "Meme",
                 "Useful",
                 "featured_list.json"
             };
-            for (auto const& entry : std::filesystem::directory_iterator(clicksDir)) {
-                if (!skipList.contains(entry.path().filename().string())) {
-                    std::filesystem::remove_all(entry.path());
+
+			auto clicksIter = asp::fs::iterDir(clicksDir);
+			if (!clicksIter) return;
+            for (auto const& entry : clicksIter.unwrap()) {
+                if (!skipList.contains(entry.unwrap().path.filename()->string())) {
+                    auto removeResult = asp::fs::removeDirAll(entry.unwrap().path);
+					if (!removeResult) {
+						log::warn("Failed to remove directory: {}", removeResult.unwrapErr());
+						return;
+					}
                 }
             }
-            if (std::filesystem::exists(zipPath)) {
-                std::filesystem::remove(zipPath);
+
+            if (asp::fs::Path(zipPath).exists()) {
+                auto removeResult = asp::fs::remove(zipPath);
+				if (!removeResult) {
+					log::warn("Failed to remove zip file: {}", removeResult.unwrapErr());
+					return;
+				}
             }
         });
         Mod::get()->setSavedValue<bool>("CSINDEXDOWNLOADING", false);
