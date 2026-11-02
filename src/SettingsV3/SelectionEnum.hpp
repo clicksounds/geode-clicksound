@@ -16,7 +16,7 @@ using namespace geode::prelude;
 
 extern void onsettingsUpdate();
 extern void SendRequestAPI(bool forceDownload);
-extern void InstallIndexLocallyByZip(std::filesystem::path zipPath);
+extern void InstallIndexLocallyByZip(asp::fs::Path zipPath);
 extern void extractDefaultClickPack();
 
 struct ClicksoundSettingValue {
@@ -327,14 +327,14 @@ protected:
         zipFilter.description = "Index ZIP";
         zipFilter.files = { "*.zip" };
 
-        auto getPersistentDir = Mod::get()->getSavedValue<std::filesystem::path>("cspi-persistent-dir");
+        auto getPersistentDir = Mod::get()->getSavedValue<asp::fs::Path>("cspi-persistent-dir");
 
         if (m_cspiFilePickerOpen) return;
         m_cspiFilePickerOpen = true;
 
         async::spawn(
             file::pick(file::PickMode::OpenFile, { getPersistentDir, { zipFilter } }),
-            [this](Result<std::optional<std::filesystem::path>> res) {
+            [this](Result<std::optional<asp::fs::Path>> res) {
                 auto scene = CCDirector::sharedDirector()->getRunningScene();
                 if (!res || !res.isOk()) {
                     m_cspiFilePickerOpen = false;
@@ -346,9 +346,10 @@ protected:
                     return false;
                 }
                 auto path = opt.value();
-                auto stem = path.stem().string();
+                auto stem = path.stem();
+                // stem is res.unwrap().value().path.stem().string()
                 
-                if (path.extension() != ".zip" || stem != "clicks-main" && !stem.starts_with("clicks-main (")) {
+                if (path.extension() != ".zip" || stem != "clicks-main" && !stem->starts_with("clicks-main (")) {
                     if (scene) {
                         if (auto* downloadPopup = scene->getChildByID("download-popup"_spr)) {
                             downloadPopup->removeFromParent();
@@ -367,7 +368,7 @@ protected:
                     m_cspiFilePickerOpen = false;
                     return false;
                 }
-                Mod::get()->setSavedValue<std::filesystem::path>("cspi-persistent-dir", path);
+                Mod::get()->setSavedValue<asp::fs::Path>("cspi-persistent-dir", path);
                 if (scene) {
                     if (auto* downloadPopup = scene->getChildByID("download-popup"_spr)) {
                         downloadPopup->removeFromParent();
@@ -541,10 +542,14 @@ protected:
                         std::string type = "Useful";
 
                         if (asp::fs::Path(packJsonPath).exists()) {
-                            std::ifstream jsonFile(packJsonPath);
-                            if (jsonFile.is_open()) {
-                                std::string content((std::istreambuf_iterator<char>(jsonFile)), std::istreambuf_iterator<char>());
-                                auto jsonData = matjson::parse(content).unwrapOr(-2);
+                            auto readResult = asp::fs::readToString(packJsonPath);
+                            if (!readResult) {
+                                log::warn("Failed to read pack.json: {}", readResult.unwrapErr());
+                                return false;
+                            }
+                            auto jsonResult = matjson::parse(readResult.unwrap());
+                            if (jsonResult.isOk()) {
+                                auto jsonData = jsonResult.unwrap();
                                 if (jsonData.contains("type")) {
                                     auto val = jsonData.get("type").unwrap();
                                     if (val == "Meme") type = "Meme";
@@ -615,19 +620,15 @@ protected:
 	}
 
     std::string GetJsonName(CategoryData Information) {
-        if (!Information.jsonpath.empty() && std::filesystem::exists(Information.jsonpath)) {
-            std::filesystem::path fs = std::filesystem::path(Information.jsonpath);
-            std::ifstream file(fs, std::ios::in | std::ios::binary);
-                if (file.is_open()) {
-                    std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
-                    file.close();
-                    matjson::Value jsonObject = matjson::parse(content).unwrapOrDefault();
+        if (Information.jsonpath.empty()) return "";
+        auto path = asp::fs::Path(Information.jsonpath);
+        if (!path.exists()) return "";
+        auto content = asp::fs::readToString(path);
 
-                    if (jsonObject.contains("name") && jsonObject["name"].isString()) {
-                        return jsonObject["name"].asString().unwrap();
-                    }
-                };
-            };
+        auto jsonObject = matjson::parse(content.unwrap()).unwrapOrDefault();
+        if (jsonObject.contains("name") && jsonObject["name"].isString()) {
+            return jsonObject["name"].asString().unwrap();
+        }
 
         return "";
     };
@@ -646,8 +647,8 @@ protected:
                 m_nameLabel->setOpacity(155);
                 m_nameLabel->setString("");
             } else {
-                std::filesystem::path filePath(Custompa);
-                m_nameLabel->setString(filePath.filename().string().c_str());
+                asp::fs::Path filePath(Custompa);
+                m_nameLabel->setString(filePath.filename()->string().c_str());
                 m_nameLabel->setColor(ccWHITE);
                 m_nameLabel->setOpacity(255);
             }
@@ -722,7 +723,7 @@ protected:
 
         async::spawn(
             file::pick(file::PickMode::OpenFile, { Mod::get()->getResourcesDir(), { textFilter } }), 
-            [this,sender](Result<std::optional<std::filesystem::path>> res) {
+            [this,sender](Result<std::optional<asp::fs::Path>> res) {
                 if (res.isOk()) {
                     auto path = res.unwrap();
                     ClicksoundSettingValue Changes = this->getValue();
