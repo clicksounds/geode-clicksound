@@ -520,14 +520,17 @@ protected:
 
                         Mod::get()->setSavedValue<asp::fs::Path>("cspi-persistent-dir", path);
 
-                        asp::fs::Path tempDir = dirs::getTempDir() / path.stem();
+                        auto stem = path.stem().value_or("pack");
+                        auto filename = path.filename().value_or("pack.zip");
+
+                        asp::fs::Path tempDir = dirs::getTempDir() / stem;
                         auto tempDirCreateResult = asp::fs::createDirAll(tempDir);
                         if (!tempDirCreateResult) {
                             log::warn("Failed to create temporary directory: {}", tempDirCreateResult.unwrapErr());
                             return false;
                         }
 
-                        asp::fs::Path tempZipPath = tempDir / path.filename();
+                        asp::fs::Path tempZipPath = tempDir / filename;
                         auto copyResult = asp::fs::copy(path, tempZipPath);
                         if (!copyResult) {
                             log::warn("Failed to copy temporary zip file: {}", copyResult.unwrapErr());
@@ -561,7 +564,7 @@ protected:
                             return false;
                         }
 
-                        asp::fs::Path newDir = dir / type / path.stem();
+                        asp::fs::Path newDir = dir / type / stem;
                         auto newDirCreateResult = asp::fs::createDirAll(newDir);
                         if (!newDirCreateResult) {
                             log::warn("Failed to create new directory: {}", newDirCreateResult.unwrapErr());
@@ -573,19 +576,29 @@ protected:
                             return false;
                         }
                         for (auto p : tempDirRecursiveIter.unwrap()) {
-                            auto entry = p.unwrap();
-                            if (p.unwrap().isDir()) continue;
-                            auto rel = p.unwrap().path.lexicallyRelative(tempDir);
+                            auto entryResult = p;
+                            if (!entryResult) continue;
+                            auto entry = entryResult.unwrap();
+                            if (entry.isDir()) continue;
 
-                            auto createNewDirResult = asp::fs::createDirAll(newDir / rel->parent()->toPath());
+                            auto rel = entry.path.lexicallyRelative(tempDir);
+                            if (!rel) continue;
+                            asp::fs::Path destDir = newDir;
+                            if (auto relParent = rel->parent()) {
+                                destDir = newDir / *relParent;
+                            }
+
+                            auto createNewDirResult = asp::fs::createDirAll(destDir);
                             if (!createNewDirResult) {
                                 log::warn("Failed to create new directory: {}", createNewDirResult.unwrapErr());
+                                m_cspiFilePickerOpen = false;
                                 return false;
                             }
-                            
-                            auto copyResult = asp::fs::copy(entry.path, newDir / rel);
+
+                            auto copyResult = asp::fs::copy(entry.path, newDir / *rel);
                             if (!copyResult) {
                                 log::warn("Failed to copy file: {}", copyResult.unwrapErr());
+                                m_cspiFilePickerOpen = false;
                                 return false;
                             }
                         }
