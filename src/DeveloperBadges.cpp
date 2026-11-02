@@ -113,6 +113,7 @@ class $modify(ProfilePage) {
 		}
 		auto spr = CCSprite::create("csBadge.png"_spr);
 		if (!spr) {
+			log::warn("Failed to find sprite");
 			return true; // unable to find sprite
 		}
 
@@ -124,6 +125,7 @@ class $modify(ProfilePage) {
 
 			auto btn = CCMenuItemSpriteExtra::create(
 			    spr, this, menu_selector(buttonfunctionthing::Developer));
+			if (!btn) return false;
 
 			switch (it->second) {
 			case Contributors::Owner:
@@ -150,14 +152,15 @@ class $modify(ProfilePage) {
 			}
 
 			btn->setPosition(14.500, -132);
-			btn->setZOrder(26);
+			btn->setZOrder(-1);
 			btn->setID("cs-badge"_spr);
-			this->getChildByIDRecursive("left-menu")->addChild(btn);
-			this->getChildByIDRecursive("left-menu")->updateLayout();
+			if (auto rightMenu = this->getChildByIDRecursive("right-menu")) {
+				rightMenu->addChild(btn);
+				rightMenu->updateLayout();
+				// i dont think im supposed to do this
+				rightMenu->setPositionY(rightMenu->getPositionY() - 46);
+			}
 		}
-
-		auto posX = m_usernameLabel->getPositionX();
-		auto posY = m_usernameLabel->getPositionY();
 
 		return true;
 	}
