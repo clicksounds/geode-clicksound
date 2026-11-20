@@ -16,7 +16,7 @@ using namespace geode::prelude;
 
 extern void onsettingsUpdate();
 extern void SendRequestAPI(bool forceDownload);
-extern void InstallIndexLocallyByZip(std::filesystem::path zipPath);
+extern void InstallIndexLocallyByZip(asp::fs::Path zipPath);
 extern void extractDefaultClickPack();
 
 struct ClicksoundSettingValue {
@@ -327,14 +327,14 @@ protected:
         zipFilter.description = "Index ZIP";
         zipFilter.files = { "*.zip" };
 
-        auto getPersistentDir = Mod::get()->getSavedValue<std::filesystem::path>("cspi-persistent-dir");
+        auto getPersistentDir = Mod::get()->getSavedValue<asp::fs::Path>("cspi-persistent-dir");
 
         if (m_cspiFilePickerOpen) return;
         m_cspiFilePickerOpen = true;
 
         async::spawn(
             file::pick(file::PickMode::OpenFile, { getPersistentDir, { zipFilter } }),
-            [this](Result<std::optional<std::filesystem::path>> res) {
+            [this](Result<std::optional<asp::fs::Path>> res) {
                 auto scene = CCDirector::sharedDirector()->getRunningScene();
                 if (!res || !res.isOk()) {
                     m_cspiFilePickerOpen = false;
@@ -346,9 +346,10 @@ protected:
                     return false;
                 }
                 auto path = opt.value();
-                auto stem = path.stem().string();
+                auto stem = path.stem();
+                // stem is res.unwrap().value().path.stem().string()
                 
-                if (path.extension() != ".zip" || stem != "clicks-main" && !stem.starts_with("clicks-main (")) {
+                if (path.extension() != ".zip" || stem != "clicks-main" && !stem->starts_with("clicks-main (")) {
                     if (scene) {
                         if (auto* downloadPopup = scene->getChildByID("download-popup"_spr)) {
                             downloadPopup->removeFromParent();
@@ -367,7 +368,7 @@ protected:
                     m_cspiFilePickerOpen = false;
                     return false;
                 }
-                Mod::get()->setSavedValue<std::filesystem::path>("cspi-persistent-dir", path);
+                Mod::get()->setSavedValue<asp::fs::Path>("cspi-persistent-dir", path);
                 if (scene) {
                     if (auto* downloadPopup = scene->getChildByID("download-popup"_spr)) {
                         downloadPopup->removeFromParent();
@@ -395,15 +396,33 @@ protected:
                     std::thread([] {
                         Mod* mod = Mod::get();
                         mod->setSavedValue<bool>("CSINDEXCLEARING", true);
-                        std::filesystem::path dir = mod->getConfigDir() / "Clicks" / "clicks-main";
+                        asp::fs::Path dir = mod->getConfigDir() / "Clicks" / "clicks-main";
 
-                        if (std::filesystem::exists(dir / "Meme"))
-                            std::filesystem::remove_all(dir / "Meme");
-                        if (std::filesystem::exists(dir / "Useful"))
-                            std::filesystem::remove_all(dir / "Useful");
+                        if (asp::fs::Path(dir / "Meme").exists()) {
+                            auto result = asp::fs::removeDirAll(dir / "Meme");
+                            if (!result) {
+                                log::warn("Failed to remove Meme directory: {}", result.unwrapErr());
+                                return;
+                            }
+                        }
+                        if (asp::fs::Path(dir / "Useful").exists()) {
+                            auto result = asp::fs::removeDirAll(dir / "Useful");
+                            if (!result) {
+                                log::warn("Failed to remove Useful directory: {}", result.unwrapErr());
+                                return;
+                            }
+                        }
 
-                        std::filesystem::create_directory(dir / "Meme");
-                        std::filesystem::create_directory(dir / "Useful");
+                        auto createUsefulDirResult = asp::fs::createDirAll(dir / "Useful");
+                        auto createMemeDirResult = asp::fs::createDirAll(dir / "Meme");
+                        if (!createUsefulDirResult) {
+                            log::warn("Failed to create Useful directory: {}", createUsefulDirResult.unwrapErr());
+                            return;
+                        }
+                        if (!createMemeDirResult) {
+                            log::warn("Failed to create Meme directory: {}", createMemeDirResult.unwrapErr());
+                            return;
+                        }
 
                         extractDefaultClickPack();
 
@@ -474,20 +493,20 @@ protected:
 	}
 
     void cspiFileSelection() {
-		std::filesystem::path dir = Loader::get()->getInstalledMod("beat.click-sound")->getConfigDir() / "Clicks" / "clicks-main";
+		asp::fs::Path dir = Loader::get()->getInstalledMod("beat.click-sound")->getConfigDir() / "Clicks" / "clicks-main";
 		file::FilePickOptions::Filter textFilter;
 		file::FilePickOptions fileOptions;
 		textFilter.description = "Click Pack";
 		textFilter.files = { "*.packgen.zip" };
 		fileOptions.filters.push_back(textFilter);
-		auto getPersistentDir = Mod::get()->getSavedValue<std::filesystem::path>("cspi-persistent-dir");
+		auto getPersistentDir = Mod::get()->getSavedValue<asp::fs::Path>("cspi-persistent-dir");
 
 		if (m_cspiFilePickerOpen) return;
 		m_cspiFilePickerOpen = true;
 
         async::spawn(
             file::pick(file::PickMode::OpenFile, { getPersistentDir, { textFilter } }),
-            [this, dir](Result<std::optional<std::filesystem::path>> res) {
+            [this, dir](Result<std::optional<asp::fs::Path>> res) {
                 if (!res || !res.isOk()) return false;
                 if (res.isOk()) {
                     auto opt = res.unwrap();
@@ -499,26 +518,41 @@ protected:
                             return false;
                         }
 
-                        Mod::get()->setSavedValue<std::filesystem::path>("cspi-persistent-dir", path);
+                        Mod::get()->setSavedValue<asp::fs::Path>("cspi-persistent-dir", path);
 
-                        std::filesystem::path tempDir = dirs::getTempDir() / path.stem();
-                        std::filesystem::create_directories(tempDir);
+                        auto stem = path.stem().value_or("pack");
+                        auto filename = path.filename().value_or("pack.zip");
 
-                        std::filesystem::path tempZipPath = tempDir / path.filename();
-                        std::filesystem::copy(path, tempZipPath, std::filesystem::copy_options::overwrite_existing);
+                        asp::fs::Path tempDir = dirs::getTempDir() / stem;
+                        auto tempDirCreateResult = asp::fs::createDirAll(tempDir);
+                        if (!tempDirCreateResult) {
+                            log::warn("Failed to create temporary directory: {}", tempDirCreateResult.unwrapErr());
+                            return false;
+                        }
+
+                        asp::fs::Path tempZipPath = tempDir / filename;
+                        auto copyResult = asp::fs::copy(path, tempZipPath);
+                        if (!copyResult) {
+                            log::warn("Failed to copy temporary zip file: {}", copyResult.unwrapErr());
+                            return false;
+                        }
 
                         auto unzip = file::Unzip::create(tempZipPath);
                         auto unzipResult = unzip.unwrap().extractAllTo(tempDir);
                         if (!unzipResult) return false;
 
-                        std::filesystem::path packJsonPath = tempDir / "pack.json";
+                        asp::fs::Path packJsonPath = tempDir / "pack.json";
                         std::string type = "Useful";
 
-                        if (std::filesystem::exists(packJsonPath)) {
-                            std::ifstream jsonFile(packJsonPath);
-                            if (jsonFile.is_open()) {
-                                std::string content((std::istreambuf_iterator<char>(jsonFile)), std::istreambuf_iterator<char>());
-                                auto jsonData = matjson::parse(content).unwrapOr(-2);
+                        if (asp::fs::Path(packJsonPath).exists()) {
+                            auto readResult = asp::fs::readToString(packJsonPath);
+                            if (!readResult) {
+                                log::warn("Failed to read pack.json: {}", readResult.unwrapErr());
+                                return false;
+                            }
+                            auto jsonResult = matjson::parse(readResult.unwrap());
+                            if (jsonResult.isOk()) {
+                                auto jsonData = jsonResult.unwrap();
                                 if (jsonData.contains("type")) {
                                     auto val = jsonData.get("type").unwrap();
                                     if (val == "Meme") type = "Meme";
@@ -530,14 +564,43 @@ protected:
                             return false;
                         }
 
-                        std::filesystem::path newDir = dir / type / path.stem();
-                        std::filesystem::create_directories(newDir);
+                        asp::fs::Path newDir = dir / type / stem;
+                        auto newDirCreateResult = asp::fs::createDirAll(newDir);
+                        if (!newDirCreateResult) {
+                            log::warn("Failed to create new directory: {}", newDirCreateResult.unwrapErr());
+                            return false;
+                        }
+                        auto tempDirRecursiveIter = asp::fs::iterDirRecursive(tempDir);
+                        if (!tempDirRecursiveIter) {
+                            log::warn("Failed to iterate over temporary directory: {}", tempDirRecursiveIter.unwrapErr());
+                            return false;
+                        }
+                        for (auto p : tempDirRecursiveIter.unwrap()) {
+                            auto entryResult = p;
+                            if (!entryResult) continue;
+                            auto entry = entryResult.unwrap();
+                            if (entry.isDir()) continue;
 
-                        for (auto& p : std::filesystem::recursive_directory_iterator(tempDir)) {
-                            if (p.is_directory()) continue;
-                            auto rel = std::filesystem::relative(p.path(), tempDir);
-                            std::filesystem::create_directories(newDir / rel.parent_path());
-                            std::filesystem::copy_file(p.path(), newDir / rel, std::filesystem::copy_options::overwrite_existing);
+                            auto rel = entry.path.lexicallyRelative(tempDir);
+                            if (!rel) continue;
+                            asp::fs::Path destDir = newDir;
+                            if (auto relParent = rel->parent()) {
+                                destDir = newDir / *relParent;
+                            }
+
+                            auto createNewDirResult = asp::fs::createDirAll(destDir);
+                            if (!createNewDirResult) {
+                                log::warn("Failed to create new directory: {}", createNewDirResult.unwrapErr());
+                                m_cspiFilePickerOpen = false;
+                                return false;
+                            }
+
+                            auto copyResult = asp::fs::copy(entry.path, newDir / *rel);
+                            if (!copyResult) {
+                                log::warn("Failed to copy file: {}", copyResult.unwrapErr());
+                                m_cspiFilePickerOpen = false;
+                                return false;
+                            }
                         }
 
                         geode::createQuickPopup(
@@ -545,8 +608,12 @@ protected:
                             fmt::format("{} pack installed successfully!", type),
                             "Close", nullptr,
                             [tempZipPath, this](auto, bool) {
-                                std::filesystem::remove(tempZipPath);
+                                auto tempZipRemoveResult = asp::fs::remove(tempZipPath);
                                 m_cspiFilePickerOpen = false;
+                                if (!tempZipRemoveResult) {
+                                    log::warn("Failed to remove temporary zip file: {}", tempZipRemoveResult.unwrapErr());
+                                    return;
+                                }
                             }
                         );
 
@@ -566,19 +633,15 @@ protected:
 	}
 
     std::string GetJsonName(CategoryData Information) {
-        if (!Information.jsonpath.empty() && std::filesystem::exists(Information.jsonpath)) {
-            std::filesystem::path fs = std::filesystem::path(Information.jsonpath);
-            std::ifstream file(fs, std::ios::in | std::ios::binary);
-                if (file.is_open()) {
-                    std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
-                    file.close();
-                    matjson::Value jsonObject = matjson::parse(content).unwrapOrDefault();
+        if (Information.jsonpath.empty()) return "";
+        auto path = asp::fs::Path(Information.jsonpath);
+        if (!path.exists()) return "";
+        auto content = asp::fs::readToString(path);
 
-                    if (jsonObject.contains("name") && jsonObject["name"].isString()) {
-                        return jsonObject["name"].asString().unwrap();
-                    }
-                };
-            };
+        auto jsonObject = matjson::parse(content.unwrap()).unwrapOrDefault();
+        if (jsonObject.contains("name") && jsonObject["name"].isString()) {
+            return jsonObject["name"].asString().unwrap();
+        }
 
         return "";
     };
@@ -597,8 +660,8 @@ protected:
                 m_nameLabel->setOpacity(155);
                 m_nameLabel->setString("");
             } else {
-                std::filesystem::path filePath(Custompa);
-                m_nameLabel->setString(filePath.filename().string().c_str());
+                asp::fs::Path filePath(Custompa);
+                m_nameLabel->setString(filePath.filename()->string().c_str());
                 m_nameLabel->setColor(ccWHITE);
                 m_nameLabel->setOpacity(255);
             }
@@ -673,7 +736,7 @@ protected:
 
         async::spawn(
             file::pick(file::PickMode::OpenFile, { Mod::get()->getResourcesDir(), { textFilter } }), 
-            [this,sender](Result<std::optional<std::filesystem::path>> res) {
+            [this,sender](Result<std::optional<asp::fs::Path>> res) {
                 if (res.isOk()) {
                     auto path = res.unwrap();
                     ClicksoundSettingValue Changes = this->getValue();

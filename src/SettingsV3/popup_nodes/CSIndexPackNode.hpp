@@ -171,7 +171,7 @@ class CSIndexPackNode : public CCLayerColor {
 				if (jsonObject.contains("id") && jsonObject["id"].isString()) {
 					std::string id = jsonObject["id"].asString().unwrap();
 					auto featuredPath = Mod::get()->getConfigDir() / "Clicks" / "clicks-main" / "featured_list.json";
-					if (std::filesystem::exists(featuredPath)) {
+					if (asp::fs::Path(featuredPath).exists()) {
 						auto featuredJsonData = utils::file::readJson(featuredPath).unwrapOr(-2);
 						if (featuredJsonData == -2) log::debug("couldnt unwrap featured_list.json");
 						if (featuredJsonData.isArray()) {

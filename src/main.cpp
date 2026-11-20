@@ -265,7 +265,7 @@ class $modify(csTouchDispatcher, CCTouchDispatcher) {
 
 async::TaskHolder<web::WebResponse> m_downloadTask;
 
-void ProcessIndexZip(std::filesystem::path zipPath) {
+void ProcessIndexZip(asp::fs::Path zipPath) {
     auto indexzipPtr = std::make_shared<decltype(indexzip)>(indexzip);
     std::thread([=] {
         auto unzip = file::Unzip::create(zipPath);
@@ -274,26 +274,42 @@ void ProcessIndexZip(std::filesystem::path zipPath) {
             return;
         }
         auto clicksRoot = Mod::get()->getConfigDir() / "Clicks";
-        std::filesystem::remove_all(clicksRoot);
+        auto clicksRootRemoveResult = asp::fs::removeDirAll(clicksRoot);
+		if (!clicksRootRemoveResult) {
+			log::warn("Failed to remove Clicks directory: {}", clicksRootRemoveResult.unwrapErr());
+			return;
+		}
         (void) unzip.unwrap().extractAllTo(clicksRoot);
         Loader::get()->queueInMainThread([=] {
             Notification::create(
                 "CS: Index updated successfully!",
                 CCSprite::createWithSpriteFrameName("GJ_completesIcon_001.png")
             )->show();
-            std::filesystem::path clicksDir = clicksRoot / "clicks-main";
+            asp::fs::Path clicksDir = clicksRoot / "clicks-main";
             static const std::unordered_set<std::string> skipList = {
                 "Meme",
                 "Useful",
                 "featured_list.json"
             };
-            for (auto const& entry : std::filesystem::directory_iterator(clicksDir)) {
-                if (!skipList.contains(entry.path().filename().string())) {
-                    std::filesystem::remove_all(entry.path());
+
+			auto clicksIter = asp::fs::iterDir(clicksDir);
+			if (!clicksIter) return;
+            for (auto const& entry : clicksIter.unwrap()) {
+                if (!skipList.contains(entry.unwrap().path.filename()->string())) {
+                    auto removeResult = asp::fs::removeDirAll(entry.unwrap().path);
+					if (!removeResult) {
+						log::warn("Failed to remove directory: {}", removeResult.unwrapErr());
+						return;
+					}
                 }
             }
-            if (std::filesystem::exists(zipPath)) {
-                std::filesystem::remove(zipPath);
+
+            if (asp::fs::Path(zipPath).exists()) {
+                auto removeResult = asp::fs::remove(zipPath);
+				if (!removeResult) {
+					log::warn("Failed to remove zip file: {}", removeResult.unwrapErr());
+					return;
+				}
             }
         });
         Mod::get()->setSavedValue<bool>("CSINDEXDOWNLOADING", false);
@@ -303,8 +319,8 @@ void ProcessIndexZip(std::filesystem::path zipPath) {
     }).detach();
 }
 
-void InstallIndexLocallyByZip(std::filesystem::path zipPath) {
-    if (!std::filesystem::exists(zipPath)) {
+void InstallIndexLocallyByZip(asp::fs::Path zipPath) {
+    if (!asp::fs::Path(zipPath).exists()) {
         Loader::get()->queueInMainThread([] {
             Notification::create(
                 "CS: File not found.",
@@ -322,9 +338,8 @@ void InstallIndexLocallyByZip(std::filesystem::path zipPath) {
     });
     // Copy file to expected zip path so ProcessIndexZip can clean it up normally
     auto targetPath = Mod::get()->getConfigDir() / "Clicks.zip";
-    std::error_code ec;
-    std::filesystem::copy_file(zipPath, targetPath, std::filesystem::copy_options::overwrite_existing, ec);
-    if (ec) {
+	auto copyResult = asp::fs::copy(zipPath, targetPath);
+    if (!copyResult) {
         Loader::get()->queueInMainThread([] {
             Notification::create(
                 "CS: Failed to read file.",
@@ -381,14 +396,18 @@ void SendRequestAPI(bool forceDownload = false) {
 
 void extractDefaultClickPack() {
     auto mod = Mod::get();
-	std::filesystem::path configPath = mod->getConfigDir();
+	asp::fs::Path configPath = mod->getConfigDir();
 
-    std::filesystem::create_directories(configPath / "Clicks" / "clicks-main" / "Useful");
+	auto createUsefulDirResult = asp::fs::createDirAll(configPath / "Clicks" / "clicks-main" / "Useful");
+    if (!createUsefulDirResult) {
+        log::warn("Failed to create Useful directory during default click pack installation: {}", createUsefulDirResult.unwrapErr());
+        return;
+    }
 
-    std::filesystem::path destinationPath = configPath / "Clicks" / "clicks-main" / "Useful" / "clicksounds.default";
-    std::filesystem::path resourcePath = mod->getResourcesDir() / "clicksounds.default.packgen.zip";
+    asp::fs::Path destinationPath = configPath / "Clicks" / "clicks-main" / "Useful" / "clicksounds.default";
+    asp::fs::Path resourcePath = mod->getResourcesDir() / "clicksounds.default.packgen.zip";
 
-    if (std::filesystem::is_directory(destinationPath) && std::filesystem::exists(destinationPath)) return;
+    if (asp::fs::Path(destinationPath).isDir() && asp::fs::Path(destinationPath).exists()) return;
 
     auto unzip = file::Unzip::create(resourcePath);
     if (!unzip) return;
@@ -432,8 +451,8 @@ $on_mod(Loaded) {
 	});
 	SpritePicker::secret = Loader::get()->isModLoaded("carrot_devs.carrotmodcarrotcarrotcarrotcarrotcarrot"); // carrot sprite flag
 	// sets the persistent directory to the geode folder if the user hasnt ever chosen a path before
-	if (Mod::get()->getSavedValue<std::filesystem::path>("cspi-persistent-dir").empty() || !std::filesystem::exists(Mod::get()->getSavedValue<std::filesystem::path>("cspi-persistent-dir"))) {
-		Mod::get()->setSavedValue<std::filesystem::path>("cspi-persistent-dir", dirs::getGeodeDir());
+	if (Mod::get()->getSavedValue<asp::fs::Path>("cspi-persistent-dir").empty() || !Mod::get()->getSavedValue<asp::fs::Path>("cspi-persistent-dir").exists()) {
+		Mod::get()->setSavedValue<asp::fs::Path>("cspi-persistent-dir", dirs::getGeodeDir());
 	}
 }
 class $modify(EndLevelLayer){void customSetup(){EndLevelLayer::customSetup();if(Carrot::carrot==true){auto eee = CCNode::create();auto ee = CCSprite::create("ee.png"_spr);eee->setPosition(450, 260);eee->setAnchorPoint({0.5, 0.5});eee->setScale(0.2);ee->setOpacity(10);eee->addChild(ee);static_cast<cocos2d::CCLayer*>(this->getChildren()->objectAtIndex(0))->addChild(eee);}Carrot::carrot=false;}};
