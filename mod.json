@@ -38,7 +38,7 @@
 	],
 	"dependencies": {
         "geode.node-ids": {
-        	"version": ">=v1.23.0",
+        	"version": ">=v1.24.0-beta.1",
          	"required": true
 		},
 		"uproxide.happy_textures": {
