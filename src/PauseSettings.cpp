@@ -23,17 +23,18 @@ class $modify(PauseLayer) {
 		auto winSize = CCDirector::sharedDirector()->getWinSize();
 		auto spr = CCSprite::create("Button.png"_spr);
 
+		spr->setScale(0.5f);
 		auto btn = CCMenuItemSpriteExtra::create(
 		    spr,
 		    this,
 		    menu_selector(PopupModSettings::ShowPopup));
-		spr->setScale(0.7f);
 		if (Mod::get()->getSettingValue<bool>("settings-button") && btn) {
 			btn->setPosition({menu->getContentSize().width / 2, btn->getContentSize().height / 2});
 			btn->setID("SettingButton"_spr);
 			menu->addChild(btn);
 			menu->updateLayout();
 		}
+		menu->updateLayout();
 	}
 };
 
@@ -50,7 +51,7 @@ class $modify(EditorPauseLayer) {
 		    spr,
 		    this,
 		    menu_selector(PopupModSettings::ShowPopup));
-		if (Mod::get()->getSettingValue<bool>("settings-button")) {
+		if (Mod::get()->getSettingValue<bool>("settings-button-editor")) {
 			btn->setPosition({menu->getContentSize().width / 2, btn->getContentSize().height / 2});
 			btn->setID("SettingButton"_spr);
 			menu->addChild(btn);

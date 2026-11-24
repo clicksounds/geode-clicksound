@@ -1,7 +1,9 @@
 # Changelog
 ## Version v2.7.0
 * Added support for Geode v6.0.0 / GD 2.2091.
+* The option to disable the settings button shortcut is now split between play mode and the editor.
 * Some buttons were moved to accomodate GD 2.2091.
+* Developer badges were replaced with a credits menu.
 * Fixed a bug where clearing the index would get stuck and opening the index would become impossible.
 ## Version v2.6.2
 * 'Sounds Everywhere' is now compatible with most replay bots.

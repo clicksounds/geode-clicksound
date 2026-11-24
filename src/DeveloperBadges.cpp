@@ -1,167 +1,32 @@
-#include <Geode/Bindings.hpp>
 #include <Geode/Geode.hpp>
-#include <Geode/binding/ProfilePage.hpp>
-#include <Geode/modify/ProfilePage.hpp>
-#include <Geode/ui/GeodeUI.hpp>
-
-namespace Contributors  {
-	enum Messages {
-		Owner = 1,
-		Developer = 2,
-		Contributors = 3,
-		Helper = 4,
-		IndexModerator = 5,
-		CSPIOwner = 6,
-		DomainSupporter = 7
-	};
-	inline std::set<std::pair<int,Messages>> List = { 
-		{13873867,Messages::Owner}, // BeatTaco
-		{14284530,Messages::Developer}, // ViperProtogen
-		{21207551,Messages::Developer}, // coopeeo
-		{25397826,Messages::Contributors}, // Uproxide
-		{6253758,Messages::Contributors}, // FireeDev
-		{1941705,Messages::Contributors}, // RayDeeUx
-		{17389494,Messages::Helper}, // AkuLunical
-		{7669473,Messages::IndexModerator}, // Jaid
-		{27823067,Messages::IndexModerator}, // Andarian
-		{27334543,Messages::IndexModerator}, // KinobuNine / 6YT
-		{29399129,Messages::IndexModerator}, // yesimapotato
-		{19229865,Messages::IndexModerator}, // whiteisgrey
-		// CSPI Owners, unknown names
-		{31335670,Messages::CSPIOwner},
-		{29986323,Messages::CSPIOwner},
-		{20341640,Messages::CSPIOwner},
-		{27823067,Messages::CSPIOwner},
-		{24588393,Messages::CSPIOwner},
-		{19604462,Messages::CSPIOwner},
-		{28277352,Messages::CSPIOwner},
-		{23476862,Messages::CSPIOwner},
-		{29372710,Messages::CSPIOwner},
-		{31726624,Messages::CSPIOwner},
-		{32718773,Messages::CSPIOwner},
-		{5899425,Messages::CSPIOwner},
-		// Domain Supporters
-		{21483991,Messages::DomainSupporter}, // ubtertallcats, year of 2026
-		{24802745,Messages::DomainSupporter} // mxgaming01, year of 2026
-	}; 
-};
-
 
 using namespace geode::prelude;
 
-// Developer badges! :3333 (ty kot!)
-class buttonfunctionthing : public CCLayer {
-  public:
-	void Owner(CCObject *sender) {
-		FLAlertLayer::create(
-		    "About",
-		    "This is the <cp>Click Sounds Owner</c>, Beat. He created the mod.",
-		    "OK")
-		    ->show();
-	}
-	void Developer(CCObject *sender) {
-		FLAlertLayer::create(
-		    "About",
-		    "This is a <cp>Click Sounds Developer</c>. They programmed a lot of features to Click Sounds.",
-		    "OK")
-		    ->show();
-	}
-	void Contributor(CCObject *sender) {
-		FLAlertLayer::create(
-		    "About",
-		    "This is a <cp>Click Sounds Contributor</c>. They have programmed anything that was added to Click Sounds.",
-		    "OK")
-		    ->show();
-	}
-	void Helper(CCObject *sender) {
-		FLAlertLayer::create(
-		    "About",
-		    "This is a <cp>Click Sounds Helper</c>. These users are helpful to the Click Sounds community.",
-		    "OK")
-		    ->show();
-	}
-	void IndexModerator(CCObject *sender) {
-		FLAlertLayer::create(
-		    "About",
-		    "This is a <cp>Click Sounds Index Moderator</c>. They moderate click packs for Click Sounds.",
-		    "OK")
-		    ->show();
-	}
-	void CSPIOwner(CCObject *sender) {
-		FLAlertLayer::create(
-		    "About",
-		    "This person was an early owner of <cp>Click Sounds Pack Installer</c>. They supported Click Sounds Full early on.",
-		    "OK")
-		    ->show();
-	}
-	void DomainSupporter(CCObject *sender) {
-		FLAlertLayer::create(
-		    "About",
-		    "This is a <cp>Click Sounds Domain Supporter</c>. They paid for the Click Sounds domain name to support Click Sounds for a year.",
-		    "OK")
-		    ->show();
-	}
-};
+$on_mod(Loaded) {
+	std::string message = R"(
+	Click Sounds is created and maintained by BeatACVR.
+		
+	Co-developers:
+	Cosmella, August.
 
-class $modify(ProfilePage) {
-	bool init(int p0, bool p1) {
-		if (!ProfilePage::init(p0, p1))
-			return false;
+	Contributors: 
+	Uproxide, FireeDev, RayDeeUx.
 
-		if (m_mainLayer->getChildByID("my-stuff-hint")) {
-			m_mainLayer->removeChildByID("my-stuff-hint"); // Might fix a crash idk
+	Helpers: 
+	AkuLunical.
+
+	Index Moderators: 
+	Jaid, Andarian, KinobuNine, yesimapotato, whiteisgrey.
+
+	Domain Supporters: 
+	ubtertallcats, mxgaming01.
+
+	Click Sounds Pack Installer Owners: 
+	zxsetj, Karim768, TheRealNywal, Andarian, commandblockaar, bionsaaisme, destryshereens, GDMineraI, Hwao, Mihele9, SkyeOuO, Podfour.
+	)";
+	ButtonSettingPressedEventV3(Mod::get(), "buttons").listen([message] (auto buttonKey) {
+		if (buttonKey == "credits-button") {
+			MDPopup::create("Credits", message, "OK", nullptr, [](bool) {})->show();
 		}
-		auto spr = CCSprite::create("csBadge.png"_spr);
-		if (!spr) {
-			log::warn("Failed to find sprite");
-			return true; // unable to find sprite
-		}
-
-		std::string username = m_usernameLabel->getString();
-		auto it = std::find_if(Contributors::List.begin(), Contributors::List.end(),
-		                       [p0](const auto &pair) { return pair.first == p0; });
-
-		if (it != Contributors::List.end()) {
-
-			auto btn = CCMenuItemSpriteExtra::create(
-			    spr, this, menu_selector(buttonfunctionthing::Developer));
-			if (!btn) return false;
-
-			switch (it->second) {
-			case Contributors::Owner:
-				btn->m_pfnSelector = menu_selector(buttonfunctionthing::Owner);
-				break;
-			case Contributors::Contributors:
-				btn->m_pfnSelector = menu_selector(buttonfunctionthing::Contributor);
-				break;
-			case Contributors::Developer:
-				btn->m_pfnSelector = menu_selector(buttonfunctionthing::Developer);
-				break;
-			case Contributors::Helper:
-				btn->m_pfnSelector = menu_selector(buttonfunctionthing::Helper);
-				break;
-			case Contributors::IndexModerator:
-				btn->m_pfnSelector = menu_selector(buttonfunctionthing::IndexModerator);
-				break;
-			case Contributors::CSPIOwner:
-				btn->m_pfnSelector = menu_selector(buttonfunctionthing::CSPIOwner);
-				break;
-			case Contributors::DomainSupporter:
-				btn->m_pfnSelector = menu_selector(buttonfunctionthing::DomainSupporter);
-				break;
-			}
-
-			btn->setPosition(14.500, -132);
-			btn->setZOrder(-1);
-			btn->setID("cs-badge"_spr);
-			if (auto rightMenu = this->getChildByIDRecursive("right-menu")) {
-				rightMenu->addChild(btn);
-				rightMenu->updateLayout();
-				// i dont think im supposed to do this
-				rightMenu->setPositionY(rightMenu->getPositionY() - 46);
-			}
-		}
-
-		return true;
-	}
+	}).leak();
 };

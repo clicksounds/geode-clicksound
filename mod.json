@@ -164,6 +164,12 @@
 			"type": "bool",
 			"default": true
 		},
+		"settings-button-editor": {
+			"name": "Show settings button (editor)",
+			"description": "When enabled, a settings button appears in the editor pause menu.",
+			"type": "bool",
+			"default": false
+		},
 		"sfx-semitone": {
 			"name": "Base Pitch",
 			"description": "Determines the pitch of click/release sounds using semitones. The Default semitones is set 0 (12 semitones = 1 Octave)",
@@ -231,6 +237,12 @@
 			"description": "When enabled, the Click Sounds Index will automatically download on startup. This is very data heavy and not recommended for those on cellular data.",
 			"type": "bool",
 			"default": false
+		},
+		"buttons": {
+			"type": "button",
+			"buttons": {
+				"credits-button": "View Credits"
+			}
 		}
 	}
 }
