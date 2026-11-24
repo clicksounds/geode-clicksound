@@ -208,6 +208,7 @@ protected:
             ->setAxisAlignment(AxisAlignment::Start)
             ->setCrossAxisLineAlignment(AxisAlignment::Start)
             ->setCrossAxisAlignment(AxisAlignment::Start)
+            ->setAutoScale(false)
         );
         
         this->addChildAtPosition(this->getNameMenu(), Anchor::TopLeft, ccp(10, 0), ccp(0, 1.0f));
