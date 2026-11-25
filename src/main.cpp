@@ -268,18 +268,21 @@ async::TaskHolder<web::WebResponse> m_downloadTask;
 void ProcessIndexZip(asp::fs::Path zipPath) {
     auto indexzipPtr = std::make_shared<decltype(indexzip)>(indexzip);
     std::thread([=] {
-        auto unzip = file::Unzip::create(zipPath);
-        if (!unzip) {
-            Mod::get()->setSavedValue<bool>("CSINDEXDOWNLOADING", false);
-            return;
-        }
         auto clicksRoot = Mod::get()->getConfigDir() / "Clicks";
-        auto clicksRootRemoveResult = asp::fs::removeDirAll(clicksRoot);
-		if (!clicksRootRemoveResult) {
-			log::warn("Failed to remove Clicks directory: {}", clicksRootRemoveResult.unwrapErr());
-			return;
-		}
-        (void) unzip.unwrap().extractAllTo(clicksRoot);
+        {
+            auto unzip = file::Unzip::create(zipPath);
+            if (!unzip) {
+                Mod::get()->setSavedValue<bool>("CSINDEXDOWNLOADING", false);
+                return;
+            }
+            auto clicksRootRemoveResult = asp::fs::removeDirAll(clicksRoot);
+            if (!clicksRootRemoveResult) {
+                log::warn("Failed to remove Clicks directory: {}", clicksRootRemoveResult.unwrapErr());
+                Mod::get()->setSavedValue<bool>("CSINDEXDOWNLOADING", false);
+                return;
+            }
+            (void) unzip.unwrap().extractAllTo(clicksRoot);
+        }
         Loader::get()->queueInMainThread([=] {
             Notification::create(
                 "CS: Index updated successfully!",
@@ -292,24 +295,26 @@ void ProcessIndexZip(asp::fs::Path zipPath) {
                 "featured_list.json"
             };
 
-			auto clicksIter = asp::fs::iterDir(clicksDir);
-			if (!clicksIter) return;
-            for (auto const& entry : clicksIter.unwrap()) {
-                if (!skipList.contains(entry.unwrap().path.filename()->string())) {
-                    auto removeResult = asp::fs::removeDirAll(entry.unwrap().path);
-					if (!removeResult) {
-						log::warn("Failed to remove directory: {}", removeResult.unwrapErr());
-						return;
-					}
+            auto clicksIter = asp::fs::iterDir(clicksDir);
+            if (clicksIter) {
+                for (auto const& entry : clicksIter.unwrap()) {
+                    if (!skipList.contains(entry.unwrap().path.filename()->string())) {
+                        auto removeResult = entry.unwrap().isDir()
+                            ? asp::fs::removeDirAll(entry.unwrap().path)
+                            : asp::fs::remove(entry.unwrap().path);
+                        if (!removeResult) {
+                            log::warn("Failed to remove {}: {}", entry.unwrap().path.string(), removeResult.unwrapErr());
+                        }
+                    }
                 }
             }
 
             if (asp::fs::Path(zipPath).exists()) {
                 auto removeResult = asp::fs::remove(zipPath);
-				if (!removeResult) {
-					log::warn("Failed to remove zip file: {}", removeResult.unwrapErr());
-					return;
-				}
+                if (!removeResult) {
+                    log::warn("Failed to remove zip file: {}", removeResult.unwrapErr());
+                    return;
+                }
             }
         });
         Mod::get()->setSavedValue<bool>("CSINDEXDOWNLOADING", false);

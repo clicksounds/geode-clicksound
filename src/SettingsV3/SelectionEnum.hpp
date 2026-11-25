@@ -513,8 +513,9 @@ protected:
                     auto opt = res.unwrap();
                     if (opt) {
                         auto path = opt.value();
-                        if (path.extension() != ".zip") {
+                        if (path.extension() != "zip") {
                             FLAlertLayer::create("Click Sounds", "Invalid click pack: Not in .packgen.zip format!", "Close")->show();
+                            log::debug("path: {} | extension: {}", path.string(), path.extension());
                             m_cspiFilePickerOpen = false;
                             return false;
                         }
@@ -581,6 +582,8 @@ protected:
                             if (!entryResult) continue;
                             auto entry = entryResult.unwrap();
                             if (entry.isDir()) continue;
+
+                            if (entry.path == tempZipPath) continue;
 
                             auto rel = entry.path.lexicallyRelative(tempDir);
                             if (!rel) continue;
