@@ -6,7 +6,7 @@
         "mac": "2.2091",
         "ios": "2.2091"
     	},
-	"version": "v2.7.1",
+	"version": "v2.7.2",
 	"id": "beat.click-sound",
 	"name": "Click Sounds Full",
 	"developers": [
@@ -107,7 +107,7 @@
 		},
 		"clicksound-effect": {
 			"type": "custom:clicksoundeffect",
-			"name": "Test Sound",
+			"name": "Preview Sound",
 			"clicksound" : true
 		},
 		"release-section": {
@@ -138,7 +138,7 @@
 		},
 		"releasesound-effect": {
 			"type": "custom:clicksoundeffect",
-			"name": "Test Sound",
+			"name": "Preview Sound",
 			"clicksound" : false
 		},
 		"Miscellaneous-section": {
