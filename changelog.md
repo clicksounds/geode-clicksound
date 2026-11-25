@@ -1,4 +1,8 @@
 # Changelog
+## Version v2.7.1
+* Downloading the Click Sounds Index is now almost instant.
+* Fixed a bug where custom click packs couldn't be installed.
+* Fixed a bug where temporary index data would not be deleted.
 ## Version v2.7.0
 * Added support for Geode v6.0.0 / GD 2.2091.
 * The option to disable the settings button shortcut is now split between play mode and the editor.
