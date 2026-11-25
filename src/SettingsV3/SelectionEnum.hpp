@@ -561,7 +561,7 @@ protected:
                                 }
                             }
                         } else {
-                            FLAlertLayer::create("Click Sounds", "Invalid click pack: Not in .packgen.zip format!", "Close")->show();
+                            FLAlertLayer::create("Click Sounds", "Invalid click pack: No pack.json file found. ZCB format click packs can be converted to .packgen.zip using Packcon at clicksounds.xyz.", "Close")->show();
                             m_cspiFilePickerOpen = false;
                             return false;
                         }
