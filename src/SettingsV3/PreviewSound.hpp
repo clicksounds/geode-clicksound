@@ -35,7 +35,7 @@ class MyButtonSettingV3 : public SettingV3 {
 	SettingNodeV3 *createNode(float width) override;
 };
 
-class PlaySoundSettingNodeV3 : public SettingNodeV3 {
+class PreviewSoundSettingNodeV3 : public SettingNodeV3 {
   protected:
 	CCSprite *m_buttonSprite;
 	CCMenuItemSpriteExtra *m_button;
@@ -48,9 +48,11 @@ class PlaySoundSettingNodeV3 : public SettingNodeV3 {
 		m_buttonSprite = CCSprite::createWithSpriteFrameName("GJ_playMusicBtn_001.png");
 		m_buttonSprite->setScale(.68f);
 		m_button = CCMenuItemSpriteExtra::create(
-		    m_buttonSprite, this, menu_selector(PlaySoundSettingNodeV3::onPlaySoundButton));
+		    m_buttonSprite, this, menu_selector(PreviewSoundSettingNodeV3::onPreviewSoundButton));
 		m_setting = setting;
-		this->getButtonMenu()->addChildAtPosition(m_button, Anchor::Center);
+		CCMenu* m_menu = CCMenu::createWithItem(m_button);
+
+		this->getButtonMenu()->addChildAtPosition(m_menu, Anchor::Center);
 		this->getButtonMenu()->setContentWidth(30);
 		this->getButtonMenu()->updateLayout();
 
@@ -69,7 +71,7 @@ class PlaySoundSettingNodeV3 : public SettingNodeV3 {
 		m_buttonSprite->setOpacity(shouldEnable ? 255 : 155);
 		m_buttonSprite->setColor(shouldEnable ? ccWHITE : ccGRAY);
 	}
-	void onPlaySoundButton(CCObject *) {
+	void onPreviewSoundButton(CCObject *) {
 		if (m_setting->clicksound) {
 			if (Custom_OnClick) {
 				ClickSound->Play();
@@ -89,8 +91,8 @@ class PlaySoundSettingNodeV3 : public SettingNodeV3 {
 	void onResetToDefault() override {}
 
   public:
-	static PlaySoundSettingNodeV3 *create(std::shared_ptr<MyButtonSettingV3> setting, float width) {
-		auto ret = new PlaySoundSettingNodeV3();
+	static PreviewSoundSettingNodeV3 *create(std::shared_ptr<MyButtonSettingV3> setting, float width) {
+		auto ret = new PreviewSoundSettingNodeV3();
 		if (ret && ret->init(setting, width)) {
 			ret->autorelease();
 			return ret;
@@ -112,7 +114,7 @@ class PlaySoundSettingNodeV3 : public SettingNodeV3 {
 };
 
 SettingNodeV3 *MyButtonSettingV3::createNode(float width) {
-	return PlaySoundSettingNodeV3::create(
+	return PreviewSoundSettingNodeV3::create(
 	    std::static_pointer_cast<MyButtonSettingV3>(shared_from_this()),
 	    width);
 }
