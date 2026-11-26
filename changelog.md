@@ -1,6 +1,7 @@
 # Changelog
 ## Version v2.7.2
 * Fixed a bug where the preview sound button couldn't be pressed.
+* Fixed a bug where the selected pack category couldn't be changed.
 ## Version v2.7.1
 * Downloading the Click Sounds Index is now almost instant.
 * Fixed a bug where custom click packs couldn't be installed.

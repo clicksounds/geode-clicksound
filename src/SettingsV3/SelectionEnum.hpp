@@ -273,14 +273,19 @@ protected:
         m_nameLabel->setScale(0.5);
         m_nameLabel->setAnchorPoint({0.5, 0});
         this->addChild(m_nameLabel);
+
+        CCMenu* m_toggleMenu = CCMenu::create();
+        m_toggleMenu->setID("toggle-menu"_spr);
+        m_toggleMenu->setAnchorPoint({ 0.5f, 0.5f });
+        m_toggleMenu->setContentSize({ 150.f, 25.f });
+        m_toggleMenu->setLayout(RowLayout::create()->setGap(5.f)->setAxisAlignment(AxisAlignment::Center)->setAutoScale(true));
+        
     
-        int count = 0;
         for (auto value : {
             std::make_pair(0, "Meme"),
             std::make_pair(1, "Useful")//,
             //std::make_pair(2, "Custom")
         }) {
-            count += 40;
             auto offSpr = ButtonSprite::create(value.second, 40.f, false, "bigFont.fnt", "GJ_button_04.png", 20.f, 1.0f);
             auto onSpr = ButtonSprite::create(value.second, 40.f, false, "bigFont.fnt", "GJ_button_01.png", 20.f, 1.0f);
             offSpr->setOpacity(90);
@@ -288,13 +293,15 @@ protected:
                 offSpr, onSpr, this, menu_selector(ClicksoundSetterNodeV3::onToggle)
             );
             toggle->m_notClickable = true;
-            toggle->setTag(static_cast<int>(value.first));
+            toggle->setTag(value.first);
             m_toggles.push_back(toggle);
             m_togglerItems.emplace_back(toggle, value.second);
-            this->getButtonMenu()->addChild(toggle);
+            m_toggleMenu->addChild(toggle);
         }
-        this->getButtonMenu()->setLayout(RowLayout::create());
+        this->getButtonMenu()->addChildAtPosition(m_toggleMenu, Anchor::Center);
         this->getButtonMenu()->updateLayout();
+        m_toggleMenu->updateLayout();
+        m_toggleMenu->setPositionY(m_toggleMenu->getPositionY() + 3.f);
 
         this->updateState(nullptr);
         return true;
